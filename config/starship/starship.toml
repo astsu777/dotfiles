@@ -1,0 +1,109 @@
+# Do not create an empty line at start
+add_newline = false
+
+# Prompt's format
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$time\
+$status\
+$character"""
+
+# Prompt on two lines
+[line_break]
+disabled = false
+
+# Prompt's beginning character customization
+[character]
+success_symbol = "[❯](bold 33)"
+error_symbol = "[❯](bold 196)"
+vicmd_symbol = "[❮](bold 39)"
+
+# Command duration customization
+[cmd_duration]
+format = "[took $duration]($style) "
+style = "bold #85855e"
+
+# Path customization
+[directory]
+truncation_length = 10
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only = " "
+read_only_style = "blue"
+style = "bold 172"
+
+# AWS region and profile
+[aws]
+format = '[$symbol$profile(\($region\))]($style) '
+symbol = " "
+
+# Current Git branch
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold purple"
+
+# Current Git commit hash
+[git_commit]
+only_detached = true
+format = "[\\[$hash\\]]($style) "
+style = "purple"
+
+# Git repo status (ahead, etc...)
+[git_status]
+style = "bold purple"
+
+# Background jobs customization
+[jobs]
+threshold = 1
+
+# Show error code of previous command if failed
+[status]
+disabled = false
+format = "[\\($status\\)]($style) "

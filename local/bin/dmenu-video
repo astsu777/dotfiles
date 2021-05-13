@@ -1,0 +1,66 @@
+#!/bin/bash
+# Manage Internet videos. If taskspooler is installed, queue the links
+
+# Prerequisites
+if ! type mpv youtube-dl ffmpeg > /dev/null 2>&1; then printf "%s\n" "ERROR: youtube-dl & ffmpeg must be installed" | dmenu -l 2 -p 'An Error Occurred' & exit 1; fi
+
+# Determine queue software (optional)
+if type ts > /dev/null 2>&1; then
+	queue=ts
+elif type tsp > /dev/null 2>&1; then
+	queue=tsp
+else
+	queue=''
+fi
+
+# Grab the video/playlist link
+link="$(printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link')"
+if [ -z "$link" ]; then exit 2; fi
+
+# Actions
+yt-listen(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; else "$queue" mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
+}
+yt-wsd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; fi
+}
+yt-whd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; fi
+}
+yt-shufsd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; fi
+}
+yt-shufhd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; fi
+}
+yt-revsd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; fi
+}
+yt-revhd(){
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; fi
+}
+yt-dlvideo(){
+	notify-send "Video queued for download..."
+	if [ -z "$queue" ]; then youtube-dl -ci -f best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci -f best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
+}
+yt-dlaudio(){
+	notify-send "Audio queued for download..."
+	if [ -z "$queue" ]; then youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
+}
+
+# Choose preferred video format
+format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | dmenu -i -p 'Choose Action')"
+case "$format" in
+	Listen) yt-listen ;;
+	"Watch SD") yt-wsd ;;
+	"Watch HD") yt-whd ;;
+	"Shuffle SD") yt-shufsd ;;
+	"Shuffle HD") yt-shufhd ;;
+	"Watch Reverse SD") yt-revsd ;;
+	"Watch Reverse HD") yt-revhd ;;
+	Download) yt-dlvideo ;;
+	"Download Audio") yt-dlaudio ;;
+	"Copy Link") printf "$link" | tr -d '\n' | xclip -selection clipboard ;;
+	"Stop Playing") killall mpv ;;
+esac
+exit 0

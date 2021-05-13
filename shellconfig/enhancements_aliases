@@ -1,0 +1,37 @@
+# Enhancements aliases
+#
+# Colorize output of the "ls" command
+if [[ "$OSTYPE" = "linux-gnu" ]]; then
+	alias ls="ls --color=auto"
+elif [[ "$OSTYPE" = "darwin"* ]]; then
+	alias ls="ls -GO"
+fi
+
+# Colorize the output of the "grep" command
+alias grep="grep --color=auto"
+
+# If the program "colordiff" is installed, replace "diff" with it
+if type colordiff > /dev/null 2>&1; then
+	alias diff="colordiff"
+fi
+
+# Allow "wget" to continue a partial download
+alias wget="wget -c --content-disposition"
+
+# Modify curl User-Agent to mimic Chrome
+alias curl='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"'
+
+# Always read this specific config file
+if [[ -f "$HOME"/.ssh/config ]]; then
+	alias ssh="ssh -F ~/.ssh/config"
+fi
+
+# Do not store the public key of the remote server and accept it
+alias sssh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+alias ssftp="sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+# Preserve environment variables when calling "sudo"
+alias sudo="sudo -E"
+
+# Create parent directories if they do not exist
+alias mkdir="mkdir -pv"

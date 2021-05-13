@@ -1,0 +1,354 @@
+# Functions
+#
+
+# Benchmark the SHELL (Bash & ZSH)
+benchshell(){
+	if [[ "$SHELL" == "/bin/bash" ]]; then
+		time bash -i -c "echo -n"
+	elif [[ "$SHELL" == "/bin/zsh" ]]; then
+		time zsh -i -c "print -n"
+	fi
+}
+
+# Display true colors to test terminal colors
+colortest() {
+	echo -e "\033[0mNC (No color)"
+	echo -e "\033[1;37mWHITE\t\033[0;30mBLACK"
+	echo -e "\033[0;34mBLUE\t\033[1;34mLIGHT_BLUE"
+	echo -e "\033[0;32mGREEN\t\033[1;32mLIGHT_GREEN"
+	echo -e "\033[0;36mCYAN\t\033[1;36mLIGHT_CYAN"
+	echo -e "\033[0;31mRED\t\033[1;31mLIGHT_RED"
+	echo -e "\033[0;35mPURPLE\t\033[1;35mLIGHT_PURPLE"
+	echo -e "\033[0;33mYELLOW\t\033[1;33mLIGHT_YELLOW"
+	echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
+}
+
+# Function to perform basic maths
+if type bc > /dev/null 2>&1; then
+	calc() {
+		printf "%s\n" "$*" | bc -l
+	}
+fi
+
+#=================
+# NNN
+#=================
+if type nnn > /dev/null 2>&1; then
+# CD on exit when pressing ^G
+	n3()
+	{
+    	# Block nesting of nnn in subshells
+    	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        	echo "nnn is already running"
+        	return
+    	fi
+
+    	# The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    	# To cd on quit only on ^G, remove the "export" as in:
+    	#     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    	# NOTE: NNN_TMPFILE is fixed, should not be modified
+    	local export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    	# Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    	# stty start undef
+    	# stty stop undef
+    	# stty lwrap undef
+    	# stty lnext undef
+
+    	nnn "$@"
+
+    	if [ -f "$NNN_TMPFILE" ]; then
+            	. "$NNN_TMPFILE"
+            	rm -f "$NNN_TMPFILE" > /dev/null
+    	fi
+	}
+fi
+
+#=================
+# Curl
+#=================
+# Get the current weather forecast
+if type curl > /dev/null 2>&1; then
+	weather() {
+		curl -s http://wttr.in/"$1"\?A\&F
+	}
+fi
+
+# Bootstrap
+if type curl > /dev/null 2>&1; then
+	bootstrap() {
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
+	}
+fi
+
+# Get cheat sheets for specified commands
+if type curl > /dev/null 2>&1; then
+	cheat() {
+    	\curl https://cheat.sh/"$1"
+	}
+fi
+
+# Get cryptocurrency exchange rate
+if type curl > /dev/null 2>&1; then
+	cryptorate() {
+		\curl https://eur.rate.sx/"$1"
+	}
+	cryptorates() {
+		\curl https://eur.rate.sx/?n=20
+	}
+fi
+
+# Get a Website's speed statistics
+if type curl > /dev/null 2>&1; then
+	speedsite() {
+		curl -s -w 'Testing Website Response Time for :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nAppCon Time:\t\t%{time_appconnect}\nRedirect Time:\t\t%{time_redirect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null "$1"
+	}
+fi
+
+# Check if a Website is UP
+if type curl > /dev/null 2>&1; then
+	checkwebsite() {
+    	curl -LIs "$1" | grep HTTP | cut -d$' ' -f2
+	}
+fi
+
+# Generate QR code for a URL
+if type curl > /dev/null 2>&1; then
+	qrcodegen() {
+    	\curl qrenco.de/"$1"
+	}
+fi
+
+# Get the definition of a word
+if type curl > /dev/null 2>&1; then
+	dico() {
+    	\curl dict.org/d:"$1"
+	}
+fi
+
+# Shorten a URL
+if type curl > /dev/null 2>&1; then
+	urlshortener() {
+    	curl -F "shorten=$1" https://0x0.st
+	}
+fi
+
+# Have a reverse traceroute
+if type curl > /dev/null 2>&1; then
+	tracerouterev() {
+    	curl http://icanhaztraceroute.com/
+	}
+fi
+
+# IP subnet calculator
+if type curl > /dev/null 2>&1 && ! type ipcalc > /dev/null 2>&1; then
+	ipcalc() {
+    	curl "api.hackertarget.com/subnetcalc/?q=$1"
+	}
+fi
+
+# Use Google Translate
+if type curl > /dev/null 2>&1; then
+	trag() {
+		local sl=$1
+		local tl=$2
+		if [[ ! "$1" =~ ^[a-z][a-z]$ ]] || [[ ! "$2" =~ ^[a-z][a-z]$ ]]; then
+			echo "Please input a valid source and destination language (Ex.: \"en\" for English)"
+			echo "Usage: trag [SL] [DL] TEXT_TO_TRANSLATE"
+			return 1
+		fi
+		shift 2
+		local base_url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q="
+		local ua='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+		local qry=$( echo $@ | sed -e "s/\ /+/g" )
+		local full_url=${base_url}${qry}
+		local response=$(curl -sA "${ua}" "${full_url}")
+		echo ${response} | jq -r '.[0][0][0]'
+	}
+fi
+
+#=================
+# Fuzzy Finder
+#=================
+if type fzf > /dev/null 2>&1; then
+	if type fd > /dev/null 2>&1; then
+		# Find file in current folder and open it with default editor
+ 		fcd() {
+			fd -H . | fzf | xargs -I{} -o "$EDITOR" '{}'
+		}
+		# Find file in home folder and open it with default editor
+ 		fch() {
+			fd -H . "$HOME" -E vim/backup | fzf | xargs -I{} -o "$EDITOR" '{}'
+		}
+	else
+		# Find file in current folder and open it with default editor
+ 		fcc() {
+			du -a . | awk '{print$2}'| fzf | xargs -I{} -o "$EDITOR" '{}'
+		}
+		# Find file in home folder and open it with default editor
+		fch() {
+			du -a "$HOME" | awk '{print$2}' | fzf | xargs -I{} -o "$EDITOR" '{}'
+		}
+	fi
+	## LINUX
+	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+		# Open and follow a log file
+		flogs() {
+			sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs I{} -o sudo tail -f '{}'
+		}
+
+		# Search a file and open it with the default editor
+		fcf() {
+			sudo echo > /dev/null && sudo du -a /opt /etc | awk '{print$2}' | fzf | xargs -I{} -o sudoedit '{}'
+		}
+
+		# If peco is installed, open a log file in it
+		if type peco > /dev/null 2>&1; then
+			plogs() {
+				sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs -I{} -o sudo peco '{}'
+			}
+		fi
+	fi
+fi
+
+
+#=================
+# OpenSSL
+#=================
+if type openssl > /dev/null 2>&1; then
+	# Check SSL certificate of a Website
+	checkssl() {
+		openssl s_client -connect "$1":443 < /dev/null | openssl x509 -text
+	}
+fi
+
+
+#=================
+# MPV
+#=================
+if type mpv youtube-dl > /dev/null 2>&1 && ! type dmenu > /dev/null 2>&1; then
+	# YouTube in 480p
+	yt-480p() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+	}
+
+	# YouTube in 720p
+	yt-720p() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=136+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+	}
+
+	# YouTube in 1080p
+	yt-hd() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+	}
+
+	# Randomly play a YouTube channel or playlist in 480p
+	ytshuf-480p() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	}
+
+	# Randomly play a YouTube channel or playlist in 720p
+	ytshuf-720p() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=136+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	}
+
+	# Randomly play a YouTube channel or playlist
+	ytshuf-hd() {
+		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	}
+fi
+
+#=================
+# Colors
+#=================
+## Parse RGB hex tuples.
+## <Arg 1> - Hex: Input hex value [[:xdigit]]{6}
+## <Arg 2> - String: Tuple [r|g|b]
+get_rgbtuple() {
+	local hexrgb="${1}"
+	local tuple_flag="${2}"
+	local tuple_fmt="${3:-x}"
+	local tuple=""
+	case "${tuple_flag}" in
+ 	 r|R)
+  	  tuple=${hexrgb:0:2}
+  	  ;;
+ 	 g|G)
+  	  tuple=${hexrgb:2:2}
+  	  ;;
+ 	 b|B)
+  	  tuple=${hexrgb:4:2}
+  	  ;;
+	esac
+	echo $((0x${tuple}))
+}
+
+get_rgb() {
+	local -i ansi=${1:-1}
+	local -a rgb=("000000" "800000" "008000" "808000" "000080"     \
+	"800080" "008080" "c0c0c0" "808080" "ff0000" "00ff00" "ffff00" \
+	"0000ff" "ff00ff" "00ffff" "ffffff" "000000" "00005f" "000087" \
+	"0000af" "0000d7" "0000ff" "005f00" "005f5f" "005f87" "005faf" \
+	"005fd7" "005fff" "008700" "00875f" "008787" "0087af" "0087d7" \
+	"0087ff" "00af00" "00af5f" "00af87" "00afaf" "00afd7" "00afff" \
+	"00d700" "00d75f" "00d787" "00d7af" "00d7d7" "00d7ff" "00ff00" \
+	"00ff5f" "00ff87" "00ffaf" "00ffd7" "00ffff" "5f0000" "5f005f" \
+	"5f0087" "5f00af" "5f00d7" "5f00ff" "5f5f00" "5f5f5f" "5f5f87" \
+	"5f5faf" "5f5fd7" "5f5fff" "5f8700" "5f875f" "5f8787" "5f87af" \
+	"5f87d7" "5f87ff" "5faf00" "5faf5f" "5faf87" "5fafaf" "5fafd7" \
+	"5fafff" "5fd700" "5fd75f" "5fd787" "5fd7af" "5fd7d7" "5fd7ff" \
+	"5fff00" "5fff5f" "5fff87" "5fffaf" "5fffd7" "5fffff" "870000" \
+	"87005f" "870087" "8700af" "8700d7" "8700ff" "875f00" "875f5f" \
+	"875f87" "875faf" "875fd7" "875fff" "878700" "87875f" "878787" \
+	"8787af" "8787d7" "8787ff" "87af00" "87af5f" "87af87" "87afaf" \
+	"87afd7" "87afff" "87d700" "87d75f" "87d787" "87d7af" "87d7d7" \
+	"87d7ff" "87ff00" "87ff5f" "87ff87" "87ffaf" "87ffd7" "87ffff" \
+	"af0000" "af005f" "af0087" "af00af" "af00d7" "af00ff" "af5f00" \
+	"af5f5f" "af5f87" "af5faf" "af5fd7" "af5fff" "af8700" "af875f" \
+	"af8787" "af87af" "af87d7" "af87ff" "afaf00" "afaf5f" "afaf87" \
+	"afafaf" "afafd7" "afafff" "afd700" "afd75f" "afd787" "afd7af" \
+	"afd7d7" "afd7ff" "afff00" "afff5f" "afff87" "afffaf" "afffd7" \
+	"afffff" "d70000" "d7005f" "d70087" "d700af" "d700d7" "d700ff" \
+	"d75f00" "d75f5f" "d75f87" "d75faf" "d75fd7" "d75fff" "d78700" \
+	"d7875f" "d78787" "d787af" "d787d7" "d787ff" "dfaf00" "dfaf5f" \
+	"dfaf87" "dfafaf" "dfafdf" "dfafff" "dfdf00" "dfdf5f" "dfdf87" \
+	"dfdfaf" "dfdfdf" "dfdfff" "dfff00" "dfff5f" "dfff87" "dfffaf" \
+	"dfffdf" "dfffff" "ff0000" "ff005f" "ff0087" "ff00af" "ff00df" \
+	"ff00ff" "ff5f00" "ff5f5f" "ff5f87" "ff5faf" "ff5fdf" "ff5fff" \
+	"ff8700" "ff875f" "ff8787" "ff87af" "ff87df" "ff87ff" "ffaf00" \
+	"ffaf5f" "ffaf87" "ffafaf" "ffafdf" "ffafff" "ffdf00" "ffdf5f" \
+	"ffdf87" "ffdfaf" "ffdfdf" "ffdfff" "ffff00" "ffff5f" "ffff87" \
+	"ffffaf" "ffffdf" "ffffff" "080808" "121212" "1c1c1c" "262626" \
+	"303030" "3a3a3a" "444444" "4e4e4e" "585858" "626262" "6c6c6c" \
+	"767676" "808080" "8a8a8a" "949494" "9e9e9e" "a8a8a8" "b2b2b2" \
+	"bcbcbc" "c6c6c6" "d0d0d0" "dadada" "e4e4e4" "eeeeee")
+	if ((ansi<=256)); then
+ 	 	 printf "%s\n" "${rgb[${ansi}]}"
+ 	 	 return 0
+	else
+ 	 	 return 1
+	fi
+}
+
+colorpick() {
+	local -i i=0
+	local rgb_R
+	local rgb_G
+	local rgb_B
+	local prgb_R
+	local prgb_G
+	local prgb_B
+	local hex
+	for i in {0..255}; do
+		hex=$(get_rgb "${i}")
+		rgb_R=$(get_rgbtuple "${hex}" "r")
+		rgb_G=$(get_rgbtuple "${hex}" "g")
+		rgb_B=$(get_rgbtuple "${hex}" "b")
+		prgb_R=$(printf "%3s" "${rgb_R}")
+		prgb_G=$(printf "%3s" "${rgb_G}")
+		prgb_B=$(printf "%3s" "${rgb_B}")
+		printf "\x1b[38;5;${i}mANSI COLOR: %3s\x1b[0m |" "${i}"
+		printf "\x1b[38;2;${rgb_R};${rgb_G};${rgb_B}mRGB/TRUECOLOR - RGB:%s,%s,%s\x1b[0m%s" "${prgb_R}" "${prgb_G}" "${prgb_B}" " |"
+		printf "\x1b[38;5;40m%s%s\n\x1b[0m" "HEX:0x" "${hex}"
+	done
+}

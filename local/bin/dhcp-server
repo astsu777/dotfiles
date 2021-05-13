@@ -1,0 +1,27 @@
+#!/bin/bash
+# Check /etc/bootpd.plist for DHCP parameters
+if [[ $OSTYPE == "darwin"* ]]; then
+	select name in StartDHCP StopDHCP Exit ;
+	do
+		case "$name" in
+			StartDHCP)
+	            sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist
+				echo
+				echo "DHCP server started. Modify its options in /etc/bootpd.list"
+				echo
+	            break
+	          ;;
+	        StopDHCP)
+	            sudo /bin/launchctl unload -w /System/Library/LaunchDaemons/bootps.plist
+				echo
+				echo "DHCP server stopped"
+				echo
+	            break
+	          ;;
+	        Exit)
+	            exit 0
+	            break
+	            ;;
+		esac
+	done
+fi

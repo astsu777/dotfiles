@@ -1,0 +1,114 @@
+# Skip this file for non-interactive shells
+[[ $- != *i* ]] && return
+
+# Set the prompt
+setopt PROMPT_SUBST
+NEWLINE=$'\n'
+GITBRANCH='$(git rev-parse --abbrev-ref HEAD 2> /dev/null)'
+if [[ ! -z "$TMUX" ]]; then
+	if [[ ${EUID} == 0 ]]; then
+		export PS1="%F{red}> %F{yellow}%~%f %F{green}${GITBRANCH}%f${NEWLINE}%# "
+	else
+		export PS1="%F{blue}> %F{yellow}%~%f %F{green}${GITBRANCH}%f${NEWLINE}%# "
+	fi
+else
+	if [[ ${EUID} == 0 ]]; then
+		export PS1="%F{red}%n@%m%f %F{yellow}%~%f %F{green}${GITBRANCH}%f${NEWLINE}%# "
+	else
+		export PS1="%F{blue}%n@%m%f %F{yellow}%~%f %F{green}${GITBRANCH}%f${NEWLINE}%# "
+	fi
+fi
+
+# Set the dotfiles and custom scripts location
+export DOTFILES="$HOME/.dotfiles"
+
+# Set scripts, Git repositories & sources location
+export SCRIPTS="$HOME/.local/bin"
+export SOURCES="$HOME/.sources"
+export REPOS="$HOME/.sources/repos"
+
+# Enable VI mode & fix backspace when switching to normal mode
+bindkey -v
+bindkey -a -s "diw" "bde"
+bindkey -a -s "daw" "bdw"
+bindkey -v '^?' backward-delete-char
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+# Include dotfiles
+#_comp_options+=(globdots)
+
+# Automatically escape special characters in URL
+unsetopt nomatch
+
+# Do not highlight trailing new lines with a percent sign (print -n)
+PROMPT_EOL_MARK=''
+
+# Define keyboard shortcuts
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
+
+# Launch ZSH and ignore .zshrc
+alias zzsh="env -i zsh -d -f"
+
+# Source common options
+source "$DOTFILES"/shellconfig/common
+
+# Source aliases & functions
+for f in "$DOTFILES"/shellconfig/*aliases; do source $f; done
+source "$DOTFILES"/shellconfig/functions
+
+# Load ZSH completions
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	fpath=($(brew --prefix)/share/zsh-completions $fpath)
+fi
+
+# ZSH plugins
+source "$ZPLUG_HOME"/init.zsh
+zplug "zsh-users/zsh-autosuggestions"
+## Load ZSH auto-suggestions for commands
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search"
+## Load ZSH history substring
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+if ! zplug check; then
+	zplug install
+fi
+zplug load
+
+# Load Starship prompt
+if type starship > /dev/null 2>&1; then
+	eval "$(starship init zsh)"
+elif [[ -z "$SSH_CLIENT" ]] || [[ -z "$SSH_TTY" ]] && [[ -f "$HOME"/.config/starship.toml ]]; then
+	curl -fsSL https://starship.rs/install.sh | bash -s -- -y
+fi

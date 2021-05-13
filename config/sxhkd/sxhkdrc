@@ -1,0 +1,117 @@
+# Launch terminal emulator
+super + Return
+	"$SHELL" -c "$TERMINAL"
+
+# Launch launcher menu
+super + shift + Return
+	"$SHELL" -c "$LMENU"
+
+# Show clipboard manager
+super + alt + c
+	clipmenu
+
+# Launch Web browser
+super + alt + {w,W}
+	"$SHELL" -c {"$BROWSER","tui $BROWSERCLI https://duckduckgo.com"}
+
+# Launch music player
+super + alt + M
+	"$SHELL" -c 'if [[ "$MUSICPLAYER" == *"mocp"* ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'
+
+# Launch text editor
+super + alt + e
+	"$SHELL" -c 'tui "$EDITOR"'
+
+# Launch file manager
+super + alt + f
+	"$SHELL" -c 'if [[ "$FILEMANAGER" == "nnn" ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi'
+
+# Launch system monitor
+super + alt + h
+	"$SHELL" -c 'tui $SYSMONITOR'
+
+# Launch IRC client
+super + alt + i
+	"$SHELL" -c 'if [[ "$IRCCLIENT" == "weechat" ]]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
+
+# Launch RSS reader
+super + alt + n
+	"$SHELL" -c 'tui "$RSSREADER"'
+
+# Launch mail client
+super + alt + m
+	"$SHELL" -c '"$MAILER"'
+
+# Launch screenshot utility
+super + alt + 5
+	"$SHELL" -c '"$SCROTBIN"'
+
+# Launch password manager
+super + alt + p
+	"$PASSWORDMGR"
+
+# Launch Reddit client
+super + alt + r
+	"$SHELL" -c 'tui "$REDDITCLI"'
+
+# Emoji selector
+super + alt + E
+	"$SHELL" -c 'dmenu-unicode'
+
+# Password manager (pass)
+super + alt + P
+	"$SHELL" -c 'dmenu-pass'
+
+# Bookmarks manager
+super + alt + S
+	"$SHELL" -c 'dmenu-websearch'
+
+# Bookmarks manager
+super + alt + B
+	"$SHELL" -c 'dmenu-bookmarks'
+
+# Play Internet videos
+super + alt + V
+	"$SHELL" -c 'dmenu-video'
+
+# YouTube subscriptions
+super + alt + y
+	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S --sort ; else tui ytfzf -S --sort ; fi'
+
+# Search YouTube
+super + alt + Y
+	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t ; else tui ytfzf ; fi'
+
+# Shutdown the system (script)
+super + shift + Escape
+	"$SHELL" -c 'dmenu-shutdown'
+
+# Lock the screen
+super + alt + l
+	slock
+
+# Set a random wallpaper
+super + r ; w
+	feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*
+
+# Open files with Rofi/Dmenu
+super + alt + F
+	xdg-open "$(locate home media | dmenu -i -p "File to open")"
+
+# Launch sound mixer
+super + r ; m
+	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
+
+# Multimedia Keys
+XF86AudioLowerVolume
+	pactl set-sink-volume 0 -2%
+XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +2%
+XF86AudioMute
+	pactl set-sink-mute 0 toggle
+XF86Calculator
+	"$CALCULATOR"
+
+# Reload sxhkdrc
+super + r ; r ; s
+    pkill -USR1 sxhkd && notify-send "SXHKD configuration refreshed"

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Description: reboot or shutdown the computer via DMenu
+
+OPTS=$(echo -e "Lock Screen\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | dmenu -i -p "Choose")
+
+case $OPTS in
+	"Lock Screen") slock ;;
+	Logout) xdotool key "super+shift+q" ;;
+	Suspend) systemctl suspend ;;
+	Hibernate) systemctl hibernate ;;
+	Reboot) systemctl reboot ;;
+	Shutdown) systemctl poweroff ;;
+	*) ;;
+esac

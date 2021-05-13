@@ -1,0 +1,30 @@
+#!/bin/bash
+while true; do
+	sleep 5s && dwmupdates > /tmp/dwmupdates.txt
+	dwmdisk > /tmp/dwmdisk.txt
+	if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
+	sleep 3600s
+done &
+
+while true; do
+	VOL="$(dwmvol)"
+	CPU="$(dwmcpu)"
+	RAM="$(dwmmemory)"
+	NET="$(dwmnet)"
+	TEMP="$(dwmtemp)"
+	CLOCK="$(dwmclock)"
+	BATTERY="$(dwmbattery)"
+	UPDATES="$(< /tmp/dwmupdates.txt)"
+	DISK="$(< /tmp/dwmdisk.txt)"
+	NEWS="$(< /tmp/dwmnews.txt)"
+	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmnews.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $CLOCK"
+	elif sensors | grep temp > /dev/null 2>&1 && type newsboat > /dev/null 2>&1; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $CLOCK"
+	elif [ -f /tmp/dwmnews.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
+	else
+		xsetroot -name " $UPDATES| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
+	fi
+	sleep 1s
+done &

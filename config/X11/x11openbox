@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Launch Simple X Hotkey Daemon
+if type sxhkd > /dev/null 2>&1; then
+	sxhkd &
+fi
+# GNOME-Keyring for password caching
+if type gnome-keyring > /dev/null 2>&1; then
+	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+	export SSH_AUTH_SOCK
+fi

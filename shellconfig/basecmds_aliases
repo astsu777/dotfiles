@@ -1,0 +1,16 @@
+# Base commands aliases and replacements
+#
+# If the program "bat" is installed, replace "cat" with it
+if type ccat > /dev/null 2>&1; then
+        alias cat="ccat"
+fi
+
+# If the program "prettyping" is installed, replace "ping" with it
+if type prettyping > /dev/null 2>&1; then
+		alias ping="prettyping --nolegend"
+fi
+
+# Refresh Touch Bar on MacBook Pro
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'
+fi

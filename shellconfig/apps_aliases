@@ -1,0 +1,169 @@
+# Application aliases
+#
+
+# Attach or create a TMUX session with username as session name
+if type tmux > /dev/null 2>&1; then
+	alias t="tmux attach-session -t $USER || tmux new-session -s $USER"
+fi
+
+# Display the PATH in a human readable format
+alias path='echo -e ${PATH//:/\\n}'
+
+# Quickly launch a Web server
+if type php > /dev/null 2>&1; then
+	alias web-server="php -S localhost:8888 &"
+fi
+
+# Get the current public IP address
+alias getpublicip="curl -s http://ipinfo.io/ip"
+
+# Generate random secure passwords of 64 characters
+if type pwgen > /dev/null 2>&1; then
+	alias pwgen-secure="pwgen -syBcn 64"
+fi
+
+# Search in the shell history specified input
+alias hs='history | grep $1'
+
+# Disable or enable Gatekeeper on macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias disgatekeeper="sudo spctl --master-disable"
+	alias engatekeeper="sudo spctl --masster-enable"
+fi
+
+# Have the 'updatedb' command to generate the 'locate' database on macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias updatedb="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist ; sudo /usr/libexec/locate.updatedb"
+fi
+
+# Launch a Powershell shell (when not on Windows)
+if type pwsh > /dev/null 2>&1; then
+	alias powershell="/usr/local/microsoft/powershell/6/pwsh"
+fi
+
+# Scan the current network and provides IP addresses that replies to PING
+if type nmap > /dev/null 2>&1; then
+	alias ipscan="nmap -sP --scan-delay 0.5"
+fi
+
+# Launch "minicom" and connect to the AirConsole
+if type minicom > /dev/null 2>&1; then
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		alias minicom-bt="minicom -D /dev/cu.Airconsole-1"
+	fi
+fi
+
+# Mount in R/W mode any NTFS drive on MacOS
+if [[ "$OSTYPE" == "darwin"* ]] && type ntfs-3g > /dev/null 2>&1; then
+	alias mount-ntfs-rw="sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other"
+fi
+
+# Get details on the connected NIC on MacOS (Ex.: list the DHCP server)
+if [[ $OSTYPE == "darwin"* ]]; then
+	alias ip="ipconfig getpacket"
+fi
+
+# Perform iPerf speedtests on the different continents
+if type iperf3 > /dev/null 2>&1; then
+	alias wan-speedtest-eu="iperf3 -c bouygues.iperf.fr -p 5201 -P 20"
+	alias wan-speedtest-as="iperf3 -c iperf.biznetnetworks.com -p 5201 -P 20"
+	alias wan-speedtest-us="iperf3 -c iperf.he.net -p 5201 -P 20"
+fi
+
+# Mirror a Website on the local machine
+alias websave='wget -E -H -k -K -nd -N -p -e robots=off --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" -P'
+
+# Update systems globally and check if a reboot is necessary whenever possible
+	# macOS based systems using HOMEBREW package manager
+if [[ "$OSTYPE" == "darwin"* ]] && type brew > /dev/null 2>&1; then
+	alias update-system="brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup && brew doctor && softwareupdate --list && mas upgrade"
+elif [[ $OSTYPE == "linux-gnu" ]]; then
+
+	# Debian based systems using APT or APT-GET package manager
+	if type apt snap > /dev/null 2>&1; then
+		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+	elif type apt > /dev/null 2>&1; then
+		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; }'
+	elif type apt-get snap > /dev/null 2>&1; then
+		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+	elif type apt-get > /dev/null 2>&1; then
+		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; }'
+
+	# Red Hat based systems using DNF package manager
+	elif type dnf snap > /dev/null 2>&1; then
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
+	elif type dnf > /dev/null 2>&1; then
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; }'
+
+	# Red Hat based systems using YUM package manager
+	elif type yum snap > /dev/null 2>&1; then
+		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
+	elif type yum > /dev/null 2>&1; then
+		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; }'
+
+	# Arch based systems using Pacman package manager
+	# It also integrates the AUR helper 'yay' if it is installed
+	# The last command will return an error if no orphan packages found
+	elif type pacman yay snap > /dev/null 2>&1; then
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq) ; sudo snap refresh'
+	elif type pacman yay > /dev/null 2>&1; then
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq)'
+	elif type pacman > /dev/null 2>&1; then
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq)'
+	fi
+fi
+
+# Make 'etckeeper' easier to use
+if type etckeeper > /dev/null 2>&1; then
+	alias etcgit="sudo etckeeper vcs"
+fi
+
+# Use the common alias 'll' to display files with exa
+if type exa > /dev/null 2>&1; then
+	alias ll="exa -lSag --git --icons"
+fi
+
+# Make 'youtube-dl' easier to use
+if type youtube-dl > /dev/null 2>&1; then
+	alias yt-audio="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
+fi
+
+# If the program "neovim" is installed, replace "vim" with it
+# Also, adds an alias to launch it without any configuration
+if type nvim > /dev/null 2>&1; then
+	alias vim="nvim"
+	alias vvim="nvim -u NONE"
+elif type vim > /dev/null 2>&1; then
+	alias vvim="vim -u NONE"
+fi
+
+# Surfraw with the default graphical browser on MacOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias srgui="sr -browser=open"
+fi
+
+# Task spooler
+if type tsp > /dev/null 2>&1; then
+	alias ts="tsp"
+fi
+
+# Music on console
+if type mocp > /dev/null 2>&1; then
+	alias mocp="mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc"
+fi
+
+# DOSBox
+if type dosbox > /dev/null 2>&1 && [[ -f "$XDG_CONFIG_HOME"/dosbox/dosbox.conf ]]; then
+	alias dosbox="dosbox -conf $XDG_CONFIG_HOME/dosbox/dosbox.conf"
+fi
+
+# Get a list of all media types defined by IANA
+if type w3m > /dev/null 2>&1 || type lynx > /dev/null 2>&1 || type links > /dev/null 2>&1; then
+	alias mimetypes="$BROWSERCLI https://www.iana.org/assignments/media-types/media-types.txt"
+fi
+
+# Quickly spawn a nested X server
+if type Xephyr > /dev/null 2>&1; then
+	alias xnested_startx="startx -- /usr/bin/Xephyr -screen 1280x1024 :1"
+	alias xnested="Xephyr -br -ac -noreset -screen 1280x1024 :1 ; echo -e 'Launch programs with DISPLAY=:1 <PROGRAM> (Ex.: startx -- /usr/bin/Xephyr :1) | Keystrokes can be ungrabbed with CTRL+Shift'"
+fi

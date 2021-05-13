@@ -1,0 +1,132 @@
+#!/bin/bash
+#
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation date: 06 February 2021
+# Update date: N/A
+# Version: 1.0
+#
+# Description: this script retrieves lists of domains and insert then in the /etc/hosts file for blocking purposes
+#
+
+#====================
+# HELP
+#====================
+if [[ -z "$1" ]]; then
+	echo "An action needs to be specified!
+Usage: ./block_hosts.sh <ARGUMENT>
+	--install: install the blocklists to the local hosts file (a backup is created)
+	--uninstall: delete the blocklists from the local hosts file
+	--update: update the blocklists
+
+Note that any other modifications performed to the hosts file will remain even when uninstalling the blocklists.
+	"
+	exit 1
+fi
+
+#====================
+# VARIABLES
+#====================
+hostsfile="/etc/hosts"
+blocklists=$(mktemp) && cat <<-'EOF' >"$blocklists"
+https://blocklistproject.github.io/Lists/abuse.txt
+https://blocklistproject.github.io/Lists/ads.txt
+https://blocklistproject.github.io/Lists/fraud.txt
+https://blocklistproject.github.io/Lists/malware.txt
+https://blocklistproject.github.io/Lists/phishing.txt
+https://blocklistproject.github.io/Lists/ransomware.txt
+https://blocklistproject.github.io/Lists/scam.txt
+https://blocklistproject.github.io/Lists/tracking.txt
+EOF
+cleanblocklist=$(<"$blocklists" xargs -n1 curl -s | grep '^0' | sort | uniq)
+leadmark="#### BLOCKLIST ####"
+tailmark="#### BLOCKLIST END ####"
+
+#====================
+# REQUIREMENTS
+#====================
+if ! [[ -f "$hostsfile" ]] && ! type curl > /dev/null 2>&1; then
+	echo .
+	echo "No hosts file was found on your system! This script cannot be executed"
+	exit 2
+elif [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1 && ! type doas > /dev/null 2>&1; then
+	echo .
+	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo|doas installed!"
+	exit 3
+elif ! type sed grep sort uniq > /dev/null 2>&1; then
+	echo .
+	echo "Please make sure the packages 'sed grep sort uniq' are installed on your system!"
+	exit 4
+fi
+
+#====================
+# FUNCTIONS
+#====================
+installblocklist() {
+	if [[ "$EUID" = 0 ]]; then
+		cp "$hostsfile" "$hostsfile"_.BACKUP
+		echo "$leadmark" | tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$cleanblocklist" | tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$tailmark" | tee -a "$hostsfile" > /dev/null 2>&1
+	elif type sudo > /dev/null 2>&1; then
+		sudo cp "$hostsfile" "$hostsfile"_.BACKUP
+		echo "$leadmark" | sudo tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$cleanblocklist" | sudo tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$tailmark" | sudo tee -a "$hostsfile" > /dev/null 2>&1
+	elif type doas > /dev/null 2>&1; then
+		doas cp "$hostsfile" "$hostsfile"_.BACKUP
+		echo "$leadmark" | doas tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$cleanblocklist" | doas tee -a "$hostsfile" > /dev/null 2>&1
+		echo "$tailmark" | doas tee -a "$hostsfile" > /dev/null 2>&1
+	fi
+}
+
+#====================
+# INSTALL BLOCKLIST
+#====================
+if [ "$1" == "--install" ]; then
+	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
+		echo "Blacklists are already installed. Please either update them or uninstall them!"
+		exit 5
+	else
+		installblocklist
+	fi
+fi
+
+#====================
+# UNINSTALL BLOCKLIST
+#====================
+if [ "$1" == "--uninstall" ]; then
+	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
+		if [[ "$EUID" = 0 ]]; then
+			sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+		elif type sudo > /dev/null 2>&1; then
+			sudo sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+		elif type doas > /dev/null 2>&1; then
+			doas sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+		fi
+	else
+		echo "The blocklists are not installed. Nothing to do"
+		exit 5
+	fi
+fi
+
+#====================
+# UPDATE BLOCKLIST
+#====================
+if [ "$1" == "--update" ]; then
+	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
+		if [[ "$EUID" = 0 ]]; then
+			sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+			installblocklist
+		elif type sudo > /dev/null 2>&1; then
+			sudo sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+			installblocklist
+		elif type doas > /dev/null 2>&1; then
+			doas sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
+			installblocklist
+		fi
+	else
+		echo "The blocklists are not installed. Nothing to do"
+		exit 5
+	fi
+fi

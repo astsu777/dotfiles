@@ -1,0 +1,62 @@
+! Font settings
+!Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
+! XTerm
+XTerm*renderFont: true
+XTerm*faceName: xft:JetBrains Mono
+XTerm*faceSize: 9
+XTerm*utf8: 2
+XTerm*locale: true
+XTerm.vt100.translations: #override \n\
+  Ctrl <Key> j: smaller-vt-font() \n\
+  Ctrl <Key> k: larger-vt-font()
+XTerm*loginshell: true
+XTerm*savelines: 50000
+
+! SXIV
+Sxiv.foreground:   #c5c8c6
+Sxiv.background:   #1c1c1c
+Sxiv.font: JetBrains Mono:style=Medium:size=10
+
+! Colors
+*.foreground:   #c5c8c6
+*.background:   #1c1c1c
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #333333
+*.color8:       #595959
+
+! red
+*.color1:       #cc6666
+*.color9:       #d98c8c
+
+! green
+*.color2:       #81bd68
+*.color10:      #a7d095
+
+! yellow
+*.color3:       #f0c674
+*.color11:      #f5daa3
+
+! blue
+*.color4:       #6699ff
+*.color12:      #9ab4cb
+
+! magenta
+*.color5:       #b294bb
+*.color13:      #c7b1cd
+
+! cyan
+*.color6:       #789bba
+*.color14:      #add2cd
+
+! white
+*.color7:       #c5c8c6
+*.color15:      #e5e6e5

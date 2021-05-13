@@ -1,0 +1,260 @@
+"=============
+" Global Variables
+"=============
+" Detect OS type (useful to define OS specific options)
+" Linux will be referenced as 'Linux'. MacOS will be referenced as 'Darwin'
+if !exists('g:os')
+    if has('win32') || has('win16')
+        let g:os = 'Windows'
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
+"=============
+" Plugins Installation
+"=============
+" Vim-plug plugin manager auto-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Auto-install plugins if not installed
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+call plug#begin('~/.vim/bundle')
+
+	"" Linters
+	Plug 'chr4/nginx.vim'
+
+	"" Status bar
+	Plug 'itchyny/lightline.vim'
+
+	"" File browser
+	Plug 'scrooloose/nerdtree'
+
+	"" Easily comment lines with 'gcc' for a line, 'gcap' for a paragraph, etc...
+	Plug 'tpope/vim-commentary'
+
+	"" Easily modify surrounding of a text with 'cs' followed by surrounds. 'ds' deletes surroundings
+	Plug 'tpope/vim-surround'
+
+	"" Center the text for distraction free typing
+	Plug 'junegunn/goyo.vim'
+
+	"" Colorize color codes
+	Plug 'lilydjwg/colorizer'
+
+	"" Match sections begin/end (like if/fi) using '%' and 'g%'
+	Plug 'https://github.com/adelarsq/vim-matchit'
+
+	"" Quickly comment multiple lines of text using <leader>cc and <leader>cn
+	Plug 'preservim/nerdcommenter'
+
+	"" Fuzzy Finder
+	set rtp+=~/.vim/bundle/fzf
+	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
+
+call plug#end()
+filetype plugin on
+
+"=============
+" Key Bindings
+"=============
+" Change the leader key to comma
+let mapleader=","
+
+" Reload VIM's configuration
+nnoremap <leader>r :source $MYVIMRC<CR>
+
+" Assign keyboard shortcuts to easily resize VIM windows
+nnoremap <silent> <leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <leader>_ <C-w>=
+
+" Shortcutting window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Configure the "+ register to be used with TMUX
+" The ^ sign allows to copy to TMUX buffer
+set clipboard^="+
+noremap <leader>y "+y
+noremap <leader>p "+p
+noremap <leader>Y "+Y
+noremap <leader>P "+P
+
+" Quickly move around document
+noremap <silent> K 10j
+noremap <silent> L 10k
+
+" Spell-check set to <leader>o, 'o' for 'orthography'. It defaults to American English but
+" an additional letter to the shortcut can simply be added for other languages
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <leader>of :setlocal spell! spelllang=fr_fr<CR>
+
+"=============
+" Configuration
+"=============
+" Organize backups, swaps and undo files
+set undodir=$HOME/.vim/undo//
+set undofile
+set backupdir=$HOME/.vim/backup//
+set directory=$HOME/.vim/swap//
+
+" Create a backup file and delete old backup if existing
+set backup
+set writebackup
+
+" Search find recursively with the 'find' command
+set path+=**
+
+" Do not create .netrwhist file
+let g:netrw_dirhistmax=0
+
+" Enable autocompletion of commands
+set wildmode=longest,list,full
+
+" Automatically deletes all trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" Disable auto-commenting on new lines
+autocmd FileType * setlocal formatoptions-=cro
+map <leader>C :setlocal formatoptions+=cro<CR>
+map <leader>c :setlocal formatoptions-=cro<CR>
+
+" Allow applying a macro to selected lines in visual mode
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+"" Text wrapping
+" For text file, wrap all the text
+autocmd FileType text setlocal textwidth=121 formatoptions=t
+" For all other files, wrap comments but not the text
+autocmd FileType * setlocal textwidth=121 formatoptions=c
+
+" Do not insert EOL character
+set noeol
+set binary
+
+"=============
+" Look & Feel
+"=============
+" Splits open at bottom and on the right (override defaults)
+" Shortcuts also to create normal and vertical splits
+set splitbelow splitright
+nnoremap <leader>h :split<Space>
+nnoremap <leader>v :vsplit<Space>
+
+" Enable syntax highlighting
+syntax on
+
+" Set encoding to UTF-8
+set encoding=utf-8
+
+" Color and theme setup
+set background=dark
+colorscheme kuroi
+
+" Enable status line
+set laststatus=2
+
+" Auto-indent the text (tabs only used for indentation)
+filetype indent on
+set noexpandtab
+set copyindent
+set preserveindent
+set softtabstop=0
+set shiftwidth=4
+set tabstop=4
+
+" Enable a visual menu when using TAB autocomplete in command mode
+set wildmenu
+
+" Disable screen update when executing macros, registers and other commands
+" This really speeds up macros' execution
+set lazyredraw
+
+" Search as soon as some characters are typed and don't highlight all search results
+" and highlight matching parenthesis, brackets, etc...
+set incsearch
+set nohlsearch
+set showmatch
+
+" Ignore case sensitivity when searching EXCEPT if an upper case letter is in
+" the search pattern
+set ignorecase
+set smartcase
+
+" Include line numbers & their relative number for navigation
+set number relativenumber
+
+" Highlight the line where the cursor is (disable it if scrolling feels slow)
+set cursorline
+
+"=============
+" Plugins Configuration
+"=============
+
+" Nerd tree & close VIM if NerdTree is the only window opened
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Check file in shellcheck
+map <leader>s :!clear && shellcheck %<CR>
+
+" Goyo
+map <leader>f :Goyo \| set linebreak<CR>
+
+" Colorizer
+let g:colorizer_fgcontrast = 1
+let g:colorizer_nomap = 1
+let g:colorizer_maxlines = 1000
+nmap <leader>tc <Plug>Colorizer
+
+" FZF
+nnoremap <leader>F :Files<CR>
+nnoremap <leader>R :Rg!<space>
+nnoremap <leader>O :Buffers<CR>
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Lightline
+let g:lightline = {
+	\ 'colorscheme': 'jellybeans',
+	\ }
+
+"=============
+" Code Snippets
+"=============
+" Guide Navigation
+map ;g <++>
+noremap <leader><Space> <Esc>/<++><Enter>"_c4l
+vnoremap <leader><Space> <Esc>/<++><Enter>"_c4l
+
+" General
+inoremap ;lo Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<CR>
+
+" Shell
+autocmd FileType sh inoremap ;fu ()<Space>{<CR><Tab><++><CR>}<CR><CR><++><Esc>?()<CR>
+autocmd FileType sh inoremap ;if if<Space>[<Space>];<Space>then<CR><++><CR>fi<CR><CR><++><Esc>?];<CR>hi<Space>
+autocmd FileType sh inoremap ;el elif<Space>[<Space>];<Space>then<CR><++><CR><Esc>?];<CR>hi<Space>
+autocmd FileType sh inoremap ;ca case<Space>""<Space>in<CR><++>)<Space><++><Space>;;<CR><++><CR>esac<CR><CR><++><Esc>?"<CR>i
+
+"=============
+" Macros
+"=============
+" Newsboat to FreshRSS
+" let @q = 'viWS"Wdt|dt|xxi"j0'
+" let @w = 'Wv$hy0P0i<outline text=f"f"a type="rss" xmlUrl=lvt"lyf"a htmlUrl=plf"idescription=$a/>j0'

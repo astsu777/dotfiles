@@ -1,0 +1,48 @@
+# Skip this file for non-interactive shells
+[[ $- != *i* ]] && return
+
+# Set the dotfiles' location
+export DOTFILES="$HOME/.dotfiles"
+
+# Set scripts, Git repositories & sources location
+export SCRIPTS="$HOME/.local/bin"
+export SOURCES="$HOME/.sources"
+export REPOS="$HOME/.sources/repos"
+
+# Define prompt
+if [[ ! -z "$TMUX" ]]; then
+	if [[ ${EUID} == 0 ]]; then
+		export PS1='\[\e[31m\]> \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+	else
+		export PS1='\[\e[34m\]> \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+	fi
+else
+	if [[ ${EUID} == 0 ]]; then
+		export PS1='\[\e[31m\]\u@\h \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+	else
+		export PS1='\[\e[34m\]\u@\h \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+	fi
+fi
+
+# Enable VI mode
+set -o vi
+
+# Launch BASH and ignore .bashrc
+alias bbash="env -i bash --norc --noprofile"
+
+# Source common options
+source "$DOTFILES"/shellconfig/common
+
+# Source aliases & functions
+source "$DOTFILES"/shellconfig/functions
+for f in "$DOTFILES"/shellconfig/*aliases; do source $f; done
+
+# XDG config location
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+
+# Load Starship prompt if installed
+if type starship > /dev/null 2>&1; then
+	eval "$(starship init bash)"
+elif [[ -z "$SSH_CLIENT" ]] || [[ -z "$SSH_TTY" ]] && [[ -f "$HOME"/.config/starship.toml ]]; then
+	curl -fsSL https://starship.rs/install.sh | bash -s -- -y
+fi

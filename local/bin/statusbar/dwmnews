@@ -1,0 +1,4 @@
+#!/bin/sh
+news=$(newsboat -x print-unread | awk '{print $1}')
+icon="📰"
+printf "%s %s \\n"  "$icon" "$news"

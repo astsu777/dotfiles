@@ -1,0 +1,38 @@
+#=============
+# General
+#=============
+# Set prefix from CTRL-a to CTRL-b
+#escape ^Bb
+
+# Allow bold colors
+attrcolor b ".I"
+
+# Disable the splash screen at start
+startup_message off
+
+# New windows as 'logged in' automatically
+deflogin on
+
+# Enables use of shift-PgUp and shift-PgDn
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+# Enable 256 color terminal
+term screen-256color
+
+# Increase history buffer
+defscrollback 50000
+
+# Erase background with current bg color
+defbce "on"
+
+# Very nice tabbed colored hardstatus line
+hardstatus alwayslastline
+hardstatus string '%{= Kd} %{= Kd}%-w%{= Kr}[%{= KW}%n %t%{= Kr}]%{= Kd}%+w %-= %{KG} %H%{KW}|%{KY}%101`%{KW}|%D %M %d %Y%{= Kc} %C%A%{-}'
+
+#=============
+# Key Bindings
+#=============
+
+# Kill window
+bind ^k
+bind x kill

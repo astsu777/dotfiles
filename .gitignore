@@ -1,0 +1,23 @@
+######################
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+##########
+# Custom #
+##########
+vim/bundle/**
+vim/autoload/**
+vim/init.vim
+vim/backup/**
+!vim/backup/.gitkeep
+vim/swap/**
+!vim/swap/.gitkeep
+vim/undo/**
+!vim/undo/.gitkeep

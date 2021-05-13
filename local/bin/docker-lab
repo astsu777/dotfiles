@@ -1,0 +1,153 @@
+#!/bin/bash
+#
+# This script can be used to quickly deploy a set of Docker containers for test purposes
+
+# Determine the username to be created based on the logged on user
+USERNAME=$(id -nu)
+
+if [ -z "$1" ]; then
+	echo "
+Usage:
+	--proxy: add a proxy configuration into proxycs so Docker can pull images
+
+	--create-debian: create 2 instances of Debian by default (indicate a value to override)
+
+	--create-centos: create 2 instances of CentOS by default (indicate a value to override)
+
+	--drop: delete all created lab containers
+
+	--start: start all lab containers
+
+	--status: display the current lab containers
+	"
+fi
+
+# Proxy configuration
+if [ "$1" == "--proxy" ];then
+	if [ -f "/etc/systemd/system/docker.service.d/http-proxy.conf" ];then
+		echo "Check if /etc/systemd/system/docker.service.d/http-proxy.conf exists"
+	else
+        mkdir /etc/systemd/system/docker.service.d/
+		echo "[Service]" | sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf
+		echo "Environment=\"HTTP_PROXY=http://xxx.xxx.xx:3128\"" | sudo tee --append /etc/systemd/system/docker.service.d/http-proxy.conf
+		sudo service docker restart
+    fi
+fi
+
+# Debian containers
+if [ "$1" == "--create-debian" ]; then
+	nbserv=$2
+	[ "$nbserv" == "" ] && nbserv=2
+
+	# Pull Docker image if necessary
+	echo "Docker image installation "
+	docker pull priximmo/stretch-systemd-ssh:v3.3
+
+	# Create containers
+	echo "Creating ${nbserv} containers..."
+
+	# Determine the ID number of the container
+	id_first=$(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" | sed s/".*-lab"//g  | sort -nr | head -1)
+	id_min=$((id_first + 1))
+	id_max=$((nbserv + id_min - 1))
+
+	# Creating the containers
+	for i in $( seq $id_min $id_max ); do
+		echo ""
+		echo "=> Container ${USERNAME}-deb-lab${i}"
+		if [[ $OSTYPE == "linux-gnu" ]]; then
+			docker run -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-deb-lab"${i}" -h "${USERNAME}"-deb-lab"${i}" priximmo/stretch-systemd-ssh:v3.3
+		else
+			# Necessary due to docker0 interface missing in macOS and Windows
+			docker run -p 202"${i}":22 -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-deb-lab"${i}" -h "${USERNAME}"-deb-lab"${i}" priximmo/stretch-systemd-ssh:v3.3
+		fi
+		echo "=> Creation of user ${USERNAME}"
+		docker exec -ti "${USERNAME}"-deb-lab"${i}" /bin/bash -c "useradd -m -p sa3tHJ3/KuYvI ${USERNAME}"
+		docker exec -ti "${USERNAME}"-deb-lab"${i}" /bin/bash -c "echo '${USERNAME}   ALL=(ALL) NOPASSWD: ALL'>>/etc/sudoers"
+		docker exec -ti "${USERNAME}"-deb-lab"${i}" /bin/bash -c "service ssh start"
+	done
+
+	# Display the created containers
+	echo
+	echo "Lab Containers:"
+	echo
+	for i in $(docker ps -a --format "{{ .Names }}" |grep "lab" );do
+		info_container=$(docker inspect -f '{{.Name}}  |  {{.NetworkSettings.IPAddress }}  |  {{.NetworkSettings.Ports}}' "${i}")
+		echo "${info_container}"
+		echo
+	done
+fi
+
+# CentOS containers
+if [ "$1" == "--create-centos" ]; then
+	nbserv=$2
+	[ "$nbserv" == "" ] && nbserv=2
+
+	# Pull Docker image if necessary
+	echo "Docker image installation "
+	docker pull priximmo/centos7-systemctl-ssh:v3.2
+
+	# Create containers
+	echo "Creating ${nbserv} containers..."
+
+	# Determine the ID number of the container
+	id_first=$(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" | sed s/".*-lab"//g  | sort -nr | head -1)
+	id_min=$((id_first + 1))
+	id_max=$((nbserv + id_min - 1))
+
+	# Creating the containers
+	for i in $( seq $id_min $id_max ); do
+		echo ""
+		echo "=> Container ${USERNAME}-centos-lab${i}"
+		if [[ $OSTYPE == "linux-gnu" ]]; then
+			docker run -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-centos-lab"${i}" -h "${USERNAME}"-centos-lab"${i}" priximmo/centos7-systemctl-ssh:v3.2
+		else
+			# Necessary due to docker0 interface missing in macOS and Windows
+			docker run -p 203"${i}":22 -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-centos-lab"${i}" -h "${USERNAME}"-centos-lab"${i}" priximmo/centos7-systemctl-ssh:v3.2
+		fi
+		echo "=> Creation of user ${USERNAME}"
+		docker exec -ti "${USERNAME}"-centos-lab"${i}" /bin/bash -c "useradd -m -p sa3tHJ3/KuYvI ${USERNAME}"
+		docker exec -ti "${USERNAME}"-centos-lab"${i}" /bin/bash -c "echo '${USERNAME}   ALL=(ALL) NOPASSWD: ALL'>>/etc/sudoers"
+		docker exec -ti "${USERNAME}"-centos-lab"${i}" /bin/bash -c "service ssh start"
+	done
+
+	# Display the created containers
+	echo
+	echo "Lab Containers:"
+	echo
+	for i in $(docker ps -a --format "{{ .Names }}" |grep "lab" );do
+		info_container=$(docker inspect -f '{{.Name}}  |  {{.NetworkSettings.IPAddress }}  |  {{.NetworkSettings.Ports}}' "${i}")
+		echo "${info_container}"
+		echo
+	done
+fi
+
+# Delete all lab containers
+if [ "$1" == "--drop" ]; then
+	for i in $(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" );do
+		echo "Stopping ${i}..."
+		docker stop "$i" >> /dev/null 2>&1
+		echo "Deleting ${i}..."
+		docker rm "$i" >> /dev/null 2>&1
+		done
+fi
+
+# Start the lab containers
+if [ "$1" == "--start" ]; then
+    for i in $(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" );do
+		echo "Starting ${i}..."
+        docker start "$i"
+    done
+fi
+
+# Display a summary of created containers
+if [ "$1" == "--status" ]; then
+	echo
+	echo "Lab Containers:"
+	echo
+	for i in $(docker ps -a --format "{{ .Names }}" |grep "lab" );do
+		info_container=$(docker inspect -f '{{.Name}}  |  {{.NetworkSettings.IPAddress }}  |  {{.NetworkSettings.Ports}}' "${i}")
+		echo "${info_container}"
+		echo
+	done
+fi

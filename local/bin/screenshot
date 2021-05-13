@@ -1,0 +1,4 @@
+#!/bin/bash
+if type flameshot > /dev/null 2>&1; then
+	flameshot gui
+fi

@@ -1,0 +1,56 @@
+# Use W3M as HTML renderer if issues displaying HTML articles
+# html-renderer "w3m -dump -T text/html"
+
+# Refresh all RSS feeds on startup
+auto-reload yes
+
+# Display all URLs in an article
+external-url-viewer "urlview"
+
+# Maximum number of articles to show per feed
+max-items 100
+
+# Key bindings
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key U show-urls
+
+# Configure browsers for various type of URLs
+browser $BROWSER
+macro , open-in-browser
+macro t set browser "$BROWSERCLI %u"; open-in-browser ; set browser $BROWSER
+macro m set browser "tui tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser $BROWSER
+macro v set browser "tui tsp mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet $1"; open-in-browser ; set browser $BROWSER
+
+# Look & feel
+color listnormal cyan default
+color listfocus black yellow standout bold
+color listnormal_unread blue default
+color listfocus_unread yellow default bold
+color info red black bold
+color article white default bold
+highlight all "---.*---" yellow
+highlight feedlist ".*(0/0))" black
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default

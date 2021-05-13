@@ -1,0 +1,40 @@
+xset -b
+# Make menu
+(sleep 1s && mmaker Openbox -f -t xterm) &
+(sleep 1s && openbox --reconfigure) &
+
+# Set wallpaper
+(sleep 1s && feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* || feh --bg-fill --no-fehbg "$HOME"/.config/openbox/background.jpg) &
+
+# Compositer
+(sleep 1s && picom -CGb --no-fading-openclose) &
+
+# Notification Daemon
+(sleep 1s && dunst) &
+
+# Session Manager
+(sleep 1s && lxsession) &
+
+# Policy kit
+(sleep 1s && lxpolkit) &
+
+# System Tray
+(sleep 1s && volumeicon) &
+
+# Hide mouse cursor
+(sleep 1s && unclutter) &
+
+# Enable NumLock
+(sleep 1s && numlockx) &
+
+# Screenshot
+(sleep 1s && flameshot) &
+
+# Nextcloud
+(sleep 1s && nextcloud --background) &
+
+# Redshift
+(sleep 1s && redshift-gtk) &
+
+# Status Bar
+(sleep 1s && tint2) &

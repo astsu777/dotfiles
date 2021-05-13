@@ -1,0 +1,10 @@
+configuration {
+	modi: "drun,run,window,ssh,keys,combi";
+	font: "JetBrains Mono 10";
+	show-icons: true;
+	terminal: "st";
+	combi-modi: "window,run,drun";
+	sort: true;
+	levenshtein-sort: true;
+}
+@import "/usr/share/rofi/themes/Arc-Dark.rasi"

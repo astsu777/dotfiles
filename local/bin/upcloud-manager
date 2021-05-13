@@ -1,0 +1,52 @@
+#!/bin/bash
+# Allow to either start or stop servers hosted at UpCloud
+select name in "Start server" "Stop server" "Check server status" "Get server details" "Exit" ;
+do
+	case "$name" in
+		"Start server")
+			echo
+			read -sp "Enter your Base64 encoded API key: " APIKEY
+			echo
+			read -rp "Server's UUID: " SRVUUID
+			curl -s -i -X POST -H "Authorization:Basic $APIKEY" "https://api.upcloud.com/1.3/server/$SRVUUID/start" > /dev/null 2>&1
+			echo
+			echo "The server $SRVUUID has been started"
+			break
+		;;
+		"Stop server")
+			echo
+			read -sp "Enter your Base64 encoded API key: " APIKEY
+			echo
+			read -rp "Server's UUID: " SRVUUID
+			curl -s -i -X POST -H "Authorization:Basic $APIKEY" "https://api.upcloud.com/1.3/server/$SRVUUID/stop" > /dev/null 2>&1
+			echo
+			echo "The server $SRVUUID has been stopped"
+			break
+		;;
+		"Check server status")
+			echo
+			read -sp "Enter your Base64 encoded API key: " APIKEY
+			echo
+			read -rp "Server's UUID: " SRVUUID
+			srvstatus=$(curl -s -i -X GET -H "Authorization:Basic $APIKEY" "https://api.upcloud.com/1.3/server/$SRVUUID" | grep state)
+			if [[ "$srvstatus" == *"stopped"* ]]; then
+				echo "The server $SRVUUID is currently powered off"
+			else
+				echo "The server $SRVUUID is currently powered on"
+			fi
+			break
+		;;
+		"Get server details")
+			echo
+			read -sp "Enter your Base64 encoded API key: " APIKEY
+			echo
+			read -rp "Server's UUID: " SRVUUID
+			curl -s -i -X GET -H "Authorization:Basic $APIKEY" "https://api.upcloud.com/1.3/server/$SRVUUID"
+			break
+		;;
+		"Exit")
+			exit 0
+			break
+			;;
+	esac
+done

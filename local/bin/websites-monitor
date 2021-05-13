@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation date: 03 April 2020
+# Update date: N/A
+# Version: 1.0
+#
+# Description: this script checks if a list of URLs returns a HTTP/200 OK or not
+#
+
+#====================
+# Print help if no input
+#====================
+if [[ -z "$2" ]]; then
+	echo "
+Missing argument: url list!
+
+Usage: ./websites_monitor.sh <OPTION> \"input_file\" (Example: ./websites_monitor.sh --insecure urllist.txt)
+Options:
+	--secure: validate the SSL certificate of the remote server
+	--insecure: do not validate the SSL certificate of the remote server
+
+------------
+The URL list file must have a single URL per line
+"
+	exit 1
+fi
+
+#====================
+# Variables
+#====================
+urlsum=$(awk 'END{print NR}' "$2")
+website=$(<"$2" xargs -n1 echo)
+
+#====================
+# Do not check SSL certificate
+#====================
+if [ "$1" == "--insecure" ]; then
+	for i in $website
+	do
+		httpcode=$(curl -k -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+		if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
+			urlnok=$((urlnok + 1))
+			echo "$i is DOWN (HTTP Code: $httpcode)"
+			false
+		fi
+	done
+fi
+
+#====================
+# Check the list of URLs
+#====================
+if [ "$1" == "--secure" ]; then
+	for i in $website
+	do
+		httpcode=$(curl -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+		if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
+			urlnok=$((urlnok + 1))
+			echo "$i is DOWN (HTTP Code: $httpcode)"
+			false
+		fi
+	done
+fi
+
+#====================
+# Show results
+#====================
+if [ -z "$urlnok" ]; then
+	echo
+	echo "Result: all sites are UP ($urlsum checked)"
+else
+	echo
+	echo ------------
+	echo "Result: $urlnok/$urlsum sites are DOWN"
+fi

@@ -1,0 +1,81 @@
+# Shortcuts
+#
+if ! type fzf > /dev/null 2>&1; then
+	# Shell configurations
+	if [[ -f "$XDG_CONFIG_HOME"/zsh/.zshrc ]]; then
+		alias cfg-zshrc="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
+	else
+		alias cfg-zshrc="$EDITOR $HOME/.zshrc"
+	fi
+	alias cfg-bashrc="$EDITOR $HOME/.bashrc"
+
+	# If custom dotfiles are installed
+	if [[ -d "$DOTFILES" ]]; then
+		alias cfg-shellfiles_aliases="$EDITOR $DOTFILES/shellconfig/files_aliases"
+		alias cfg-shellapps_aliases="$EDITOR $DOTFILES/shellconfig/apps_aliases"
+		alias cfg-shellbasecmds_aliases="$EDITOR $DOTFILES/shellconfig/basecmds_aliases"
+		alias cfg-shellfunctions="$EDITOR $DOTFILES/shellconfig/functions"
+		alias cfg-shellenhancements_aliases="$EDITOR $DOTFILES/shellconfig/enhancements_aliases"
+		alias cfg-shellcommon="$EDITOR $DOTFILES/shellconfig/common"
+	fi
+
+	# VIM configuration
+	if [[ -f "$HOME"/.vimrc ]]; then
+		alias cfg-vimrc="$EDITOR $HOME/.vimrc"
+	fi
+
+	# TMUX configuration
+	if [[ -f "$XDG_CONFIG_HOME"/tmux/tmux.conf ]]; then
+		alias cfg-tmux="$EDITOR $XDG_CONFIGHOME/tmux/tmux.conf"
+	elif [[ -f "$HOME"/.tmux.conf ]]; then
+		alias cfg-tmux="$EDITOR $HOME/.tmux.conf"
+	fi
+
+	# SSH client configuration
+	if [[ -f "$HOME"/.ssh/config ]]; then
+		alias cfg-ssh="$EDITOR $HOME/.ssh/config"
+	fi
+
+	# MSMTP client configuration
+	if [[ -f "$HOME"/.msmtprc ]]; then
+		alias cfg-msmtp="$EDITOR $HOME/.msmtprc"
+	fi
+
+	# Git profile
+	if [[ -f "$HOME"/.gitconfig ]]; then
+		alias cfg-gitconfig="$EDITOR $HOME/.gitconfig"
+	fi
+
+	# Weechat configuration
+	if [[ -d "$XDG_CONFIG_HOME"/weechat ]]; then
+		alias cfg-weechat="$EDITOR $XDG_CONFIG_HOME/weechat/weechat.conf"
+		alias cfg-weechatirc="$EDITOR $XDG_CONFIG_HOME/weechat/irc.conf"
+	fi
+
+	# NVIM configuration
+	if [[ -f "$XDG_CONFIG_HOME"/nvim/init.vim ]]; then
+		alias cfg-nvim="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
+	fi
+
+	# Alacritty configuration
+	if [[ -f "$XDG_CONFIG_HOME"/alacritty/alacritty.yml ]]; then
+		alias cfg-alacritty="$EDITOR $XDG_CONFIG_HOME/alacritty/alacritty.yml"
+	fi
+
+	# MPV configuration
+	if [[ -f "$XDG_CONFIG_HOME"/mpv/input.conf ]]; then
+		alias cfg-mpv="$EDITOR $XDG_CONFIG_HOME/mpv/input.conf"
+	fi
+
+	# W3M configuration
+	if [[ -f "$HOME"/.w3m/config ]]; then
+		alias cfg-nvim="$EDITOR $XDG_CONFIG_HOME/.w3m/config"
+	fi
+
+	# Powerlevel10k theme configuration (ZSH)
+	if [[ -f "$ZDOTDIR"/.p10k.zsh ]]; then
+		alias cfg-p10k="$EDITOR $ZDOTDIR/.p10k.zsh"
+	elif [[ -f "$HOME"/.p10k.zsh ]]; then
+		alias cfg-p10k="$EDITOR $HOME/.p10k.zsh"
+	fi
+fi

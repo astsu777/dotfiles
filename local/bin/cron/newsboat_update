@@ -1,0 +1,5 @@
+#!/bin/sh
+# Set as a cron job to check for new RSS entries for newsboat.
+/usr/bin/notify-send "📰 Updating RSS feeds..."
+/usr/bin/newsboat -x reload > /dev/null 2>&1
+/usr/bin/notify-send "📰 RSS feeds updated"

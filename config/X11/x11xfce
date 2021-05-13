@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Launch Simple X Hotkey Daemon
+if type sxhkd > /dev/null 2>&1; then
+	sxhkd &
+fi
+
+# Launch Unclutter (hide mouse cursor)
+if type unclutter > /dev/null 2>&1; then
+	unclutter &
+fi
+
+# Launch Flameshot if installed
+if type flameshot > /dev/null 2>&1; then
+	flameshot &
+fi
+
+# Display volume icon in systray
+if type volumeicon > /dev/null 2>&1 && [ ! -n "$(pgrep volumeicon)" ]; then
+	volumeicon &
+fi
+
+# Turn on Numlock
+if type numlockx > /dev/null 2>&1; then
+	numlockx on &
+fi
+
+# Launch Redshift (night light)
+if type redshift > /dev/null 2>&1 && [ ! -n "$(pgrep redshift-gtk)" ]; then
+	redshift-gtk &
+fi
+
+# Launch Nextcloud client
+if type nextcloud > /dev/null 2>&1; then
+	nextcloud --background &
+fi
+
+# GNOME-Keyring for password caching
+if type gnome-keyring > /dev/null 2>&1; then
+	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+	export SSH_AUTH_SOCK
+fi
+
+# Launch Pamac
+if type pamac-tray > /dev/null 2>&1; then
+	pamac-tray &
+fi
