@@ -394,7 +394,7 @@ c.tabs.indicator.padding = {'bottom': 2, 'left': 0, 'right': 4, 'top': 2}
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://duckduckgo.com/?key=156e688cb0dde7e4558a853154db4b02f5b831c07f124ef90c48c6c0e372e4f4e0299c4073d0de7199994a409a65c5d6ab999b4c7105085dd6a0e653f4430b95'
+c.url.default_page = 'about:blank'
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -419,7 +419,7 @@ c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}&key=156e688cb0dd
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://duckduckgo.com/?key=156e688cb0dde7e4558a853154db4b02f5b831c07f124ef90c48c6c0e372e4f4e0299c4073d0de7199994a409a65c5d6ab999b4c7105085dd6a0e653f4430b95'
+c.url.start_pages = 'about:blank'
 
 # Hide the window decoration.  This setting requires a restart on
 # Wayland.
