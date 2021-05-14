@@ -1,5 +1,5 @@
 #!/bin/bash
 
-dte="$(date +"%a, %B %d %R"| sed 's/  / /g')"
+dte="$(date +"%a %B %d %R"| sed 's/  / /g')"
 icon="🕒"
 printf "%s %s\n" "$icon $dte"
