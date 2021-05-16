@@ -27,39 +27,28 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 call plug#begin('~/.vim/bundle')
-
 	"" Linters
 	Plug 'chr4/nginx.vim'
-
 	"" Status bar
 	Plug 'itchyny/lightline.vim'
-
 	"" File browser
 	Plug 'scrooloose/nerdtree'
-
 	"" Easily comment lines with 'gcc' for a line, 'gcap' for a paragraph, etc...
 	Plug 'tpope/vim-commentary'
-
 	"" Easily modify surrounding of a text with 'cs' followed by surrounds. 'ds' deletes surroundings
 	Plug 'tpope/vim-surround'
-
 	"" Center the text for distraction free typing
 	Plug 'junegunn/goyo.vim'
-
 	"" Colorize color codes
 	Plug 'lilydjwg/colorizer'
-
 	"" Match sections begin/end (like if/fi) using '%' and 'g%'
 	Plug 'https://github.com/adelarsq/vim-matchit'
-
 	"" Quickly comment multiple lines of text using <leader>cc and <leader>cn
 	Plug 'preservim/nerdcommenter'
-
 	"" Fuzzy Finder
 	set rtp+=~/.vim/bundle/fzf
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
-
 call plug#end()
 filetype plugin on
 
@@ -122,14 +111,6 @@ let g:netrw_dirhistmax=0
 " Enable autocompletion of commands
 set wildmode=longest,list,full
 
-" Automatically deletes all trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
-
-" Disable auto-commenting on new lines
-autocmd FileType * setlocal formatoptions-=cro
-map <leader>C :setlocal formatoptions+=cro<CR>
-map <leader>c :setlocal formatoptions-=cro<CR>
-
 " Allow applying a macro to selected lines in visual mode
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
@@ -161,6 +142,7 @@ syntax on
 
 " Set encoding to UTF-8
 set encoding=utf-8
+set fileencoding=utf-8
 
 " Color and theme setup
 set background=dark
@@ -202,6 +184,19 @@ set number relativenumber
 " Highlight the line where the cursor is (disable it if scrolling feels slow)
 set cursorline
 
+" Do not show mode at the bottom
+set noshowmode
+
+" Set window title to current file
+set title
+
+" Disable intro message when VIM starts
+set shortmess+=I
+
+" Fold color
+hi Folded cterm=bold ctermfg=DarkBlue ctermbg=none
+hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none
+
 "=============
 " Plugins Configuration
 "=============
@@ -236,6 +231,24 @@ let g:lightline = {
 	\ }
 
 "=============
+" Auto-Commands
+"=============
+" Automatically deletes all trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" Clean TeX files when quitting
+autocmd VimLeave *.tex !texclear %
+
+" Run xrdb whenever Xdefaults or Xresources are updated.
+autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
+
+" Disable auto-commenting on new lines
+autocmd FileType * setlocal formatoptions-=cro
+map <leader>C :setlocal formatoptions+=cro<CR>
+map <leader>c :setlocal formatoptions-=cro<CR>
+
+"=============
 " Code Snippets
 "=============
 " Guide Navigation
@@ -251,6 +264,12 @@ autocmd FileType sh inoremap ;fu ()<Space>{<CR><Tab><++><CR>}<CR><CR><++><Esc>?(
 autocmd FileType sh inoremap ;if if<Space>[<Space>];<Space>then<CR><++><CR>fi<CR><CR><++><Esc>?];<CR>hi<Space>
 autocmd FileType sh inoremap ;el elif<Space>[<Space>];<Space>then<CR><++><CR><Esc>?];<CR>hi<Space>
 autocmd FileType sh inoremap ;ca case<Space>""<Space>in<CR><++>)<Space><++><Space>;;<CR><++><CR>esac<CR><CR><++><Esc>?"<CR>i
+
+"=============
+" Scripts
+"=============
+" Compile document
+map <leader>c :w! \| !compiler "<c-r%"<CR>
 
 "=============
 " Macros
