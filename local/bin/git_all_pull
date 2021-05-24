@@ -37,7 +37,7 @@ do
 		echo -e "\e[32mNothing to update\e[0m"
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
-	elif grep 'Updating' "$pull" > /dev/null; then
+	elif grep 'Updating\|forced update' "$pull" > /dev/null; then
 		echo -e "\e[33mUpstream has been updated\e[0m"
 		echo -e "$(cat $pull)"
 		echo -e
