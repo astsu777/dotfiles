@@ -32,8 +32,8 @@ bind-key U show-urls
 browser $BROWSER
 macro , open-in-browser
 macro t set browser "$BROWSERCLI %u"; open-in-browser ; set browser $BROWSER
-macro m set browser "tui tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser $BROWSER
-macro v set browser "tui tsp mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet $1"; open-in-browser ; set browser $BROWSER
+macro m set browser "tspool youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser $BROWSER
+macro v set browser "tspool mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title=\"mpv floating\" $1"; open-in-browser ; set browser $BROWSER
 
 # Look & feel
 color listnormal cyan default
