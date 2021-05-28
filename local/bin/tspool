@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -x "$(command -v tsp)" ] && tsp "$@"
+[ -x "$(command -v ts)" ] && ts "$@"
