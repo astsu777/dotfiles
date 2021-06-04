@@ -81,25 +81,25 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 
 	# Debian based systems using APT or APT-GET package manager
 	if type apt snap > /dev/null 2>&1; then
-		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
 	elif type apt > /dev/null 2>&1; then
-		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; }'
+		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; }'
 	elif type apt-get snap > /dev/null 2>&1; then
-		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
 	elif type apt-get > /dev/null 2>&1; then
-		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \e[31mA reboot is required to apply all updates"; }'
+		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; }'
 
 	# Red Hat based systems using DNF package manager
 	elif type dnf snap > /dev/null 2>&1; then
-		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
 	elif type dnf > /dev/null 2>&1; then
-		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; }'
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; }'
 
 	# Red Hat based systems using YUM package manager
 	elif type yum snap > /dev/null 2>&1; then
-		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
+		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
 	elif type yum > /dev/null 2>&1; then
-		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\e[31mA reboot is required to apply all updates"; fi; }'
+		alias update-system='sudo yum update && sudo package-cleanup --oldkernels --count=2 && sudo yum autoremove && sudo yum clean all && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; }'
 
 	# Arch based systems using Pacman package manager
 	# It also integrates the AUR helper 'yay' if it is installed

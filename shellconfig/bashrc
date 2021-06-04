@@ -12,15 +12,15 @@ export REPOS="$HOME/.sources/repos"
 # Define prompt
 if [[ ! -z "$TMUX" ]]; then
 	if [[ ${EUID} == 0 ]]; then
-		export PS1='\[\e[31m\]> \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+		export PS1='\[\033[31m\]> \[\033[33m\]\w \033[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \033[37m\n\$ '
 	else
-		export PS1='\[\e[34m\]> \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+		export PS1='\[\033[34m\]> \[\033[33m\]\w \033[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \033[37m\n\$ '
 	fi
 else
 	if [[ ${EUID} == 0 ]]; then
-		export PS1='\[\e[31m\]\u@\h \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+		export PS1='\[\033[31m\]\u@\h \[\033[33m\]\w \033[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \033[37m\n\$ '
 	else
-		export PS1='\[\e[34m\]\u@\h \[\e[33m\]\w \e[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \e[37m\n\$ '
+		export PS1='\[\033[34m\]\u@\h \[\033[33m\]\w \033[32m$(git rev-parse --abbrev-ref HEAD 2> /dev/null) \033[37m\n\$ '
 	fi
 fi
 

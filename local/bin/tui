@@ -10,7 +10,7 @@ elif [[ $1 == /* ]]; then
     xterm -e "$@" &
 else
     s=${1%% *}
-    set -- "printf \"\e]0;${s^}\a\"; $@"
+    set -- "printf \"\033]0;${s^}\a\"; $@"
     st -e $SHELL -ic "$*" ||
     xterm -e $SHELL -ic "$*" &
 fi
