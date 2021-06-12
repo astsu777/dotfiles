@@ -22,22 +22,28 @@ yt-listen(){
 	if [ -z "$queue" ]; then mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; else "$queue" mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
 }
 yt-wsd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+}
+yt-wsdnow(){
+	mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
 }
 yt-whd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+}
+yt-whdnow(){
+	mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
 }
 yt-shufsd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-shufhd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-revsd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-revhd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-dlvideo(){
 	notify-send "Video queued for download..."
@@ -49,18 +55,37 @@ yt-dlaudio(){
 }
 
 # Choose preferred video format
-format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | dmenu -i -p 'Choose Action')"
-case "$format" in
-	Listen) yt-listen ;;
-	"Watch SD") yt-wsd ;;
-	"Watch HD") yt-whd ;;
-	"Shuffle SD") yt-shufsd ;;
-	"Shuffle HD") yt-shufhd ;;
-	"Watch Reverse SD") yt-revsd ;;
-	"Watch Reverse HD") yt-revhd ;;
-	Download) yt-dlvideo ;;
-	"Download Audio") yt-dlaudio ;;
-	"Copy Link") printf "$link" | tr -d '\n' | xclip -selection clipboard ;;
-	"Stop Playing") killall mpv ;;
-esac
+if [ -z "$queue" ]; then
+	format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | dmenu -i -p 'Choose Action')"
+	case "$format" in
+		Listen) yt-listen ;;
+		"Watch SD") yt-wsd ;;
+		"Watch HD") yt-whd ;;
+		"Shuffle SD") yt-shufsd ;;
+		"Shuffle HD") yt-shufhd ;;
+		"Watch Reverse SD") yt-revsd ;;
+		"Watch Reverse HD") yt-revhd ;;
+		Download) yt-dlvideo ;;
+		"Download Audio") yt-dlaudio ;;
+		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ;;
+		"Stop Playing") killall mpv ;;
+	esac
+else
+	format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | dmenu -i -p 'Choose Action')"
+	case "$format" in
+		Listen) yt-listen ;;
+		"Watch SD") yt-wsd ;;
+		"Watch SD (no queue)") yt-wsdnow ;;
+		"Watch HD") yt-whd ;;
+		"Watch HD (no queue)") yt-whdnow ;;
+		"Shuffle SD") yt-shufsd ;;
+		"Shuffle HD") yt-shufhd ;;
+		"Watch Reverse SD") yt-revsd ;;
+		"Watch Reverse HD") yt-revhd ;;
+		Download) yt-dlvideo ;;
+		"Download Audio") yt-dlaudio ;;
+		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ;;
+		"Stop Playing") killall mpv ;;
+	esac
+fi
 exit 0
