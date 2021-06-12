@@ -97,5 +97,5 @@ query=$(printf "%s\n" "$*" | dmenu -p 'Query')
 url=$(sed "s/\%s/$query/g" <<< "$search_engine")
 
 # Display search results in web browser
-if pgrep surf > /dev/null 2>&1; then echo "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
+if pgrep surf > /dev/null 2>&1; then surf "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
 exit 0
