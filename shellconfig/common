@@ -267,17 +267,13 @@ fi
 
 # Configure the default graphical Web browser
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type firefox > /dev/null 2>&1; then
-		export BROWSER="firefox"
-	elif type brave > /dev/null 2>&1; then
-		export BROWSER="brave"
-	elif type chromium > /dev/null 2>&1; then
+	if type chromium > /dev/null 2>&1; then
 		export BROWSER="chromium"
+	elif type firefox > /dev/null 2>&1; then
+		export BROWSER="firefox"
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	if [[ -d /Applications/Brave\ Browser.app ]]; then
-		export BROWSER="/Applications/Brave*Browser.app/Contents/MacOS/Brave*Browser"
-	elif [[ -d /Applications/Firefox.app ]]; then
+	if [[ -d /Applications/Firefox.app ]]; then
 		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
 	elif [[ -d /Applications/Safari.app ]]; then
 		export BROWSER="/Applications/Safari.app/Contents/MacOS/Safari"
