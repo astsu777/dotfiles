@@ -29,6 +29,7 @@ fi
 # Do not store the public key of the remote server and accept it
 alias sssh="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 alias ssftp="sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+alias sscp="scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
 # Preserve environment variables when calling "sudo"
 alias sudo="sudo -E"
