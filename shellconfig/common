@@ -267,10 +267,10 @@ fi
 
 # Configure the default graphical Web browser
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type chromium > /dev/null 2>&1; then
-		export BROWSER="chromium"
-	elif type firefox > /dev/null 2>&1; then
+	if type firefox > /dev/null 2>&1; then
 		export BROWSER="firefox"
+	elif type chromium > /dev/null 2>&1; then
+		export BROWSER="chromium"
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -d /Applications/Firefox.app ]]; then
