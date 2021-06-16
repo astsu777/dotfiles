@@ -19,7 +19,7 @@ if [ -z "$link" ]; then exit 2; fi
 
 # Actions
 yt-listen(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; else "$queue" mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ytdl-format=bestaudio --really-quiet "$link" 2> /dev/null & disown ; else "$queue" mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
 }
 yt-wsd(){
 	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
@@ -28,26 +28,26 @@ yt-wsdnow(){
 	mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
 }
 yt-whd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-whdnow(){
-	mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
+	mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null & disown
 }
 yt-shufsd(){
 	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-shufhd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-revsd(){
 	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-revhd(){
-	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	if [ -z "$queue" ]; then mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-dlvideo(){
 	notify-send "Video queued for download..."
-	if [ -z "$queue" ]; then youtube-dl -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci -f best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
+	if [ -z "$queue" ]; then youtube-dl -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci -f 299+bestaudio/137+bestaudio/best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
 yt-dlaudio(){
 	notify-send "Audio queued for download..."
