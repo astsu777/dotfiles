@@ -1,0 +1,9 @@
+# Bind CTRL+l to clear the screen
+"\C-l": clear-screen
+
+# UP & DOWN perform history search (smarter this way)
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Enable VI mode
+set editing-mode vi

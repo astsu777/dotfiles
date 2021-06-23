@@ -38,7 +38,7 @@ source "$DOTFILES"/shellconfig/functions
 for f in "$DOTFILES"/shellconfig/*aliases; do source $f; done
 
 # XDG config location
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 
 # Load Starship prompt if installed
 if type starship > /dev/null 2>&1; then
