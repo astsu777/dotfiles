@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Description: Listen to online radio
+
+# Search engine config
+declare -A radios
+radios[Blues Music Fan Radio]="http://ais-sa2.cdnstream1.com/1992_128.mp3"
+radios[Chillhop Radio]="http://hyades.shoutca.st:8043/stream"
+radios[Driveradio]="http://listen.radionomy.com/driveradio.m3u"
+radios[Hotmix Radio - Classical]="https://streaming.hotmixradio.fr/hotmixradio-classical-128.mp3"
+radios[Hotmix Radio - Funky]="https://streaming.hotmixradio.fr/hotmixradio-funky-128.mp3"
+radios[Hotmix Radio - Lounge]="http://streaming.hotmixradio.fr/hotmixradio-lounge-128.mp3"
+radios[Hotmix Radio - Platinum]="http://streaming.hotmixradio.fr/hotmixradio-platinum-128.mp3"
+radios[I Love Chillhop]="https://streams.ilovemusic.de/iloveradio17.mp3"
+radios[Lofi 24/7]="http://usa9.fastcast4u.com/proxy/jamz?mp=/1"
+radios[Musopen - Classical]="https://live.musopen.org:8085/streamvbr0"
+radios[Nightride]="https://stream.nightride.fm/nightride.m4a"
+radios[Radiomeuh]="http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3"
+radios[Radiorecord - Synthwave]="http://air.radiorecord.ru:805/synth_320"
+radios[Studio Brussels]="http://icecast.vrtcdn.be/stubru-high.mp3"
+radios[Synthwave]="https://ecast.myautodj.com/public1channel"
+radios[Stop Playing]=""
+
+# Choose a radio
+radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station') "$@" || exit
+station="${radios["${radio}"]}"
+
+# Listen to the stream
+if [[ "$station" == "Stop Playing" ]]; then pkill mpv; fi
+pkill mpv ; mpv --cache=yes --really-quiet "$station" 2> /dev/null & disown
+exit 0

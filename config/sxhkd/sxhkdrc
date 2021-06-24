@@ -74,6 +74,10 @@ super + alt + B
 super + alt + V
 	"$SHELL" -c 'dmenu-video'
 
+# Play Internet radio stations
+super + alt + R
+	"$SHELL" -c 'dmenu-radio'
+
 # YouTube subscriptions
 super + alt + y
 	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S --sort ; else tui ytfzf -S --sort ; fi'
