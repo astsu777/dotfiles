@@ -13,15 +13,21 @@ if [ ! -f "$Streams" ]; then
 fi
 
 # Check online streams
-notify-send "Checking online streams..."
-OnlineStreams=$(mktemp)
-while IFS="" read -r i; do
-	youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
-done < "$Streams"
+Cache="$XDG_CACHE_HOME/onlinestreams"
+if [ -f "$Cache" ] && test "`find $Cache -mmin +10`" || [ ! -f "$Cache" ]; then
+	rm "$Cache"
+	OnlineStreams=$(mktemp)
+	notify-send "Checking online streams..."
+	while IFS="" read -r i; do
+		youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
+	done < "$Streams"
+	mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
+fi
 
 # Choose a stream to watch
-Stream=$(cat "$OnlineStreams" | sort | dmenu -i -p "Online streams")
+Stream=$(cat "$Cache" | sort | dmenu -i -p "Online streams")
 
 # Watch the stream
+if [ -z "$Stream" ]; then exit 3; fi
 if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else pkill mpv ; mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & disown ; fi
 exit 0
