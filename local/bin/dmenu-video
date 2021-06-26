@@ -14,7 +14,7 @@ else
 fi
 
 # Grab the video/playlist link
-link="$(printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link')"
+link="$(if [[ -z "$1" ]]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link'; else printf "%s" "$1" ;fi)"
 if [ -z "$link" ]; then exit 2; fi
 
 # Actions

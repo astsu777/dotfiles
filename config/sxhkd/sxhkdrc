@@ -51,7 +51,7 @@ super + alt + p
 	"$PASSWORDMGR"
 
 # Launch Reddit client
-super + alt + r
+super + alt + R
 	"$SHELL" -c 'tui "$REDDITCLI"'
 
 # Emoji selector
@@ -63,22 +63,26 @@ super + alt + P
 	"$SHELL" -c 'dmenu-pass'
 
 # Bookmarks manager
-super + alt + S
+super + alt + s
 	"$SHELL" -c 'dmenu-websearch'
 
 # Bookmarks manager
-super + alt + B
+super + alt + b
 	"$SHELL" -c 'dmenu-bookmarks'
 
 # Play Internet videos
-super + alt + V
+super + alt + v
 	"$SHELL" -c 'dmenu-video'
 
 # Play Internet radio stations
-super + alt + R
-	"$SHELL" -c 'dmenu-radio'
+super + alt + V
+	"$SHELL" -c 'dmenu-stream'
 
+# Play Internet radio stations
+super + alt + r
+	"$SHELL" -c 'dmenu-radio'
 # YouTube subscriptions
+
 super + alt + y
 	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S --sort ; else tui ytfzf -S --sort ; fi'
 
