@@ -106,6 +106,10 @@ super + alt + F
 super + r ; m
 	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
 
+# Launch sound mixer
+super + r ; s
+	pkill mpv ; pkill mplayer ; pkill vlc
+
 # Multimedia Keys
 XF86AudioLowerVolume
 	pactl set-sink-volume 0 -2%
