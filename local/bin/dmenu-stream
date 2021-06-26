@@ -6,7 +6,7 @@ if ! type youtube-dl mpv > /dev/null 2>&1; then
 fi
 
 # Define streams list
-Streams="$HOME/.local/share/streams.txt"
+Streams="$HOME/.local/share/streams"
 if [ ! -f "$Streams" ]; then
 	notify-send "Stream list does not exist!"
 	exit 2
