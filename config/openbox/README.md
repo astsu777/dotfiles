@@ -1,5 +1,5 @@
 # My Openbox Configuration
-![](https://hostr.co/file/vab8EaeTPcuA/openbox.png)
+![](https://i.postimg.cc/yxLH0R0P/screenshot-20210324-011.png)
 
 This repository hosts the configuration files for [Openbox](http://openbox.org). Three files are necessary to the configuration: *rc.xml* which is the main Openbox config file, *menu.xml* which is the right-click menu and *autostart* which automatically starts certain programs when logging into Openbox. This custom configuration features:
 
@@ -103,7 +103,7 @@ I configured the key bindings that I like. They are all configured in the *rc.xm
 # Status Bar
 In this Openbox configuration, [Polybar](https://github.com/polybar/polybar) has been configured to act as the status bar
 
-![](https://hostr.co/file/zFlwYKUQmtMi/leftwm_bar.png)
+![](https://i.postimg.cc/kXjJb0cm/screenshot-20210324-009.png)
 
 * 📦 0 : indicates how many updates are available (script: *updates.sh*)
 * 🖥️ 2%: indicates the CPU usage

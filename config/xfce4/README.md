@@ -1,5 +1,5 @@
 # My XFCE4 Configuration
-![](https://hostr.co/file/9lFVZJRORsGI/xfce4.png)
+![](https://i.postimg.cc/L4xKCzZk/screenshot-20210324-014.png)
 
 This repository hosts the configuration files for [XFCE4](https://www.xfce.org/). The configuration of XFCE is very basic and minimalist and mostly rocks default settings:
 

@@ -1,5 +1,5 @@
 # My LeftWM Configuration
-![](https://hostr.co/file/5DL7v7qienXh/leftwm.png)
+![](https://i.postimg.cc/3N8hy10N/screenshot-20210324-010.png)
 
 This repository hosts the configuration files for [LeftWM](https://leftwm.org/). The files here consist of a *config.toml* file that contains all the key bindings of the window manager. The rest is part of a custom theme. It features:
 
@@ -87,7 +87,7 @@ I configured the key bindings that I like. They are all configured in the *confi
 # Status Bar
 In the custom theme offered by this repository, [Polybar](https://github.com/polybar/polybar) has been configured to act as the status bar
 
-![](https://hostr.co/file/zFlwYKUQmtMi/leftwm_bar.png)
+![](https://i.postimg.cc/kXjJb0cm/screenshot-20210324-009.png)
 
 * 📦 0 : indicates how many updates are available (script: *updates.sh*)
 * 🖥️ 2%: indicates the CPU usage

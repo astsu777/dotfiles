@@ -1,7 +1,7 @@
 # DWM Status Bar
 By default, DWM has a very plain bar with almost no information in it. The status bar can be customized with one/several BASH script(s). Here is what mine looks like:
 
-![](https://hostr.co/file/adYGfR8cLzbF/dwmbar.png)
+![](https://i.postimg.cc/kXjJb0cm/screenshot-20210324-009.png)
 
 * 📦 0 : indicates how many updates are available (script: *dwmupdates*)
 * 🖥 10%: indicates the CPU usage (script: *dwmcpu*)
