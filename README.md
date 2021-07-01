@@ -1,6 +1,6 @@
 # Dotfiles
 
-![](https://hostr.co/file/VvyK1CyZGELf/dotfiles-showcase.png)
+[![screenshot-20210324-005.png](https://i.postimg.cc/TwXfxfRr/screenshot-20210324-005.png)](https://postimg.cc/8FwqB8f5)
 
 This repository hosts all my public configuration files. They offer the following features:
 
