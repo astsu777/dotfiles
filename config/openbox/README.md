@@ -1,12 +1,11 @@
 # My Openbox Configuration
-![](https://i.postimg.cc/yxLH0R0P/screenshot-20210324-011.png)
+![](https://i.postimg.cc/7L6kqvJY/screenshot-20210702-021.png)
 
 This repository hosts the configuration files for [Openbox](http://openbox.org). Three files are necessary to the configuration: *rc.xml* which is the main Openbox config file, *menu.xml* which is the right-click menu and *autostart* which automatically starts certain programs when logging into Openbox. This custom configuration features:
 
-* Status bar with *Polybar* with a built-in system tray
+* Status bar with *Tint2* with a built-in system tray
 * Script to autostart all the necessary programs such as the composer, etc...
 * 4 workspaces
-* Custom scripts ran by the status bar to display various information
 * Right-click automatically generated at login
 * Keybindings to tile windows in certain ways
 
@@ -16,8 +15,7 @@ The following packages are necessary in order to run this build of LeftWM proper
 * openbox
 * ttf-jetbrains-mono
 * ttf-joypixels
-* polybar
-* libxft-bgra (regular *libxft* won't work with my status bar)
+* tint2
 
 The following software are not mandatory but recommended:
 * feh (hard-coded in the theme to set a wallpaper)
@@ -30,7 +28,7 @@ The following software are not mandatory but recommended:
 If you want a nice DMenu to be integrated, you can install [my custom build](https://github.com/GSquad934/dmenu). You can check out [my build of ST](https://github.com/GSquad934/st) for a nice terminal emulator.
 
 # Installation
-Openbox is availalbe in most Linux distribution repositories. It can be installed with the following command depending on your distro:
+Openbox is available in most Linux distribution repositories. It can be installed with the following command depending on your distro:
 
 ### Arch Linux
 ```
@@ -45,7 +43,7 @@ apt install openbox
 dnf install openbox
 ```
 
-Then, you also need the files in this repository to actually configure Openbox and have the theme showcased in the above screenshot. The *polybar* configuration is available in the polybar folder.
+Then, you also need the files in this repository to actually configure Openbox and have the theme showcased in the above screenshot. The *tint2rc* configuration file is available in this repository in the */config/tint2* folder and must be present in *$HOME/.config/tint2/tint2rc*.
 
 <u>**Note**</u>: this Openbox installation can be fully automated by using my [bootstrap script](https://github.com/GSquad934/bootstrap).
 
@@ -101,21 +99,12 @@ I configured the key bindings that I like. They are all configured in the *rc.xm
 <u>**Note**</u>: the key bindings in this configuration are a bit limited because I actually use *SXHKD* to run all my applications. My configuration for *SXHKD* can be found in [my dotfiles](https://github.com/GSquad934/dotfiles/blob/master/config/sxhkd/sxhkdrc). My configuration file for *SXHKD* is totally based on my personal dotfiles, so you will need to modify either the key bindings of LeftWM or have a custom *sxhkdrc* ready.
 
 # Status Bar
-In this Openbox configuration, [Polybar](https://github.com/polybar/polybar) has been configured to act as the status bar
+In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been configured to act as the status bar. It is configured to display:
 
-![](https://i.postimg.cc/kXjJb0cm/screenshot-20210324-009.png)
-
-* 📦 0 : indicates how many updates are available (script: *updates.sh*)
-* 🖥️ 2%: indicates the CPU usage
-* 🧠 35% : indicates the RAM usage
-* ⬇  120B ⬆  60B : indicates the download/upload network traffic usage. It will automatically change B/KB/MB depending on the usage
-* 💾 8.2G (38%) : indicates the disk space usage where "/" is mounted. Other disks can be added by modifying the script
-* 🌡 25.2 : indicates the CPU temperatur (will indicate 0 if no sensors are found)
-* 🔊 60% : indicates the volume level. The icon will change depending on the volume level
-* 🕒 Wed, February 24 21:39 : indicates the current day, date and time in 24H format
-* The system tray on the right will display whatever icon is required in the systray
-
-While certain information are internal to *Polybar*, others actually require the usage of scripts. All scripts are present in the *polybar/scripts* folder.
+* Opened windows on the left side
+* Battery charge (if applicable)
+* Time & date on the right side
+* A system tray on the far right
 
 # Wallpapers
 *Feh* is used to setup the wallpaper. A default wallpaper (file: *background.jpg*) is supplied with this configuration of Openbox. *Feh* is executed by the *autostart* file to set the default wallpaper. In order to setup a custom wallpaper, it is possible to either replace the *background.jpg* file or to modify the execution of *feh* in the *autostart* file with something like the following:
