@@ -1,10 +1,10 @@
 # Launch terminal emulator
 super + Return
-	"$SHELL" -c "$TERMINAL"
+	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
 
 # Launch launcher menu
 super + shift + Return
-	"$SHELL" -c "$LMENU"
+	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
 
 # Show clipboard manager
 super + alt + c
