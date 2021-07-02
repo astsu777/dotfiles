@@ -10,7 +10,7 @@ This repository hosts the configuration files for [Openbox](http://openbox.org).
 * Keybindings to tile windows in certain ways
 
 # Dependencies
-The following packages are necessary in order to run this build of LeftWM properly:
+The following packages are necessary in order to run this build of Openbox properly:
 
 * openbox
 * ttf-jetbrains-mono
@@ -50,7 +50,7 @@ Then, you also need the files in this repository to actually configure Openbox a
 # Running Openbox
 If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/GSquad934/dotfiles/blob/master/config/X11/xinitrc).
 
-If you use a login manager (such as *lightdm*), the Openbox package installation should have already created a *.desktop* file necessary for the login manager. Otherwise, make sure to create a *leftwm.desktop* file in */usr/share/xsessions/*. The file should contain the following:
+If you use a login manager (such as *lightdm*), the Openbox package installation should have already created a *.desktop* file necessary for the login manager. Otherwise, make sure to create a *openbox.desktop* file in */usr/share/xsessions/*. The file should contain the following:
 
 ```
 [Desktop Entry]
@@ -96,7 +96,7 @@ I configured the key bindings that I like. They are all configured in the *rc.xm
 | `ALT + Tab` | Cycle between opened windows |
 | `Super + Alt + l` | Lock screen |
 
-<u>**Note**</u>: the key bindings in this configuration are a bit limited because I actually use *SXHKD* to run all my applications. My configuration for *SXHKD* can be found in [my dotfiles](https://github.com/GSquad934/dotfiles/blob/master/config/sxhkd/sxhkdrc). My configuration file for *SXHKD* is totally based on my personal dotfiles, so you will need to modify either the key bindings of LeftWM or have a custom *sxhkdrc* ready.
+<u>**Note**</u>: the key bindings in this configuration are a bit limited because I actually use *SXHKD* to run all my applications. My configuration for *SXHKD* can be found in [my dotfiles](https://github.com/GSquad934/dotfiles/blob/master/config/sxhkd/sxhkdrc). My configuration file for *SXHKD* is totally based on my personal dotfiles, so you will need to modify either the key bindings of Openbox or have a custom *sxhkdrc* ready.
 
 # Status Bar
 In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been configured to act as the status bar. It is configured to display:

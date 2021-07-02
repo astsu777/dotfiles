@@ -59,11 +59,6 @@ if [[ "$GDMSESSION" =~ ^(xfce|Xfce|XFCE)$ ]]; then
 	source "$HOME"/.dotfiles/config/X11/x11xfce
 fi
 
-# LeftWM
-if [[ "$GDMSESSION" =~ ^(leftwm|LeftWM)$ ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11leftwm
-fi
-
 # Openbox
 if [[ "$GDMSESSION" =~ ^(openbox|Openbox)$ ]]; then
 	source "$HOME"/.dotfiles/config/X11/x11openbox

@@ -9,7 +9,6 @@ get_session(){
 	case "$SESSION" in
 		dwm) exec dwm ;;
 		jwm) exec jwm ;;
-		leftwm) exec leftwm ;;
 		openbox) exec openbox-session ;;
 		xfce) exec startxfce4 ;;
 	esac
@@ -68,11 +67,6 @@ fi
 # XFCE
 if [[ "$SESSION" == "xfce" ]]; then
 	source "$HOME"/.dotfiles/config/X11/x11xfce
-fi
-
-# LeftWM
-if [[ "$SESSION" == "leftwm" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11leftwm
 fi
 
 # Openbox

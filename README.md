@@ -60,7 +60,7 @@ The configuration files stored in *config/X11* are meant to be used for graphica
 
 * *xinitrc*: this file is supposed to be located in *$HOME/.xinitrc* and is loaded by *xorg-xinit* when logging in without any display manager. The very first line defines which GUI needs to be loaded and the rest is executing commands automatically to setup the screen layout, keyboard, programs required to start automatically, etc...
 * *xprofile*: this file is the equivalent of *xinitrc* but is used by display managers at logon
-* *x11dwm*, *x11leftwm*, *x11...*: these files are sourced in the *xinitrc* and *xprofile* files and there is one per supported GUI. The reason for this is to provide modularity and avoid repeatetiveness in both *xinitrc* and *xprofile*
+* *x11dwm*, *x11...*: these files are sourced in the *xinitrc* and *xprofile* files and there is one per supported GUI. The reason for this is to provide modularity and avoid repeatetiveness in both *xinitrc* and *xprofile*
 * *lightdm*: these are configuration files for *LightDM* display manager when using the GTK greeter. The customization is very light as I do not use any display managers at all (but I offer the option)
 
 The deployment of the supported GUIs can be automated with my [bootstrap script](https://github.com/GSquad934/bootstrap.git) and the relevant x-file will also be automatically installed and configured.
@@ -115,7 +115,7 @@ There is a sample *DOSBox* configuration that I keep around and modify if needed
 ## TMUX
 *TMUX* configuration has changed over the years and multiple config files are available. A single one is present for my workstations and two are aimed for remote SSH connections. The file called *tmux24-server.conf* is meant to be used on servers with *TMUX* v2.9 or higher (earlier versions should use the file called *tmuxpre29-server.conf* for compatibility purposes).
 
-My dotfiles will open *TMUX* automatically unless the window manager is *DWM* or *LeftWM*: I tend to open multiple terminal emulators when using a tiling window manager. This is configured in the file called *shellconfig/common*. On a remote server, *TMUX* is also automatically loaded upon login.
+My dotfiles will open *TMUX* automatically unless the window manager is *DWM*: I tend to open multiple terminal emulators when using a tiling window manager. This is configured in the file called *shellconfig/common*. On a remote server, *TMUX* is also automatically loaded upon login.
 
 <u>**Note**</u>: even though I also use a tiling window manager in macOS (called *Amethyst*), I still use *TMUX* automatically on my Mac as it is more convenient.
 
