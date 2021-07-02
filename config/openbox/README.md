@@ -101,8 +101,9 @@ I configured the key bindings that I like. They are all configured in the *rc.xm
 # Status Bar
 In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been configured to act as the status bar. It is configured to display:
 
+* Workspace ID on the far left
 * Opened windows on the left side
-* Battery charge (if applicable)
+* Battery charge on the right side (if applicable)
 * Time & date on the right side
 * A system tray on the far right
 
