@@ -88,7 +88,7 @@ super + alt + y
 
 # Search YouTube
 super + alt + Y
-	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t ; else tui ytfzf ; fi'
+	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -s ; else tui ytfzf -s ; fi'
 
 # Shutdown the system (script)
 super + shift + Escape
