@@ -54,9 +54,10 @@ else
 	xrdb -merge -I$HOME ~/.Xresources
 fi
 
-# XFCE
-if [[ "$GDMSESSION" =~ ^(xfce|Xfce|XFCE)$ ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11xfce
+# DWM
+if [[ "$GDMSESSION" =~ ^(dwm|DWM)$ ]]; then
+	export PATH="$HOME/.local/bin/statusbar:$PATH"
+	source "$HOME"/.dotfiles/config/X11/x11dwm
 fi
 
 # Openbox
@@ -64,8 +65,7 @@ if [[ "$GDMSESSION" =~ ^(openbox|Openbox)$ ]]; then
 	source "$HOME"/.dotfiles/config/X11/x11openbox
 fi
 
-# DWM
-if [[ "$GDMSESSION" =~ ^(dwm|DWM)$ ]]; then
-	export PATH="$HOME/.local/bin/statusbar:$PATH"
-	source "$HOME"/.dotfiles/config/X11/x11dwm
+# XFCE
+if [[ "$GDMSESSION" =~ ^(xfce|Xfce|XFCE)$ ]]; then
+	source "$HOME"/.dotfiles/config/X11/x11xfce
 fi

@@ -65,9 +65,9 @@ if type slock > /dev/null 2>&1; then
 	fi
 fi
 
-# XFCE
-if [[ "$SESSION" == "xfce" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11xfce
+# DWM
+if [[ "$SESSION" == "dwm" ]]; then
+	source "$HOME"/.dotfiles/config/X11/x11dwm
 fi
 
 # Openbox
@@ -75,9 +75,9 @@ if [[ "$SESSION" == "openbox" ]]; then
 	source "$HOME"/.dotfiles/config/X11/x11openbox
 fi
 
-# DWM
-if [[ "$SESSION" == "dwm" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11dwm
+# XFCE
+if [[ "$SESSION" == "xfce" ]]; then
+	source "$HOME"/.dotfiles/config/X11/x11xfce
 fi
 
 # Launch the chosen GUI environment (must be last)
