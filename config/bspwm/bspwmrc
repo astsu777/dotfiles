@@ -23,7 +23,7 @@ if type feh > /dev/null 2>&1; then
 	if [[ -d "$HOME/.local/share/wallpapers" ]]; then
 		feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* &
 	else
-		feh --bg-fill --no-fehbg /opt/dwm/background.jpg &
+		feh --bg-fill --no-fehbg "$HOME"/.config/bspwm/background.jpg &
 	fi
 fi
 
