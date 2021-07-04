@@ -1,119 +1,3 @@
-# Launch terminal emulator
-super + Return
-	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
-
-# Launch launcher menu
-super + shift + Return
-	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
-
-# Show clipboard manager
-super + alt + c
-	clipmenu
-
-# Launch Web browser
-super + alt + {w,W}
-	"$SHELL" -c {"$BROWSER","tui $BROWSERCLI https://duckduckgo.com"}
-
-# Launch music player
-super + alt + M
-	"$SHELL" -c 'if [[ "$MUSICPLAYER" == *"mocp"* ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'
-
-# Launch text editor
-super + alt + e
-	"$SHELL" -c 'tui "$EDITOR"'
-
-# Launch file manager
-super + alt + f
-	"$SHELL" -c 'if [[ "$FILEMANAGER" == "nnn" ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi'
-
-# Launch system monitor
-super + alt + h
-	"$SHELL" -c 'tui $SYSMONITOR'
-
-# Launch IRC client
-super + alt + i
-	"$SHELL" -c 'if [[ "$IRCCLIENT" == "weechat" ]]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
-
-# Launch RSS reader
-super + alt + n
-	"$SHELL" -c 'tui "$RSSREADER"'
-
-# Launch mail client
-super + alt + m
-	"$SHELL" -c '"$MAILER"'
-
-# Launch screenshot utility
-super + alt + 5
-	"$SHELL" -c '"$SCROTBIN"'
-
-# Launch password manager
-super + alt + p
-	"$PASSWORDMGR"
-
-# Launch Reddit client
-super + alt + R
-	"$SHELL" -c 'tui "$REDDITCLI"'
-
-# Emoji selector
-super + alt + E
-	"$SHELL" -c 'dmenu-unicode'
-
-# Password manager (pass)
-super + alt + P
-	"$SHELL" -c 'dmenu-pass'
-
-# Bookmarks manager
-super + alt + s
-	"$SHELL" -c 'dmenu-websearch'
-
-# Bookmarks manager
-super + alt + b
-	"$SHELL" -c 'dmenu-bookmarks'
-
-# Play Internet videos
-super + alt + v
-	"$SHELL" -c 'dmenu-video'
-
-# Play Internet radio stations
-super + alt + V
-	"$SHELL" -c 'dmenu-stream'
-
-# Play Internet radio stations
-super + alt + r
-	"$SHELL" -c 'dmenu-radio'
-# YouTube subscriptions
-
-super + alt + y
-	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S --sort ; else tui ytfzf -S --sort ; fi'
-
-# Search YouTube
-super + alt + Y
-	"$SHELL" -c 'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -s ; else tui ytfzf -s ; fi'
-
-# Shutdown the system (script)
-super + shift + Escape
-	"$SHELL" -c 'dmenu-shutdown'
-
-# Lock the screen
-super + alt + l
-	slock
-
-# Set a random wallpaper
-super + r ; w
-	feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*
-
-# Open files with Rofi/Dmenu
-super + alt + F
-	xdg-open "$(locate home media | dmenu -i -p "File to open")"
-
-# Launch sound mixer
-super + r ; m
-	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
-
-# Launch sound mixer
-super + r ; s
-	pkill mpv ; pkill mplayer ; pkill vlc
-
 # Multimedia Keys
 XF86AudioLowerVolume
 	pactl set-sink-volume 0 -2%
@@ -123,6 +7,94 @@ XF86AudioMute
 	pactl set-sink-mute 0 toggle
 XF86Calculator
 	"$CALCULATOR"
+
+# Terminal emulator
+super + Return
+	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
+
+# Shutdown/Logout
+super + shift + Escape
+	"$SHELL" -c 'dmenu-shutdown'
+
+# Launcher menu
+super + shift + Return
+	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
+
+# Screenshot
+super + alt + 5
+	"$SHELL" -c '"$SCROTBIN"'
+
+# Bookmarks manager
+super + alt + b
+	"$SHELL" -c 'dmenu-bookmarks'
+
+# Clipboard manager
+super + alt + c
+	clipmenu
+
+# Text editor | List of unicode characters
+super + alt + {e,E}
+	"$SHELL" -c {'tui "$EDITOR"','dmenu-unicode'}
+
+# File manager
+super + alt + {f,F}
+	"$SHELL" -c {'if [[ "$FILEMANAGER" == "nnn" ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi','xdg-open "$(locate home media | dmenu -i -p "File to open")"'}
+
+# System monitor
+super + alt + h
+	"$SHELL" -c 'tui $SYSMONITOR'
+
+# IRC client
+super + alt + i
+	"$SHELL" -c 'if [[ "$IRCCLIENT" == "weechat" ]]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
+
+# Lock the screen
+super + alt + l
+	slock
+
+# Email client | Music player
+super + alt + {m,M}
+	"$SHELL" -c {'"$MAILER"'.'if [[ "$MUSICPLAYER" == *"mocp"* ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'}
+
+# RSS reader
+super + alt + n
+	"$SHELL" -c 'tui "$RSSREADER"'
+
+# Password manager
+super + alt + {p,P}
+	"$SHELL" -c {'"$PASSWORDMGR"','dmenu-pass'}
+
+# Reddit client
+super + alt + {r,R}
+	"$SHELL" -c {'dmenu-radio','tui "$REDDITCLI"'}
+
+# Web search
+super + alt + s
+	"$SHELL" -c 'dmenu-websearch'
+
+# Play Internet videos | Online streams
+super + alt + {v,V}
+	"$SHELL" -c {'dmenu-video','dmenu-stream'}
+
+# Web browser
+super + alt + {w,W}
+	"$SHELL" -c {'"$BROWSER"','tui "$BROWSERCLI" https://duckduckgo.com'}
+
+# YouTube
+super + alt + {y,Y}
+	"$SHELL" -c {'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S --sort ; else tui ytfzf -S --sort ; fi','if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -s ; else tui ytfzf -s ; fi'}
+
+# Sound mixer
+super + r ; m
+	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
+
+# Kill all multimedia players
+super + r ; s
+	pkill mpv ; pkill mplayer ; pkill vlc
+
+# Set a random wallpaper
+super + r ; w
+	feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*
 
 # Reload sxhkdrc
 super + r ; r ; s
