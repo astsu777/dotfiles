@@ -27,6 +27,11 @@ if type feh > /dev/null 2>&1; then
 	fi
 fi
 
+# Set default mouse cursor when not over window
+if type xsetroot > /dev/null 2>&1; then
+	xsetroot -cursor_name left_ptr &
+fi
+
 # Launch Simple X Hotkey Daemon
 if type sxhkd > /dev/null 2>&1; then
 	sxhkd &
