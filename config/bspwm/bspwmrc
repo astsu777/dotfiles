@@ -92,3 +92,6 @@ if type gnome-keyring > /dev/null 2>&1; then
 	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 	export SSH_AUTH_SOCK
 fi
+
+# Status bar
+"$HOME"/.config/bspwm/bar.sh &
