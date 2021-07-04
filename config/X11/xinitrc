@@ -7,6 +7,7 @@ export SESSION="dwm"
 # If the main GUI has an issue and won't start, use 'jwm' as a failsafe
 get_session(){
 	case "$SESSION" in
+		bspwm) exec bspwm ;;
 		dwm) exec dwm ;;
 		jwm) exec jwm ;;
 		openbox) exec openbox-session ;;
