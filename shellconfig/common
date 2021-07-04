@@ -370,7 +370,7 @@ if [[ ! -h /etc/arch-release ]] && [[ -f "$HOME"/.xinitrc ]] && [ -z "${DISPLAY}
 fi
 
 # Auto-start Tmux session
-if [[ ! "$SESSION" =~ ^(dwm|DWM)$ ]] && [[ ! "$GDMSESSION" =~ ^(dwm|DWM)$ ]]; then
+if [[ ! "$SESSION" =~ ^(dwm|DWM|bspwm|BSPWM)$ ]] && [[ ! "$GDMSESSION" =~ ^(dwm|DWM|bspwm|BSPWM)$ ]]; then
 	if type tmux > /dev/null 2>&1 && [[ -z "$TMUX" ]]; then
 		if [[ -z "$SSH_CLIENT" ]] || [[ -z "$SSH_TTY" ]]; then
     		if [[ ! -d "$XDG_CONFIG_HOME"/tmux/plugins/tpm ]]; then
