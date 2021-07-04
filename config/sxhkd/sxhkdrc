@@ -54,7 +54,7 @@ super + alt + l
 
 # Email client | Music player
 super + alt + {m,M}
-	"$SHELL" -c {'"$MAILER"'.'if [[ "$MUSICPLAYER" == *"mocp"* ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'}
+	"$SHELL" -c {'"$MAILER"','if [[ "$MUSICPLAYER" == *"mocp"* ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'}
 
 # RSS reader
 super + alt + n
