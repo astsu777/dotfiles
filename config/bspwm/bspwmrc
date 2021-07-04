@@ -12,11 +12,11 @@ bspc config focused_border_color \#304569
 bspc config focus_follows_pointer true
 
 # Window management
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+bspc rule -a Gimp state=floating
+bspc rule -a Picture-in-Picture state=floating sticky=on
+bspc rule -a 'Picture in picture' state=floating sticky=on
+bspc rule -a galculator state=floating
+bspc rule -a 'mpv floating' state=floating sticky=on
 
 # Configure wallpaper
 if type feh > /dev/null 2>&1; then
