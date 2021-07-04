@@ -1,0 +1,89 @@
+#! /bin/sh
+# BSPWM configuration
+bspc monitor -d 1 2 3 4 5 6 7 8 9
+bspc config border_width        2
+bspc config window_gap          10
+bspc config split_ratio         0.50
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config active_border_color \#282c34
+bspc config normal_border_color \#282c34
+bspc config focused_border_color \#304569
+bspc config focus_follows_pointer true
+
+# Window management
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+# Configure wallpaper
+if type feh > /dev/null 2>&1; then
+	if [[ -d "$HOME/.local/share/wallpapers" ]]; then
+		feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* &
+	else
+		feh --bg-fill --no-fehbg /opt/dwm/background.jpg &
+	fi
+fi
+
+# Launch Simple X Hotkey Daemon
+if type sxhkd > /dev/null 2>&1; then
+	sxhkd &
+fi
+
+# Launch Dunst if installed (notification)
+if type dunst > /dev/null 2>&1; then
+	dunst &
+fi
+
+# Launch Unclutter (hide mouse cursor)
+if type unclutter > /dev/null 2>&1; then
+	unclutter &
+fi
+
+# Launch Flameshot if installed
+if type flameshot > /dev/null 2>&1; then
+	flameshot &
+fi
+
+# Display volume icon in systray
+if type volumeicon > /dev/null 2>&1 && [ ! -n "$(pgrep volumeicon)" ]; then
+	volumeicon &
+fi
+
+# Turn on Numlock
+if type numlockx > /dev/null 2>&1; then
+	numlockx on &
+fi
+
+# Launch a session manager
+if type lxpolkit > /dev/null 2>&1; then
+	lxpolkit &
+fi
+
+# Launch a session manager
+if type lxsession > /dev/null 2>&1; then
+	lxsession &
+fi
+
+# Launch Redshift (night light)
+if type redshift > /dev/null 2>&1 && [ ! -n "$(pgrep redshift-gtk)" ]; then
+	redshift-gtk &
+fi
+
+# Launch Nextcloud client
+if type nextcloud > /dev/null 2>&1; then
+	nextcloud --background &
+fi
+
+# Launch compositer for fancy graphical effects
+if type picom > /dev/null 2>&1; then
+	picom -CGb --no-fading-openclose &
+fi
+
+# GNOME-Keyring for password caching
+if type gnome-keyring > /dev/null 2>&1; then
+	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+	export SSH_AUTH_SOCK
+fi

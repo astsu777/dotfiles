@@ -99,3 +99,61 @@ super + r ; w
 # Reload sxhkdrc
 super + r ; r ; s
     pkill -USR1 sxhkd && notify-send "SXHKD configuration refreshed"
+
+#================
+# BSPWM
+#================
+
+# Quit or restart BSPWM
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+# Kill focused window
+super + shift + c
+	bspc node -k
+
+# Alternate between the tiled and monocle layout
+super + space
+	bspc desktop -l next
+
+# Change window state
+super + {t,shift + t,f,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set focused window to sticky
+super + shift + space
+	bspc node -g sticky
+
+# Focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# Focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# Focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# Focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# Expand a window by moving one of its side outward
+super + {Left,Down,Up,Right}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + {Left,Down,Up,Right}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Move a floating window
+super + shift + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
