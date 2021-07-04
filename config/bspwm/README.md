@@ -60,6 +60,45 @@ Exec=bspwm
 Type=Application
 ```
 
+## Multi-monitor Setup
+BSPWM treats workspaces on a per-monitor basis. This means that a workspace can only exist on a single monitor. By default, the *bspwmrc* is configured to setup 9 workspaces on a single monitor with the following line:
+
+```
+bspc monitor -d 1 2 3 4 5 6 7 8 9
+```
+
+In order to quickly detect connected monitors, the following command can be used:
+
+```
+xrandr -q | grep '\sconnected' | awk '{print $1}'
+OR
+bspc query -M --names
+```
+
+The command will return values such as *eDP1*, *HDMI*, etc... For example, if two monitors are connected with DisplayPorts, the output of the above command would be *eDP1* and *eDP2*. Then, an example configuration would be:
+
+```
+bspc monitor eDP1 -d 1 2 3 4 5
+bspc monitor eDP2 -d 6 7 8 9 0
+```
+
+Workspaces 1 to 5 would be on the first monitor and 6 to 10 on the second monitor.
+
+### Workspace setup per machine
+It is possible to setup a custom configuration based on a machine's hostname in *bspwmrc* like the following:
+
+```
+ if [[ $(hostname) == 'MYPC1' ]]; then
+     bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9
+ elif [[ $(hostname) == 'MYPC2' ]]; then
+     bspc monitor VGA-0 -d 1 2 3 4 5
+     bspc monitor VGA-1 -d 6 7 8 9 10
+ elif [[ $(hostname) == 'MYPC3' ]]; then
+     bspc monitor DVI-I-3 -d 6 7 8 9 10
+     bspc monitor DVI-I-2 -d 1 2 3 4 5
+ fi
+```
+
 # Key Bindings
 I configured the key bindings that I like. They are all configured in the *sxhkdrc* file. Here is the full list and what they actually do:
 

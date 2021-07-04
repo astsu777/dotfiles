@@ -1,5 +1,7 @@
 #! /bin/sh
 # BSPWM configuration
+# Workspaces can be customized for multi-monitor. They are independant per monitor
+# Use command 'xrandr -q | grep '\sconnected' | awk '{print $1}'' to display connected monitors
 bspc monitor -d 1 2 3 4 5 6 7 8 9
 bspc config border_width        2
 bspc config window_gap          10
