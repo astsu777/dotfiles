@@ -132,6 +132,8 @@ I use this application to globally define my keybindings to do... everything. A 
 
 Doing this allows modularity: for example, Mod4+ALT+w opens the Web browser defined by the *$BROWSER* variable. This variable sets *Firefox* as the primary browser, but then several fallbacks such as *Qutebrowser*, *Chromium*, etc...
 
+Two configuration files are present in this repository: one called *sxhkdrc* which contains all the keybindings. The second one is called *sxhkdrc_bspwm* and is solely called when running *BSPWM*.
+
 ## VIM/Neovim
 In this repository, the *vim* folder contains all the necessary configuration files for *VIM*. However, I use *Neovim* as my text editor (mostly for new window stuff) but don't have a specific config file for it: the *~/.config/nvim/init.vim"* is actually a symlink to the *.vimrc*. When deploying my dotfiles, simply simlink the *vim* folder to *~/.config/nvim* and it will work.
 

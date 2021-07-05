@@ -1,7 +1,7 @@
 # My BSPWM Configuration
 ![](https://i.postimg.cc/QtKf92Lc/screenshot-20210704-026.png)
 
-This repository hosts the configuration files for [BSPWM](https://github.com/baskerville/bspwm). A single file is necessary to the configuration: *bspwmrc*. However, this window manager does not hadle keybindings by itself as windows are managed by a program called *bspc*. Its author created a tool called *SXHKD* that can be used to manage keybindings. This repository of dotfiles includes a configuration of *SXHKD* using */config/sxhkd/sxhkdrc* as a configuration file. These two programs combined provide the following features:
+This repository hosts the configuration files for [BSPWM](https://github.com/baskerville/bspwm). A single file is necessary to the configuration: *bspwmrc*. However, this window manager does not hadle keybindings by itself as windows are managed by a program called *bspc*. Its author created a tool called *SXHKD* that can be used to manage keybindings. This repository of dotfiles includes a configuration of *SXHKD* using */config/sxhkd/sxhkdrc* as a configuration file + *sxhkdrc_bspwm* for the window manager specific keybindings. These two programs combined provide the following features:
 
 * Script to autostart all the necessary programs such as the composer, etc... via the *bspwmrc* file
 * 9 workspaces (requires configuration)
@@ -45,7 +45,7 @@ dnf install bspwm
 
 Then, you also need the files in this repository to actually configure BSPWM and have the theme showcased in the above screenshot.
 
-<u>**Note**</u>: this BSPWM installation can be fully automated by using my [bootstrap script](https://github.com/GSquad934/bootstrap). The script also automates multi-monitor configuration.
+<u>**Note**</u>: this BSPWM installation can be fully automated by using my [bootstrap script](https://github.com/GSquad934/bootstrap).
 
 # Running BSPWM
 If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/GSquad934/dotfiles/blob/master/config/X11/xinitrc).
@@ -100,7 +100,7 @@ It is possible to setup a custom configuration based on a machine's hostname in 
 ```
 
 # Key Bindings
-I configured the key bindings that I like. They are all configured in the *sxhkdrc* file. Here is the full list and what they actually do:
+I configured the key bindings that I like. They are all configured in the *sxhkdrc* and *sxhkdrc_bspwm* files. Here is the full list and what they actually do:
 
 | Key binding | Action |
 | :--- | :--- |
