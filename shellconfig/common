@@ -244,6 +244,22 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	fi
 fi
 
+# Configure the default SMS program
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	if type android-messages-desktop > /dev/null 2>&1; then
+		export SMSMGR="android-messages-desktop"
+	fi
+fi
+
+# Configure the default direct messaging program
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	if type telegram-desktop > /dev/null 2>&1; then
+		export CHATTER="telegram-desktop"
+	elif type signal-desktop > /dev/null 2>&1; then
+		export CHATTER="signal-desktop"
+	fi
+fi
+
 # Configure the default password manager
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	if type keepassxc > /dev/null 2>&1; then

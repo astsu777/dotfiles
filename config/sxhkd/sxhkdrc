@@ -72,6 +72,10 @@ super + alt + {r,R}
 super + alt + s
 	"$SHELL" -c 'dmenu-websearch'
 
+# SMS manager | Direct messaging
+super + alt + {t,T}
+	"$SHELL" -c {'"$SMSMGR"','"$CHATTER"'}
+
 # Play Internet videos | Online streams
 super + alt + {v,V}
 	"$SHELL" -c {'dmenu-video','dmenu-stream'}
