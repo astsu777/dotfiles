@@ -36,7 +36,7 @@ fi
 
 # Launch Simple X Hotkey Daemon
 if type sxhkd > /dev/null 2>&1; then
-	sxhkd &
+	sxhkd -c "$HOME"/.config/sxhkd/sxhkdrc_bspwm &
 fi
 
 # Launch Dunst if installed (notification)
