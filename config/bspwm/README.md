@@ -1,7 +1,7 @@
 # My BSPWM Configuration
 ![](https://i.postimg.cc/QtKf92Lc/screenshot-20210704-026.png)
 
-This repository hosts the configuration files for [BSPWM](https://github.com/baskerville/bspwm). A single file is necessary to the configuration: *bspwmrc*. However, this window manager does not hadle keybindings by itself as windows are managed by a program called *bspc*. Its author created a tool called *SXHKD* that can be used to manage keybindings. This repository of dotfiles includes a configuration of *SXHKD* using */config/sxhkd/sxhkdrc* as a configuration file + *sxhkdrc_bspwm* for the window manager specific keybindings. These two programs combined provide the following features:
+This repository hosts the configuration files for [BSPWM](https://github.com/baskerville/bspwm). A single file is necessary to the configuration: *bspwmrc*. However, this window manager does not handle keybindings by itself as windows are managed by a program called *bspc*. Its author created a tool called *SXHKD* that can be used to manage keybindings. This repository of dotfiles includes a configuration of *SXHKD* using */config/sxhkd/sxhkdrc* as a configuration file + *sxhkdrc_bspwm* for the window manager specific keybindings. These two programs combined provide the following features:
 
 * Script to autostart all the necessary programs such as the composer, etc... via the *bspwmrc* file
 * 9 workspaces (requires configuration)
