@@ -217,12 +217,12 @@ fi
 
 # Configure the default terminal emulator
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type alacritty > /dev/null 2>&1; then
+	if type st > /dev/null 2>&1; then
+		export TERMINAL="st"
+	elif type alacritty > /dev/null 2>&1; then
 		export TERMINAL="alacritty"
 	elif type kitty > /dev/null 2>&1; then
 		export TERMINAL="kitty"
-	elif type st > /dev/null 2>&1; then
-		export TERMINAL="st"
 	elif type xterm > /dev/null 2>&1; then
 		export TERMINAL="xterm"
 	fi
