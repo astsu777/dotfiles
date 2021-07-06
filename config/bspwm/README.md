@@ -134,13 +134,14 @@ BSPWM does not ship with a status bar. *Polybar* has been configure to show the 
 
 ![](https://i.postimg.cc/bvrT4sTz/screenshot-20210704-027.png)
 
+* The workspaces and focused window name on the far left
 * 📦 1 : indicates how many updates are available (script: *updates.sh*)
 * 📰 0 : indicates the number of unread news if newsboat is installed (script: *news.sh*)
-* 🖥️ 3% : indicates the CPU usag
+* 🖥️  3% : indicates the CPU usag
 * 🧠 23% : indicates the percentage or used RAM
 * ⬇  1.4KB ⬆  0B : indicates the download/upload network traffic usage. It will automatically change B/KB/MB depending on the usage (script: *network.sh*)
 * 💾 14G/20G : indicates the disk space usage where "/" is mounted. Other disks can be added by modifying the script (script: *disk.sh*)
-* 🌡️ 57.5°C: indicates the CPU temperature when sensors can be read (script: *temp.sh*)
+* 🌡️  57.5°C: indicates the CPU temperature when sensors can be read (script: *temp.sh*)
 * 🔋 99% : indicates the battery level when a battery is detected (script: *battery.sh*)
 * 🔊 60% : indicates the volume level. The icon will change depending on the volume level (script: *vol.sh*)
 * 🕒 Sun July 04 21:49 : indicates the current day, date and time in 24H format
