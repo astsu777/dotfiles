@@ -5,6 +5,6 @@ configuration {
 	terminal: "st";
 	combi-modi: "window,run,drun";
 	sort: true;
-	levenshtein-sort: true;
+	sorting-method: "levenshtein";
 }
 @import "/usr/share/rofi/themes/Arc-Dark.rasi"
