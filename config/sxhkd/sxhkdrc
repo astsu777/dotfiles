@@ -12,6 +12,10 @@ XF86Calculator
 super + Return
 	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
 
+# Kill all media players
+super + XF86AudioMute
+	pkill mpv ; pkill mplayer ; pkill vlc ; pkill hypnotix
+
 # System manager
 super + shift + Escape
 	"$SHELL" -c 'dmenu-system'
