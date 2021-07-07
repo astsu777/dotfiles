@@ -12,9 +12,9 @@ XF86Calculator
 super + Return
 	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
 
-# Shutdown/Logout
+# System manager
 super + shift + Escape
-	"$SHELL" -c 'dmenu-shutdown'
+	"$SHELL" -c 'dmenu-system'
 
 # Launcher menu
 super + shift + Return

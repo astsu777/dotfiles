@@ -1,0 +1,60 @@
+#!/bin/bash
+# Description: perform various system operations
+
+# Top menu
+TOPMENU=$(echo -e "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nCancel" | dmenu -i -p "Choose")
+
+# Logout/Shutdown
+if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
+	OPTS=$(echo -e "Lock Screen\nManage Displays\nDisable Lock on Idle\nEnable Lock on Idle\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | sort | dmenu -i -p "Logout/Shutdown")
+	case $OPTS in
+		"Lock Screen") slock ;;
+		"Disable Lock on Idle") pkill xautolock ;;
+		"Enable Lock on Idle") pgrep xautolock || xautolock -secure -detectsleep -time 10 -locker slock & disown ;;
+		Logout) xdotool key "super+shift+q" ;;
+		Suspend) systemctl suspend ;;
+		Hibernate) systemctl hibernate ;;
+		Reboot) systemctl reboot ;;
+		Shutdown) systemctl poweroff ;;
+		*) ;;
+	esac
+fi
+
+# Display management
+if [ "$TOPMENU" = 'Display Management' ]; then
+	displayselect
+fi
+
+# Network management
+if [ "$TOPMENU" = 'Network Management' ]; then
+	OPTS=$(echo -e "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management")
+	case $OPTS in
+		"Block Ads") tui 'block-hosts ; bash' ;;
+		"Clear DNS Cache") tui 'clear-dns-cache ; bash' ;;
+		"Cloud Manager") tui 'upcloud-manager ; bash' ;;
+		"DHCP Server") tui 'dhcp-server ; bash' ;;
+		"Manage Network") tui 'nmtui ; bash' ;;
+		"TFTP Server") tui 'tftp-server ; bash' ;;
+		"Websites Monitor") tui 'websites-monitor ; bash' ;;
+		*) ;;
+	esac
+fi
+
+# Miscellaneous
+if [ "$TOPMENU" = 'Miscellaneous' ]; then
+	OPTS=$(echo -e "Bookmarks List\nCheck Online Streams\nCheck System Queue\nListen To Radio\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nToggle Cron Jobs\nWeb Search" | sort | dmenu -i -p "Miscellaneous")
+	case $OPTS in
+		"Bookmarks List") dmenu-bookmarks ;;
+		"Check Online Streams") dmenu-stream ;;
+		"Check System Queue") tui 'tspool ; bash' ;;
+		"Listen To Radio") dmenu-radio ;;
+		"Open URI/URL") dmenu-handler ;;
+		"Password List") dmenu-pass ;;
+		"Play Audio/Video") dmenu-video ;;
+		"Record Screen/Webcam") dmenu-record ;;
+		"Run") dmenu-run ;;
+		"Toggle Cron Jobs") crontoggle ;;
+		"Web Search") dmenu-websearch ;;
+		*) ;;
+	esac
+fi
