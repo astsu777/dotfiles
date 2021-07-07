@@ -19,11 +19,11 @@ if [ "$TOPMENU" = 'Network Management' ]; then
 	OPTS=$(echo -e "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management")
 	case $OPTS in
 		"Block Ads") tui 'block-hosts ; bash' ;;
-		"Clear DNS Cache") tui 'clear-dns-cache ; bash' ;;
-		"Cloud Manager") tui 'upcloud-manager ; bash' ;;
-		"DHCP Server") tui 'dhcp-server ; bash' ;;
-		"Manage Network") tui 'nmtui ; bash' ;;
-		"TFTP Server") tui 'tftp-server ; bash' ;;
+		"Clear DNS Cache") tui 'clear-dns-cache' ;;
+		"Cloud Manager") tui 'upcloud-manager' ;;
+		"DHCP Server") tui 'dhcp-server' ;;
+		"Manage Network") tui 'nmtui' ;;
+		"TFTP Server") tui 'tftp-server' ;;
 		"Websites Monitor") tui 'websites-monitor ; bash' ;;
 		*) exec dmenu-system ;;
 	esac

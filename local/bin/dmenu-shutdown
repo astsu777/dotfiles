@@ -11,5 +11,5 @@ case $OPTS in
 	Hibernate) systemctl hibernate ;;
 	Reboot) systemctl reboot ;;
 	Shutdown) systemctl poweroff ;;
-	*) exec dmenu-system ;;
+	*) ;;
 esac
