@@ -16,7 +16,7 @@ if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
 		Hibernate) systemctl hibernate ;;
 		Reboot) systemctl reboot ;;
 		Shutdown) systemctl poweroff ;;
-		*) ;;
+		*) exec dmenu-system ;;
 	esac
 fi
 
@@ -36,7 +36,7 @@ if [ "$TOPMENU" = 'Network Management' ]; then
 		"Manage Network") tui 'nmtui ; bash' ;;
 		"TFTP Server") tui 'tftp-server ; bash' ;;
 		"Websites Monitor") tui 'websites-monitor ; bash' ;;
-		*) ;;
+		*) exec dmenu-system ;;
 	esac
 fi
 
@@ -55,6 +55,6 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Run") dmenu-run ;;
 		"Toggle Cron Jobs") crontoggle ;;
 		"Web Search") dmenu-websearch ;;
-		*) ;;
+		*) exec dmenu-system ;;
 	esac
 fi

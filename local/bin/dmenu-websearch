@@ -93,7 +93,7 @@ engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Searc
 search_engine="${search_options["${engine}"]}"
 
 # Searching the chosen engine.
-query=$(printf "%s\n" "$*" | dmenu -p 'Query')
+query=$(printf "%s\n" "$*" | dmenu -p 'Query') || exec dmenu-websearch
 
 # Getting the url of the search engine we chose.
 url=$(sed "s/\%s/$query/g" <<< "$search_engine")

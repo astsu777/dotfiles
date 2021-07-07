@@ -18,4 +18,5 @@ case "$(printf "Copy URL\\nsxiv\\nsetbg\\nPDF\\nbrowser\\nlynx\\nvim\\nmpv\\nmpv
 	setbg) curl -L "$feed" > $XDG_CACHE_HOME/pic ; xwallpaper --zoom $XDG_CACHE_HOME/pic >/dev/null 2>&1 ;;
 	browser) setsid -f "$BROWSER" "$feed" >/dev/null 2>&1 ;;
 	lynx) lynx "$feed" >/dev/null 2>&1 ;;
+	*) exec dmenu-handler ;;
 esac
