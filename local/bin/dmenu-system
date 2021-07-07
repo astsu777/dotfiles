@@ -6,18 +6,7 @@ TOPMENU=$(echo -e "Display Management\nLogout/Shutdown\nNetwork Management\nMisc
 
 # Logout/Shutdown
 if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
-	OPTS=$(echo -e "Lock Screen\nManage Displays\nDisable Lock on Idle\nEnable Lock on Idle\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | sort | dmenu -i -p "Logout/Shutdown")
-	case $OPTS in
-		"Lock Screen") slock ;;
-		"Disable Lock on Idle") pkill xautolock ;;
-		"Enable Lock on Idle") pgrep xautolock || xautolock -secure -detectsleep -time 10 -locker slock & disown ;;
-		Logout) xdotool key "super+shift+q" ;;
-		Suspend) systemctl suspend ;;
-		Hibernate) systemctl hibernate ;;
-		Reboot) systemctl reboot ;;
-		Shutdown) systemctl poweroff ;;
-		*) exec dmenu-system ;;
-	esac
+	dmenu-shutdown
 fi
 
 # Display management

@@ -16,13 +16,17 @@ super + Return
 super + XF86AudioMute
 	pkill mpv ; pkill mplayer ; pkill vlc ; pkill hypnotix
 
-# System manager
+# Shutdown the system
 super + shift + Escape
-	"$SHELL" -c 'dmenu-system'
+	"$SHELL" -c 'dmenu-shutdown'
 
 # Launcher menu
 super + shift + Return
 	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
+
+# System manager
+super + alt + Escape
+	"$SHELL" -c 'dmenu-system'
 
 # Screenshot
 super + alt + 5
