@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 # Description: Check online streams and watch them
+
+# Requirements check
 if ! type youtube-dl mpv > /dev/null 2>&1; then
-	echo "Please install 'mpv' and 'youtube-dl' to use this script"
+	notify-send "⚠️ Error" "Please install 'mpv' and 'youtube-dl' to use this script"
 	exit 1
+fi
+
+# Check for on-going instance
+if pgrep youtube-dl > /dev/null 2>&1; then
+	notify-send "Script already running" "Checking for online streams. Please wait..."
+	exit 4
 fi
 
 # Define streams list
 Streams="$HOME/.local/share/streams"
 if [ ! -f "$Streams" ]; then
-	notify-send "Stream list does not exist!"
+	notify-send "⚠️ Error" "Stream list does not exist!"
 	exit 2
 fi
 
@@ -20,7 +28,7 @@ if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; th
 		'Refresh Online Streams')
 			rm "$Cache"
 			OnlineStreams=$(mktemp)
-			notify-send "Checking online streams..."
+			notify-send "🎬 Checking online streams" "Please wait, it may take a while..."
 			while IFS="" read -r i; do
 				youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
 			done < "$Streams"
@@ -28,6 +36,8 @@ if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; th
 			;;
 		'Use Cache')
 			;;
+		*)
+			exit 0 ;;
 	esac
 fi
 
