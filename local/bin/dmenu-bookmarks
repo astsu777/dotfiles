@@ -32,49 +32,49 @@ If you would prefer to have your bookmarks stored in alternate location there ar
 bmks_add() {
 	[ -z "$url" ] && printf "Error: url must be provided\n\n" && show_usage && exit 0
 	printf "Description: "
-	read description
-	[ -z "$description" ] && echo "$url" >> $URL_FILE_PATH/$URL_FILE_NAME
-	[ -n "$description" ] && echo "$description - $url" >> $URL_FILE_PATH/$URL_FILE_NAME
+	read -r description
+	[ -z "$description" ] && echo "$url" >> "$URL_FILE_PATH/$URL_FILE_NAME"
+	[ -n "$description" ] && echo "$description - $url" >> "$URL_FILE_PATH/$URL_FILE_NAME"
 }
 
 bmks_ls() {
 	bmks_check
-	cat $URL_FILE_PATH/$URL_FILE_NAME | sort
+	sort "$URL_FILE_PATH/$URL_FILE_NAME"
 }
 
 bmks_del() {
 	bmks_check
-	case $PREFERED_LAUNCHER in
-		dmenu) sed -i "/$(cat $URL_FILE_PATH/$URL_FILE_NAME | sort | dmenu -i -l 30 $(cat $URL_FILE_PATH/$URL_FILE_NAME | wc -l))/d" $URL_FILE_PATH/$URL_FILE_NAME ;;
-		fzf) sed -i "/$(cat $URL_FILE_PATH/$URL_FILE_NAME | sort | fzf)/d" $URL_FILE_PATH/$URL_FILE_NAME ;;
+	case "$PREFERED_LAUNCHER" in
+		dmenu) sed -i "/$(sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 "$(wc -l "$URL_FILE_PATH/$URL_FILE_NAME")")/d" "$URL_FILE_PATH/$URL_FILE_NAME" ;;
+		fzf) sed -i "/$(sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf)/d" "$URL_FILE_PATH/$URL_FILE_NAME" ;;
 	esac
 }
 
 bmks_display() {
 	bmks_check
 	if [[ "$OSTYPE" == 'darwin'* ]]; then
-		url="$(fzf <$URL_FILE_PATH/$URL_FILE_NAME | awk '{print $(NF)}')"
+		url="$(fzf <"$URL_FILE_PATH/$URL_FILE_NAME" | awk '{print $(NF)}')"
 		"$BROWSER" "$url" > /dev/null 2>&1 &
 	fi
-	case $PREFERED_LAUNCHER in
-		dmenu) cat $URL_FILE_PATH/$URL_FILE_NAME | sort | dmenu -i -l 30 -p "Bookmarks" $(cat $URL_FILE_PATH/$URL_FILE_NAME | wc -l) | awk '{print $(NF)}' | xargs -I '{}' $BROWSER {} ;;
-		fzf) cat $URL_FILE_PATH/$URL_FILE_NAME | sort | fzf | awk '{print $(NF)}' | xargs -I '{}' $BROWSER {} ;;
+	case "$PREFERED_LAUNCHER" in
+		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks" "$(wc -l "$URL_FILE_PATH/$URL_FILE_NAME")" | awk '{print $(NF)}' | xargs -I '{}' "$BROWSER" {} ;;
+		fzf) sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf | awk '{print $(NF)}' | xargs -I '{}' "$BROWSER" {} ;;
 	esac
 }
 
 bmks_check() {
-	[ ! -s $URL_FILE_PATH/$URL_FILE_NAME ] && printf "Error: No bookmarks found to display. Try adding some!\n\n" && show_usage && exit 0
+	[ ! -s "$URL_FILE_PATH/$URL_FILE_NAME" ] && printf "Error: No bookmarks found to display. Try adding some!\n\n" && show_usage && exit 0
 }
 
-[ ! -d $URL_FILE_PATH ] && mkdir $URL_FILE_PATH
-[ ! -f $URL_FILE_PATH/$URL_FILE_NAME ] && touch $URL_FILE_PATH/$URL_FILE_NAME
+[ ! -d "$URL_FILE_PATH" ] && mkdir "$URL_FILE_PATH"
+[ ! -f "$URL_FILE_PATH/$URL_FILE_NAME" ] && touch "$URL_FILE_PATH/$URL_FILE_NAME"
 
 case "$1" in
 	"help") show_usage ;;
-	"add") url=$2; bmks_add ;;
+	"add") url="$2"; bmks_add ;;
 	"del") bmks_del ;;
 	"ls") bmks_ls ;;
-	"dmenu") PREFERED_LAUNCHER=$1; bmks_display ;;
-	"fzf") PREFERED_LAUNCHER=$1; bmks_display ;;
+	"dmenu") PREFERED_LAUNCHER="$1"; bmks_display ;;
+	"fzf") PREFERED_LAUNCHER="$1"; bmks_display ;;
 	*) bmks_display ;;
 esac

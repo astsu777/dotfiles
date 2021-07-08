@@ -1,5 +1,5 @@
 #!/bin/bash
-TERM="alacritty -e"
+TERM="st -e"
 CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent-apps
 mkdir -p ${XDG_CACHE_HOME:-$HOME/.cache}
 CONFIG=${XDG_CONFIG_HOME:-$HOME/.config}/dmenu
