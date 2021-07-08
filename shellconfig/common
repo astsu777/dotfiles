@@ -64,7 +64,7 @@ fi
 
 # Define colors when displaying files on BSD
 if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == *"bsd"* ]] || [[ "$OSTYPE" == *"BSD"* ]]; then
-	export LSCOLORS='CxfxcxdxbxGxDxabagacad'
+	export LSCOLORS='ExGxFxdaCxDaDahbadacec'
 fi
 
 # Define colors when displaying files on Linux
