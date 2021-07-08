@@ -14,20 +14,27 @@ fi
 
 # Check online streams
 Cache="$XDG_CACHE_HOME/onlinestreams"
-if [ -f "$Cache" ] && test "`find $Cache -mmin +10`" || [ ! -f "$Cache" ]; then
-	rm "$Cache"
-	OnlineStreams=$(mktemp)
-	notify-send "Checking online streams..."
-	while IFS="" read -r i; do
-		youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
-	done < "$Streams"
-	mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
+if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; then
+	OPTS=$(echo -e "Refresh Online Streams\nUse Cache" | dmenu -i -p "Cache is older than 10 minutes. Choose")
+	case "$OPTS" in
+		'Refresh Online Streams')
+			rm "$Cache"
+			OnlineStreams=$(mktemp)
+			notify-send "Checking online streams..."
+			while IFS="" read -r i; do
+				youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
+			done < "$Streams"
+			mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
+			;;
+		'Use Cache')
+			;;
+	esac
 fi
 
 # Choose a stream to watch
-Stream=$(cat "$Cache" | sort | dmenu -i -p "Online streams")
+Stream=$(sort "$Cache" | dmenu -i -p "Online streams")
 
 # Watch the stream
 if [ -z "$Stream" ]; then exit 3; fi
-if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else pkill mpv ; mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & disown ; fi
+if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & disown ; fi
 exit 0

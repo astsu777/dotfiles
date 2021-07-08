@@ -26,5 +26,5 @@ station="${radios["${radio}"]}"
 
 # Listen to the stream
 if [[ "$station" == "Stop Playing" ]]; then pkill mpv; fi
-pkill mpv ; mpv --cache=yes --really-quiet "$station" 2> /dev/null & disown
+mpv --cache=yes --really-quiet "$station" 2> /dev/null & disown
 exit 0

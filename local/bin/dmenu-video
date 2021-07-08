@@ -68,7 +68,7 @@ if [ -z "$queue" ]; then
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ;;
-		"Stop Playing") killall mpv ;;
+		"Stop Playing") pkill mpv ;;
 	esac
 else
 	format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | dmenu -i -p 'Choose Action')"
@@ -85,7 +85,7 @@ else
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ;;
-		"Stop Playing") killall mpv ;;
+		"Stop Playing") pkill mpv ;;
 	esac
 fi
 exit 0
