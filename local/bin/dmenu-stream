@@ -7,17 +7,17 @@ if ! type youtube-dl mpv > /dev/null 2>&1; then
 	exit 1
 fi
 
-# Check for on-going instance
-if pgrep youtube-dl > /dev/null 2>&1; then
-	notify-send "Script already running" "Checking for online streams. Please wait..."
-	exit 4
-fi
-
 # Define streams list
 Streams="$HOME/.local/share/streams"
 if [ ! -f "$Streams" ]; then
 	notify-send "⚠️ Error" "Stream list does not exist!"
 	exit 2
+fi
+
+# Check for on-going instance
+if lsof "$Streams" > /dev/null 2>&1; then
+	notify-send "Script already running" "Checking for online streams. Please wait..."
+	exit 4
 fi
 
 # Check online streams
