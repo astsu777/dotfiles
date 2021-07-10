@@ -2,7 +2,7 @@
 # Manage Internet videos. If taskspooler is installed, queue the links
 
 # Prerequisites
-if ! type mpv youtube-dl ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "youtube-dl & ffmpeg must be installed (streamlink recommended)" & exit 1; fi
+if ! type streamlink mpv youtube-dl ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "youtube-dl, streamlink & ffmpeg must be installed" & exit 1; fi
 
 # Determine queue software (optional)
 if type ts > /dev/null 2>&1; then
@@ -17,33 +17,64 @@ fi
 link="$(if [[ -z "$1" ]]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link'; else printf "%s" "$1" ;fi)"
 if [ -z "$link" ]; then exit 2; fi
 
+# Variables
+StreamlinkSupported="twitch\|dailymotion"
+
 # Actions
 yt-listen(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --really-quiet' "$link" audio_only 2> /dev/null || mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --really-quiet' "$link" audio_only 2> /dev/null || mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --really-quiet' "$link" audio_only 2> /dev/null & disown ; else mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --really-quiet' "$link" audio_only 2> /dev/null & disown ; else "$queue" mpv --cache=yes --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown ; fi
+	fi
 }
 yt-wsd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-wsdnow(){
-	streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null
+	if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-whd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-whdnow(){
-	streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null
+	if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating"' "$link" best 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$link" 2>/dev/null & disown ; fi
 }
 yt-shufsd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" 480p 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" 480p 2>/dev/null || "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else"$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-shufhd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" best 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" best 2>/dev/null || "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" best 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpv floating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-revsd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null || "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" 480p 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-revhd(){
-	if [ -z "$queue" ]; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" best 2>/dev/null || mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null ; else "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" best 2>/dev/null || "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null ; fi
+	if [ -z "$queue" ]; then
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" best 2>/dev/null & disown ; else mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	else
+		if grep -qw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown ; fi
+	fi
 }
 yt-dlvideo(){
 	notify-send " Video queued for download..."
