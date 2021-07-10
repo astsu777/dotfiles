@@ -50,15 +50,20 @@ bmks_del() {
 	esac
 }
 
+bmks_browser(){
+	if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi
+
+}
+
 bmks_display() {
 	bmks_check
 	if [[ "$OSTYPE" == 'darwin'* ]]; then
 		url="$(fzf <"$URL_FILE_PATH/$URL_FILE_NAME" | awk '{print $(NF)}')"
-		"$BROWSER" "$url" > /dev/null 2>&1 &
+		if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi
 	fi
 	case "$PREFERED_LAUNCHER" in
-		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks" "$(wc -l "$URL_FILE_PATH/$URL_FILE_NAME")" | awk '{print $(NF)}' | xargs -I '{}' "$BROWSER" {} ;;
-		fzf) sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf | awk '{print $(NF)}' | xargs -I '{}' "$BROWSER" {} ;;
+		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks" "$(wc -l "$URL_FILE_PATH/$URL_FILE_NAME")" | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
+		fzf) sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
 	esac
 }
 
