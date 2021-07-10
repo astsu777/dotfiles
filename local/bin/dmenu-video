@@ -18,7 +18,7 @@ link="$(if [[ -z "$1" ]]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Chann
 if [ -z "$link" ]; then exit 2; fi
 
 # Variables
-StreamlinkSupported="twitch\|dailymotion"
+StreamlinkSupported="abematv\|abweb\|adultswim\|afreeca\|akamaihd\|albavision\|animelab\|app17\|ard_live\|ard_mediathek\|artetv\|atresplayer\|bbciplayer\|bfmtv\|bigo\|bilibili\|bloomberg\|booyah\|brightcove\|btv\|canalplus\|cbsnews\|cdnbg\|ceskatelevize\|cinergroup\|clubbingtv\|cnews\|crunchyroll\|dailymotion\|dash\|delfi\|deutschewelle\|dlive\|dogan\|dogus\|dommune\|drdk\|earthcam\|egame\|eltrecetv\|euronews\|facebook\|filmon\|foxtr\|funimationnow\|galatasaraytv\|gardenersworld\|garena\|goltelevision\|goodgame\|googledrive\|gulli\|hds\|hls\|http\|huajiao\|huomao\|huya\|idf1\|invintus\|kugou\|latina\|linelive\|live_russia_tv\|liveedu\|liveme\|livestream\|lrt\|ltv_lsm_lv\|mediaklikk\|mediavitrina\|mildom\|mitele\|mjunoon\|mrtmk\|n13tv\|nbc\|nbcnews\|nbcsports\|nhkworld\|nicolive\|nimotv\|nos\|nownews\|nrk\|ntv\|okru\|olympicchannel\|oneplusone\|onetv\|openrectv\|orf_tvthek\|periscope\|picarto\|piczel\|pixiv\|pluto\|pluzz\|powerapp\|qq\|radiko\|radionet\|raiplay\|reuters\|rotana\|rtbf\|rtlxl\|rtmp\|rtpplay\|rtve\|rtvs\|ruv\|sbscokr\|schoolism\|senategov\|showroom\|sportal\|sportschau\|ssh101\|stadium\|steam\|streamable\|streamingvideoprovider\|streann\|stv\|svtplay\|swisstxt\|teamliquid\|teleclubzoom\|telefe\|tf1\|tga\|theplatform\|tigerdile\|tlctr\|turkuvaz\|tv360\|tv3cat\|tv4play\|tv5monde\|tv8\|tv999\|tvibo\|tvp\|tvrby\|tvrplus\|tvtoya\|twitcasting\|twitch\|ustreamtv\|ustvnow\|viasat\|vidio\|vimeo\|vinhlongtv\|viutv\|vk\|vlive\|vrtbe\|vtvgo\|wasd\|webcast_india_gov\|webtv\|welt\|wwenetwork\|yupptv\|zattoo\|zdf_mediathek\|zeenews\|zengatv\|zhanqi"
 
 # Actions
 yt-listen(){
