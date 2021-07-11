@@ -81,6 +81,19 @@ if type curl > /dev/null 2>&1; then
 	}
 fi
 
+# Get song lyrics
+if type curl > /dev/null 2>&1; then
+	lyrics() {
+		if [ -z "$1" ] || [ -z "$2" ]; then
+			echo "Usage: lyrics '<ARTIST>' '<TITLE>'"
+			echo "Ex.: lyrics 'elvis presley' 'heartbreak hotel'"
+			echo
+		else
+			\curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$1" --data-urlencode "title=$2"
+		fi
+	}
+fi
+
 # Get cheat sheets for specified commands
 if type curl > /dev/null 2>&1; then
 	cheat() {
