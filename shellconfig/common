@@ -111,6 +111,7 @@ export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
 # Shell
 if [[ "$SHELL" == "/bin/bash" ]] || [[ "$SHELL" == "/bin/zsh" ]]; then
+	if [ ! -d "$XDG_CACHE_HOME" ]; then mkdir -pv "$XDG_CACHE_HOME" > /dev/null 2>&1; fi
 	HISTFILE="$XDG_CACHE_HOME/shell_history"
 fi
 
