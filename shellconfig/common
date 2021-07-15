@@ -199,6 +199,11 @@ if type nnn > /dev/null 2>&1; then
 	export NNN_BMS="h:$HOME;d:$DOTFILES;s:$SCRIPTS"
 fi
 
+# YTFZF
+if type ytfzf mpv > /dev/null 2>&1; then
+	export YTFZF_PLAYER="mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title='mpv floating'"
+fi
+
 # If NVIM is installed, set it as default editor. Otherwise, fallback to vim or vi
 if type nvim > /dev/null 2>&1; then
 	export EDITOR="nvim"
@@ -218,12 +223,12 @@ fi
 
 # Configure the default terminal emulator
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type st > /dev/null 2>&1; then
-		export TERMINAL="st"
-	elif type alacritty > /dev/null 2>&1; then
+	if type alacritty > /dev/null 2>&1; then
 		export TERMINAL="alacritty"
 	elif type kitty > /dev/null 2>&1; then
 		export TERMINAL="kitty"
+	elif type st > /dev/null 2>&1; then
+		export TERMINAL="st"
 	elif type xterm > /dev/null 2>&1; then
 		export TERMINAL="xterm"
 	fi
