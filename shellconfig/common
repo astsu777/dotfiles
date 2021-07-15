@@ -199,11 +199,6 @@ if type nnn > /dev/null 2>&1; then
 	export NNN_BMS="h:$HOME;d:$DOTFILES;s:$SCRIPTS"
 fi
 
-# YTFZF
-if type ytfzf dmenu-video > /dev/null 2>&1; then
-	export YTFZF_PLAYER="dmenu-video"
-fi
-
 # If NVIM is installed, set it as default editor. Otherwise, fallback to vim or vi
 if type nvim > /dev/null 2>&1; then
 	export EDITOR="nvim"
