@@ -145,8 +145,10 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Color and theme setup
-set background=dark
+" set background=dark
 colorscheme kuroi
+"" Transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 " Enable status line
 set laststatus=2
