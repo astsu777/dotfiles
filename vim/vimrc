@@ -145,7 +145,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Color and theme setup
-set termguicolors
+" set termguicolors
 colorscheme kuroi
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
