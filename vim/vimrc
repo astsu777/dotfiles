@@ -50,7 +50,7 @@ call plug#begin('~/.vim/bundle')
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
 call plug#end()
-filetype plugin on
+filetype plugin indent on
 
 "=============
 " Key Bindings
@@ -127,6 +127,13 @@ autocmd FileType * setlocal textwidth=121 formatoptions=c
 " Do not insert EOL character
 set noeol
 set binary
+
+" Resize buffers when window changes sizes
+autocmd VimResized * execute "normal! \<c-w>="
+
+" Trigger `autoread` when files changes on disk
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 "=============
 " Look & Feel
@@ -260,12 +267,6 @@ vnoremap <leader><Space> <Esc>/<++><Enter>"_c4l
 
 " General
 inoremap ;lo Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<CR>
-
-" Shell
-autocmd FileType sh inoremap ;fu ()<Space>{<CR><Tab><++><CR>}<CR><CR><++><Esc>?()<CR>
-autocmd FileType sh inoremap ;if if<Space>[<Space>];<Space>then<CR><++><CR>fi<CR><CR><++><Esc>?];<CR>hi<Space>
-autocmd FileType sh inoremap ;el elif<Space>[<Space>];<Space>then<CR><++><CR><Esc>?];<CR>hi<Space>
-autocmd FileType sh inoremap ;ca case<Space>""<Space>in<CR><++>)<Space><++><Space>;;<CR><++><CR>esac<CR><CR><++><Esc>?"<CR>i
 
 "=============
 " Scripts
