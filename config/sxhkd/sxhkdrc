@@ -16,6 +16,10 @@ super + Return
 super + XF86AudioMute
 	pkill mpv ; pkill mplayer ; pkill vlc ; pkill hypnotix
 
+# Toggle compositor
+super + Insert
+	"$SHELL" -c 'if pgrep picom; then pkill picom; else picom -CGb --no-fading-openclose & disown ; fi'
+
 # Shutdown the system
 super + shift + Escape
 	"$SHELL" -c 'dmenu-shutdown'
