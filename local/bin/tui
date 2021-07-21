@@ -3,14 +3,17 @@
 [[ $1 == -* ]] && shift
 
 if [[ $# == 0 ]]; then
+    "$TERMINAL" ||
     st ||
     xterm &
 elif [[ $1 == /* ]]; then
+    "$TERMINAL" -e "$@" ||
     st -e "$@" ||
     xterm -e "$@" &
 else
     s=${1%% *}
     set -- "printf \"\033]0;${s^}\a\"; $@"
+    "$TERMINAL" -e $SHELL -ic "$*" ||
     st -e $SHELL -ic "$*" ||
     xterm -e $SHELL -ic "$*" &
 fi
