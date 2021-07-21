@@ -117,12 +117,12 @@ The *Gemini* project is an alternative protocol to *HTTP* and can be used to ser
 ![](https://i.postimg.cc/bY1g2b4j/screenshot-20210718-032.png)
 
 ## Terminal Emulators
-Configuration files for three terminal emulators are available: *Alacritty*, *Kitty*, and *xTerm*. I don't use the three of them obviously, my daily driver being *Alacritty* as it is fast and minimalist. However, it is also GPU-accelerated and based on *OpenGL*, same as *Kitty*. This means that both of them cannot be used when *OpenGL* libraries are updated and/or if they are missing/buggy. In that case, I usually use *ST* even though it has no config file. Finally, *xTerm* is the last resort terminal emulators if all else is not working. *xTerm* is also the default terminal emulator in the failsafe GUI environment (see chapter about *JWM*).
+Configuration files for three terminal emulators are available: *Alacritty*, *Kitty*, and *xTerm*. I don't use the three of them obviously, my daily driver being *Kitty* as it is fast and not too bloated in my setup. However, it is also GPU-accelerated and based on *OpenGL*, same as *Alacritty*. This means that both of them cannot be used when *OpenGL* libraries are updated and/or if they are missing/buggy. In that case, I usually use *ST* even though it has no config file. Finally, *xTerm* is the last resort terminal emulators if all else is not working. *xTerm* is also the default terminal emulator in the failsafe GUI environment (see chapter about *JWM*).
 
 A few comments about each terminal emulators:
 
 * *Alacritty* is rendering fonts differently depending on the screen resolution and the configuration files differ slightly between macOS/Linux. Therefore, multiple *Alacritty* config files are available for my different computers
-* *Kitty* works like *Alacritty* but does a much better job at rendering unicode characters: this is the main reason I keep it around. It has much more features that I don't use. It has almost the same configuration as *Alacritty*, no extra plugins/*kittens*. Depending on the machine, it can also be more performant than *Alacritty*
+* *Kitty* works like *Alacritty* but does a much better job at rendering unicode characters: this is the main reason I keep it around. It has much more features that I don't use. It has almost the same configuration as *Alacritty*, no extra plugins/*kittens*. Depending on the machine, it can also be more performant than *Alacritty* and renders ligatures and unicode characters better. Also, I prefer the way fonts are rendered in *Kitty*
 * *Simple Terminal (ST)* works well enough. It is the fallback terminal emulator when *OpenGL* has been updated and I don't want to reboot immediately afterwards
 * *xTerm* is never used, but I have it installed on all my workstations for a failsafe environment. If my WM/DE fails, I can work inside a failsafe GUI and *xTerm* is the default terminal emulator there
 
