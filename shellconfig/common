@@ -333,8 +333,8 @@ fi
 
 # Configure the default system monitoring software
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type ytop > /dev/null 2>&1; then
-		export SYSMONITOR="ytop"
+	if type gotop > /dev/null 2>&1; then
+		export SYSMONITOR="gotop"
 	elif type bpytop > /dev/null 2>&1; then
 		export SYSMONITOR="bpytop"
 	elif type htop > /dev/null 2>&1; then
