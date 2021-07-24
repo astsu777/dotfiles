@@ -25,6 +25,6 @@ radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a stati
 station="${radios["${radio}"]}"
 
 # Listen to the stream
-if [[ "$station" == "Stop Playing" ]]; then pkill mpv; fi
-mpv --cache=yes --really-quiet "$station" 2> /dev/null & disown
+if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
+mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
 exit 0
