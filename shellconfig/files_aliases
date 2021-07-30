@@ -67,15 +67,13 @@ if ! type fzf > /dev/null 2>&1; then
 		alias cfg-mpv="$EDITOR $XDG_CONFIG_HOME/mpv/input.conf"
 	fi
 
-	# W3M configuration
-	if [[ -f "$HOME"/.w3m/config ]]; then
-		alias cfg-nvim="$EDITOR $XDG_CONFIG_HOME/.w3m/config"
+	# Links configuration
+	if [[ -f "$HOME"/.links/links.cfg ]]; then
+		alias cfg-links="$EDITOR $XDG_CONFIG_HOME/.w3m/links.cfg"
 	fi
 
-	# Powerlevel10k theme configuration (ZSH)
-	if [[ -f "$ZDOTDIR"/.p10k.zsh ]]; then
-		alias cfg-p10k="$EDITOR $ZDOTDIR/.p10k.zsh"
-	elif [[ -f "$HOME"/.p10k.zsh ]]; then
-		alias cfg-p10k="$EDITOR $HOME/.p10k.zsh"
+	# W3M configuration
+	if [[ -f "$HOME"/.w3m/config ]]; then
+		alias cfg-w3m="$EDITOR $XDG_CONFIG_HOME/.w3m/config"
 	fi
 fi

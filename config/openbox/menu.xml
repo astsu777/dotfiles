@@ -97,17 +97,14 @@
             <item label="FireFox"> <action name="Execute">
                 <execute>firefox</execute>
             </action> </item>
+            <item label="Links"> <action name="Execute">
+                <execute>xterm -e links</execute>
+            </action> </item>
             <item label="Signal"> <action name="Execute">
                 <execute>signal-desktop</execute>
             </action> </item>
             <item label="TkVNC"> <action name="Execute">
                 <execute>xterm -e tkvnc</execute>
-            </action> </item>
-            <item label="W3m"> <action name="Execute">
-                <execute>xterm -e w3m</execute>
-            </action> </item>
-            <item label="w3m"> <action name="Execute">
-                <execute>xterm -e w3m /usr/share/doc/w3m/MANUAL.html</execute>
             </action> </item>
             <item label="WeeChat"> <action name="Execute">
                 <execute>xterm -e weechat</execute>

@@ -303,12 +303,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Configure the default text Web browser
-if type w3m > /dev/null 2>&1; then
+if type links > /dev/null 2>&1; then
+	export BROWSERCLI="links"
+elif type w3m > /dev/null 2>&1; then
 	export BROWSERCLI="w3m"
 elif type lynx > /dev/null 2>&1; then
 	export BROWSERCLI="lynx"
-elif type links > /dev/null 2>&1; then
-	export BROWSERCLI="links"
 fi
 
 # Configure the default music player

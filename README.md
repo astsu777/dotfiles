@@ -59,6 +59,9 @@ The file *gitconfig* contains the global *Git* configuration and several aliases
 
 I mainly use *DWM* as my window manager, but all my workstations have *JWM* installed as well. The configuration file for *JWM* (*jwmrc*) is very minimalist: a dark theme and a simple menu to launch a terminal emulator, a Web browser and *DMenu*. This environment can be used as a failsafe GUI when the others are not working well enough (or for a very old machine where system resources are too limited).
 
+## Links
+*Links* is a text Web browser to run inside a terminal emulator. It can be very useful to read certain Web pages by only getting the text and not all the JavaScript, CSS, etc... It is very useful to be combined with a RSS reader such as *newsboat* for example. The custom config files stored in *links/* contains some customization but it stays very close to the defaults of the program.
+
 ## Shell/Prompt
 The folder *shellconfig* contains all the config files used to customize my shell and my command prompt. It is modular: this means that both *Bash* and *ZSH* configurations are split between different files so it is common in both shells. I use *ZSH* on my workstations and *Bash* on all my servers and sometimes workstations: both are using the same dotfiles.
 
@@ -89,9 +92,6 @@ The same is available for other applications. For example, *VIM*/*Neovim* can be
 In this repository, the *vim* folder contains all the necessary configuration files for *VIM*. However, I use *Neovim* as my text editor (mostly for new window stuff) but don't have a specific config file for it: the *~/.config/nvim/init.vim"* is actually a symlink to the *.vimrc*. When deploying my dotfiles, simply simlink the *vim* folder to *~/.config/nvim* and it will work.
 
 Because the *VIM* configuration is quite light, it is fully compatible with *Neovim*. There is no *Neovim* specific setting present. The colorscheme used is called *[kuroi](https://github.com/aonemd/kuroi.vim)* ans is made by *Aonemd*. I simply disabled the background to use the one set by the terminal emulator (usually a little bit transparent and dark).
-
-## W3M
-*W3M* is a text Web browser to run inside a terminal emulator. It can be very useful to read certain Web pages by only getting the text and not all the JavaScript, CSS, etc... It is very useful to be combined with a RSS reader such as *newsboat* for example. The custom config file */config/w3m/config* contains some customization but it stays very close to the defaults of the program.
 
 # Documentation - Local Folder
 ## Resources
