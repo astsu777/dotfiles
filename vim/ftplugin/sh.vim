@@ -11,9 +11,9 @@ augroup ft_shell
 	inoremap ;ca case<Space>""<Space>in<CR><++>)<Space><++><Space>;;<CR><++><CR>esac<CR><++><Esc>?"<CR>i
 	" Insert WHILE loop
 	inoremap ;wh while<Space>;<Space>do<CR><++><CR>done<CR><++><Esc>?;<CR>i
-	" Insert a block of comment
-	inoremap ;bl #=======================<CR>#<Space><CR>#=======================<CR><++><Esc>2kA
-	function Header() abort
+
+	" Insert header
+	function SHHeader() abort
 		execute "normal! i#!/usr/bin/env bash\<cr>"
 		execute "normal! i#===================================================\<cr>"
 		execute "normal! i# Author: Gaetan (gaetan@ictpourtous.com)\<cr>"
@@ -27,6 +27,7 @@ augroup ft_shell
 		execute "normal! i<++>"
 		execute "normal! /<++>\<cr>ciw"
 	endfunction
+	inoremap ;hh <Esc>:call SHHeader()<Enter>
 	" If the file is empty, insert the header
 	if line('$') == 1 && getline(1) == ''
 		:call Header()
