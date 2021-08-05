@@ -2,7 +2,7 @@
 # Description: perform various system operations
 
 # Top menu
-TOPMENU=$(echo -e "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nCancel" | dmenu -i -p "Choose")
+TOPMENU=$(echo -e "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nCancel" | dmenu -i -p "Choose:")
 
 # Logout/Shutdown
 if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
@@ -16,7 +16,7 @@ fi
 
 # Network management
 if [ "$TOPMENU" = 'Network Management' ]; then
-	OPTS=$(echo -e "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management")
+	OPTS=$(echo -e "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
 		"Block Ads") tui 'block-hosts ; bash' ;;
 		"Clear DNS Cache") tui 'clear-dns-cache' ;;
@@ -31,7 +31,7 @@ fi
 
 # Miscellaneous
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
-	OPTS=$(echo -e "Bookmarks List\nCheck Online Streams\nCheck System Queue\nListen To Radio\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nToggle Compositor\nToggle Cron Jobs\nWeb Search" | sort | dmenu -i -p "Miscellaneous")
+	OPTS=$(echo -e "Bookmarks List\nCheck Online Streams\nCheck System Queue\nListen To Radio\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nToggle Compositor\nToggle Cron Jobs\nWeb Search" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
 		"Bookmarks List") dmenu-bookmarks ;;
 		"Check Online Streams") dmenu-stream ;;

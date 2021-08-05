@@ -1,7 +1,7 @@
 #!/bin/bash
 # Description: logout/shutdown/reboot the system
 
-OPTS=$(echo -e "Lock Screen\nDisable Lock on Idle\nEnable Lock on Idle\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | sort | dmenu -i -p "Logout/Shutdown")
+OPTS=$(echo -e "Lock Screen\nDisable Lock on Idle\nEnable Lock on Idle\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | sort | dmenu -i -p "Logout/Shutdown:")
 case $OPTS in
 	"Lock Screen") slock ;;
 	"Disable Lock on Idle") pkill xautolock ;;

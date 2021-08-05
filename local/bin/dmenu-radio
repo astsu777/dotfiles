@@ -21,7 +21,7 @@ radios[Synthwave]="https://ecast.myautodj.com/public1channel"
 radios[Stop Playing]=""
 
 # Choose a radio
-radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station') "$@" || exit
+radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station:') "$@" || exit
 station="${radios["${radio}"]}"
 
 # Listen to the stream

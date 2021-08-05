@@ -3,7 +3,7 @@
 # set prefered launcher
 PREFERED_LAUNCHER=dmenu
 # set path where urls will be stored
-URL_FILE_PATH=$HOME/.local/share/
+URL_FILE_PATH=$HOME/.local/share
 # name of file urls will be stored in
 URL_FILE_NAME=bookmarks
 
@@ -62,7 +62,7 @@ bmks_display() {
 		if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi
 	fi
 	case "$PREFERED_LAUNCHER" in
-		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks" "$(wc -l "$URL_FILE_PATH/$URL_FILE_NAME")" | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
+		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks:" | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
 		fzf) sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
 	esac
 }

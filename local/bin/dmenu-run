@@ -8,7 +8,7 @@ touch $CONFIG/apps-term
 touch $CONFIG/apps-bg
 
 MOST_USED=`sort $CACHE 2>/dev/null | uniq -c | sort -rn | colrm 1 8`
-RUN=`(echo "$MOST_USED"; dmenu_path | grep -vxF "$MOST_USED") | dmenu -i -p Launch "$@"` || exit
+RUN=`(echo "$MOST_USED"; dmenu_path | grep -vxF "$MOST_USED") | dmenu -i -p Launch: "$@"` || exit
 (echo $RUN; head -n 99 $CACHE 2>/dev/null) > $CACHE.$$
 mv $CACHE.$$ $CACHE
 

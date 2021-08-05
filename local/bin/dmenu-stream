@@ -23,7 +23,7 @@ fi
 # Check online streams
 Cache="$XDG_CACHE_HOME/onlinestreams"
 if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; then
-	OPTS=$(echo -e "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose")
+	OPTS=$(echo -e "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose:")
 	case "$OPTS" in
 		'Refresh Online Streams')
 			rm "$Cache"
@@ -42,7 +42,7 @@ if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; th
 fi
 
 # Choose a stream to watch
-Stream=$(sort "$Cache" | dmenu -i -p "Online streams")
+Stream=$(sort "$Cache" | dmenu -i -l 30 -p "Online streams:")
 
 # Watch the stream
 if [ -z "$Stream" ]; then exit 3; fi

@@ -2,9 +2,9 @@
 
 # Feed this script a link and it will give dmenu
 # some choice programs to use to open it.
-feed="$(printf "%s" "$1" | dmenu -p 'Paste URL or file path')"
+feed="$(printf "%s" "$1" | dmenu -p 'Paste URL or file path:')"
 
-if [ -n "$feed" ]; then case "$(printf "Copy URL\\nsxiv\\nsetbg\\nPDF\\nbrowser\\nlynx\\nvim\\nmpv\\nmpv loop\\nmpv float\\nqueue download\\nqueue yt-dl\\nqueue yt-dl audio" | sort | dmenu -i -p "Open it with?")" in
+if [ -n "$feed" ]; then case "$(printf "Copy URL\\nsxiv\\nsetbg\\nPDF\\nbrowser\\nlynx\\nvim\\nmpv\\nmpv loop\\nmpv float\\nqueue download\\nqueue yt-dl\\nqueue yt-dl audio" | sort | dmenu -i -p "Open it with:")" in
 	"copy url") echo "$feed" | xclip -selection clipboard ;;
 	mpv) setsid -f mpv -quiet "$feed" >/dev/null 2>&1 ;;
 	"mpv loop") setsid -f mpv -quiet --loop "$feed" >/dev/null 2>&1 ;;

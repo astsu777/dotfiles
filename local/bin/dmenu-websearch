@@ -90,11 +90,11 @@ search_options[Yelp - BE]="https://fr.yelp.be/search?find_desc=%s"
 search_options[YouTube]="https://www.youtube.com/results?search_query=%s"
 
 # Choosing a search engine by name from array above.
-engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine') "$@" || exit
+engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine:') "$@" || exit
 search_engine="${search_options["${engine}"]}"
 
 # Searching the chosen engine.
-query=$(printf "%s\n" "$*" | dmenu -p 'Query') || exec dmenu-websearch
+query=$(printf "%s\n" "$*" | dmenu -p 'Query:') || exec dmenu-websearch
 
 # Getting the url of the search engine we chose.
 url=$(sed "s/\%s/$query/g" <<< "$search_engine")
