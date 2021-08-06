@@ -27,6 +27,8 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 call plug#begin('~/.vim/bundle')
+	"" Colorscheme
+	Plug 'sainnhe/gruvbox-material'
 	"" Linters
 	Plug 'chr4/nginx.vim'
 	"" Status bar
@@ -153,10 +155,9 @@ set fileencoding=utf-8
 
 " Color and theme setup
 " set termguicolors
-colorscheme kuroi
-highlight Comment cterm=italic gui=italic
-highlight Normal guibg=NONE ctermbg=NONE
-highlight EndOfBuffer guibg=NONE ctermbg=NONE
+colorscheme gruvbox-material
+hi Normal guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 " Enable status line
 set laststatus=2
@@ -237,7 +238,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Lightline
 let g:lightline = {
-	\ 'colorscheme': 'jellybeans',
+	\ 'colorscheme': 'gruvbox_material',
 	\ }
 
 "=============
