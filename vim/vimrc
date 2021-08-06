@@ -236,9 +236,7 @@ nnoremap <leader>O :Buffers<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Lightline
-let g:lightline = {
-	\ 'colorscheme': 'jellybeans',
-	\ }
+let g:lightline = {'colorscheme': 'jellybeans'}
 
 "=============
 " Auto-Commands
