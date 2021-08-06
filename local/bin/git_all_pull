@@ -37,7 +37,7 @@ do
 	echo -e "GIT repository found in \"$i\"..."
 	pull=$(mktemp)
 	git -C "$i" pull &>"$pull"
-	if grep -F 'Already up to date' "$pull" > /dev/null; then
+	if grep -F 'Already up to date' "$pull" > /dev/null || grep -F 'is up to date' "$pull" > /dev/null; then
 		echo -e "\033[32mNothing to update\033[0m"
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
