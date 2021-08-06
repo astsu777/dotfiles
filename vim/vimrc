@@ -27,6 +27,8 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 call plug#begin('~/.vim/bundle')
+    "" Colorscheme
+    Plug 'sainnhe/gruvbox-material'
 	"" Linters
 	Plug 'chr4/nginx.vim'
 	"" Status bar
@@ -157,6 +159,26 @@ colorscheme kuroi
 highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
+function ToggleColors()
+    if (g:colors_name == "gruvbox-material")
+        colorscheme kuroi
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline = {'colorscheme': 'jellybeans'}
+		call lightline#init()
+		call lightline#colorscheme()
+    else
+        colorscheme gruvbox-material
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline.colorscheme = 'gruvbox_material'
+		call lightline#init()
+		call lightline#colorscheme()
+    endif
+endfunction
+nnoremap <leader><F1> <Esc>:call ToggleColors()<Enter>
 
 " Enable status line
 set laststatus=2
