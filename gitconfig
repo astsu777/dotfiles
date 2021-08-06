@@ -72,3 +72,5 @@
 	all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; f"
 [pull]
 	rebase = true
+[rebase]
+	autostash = true
