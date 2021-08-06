@@ -34,4 +34,5 @@ augroup ft_shell
 	endif
 	" When writing the file, update the last modified timestamp
 	autocmd BufWritePre,FileWritePre *.sh :silent! %s/# Last modified: \zs.*/\=strftime('%a %b %Y %H:%M:%S')
+	autocmd BufWritePre,FileWritePre *.sh :normal! g`'
 augroup END
