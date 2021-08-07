@@ -1,8 +1,10 @@
 #!/bin/bash
 while true; do
-	sleep 5s && dwmupdates > /tmp/dwmupdates.txt
 	dwmdisk > /tmp/dwmdisk.txt
+	sleep 3s
 	if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
+	if type curl > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
+	dwmupdates > /tmp/dwmupdates.txt
 	sleep 3600s
 done &
 
@@ -17,10 +19,13 @@ while true; do
 	UPDATES="$(< /tmp/dwmupdates.txt)"
 	DISK="$(< /tmp/dwmdisk.txt)"
 	NEWS="$(< /tmp/dwmnews.txt)"
-	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmnews.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && type newsboat > /dev/null 2>&1; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $CLOCK"
+	WEATHER="$(< /tmp/dwmweather.txt)"
+	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $WEATHER| $CLOCK"
+	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $WEATHER| $CLOCK"
+	elif [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $WEATHER| $CLOCK"
 	elif [ -f /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
 	else
