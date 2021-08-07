@@ -8,6 +8,10 @@ XF86AudioMute
 XF86Calculator
 	"$CALCULATOR"
 
+# Window switcher
+alt + Tab
+	"$SHELL" -c 'dmenu-wm'
+
 # Terminal emulator
 super + Return
 	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
