@@ -51,6 +51,10 @@ do
 		echo -e "\033[32mNothing to update\033[0m"
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
+	elif grep -F 'Successfully rebased and updated' "$pull" > /dev/null; then
+		echo -e "\033[32mRebased and updated\033[0m"
+		echo -e
+		rm -f "$pull" > /dev/null 2>&1
 	else
 		echo -e "\033[31mAn error occurred\033[0m"
 		echo -e "$(cat $pull)"
