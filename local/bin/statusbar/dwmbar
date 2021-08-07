@@ -3,7 +3,7 @@ while true; do
 	dwmdisk > /tmp/dwmdisk.txt
 	sleep 3s
 	if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
-	if type curl > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
+	sleep 3s && if type curl > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
 	dwmupdates > /tmp/dwmupdates.txt
 	sleep 3600s
 done &
@@ -20,16 +20,18 @@ while true; do
 	DISK="$(< /tmp/dwmdisk.txt)"
 	NEWS="$(< /tmp/dwmnews.txt)"
 	WEATHER="$(< /tmp/dwmweather.txt)"
-	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $WEATHER| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+	elif sensors | grep temp > /dev/null 2>&1 && [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $WEATHER| $CLOCK"
-	elif [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+	elif [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $WEATHER| $CLOCK"
-	elif [ -f /tmp/dwmnews.txt ]; then
+	elif [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
-	else
+	elif [ ! -z /tmp/dwmupdates.txt ]; then
 		xsetroot -name " $UPDATES| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
+	else
+		xsetroot -name " $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
 	fi
 	sleep 1s
 done &
