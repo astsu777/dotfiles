@@ -13,6 +13,11 @@ fi
 # List Windows
 #=======================
 windows=$(wmctrl -xl | tr -s '[:blank:]' | cut -d ' ' -f 3-3,5- | sed 's/^[a-zA-Z0-9-]*\.//' | sort | uniq)
+if [[ -z "$windows" ]]; then
+	notify-send "No opened windows"
+	echo "No opened windows"
+	exit 0
+fi
 
 #=======================
 # Add spaces to align the WM_NAMEs of the windows
