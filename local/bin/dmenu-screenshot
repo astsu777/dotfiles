@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 20:55:51
+# Last modified: Sat Aug 2021 20:55:51
+# Version: 1.0
+#
+# Description: Take screenshot and shows a menu with different methods
+#===================================================
+screenshot="$(mktemp --suffix ".jpg")"
+case "$(printf "Selected Area\\nCurrent Window\\nFull Screen" | sort | dmenu -l 3 -i -p "Take a screenshot of:")" in
+	"Selected Area") maim -s "$screenshot"  ;;
+	"Current Window") maim -i "$(xdotool getactivewindow)" "$screenshot" ;;
+	"Full Screen") maim "$screenshot" ;;
+	*) exit 0 ;;
+esac
+case "$(printf "Copy To Clipboard\\nSave To File" | sort | dmenu -l 2 -i -p "Screenshot taken. Choose to:")" in
+	"Copy To Clipboard") xclip -selection clipboard -t image/jpg "$screenshot" && rm -f "$screenshot" && notify-send "📷 Screenshot Copied" "Screenshot copied to clipboard" ;;
+	"Save To File") mv "$screenshot" "$HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" && notify-send "📷 Screenshot Saved" "Screenshot saved to $HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" ;;
+	*) exit 0 ;;
+esac
