@@ -28,7 +28,7 @@ done &
 while true; do
 	if sensors | grep temp > /dev/null 2>&1 && [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
 		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(< /tmp/dwmweather.txt)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ]; then
@@ -38,7 +38,7 @@ while true; do
 		fi
 	elif [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
 		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(< /tmp/dwmweather.txt)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ]; then
@@ -48,7 +48,7 @@ while true; do
 		fi
 	else
 		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(< /tmp/dwmweather.txt)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ]; then
