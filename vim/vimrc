@@ -161,6 +161,7 @@ highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
     if (g:colors_name == "gruvbox-material")
+        syntax on
         colorscheme kuroi
 		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
@@ -169,6 +170,7 @@ function ToggleColors()
 		call lightline#init()
 		call lightline#colorscheme()
     else
+        syntax on
         colorscheme gruvbox-material
 		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
@@ -179,6 +181,7 @@ function ToggleColors()
     endif
 endfunction
 nnoremap <leader><F1> <Esc>:call ToggleColors()<Enter>
+nnoremap <leader><F2> <Esc>:syntax off<Enter>
 
 " Enable status line
 set laststatus=2
