@@ -3,7 +3,7 @@ while true; do
 	dwmdisk > /tmp/dwmdisk.txt
 	sleep 3s
 	if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
-	sleep 3s && if type curl > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
+	sleep 3s && if type curl > /dev/null 2>&1 && dwmweather | grep '[0-9]' > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
 	dwmupdates > /tmp/dwmupdates.txt
 	sleep 3600s
 done &
@@ -20,15 +20,15 @@ while true; do
 	DISK="$(< /tmp/dwmdisk.txt)"
 	NEWS="$(< /tmp/dwmnews.txt)"
 	WEATHER="$(< /tmp/dwmweather.txt)"
-	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
+	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $WEATHER| $CLOCK"
 	elif [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
+	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $WEATHER| $CLOCK"
 	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $CLOCK"
-	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
+	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $WEATHER| $CLOCK"
 	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
