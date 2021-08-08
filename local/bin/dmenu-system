@@ -31,9 +31,10 @@ fi
 
 # Miscellaneous
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
-	OPTS=$(echo -e "Bookmarks List\nCheck Online Streams\nCheck System Queue\nListen To Radio\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
+	OPTS=$(echo -e "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nListen To Radio\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
 		"Bookmarks List") dmenu-bookmarks ;;
+		"Change Theme") "$SHELL" -c 'tui dmenu-theme' ;;
 		"Check Online Streams") dmenu-stream ;;
 		"Check System Queue") tui 'tspool ; bash' ;;
 		"Listen To Radio") dmenu-radio ;;

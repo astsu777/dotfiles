@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sun Aug 2021 15:54:18
+# Last modified: Sun Aug 2021 16:12:40
+# Version: 1.0
+#
+# Description: Toggle graphical themes
+#===================================================
+
+#=======================
+# Functions
+#=======================
+notify() {
+	notify-send "🖌️ Theme Installed" "Please reload your WM to apply new theme (or reboot)"
+	echo "Theme Installed. Please reload your WM to apply new theme (or reboot)"
+}
+
+#=======================
+# Custom Theme
+#=======================
+toggleCustom() {
+	# VIM
+	if [[ -f "$HOME"/.vimrc ]]; then
+    	sed -i --follow-symlinks '/^colorscheme/c colorscheme kuroi' "$HOME"/.vimrc 2>&1
+    	sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': 'jellybeans'}" "$HOME"/.vimrc 2>&1
+	fi
+	# BSPWM
+	if [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
+    	sed -i --follow-symlinks '/^bspc config active_border_color/c bspc config active_border_color \\#282c34' "$HOME"/.config/bspwm/bspwmrc 2>&1
+    	sed -i --follow-symlinks '/^bspc config normal_border_color/c bspc config normal_border_color \\#282c34' "$HOME"/.config/bspwm/bspwmrc 2>&1
+    	sed -i --follow-symlinks '/^bspc config focused_border_color/c bspc config focused_border_color \\#304569' "$HOME"/.config/bspwm/bspwmrc 2>&1
+	fi
+	if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
+    	sed -i --follow-symlinks '/^background = #/c background = #282c34' "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks '/^foreground = #/c foreground = #d7d7d7' "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks '/^primary = #/c primary = #5e81ec' "$HOME"/.config/bspwm/polybar.config 2>&1
+	fi
+	# DWM
+	if [[ -f /opt/dwm/config.h ]]; then
+    	sudo sed -i '/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = "#282c34";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = "#282c34";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = "#304569";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#b34700";' /opt/dwm/config.h 2>&1
+    	sudo make -C /opt/dwm clean install > /dev/null 2>&1
+	fi
+	notify
+}
+
+#=======================
+# Gruvbox Theme
+#=======================
+toggleGruvbox() {
+	# VIM
+	if [[ -f "$HOME"/.vimrc ]]; then
+    	sed -i --follow-symlinks '/^colorscheme /c colorscheme gruvbox-material' "$HOME"/.vimrc 2>&1
+    	sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': 'gruvbox_material'}" "$HOME"/.vimrc 2>&1
+    	if ! grep "^\s*Plug 'sainnhe/gruvbox-material'" "$HOME"/.vimrc > /dev/null 2>&1; then
+        	sed -i --follow-symlinks "/^call plug#begin/a \ \ \ \ \"\" Colorscheme" "$HOME"/.vimrc 2>&1
+        	sed -i --follow-symlinks "/\"\" Colorscheme/a \ \ \ \ Plug 'sainnhe\/gruvbox-material'" "$HOME"/.vimrc 2>&1
+    	fi
+	fi
+	# BSPWM
+	if [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
+    	sed -i --follow-symlinks '/^bspc config active_border_color/c bspc config active_border_color \\#282828' "$HOME"/.config/bspwm/bspwmrc 2>&1
+    	sed -i --follow-symlinks '/^bspc config normal_border_color/c bspc config normal_border_color \\#282828' "$HOME"/.config/bspwm/bspwmrc 2>&1
+    	sed -i --follow-symlinks '/^bspc config focused_border_color/c bspc config focused_border_color \\#79520e' "$HOME"/.config/bspwm/bspwmrc 2>&1
+	fi
+	if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
+    	sed -i --follow-symlinks '/^background = #/c background = #282828' "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks '/^foreground = #/c foreground = #acacac' "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks '/^primary = #/c primary = #c98918' "$HOME"/.config/bspwm/polybar.config 2>&1
+	fi
+	# DWM
+	if [[ -f /opt/dwm/config.h ]]; then
+    	sudo sed -i '/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = "#acacac";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = "#c98918";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#79520e";' /opt/dwm/config.h 2>&1
+    	sudo make -C /opt/dwm clean install > /dev/null 2>&1
+	fi
+	notify
+}
+
+#=======================
+# Themes List
+#=======================
+case "$(printf "Custom\\nGruvbox" | sort | dmenu -l 2 -i -p "Choose a theme:")" in
+	"Custom") toggleCustom ;;
+	"Gruvbox") toggleGruvbox ;;
+	*) exit 0 ;;
+esac
