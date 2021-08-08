@@ -30,7 +30,7 @@ augroup ft_shell
 	inoremap ;hh <Esc>:call SHHeader()<Enter>
 	" If the file is empty, insert the header
 	if line('$') == 1 && getline(1) == ''
-		:call Header()
+		:call SHHeader()
 	endif
 	" When writing the file, update the last modified timestamp
 	autocmd BufWritePre,FileWritePre *.sh :silent! %s/# Last modified: \zs.*/\=strftime('%a %b %Y %H:%M:%S')
