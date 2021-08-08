@@ -1,41 +1,61 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sun Aug 2021 11:17:11
+# Last modified: Sun Aug 2021 11:17:11
+# Version: 1.0
+#
+# Description: DWM status bar script
+#===================================================
+
+#=======================
+# Modules running every hour
+#=======================
 while true; do
 	dwmdisk > /tmp/dwmdisk.txt
-	sleep 3s
-	if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
-	sleep 3s && if type curl > /dev/null 2>&1 && dwmweather | grep '[0-9]' > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
+	sleep 5s
+	if curl -s --max-time 1 http://example.com/ > /dev/null 2>&1; then
+		if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
+		if type curl > /dev/null 2>&1 && dwmweather | grep '[0-9]' > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi
+	fi
 	dwmupdates > /tmp/dwmupdates.txt
 	sleep 3600s
 done &
 
+#=======================
+# Modules running every two seconds
+#=======================
 while true; do
-	VOL="$(dwmvol)"
-	CPU="$(dwmcpu)"
-	RAM="$(dwmmemory)"
-	NET="$(dwmnet)"
-	TEMP="$(dwmtemp)"
-	CLOCK="$(dwmclock)"
-	BATTERY="$(dwmbattery)"
-	UPDATES="$(< /tmp/dwmupdates.txt)"
-	DISK="$(< /tmp/dwmdisk.txt)"
-	NEWS="$(< /tmp/dwmnews.txt)"
-	WEATHER="$(< /tmp/dwmweather.txt)"
-	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $WEATHER| $CLOCK"
-	elif [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $WEATHER| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $CLOCK"
-	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $WEATHER| $CLOCK"
-	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
-		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
-	elif [ -f /tmp/dwmupdates.txt ]; then
-		xsetroot -name " $UPDATES| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
+	if sensors | grep temp > /dev/null 2>&1 && [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
+		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		else
+			xsetroot -name " $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmvol)| $(dwmclock)"
+		fi
+	elif [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
+		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		else
+			xsetroot -name " $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmvol)| $(dwmclock)"
+		fi
 	else
-		xsetroot -name " $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
+		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmweather)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		elif [ -f /tmp/dwmupdates.txt ]; then
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+		else
+			xsetroot -name " $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmvol)| $(dwmclock)"
+		fi
 	fi
-	sleep 1s
+	sleep 2s
 done &
