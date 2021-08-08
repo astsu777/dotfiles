@@ -20,15 +20,19 @@ while true; do
 	DISK="$(< /tmp/dwmdisk.txt)"
 	NEWS="$(< /tmp/dwmnews.txt)"
 	WEATHER="$(< /tmp/dwmweather.txt)"
-	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
+	if [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $WEATHER| $CLOCK"
-	elif sensors | grep temp > /dev/null 2>&1 && [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
+	elif [ -f /sys/class/power_supply/BAT?*/charge_now ] && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $BATTERY| $VOL| $CLOCK"
+	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $WEATHER| $CLOCK"
-	elif [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ] && [ ! -z /tmp/dwmweather.txt ]; then
+	elif sensors | grep temp > /dev/null 2>&1 && [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
+		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $TEMP| $VOL| $CLOCK"
+	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && grep 'C' /tmp/dwmweather.txt > /dev/null 2>&1; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $WEATHER| $CLOCK"
-	elif [ ! -z /tmp/dwmupdates.txt ] && [ ! -z /tmp/dwmnews.txt ]; then
+	elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
 		xsetroot -name " $UPDATES| $NEWS| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
-	elif [ ! -z /tmp/dwmupdates.txt ]; then
+	elif [ -f /tmp/dwmupdates.txt ]; then
 		xsetroot -name " $UPDATES| $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
 	else
 		xsetroot -name " $CPU| $RAM| $NET| $DISK| $VOL| $CLOCK"
