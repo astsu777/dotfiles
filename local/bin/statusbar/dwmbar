@@ -38,11 +38,11 @@ while true; do
 		fi
 	elif sensors | grep temp > /dev/null 2>&1; then
 		if [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ] && [ -f /tmp/dwmweather.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(< /tmp/dwmweather.txt)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmvol)| $(< /tmp/dwmweather.txt)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ] && [ -f /tmp/dwmnews.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(< /tmp/dwmnews.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmvol)| $(dwmclock)"
 		elif [ -f /tmp/dwmupdates.txt ]; then
-			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmbattery)| $(dwmvol)| $(dwmclock)"
+			xsetroot -name " $(< /tmp/dwmupdates.txt)| $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmtemp)| $(dwmvol)| $(dwmclock)"
 		else
 			xsetroot -name " $(dwmcpu)| $(dwmmemory)| $(dwmnet)| $(dwmdisk)| $(dwmvol)| $(dwmclock)"
 		fi
