@@ -1,16 +1,16 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+#===================================================
 # Author: Gaetan (gaetan@ictpourtous.com)
-# Creation date: 06 February 2021
-# Update date: N/A
+# Creation: Mon Aug 2021 14:57:49
+# Last modified: Mon Aug 2021 14:57:49
 # Version: 1.0
 #
-# Description: this script retrieves lists of domains and insert then in the /etc/hosts file for blocking purposes
-#
+# Description: Retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
+#===================================================
 
-#====================
-# HELP
-#====================
+#=======================
+# Usage
+#=======================
 if [[ -z "$1" ]]; then
 	echo "An action needs to be specified!
 Usage: ./block_hosts.sh <ARGUMENT>
@@ -23,9 +23,9 @@ Note that any other modifications performed to the hosts file will remain even w
 	exit 1
 fi
 
-#====================
-# VARIABLES
-#====================
+#=======================
+# Variables
+#=======================
 hostsfile="/etc/hosts"
 blocklists=$(mktemp) && cat <<-'EOF' >"$blocklists"
 https://blocklistproject.github.io/Lists/abuse.txt
@@ -41,16 +41,16 @@ cleanblocklist=$(<"$blocklists" xargs -n1 curl -s | grep '^0' | sort | uniq)
 leadmark="#### BLOCKLIST ####"
 tailmark="#### BLOCKLIST END ####"
 
-#====================
-# REQUIREMENTS
-#====================
+#=======================
+# Requirements
+#=======================
 if ! [[ -f "$hostsfile" ]] && ! type curl > /dev/null 2>&1; then
 	echo .
 	echo "No hosts file was found on your system! This script cannot be executed"
 	exit 2
-elif [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1 && ! type doas > /dev/null 2>&1; then
+elif [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
 	echo .
-	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo|doas installed!"
+	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
 	exit 3
 elif ! type sed grep sort uniq > /dev/null 2>&1; then
 	echo .
@@ -58,9 +58,9 @@ elif ! type sed grep sort uniq > /dev/null 2>&1; then
 	exit 4
 fi
 
-#====================
-# FUNCTIONS
-#====================
+#=======================
+# Functions
+#=======================
 installblocklist() {
 	if [[ "$EUID" = 0 ]]; then
 		cp "$hostsfile" "$hostsfile"_.BACKUP
@@ -80,9 +80,9 @@ installblocklist() {
 	fi
 }
 
-#====================
-# INSTALL BLOCKLIST
-#====================
+#=======================
+# Install Blocklist
+#=======================
 if [ "$1" == "--install" ]; then
 	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
 		echo "Blacklists are already installed. Please either update them or uninstall them!"
@@ -92,9 +92,9 @@ if [ "$1" == "--install" ]; then
 	fi
 fi
 
-#====================
-# UNINSTALL BLOCKLIST
-#====================
+#=======================
+# Uninstall Blocklist
+#=======================
 if [ "$1" == "--uninstall" ]; then
 	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
 		if [[ "$EUID" = 0 ]]; then
@@ -110,9 +110,9 @@ if [ "$1" == "--uninstall" ]; then
 	fi
 fi
 
-#====================
-# UPDATE BLOCKLIST
-#====================
+#=======================
+# Update Blocklist
+#=======================
 if [ "$1" == "--update" ]; then
 	if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
 		if [[ "$EUID" = 0 ]]; then

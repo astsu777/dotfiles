@@ -1,4 +1,43 @@
-#!/bin/bash
-if [[ $OSTYPE == "darwin"* ]]; then
-	sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Mon Aug 2021 15:09:17
+# Last modified: Mon Aug 2021 15:09:17
+# Version: 1.0
+#
+# Description: Flush local DNS cache
+#===================================================
+
+#=======================
+# Requirements
+#=======================
+if [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
+	echo .
+	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
+	exit 1
+fi
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	if ! type awk lsof > /dev/null 2>&1; then
+		echo .
+		echo "Please make sure the packages 'awk, lsof' are installed on your system!"
+		exit 2
+	fi
+fi
+
+#=======================
+# Clear DNS Cache
+#=======================
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache
+	echo "DNS cache has been flushed"
+	exit 0
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+	dnsResolver=$(sudo lsof -i :53 -S | awk 'FNR==2 {print $1}')
+	if [[ -z "$dnsResolver" ]]; then echo "No DNS cache found" && exit 0; fi
+	case "$dnsResolver" in
+		systemd-resolve) sudo killall -USR2 systemd-resolved ;;
+		dnsmasq) sudo killall -USR1 dnsmasq ;;
+		nscd) sudo systemctl restart nscd.service ;;
+		*) echo "DNS cache $dnsResolver not supported" && exit 3 ;;
+	esac
 fi
