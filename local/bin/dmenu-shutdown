@@ -8,8 +8,8 @@ case $OPTS in
 	"Enable Lock on Idle") pgrep xautolock || xautolock -secure -detectsleep -time 10 -locker slock & disown ;;
 	Logout) xdotool key "super+shift+q" ;;
 	Suspend) systemctl suspend ;;
-	Hibernate) systemctl hibernate ;;
-	Reboot) systemctl reboot ;;
-	Shutdown) systemctl poweroff ;;
+	Hibernate) systemctl hibernate || loginctl hibernate ;;
+	Reboot) systemctl reboot || loginctl reboot ;;
+	Shutdown) systemctl poweroff || loginctl poweroff ;;
 	*) ;;
 esac
