@@ -52,7 +52,7 @@ do
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
 	elif grep -F 'Successfully rebased and updated' "$pull" > /dev/null; then
-		echo -e "\033[32mRebased and updated\033[0m"
+		echo -e "\033[33mRebased and updated\033[0m"
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
 	else
