@@ -51,6 +51,8 @@ call plug#begin('~/.vim/bundle')
 	set rtp+=~/.vim/bundle/fzf
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
+	"" Bulk rename files
+	Plug 'qpkorr/vim-renamer'
 call plug#end()
 filetype plugin indent on
 

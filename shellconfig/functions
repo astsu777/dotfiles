@@ -30,6 +30,19 @@ if type bc > /dev/null 2>&1; then
 	}
 fi
 
+# Create many files with random content
+ttouch() {
+	if [ "$1" = "-h" ]; then
+		echo "Usage: ttouch '<INTEGER>'"
+		echo "Ex.: ttouch 10 --> will create 10 files"
+		echo
+	else
+		for n in `seq 1 $1`; do
+    		dd if=/dev/urandom of=file$( printf %03d "$n" ) bs=1 count=$(( RANDOM + 1024 )) > /dev/null 2>&1
+		done
+	fi
+}
+
 #=================
 # NNN
 #=================
