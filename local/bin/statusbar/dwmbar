@@ -13,7 +13,7 @@
 #=======================
 while true; do
 	dwmdisk > /tmp/dwmdisk.txt
-	sleep 5s
+	sleep 10s
 	if curl -s --max-time 1 http://example.com/ > /dev/null 2>&1; then
 		if type newsboat > /dev/null 2>&1; then dwmnews > /tmp/dwmnews.txt ; fi
 		if type curl > /dev/null 2>&1 && dwmweather | grep '[0-9]' > /dev/null 2>&1; then dwmweather > /tmp/dwmweather.txt ; fi

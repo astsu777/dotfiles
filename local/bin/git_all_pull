@@ -55,6 +55,10 @@ do
 		echo -e "\033[33mRebased and updated\033[0m"
 		echo -e
 		rm -f "$pull" > /dev/null 2>&1
+	elif grep -F 'Fast-forwarded' "$pull" > /dev/null; then
+		echo -e "\033[33mFast-forwarded\033[0m"
+		echo -e
+		rm -f "$pull" > /dev/null 2>&1
 	else
 		echo -e "\033[31mAn error occurred\033[0m"
 		echo -e "$(cat $pull)"
