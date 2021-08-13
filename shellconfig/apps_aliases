@@ -105,11 +105,11 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	# It also integrates the AUR helper 'yay' if it is installed
 	# The last command will return an error if no orphan packages found
 	elif type pacman yay snap > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq) ; sudo snap refresh'
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq) ; sudo snap refresh ; if type dwmupdates > /dev/null 2>&1 && { [[ "$SESSION" == "dwm" ]] || [[ "$GDMSESSION" =~ ^(dwm|DWM) ]] ;}; then dwmupdates > /tmp/dwmupdates.txt; fi'
 	elif type pacman yay > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq)'
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq) ; if type dwmupdates > /dev/null 2>&1 && { [[ "$SESSION" == "dwm" ]] || [[ "$GDMSESSION" =~ ^(dwm|DWM) ]] ;}; then dwmupdates > /tmp/dwmupdates.txt; fi'
 	elif type pacman > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq)'
+		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; if type dwmupdates > /dev/null 2>&1 && { [[ "$SESSION" == "dwm" ]] || [[ "$GDMSESSION" =~ ^(dwm|DWM) ]] ;}; then dwmupdates > /tmp/dwmupdates.txt; fi'
 	fi
 fi
 
