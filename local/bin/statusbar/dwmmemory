@@ -1,5 +1,0 @@
-#!/bin/bash
-# free --mebi | sed -n '2{p;q}' | awk '{printf ("🧠 %2.2fG/%2.2fG\n ", ( $3 / 1024), ($2 / 1024))}'
-usage=$(free -t | awk 'NR == 2 {print $3/$2*100}' | cut -d'.' -f1)
-icon="🧠"
-printf "%s %s \\n" "$icon" "$usage%"
