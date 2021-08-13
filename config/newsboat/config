@@ -2,7 +2,7 @@
 # html-renderer "w3m -dump -T text/html"
 
 # Refresh all RSS feeds on startup
-auto-reload yes
+auto-reload no
 
 # Display all URLs in an article
 external-url-viewer "urlview"
