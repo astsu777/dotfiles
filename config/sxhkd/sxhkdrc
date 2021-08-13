@@ -48,9 +48,9 @@ super + alt + b
 super + alt + c
 	clipmenu
 
-# Text editor | List of unicode characters
-super + alt + {e,E}
-	"$SHELL" -c {'tui "$EDITOR"','dmenu-unicode'}
+# Text editor
+super + alt + e
+	"$SHELL" -c 'tui "$EDITOR"'
 
 # File manager
 super + alt + {f,F}
@@ -91,6 +91,10 @@ super + alt + s
 # SMS manager | Direct messaging
 super + alt + {t,T}
 	"$SHELL" -c {'"$SMSMGR"','"$CHATTER"'}
+
+# List of unicode characters
+super + alt + {u,U}
+	"$SHELL" -c {'dmenu-unicode copy','dmenu-unicode'}
 
 # Play Internet videos | Online streams
 super + alt + {v,V}
