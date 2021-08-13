@@ -43,7 +43,7 @@ toggleCustom() {
     	sudo sed -i '/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
     	sudo sed -i '/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
     	sudo sed -i '/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = "#304569";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#b34700";' /opt/dwm/config.h 2>&1
+    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#304569";' /opt/dwm/config.h 2>&1
     	sudo make -C /opt/dwm clean install > /dev/null 2>&1
 	fi
 	notify
