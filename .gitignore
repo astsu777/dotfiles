@@ -21,3 +21,5 @@ vim/swap/**
 !vim/swap/.gitkeep
 vim/undo/**
 !vim/undo/.gitkeep
+local/bin/st-copyout
+local/bin/st-urlhandler
