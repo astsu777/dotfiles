@@ -98,7 +98,7 @@ Because the *VIM* configuration is quite light, it is fully compatible with *Neo
 The folder *local/share* contains resources that can be useful for either other programs or for the user.
 
 ### Scripts
-Custom scripts are present in the folder *local/bin* for various things. This folder is present in the *$PATH* and all scripts can be called at any time. Some are meant to be called by other programs instead. For example, the *statusbar* folder contains scripts configuring my status bar in *DWM*. The folder *cron* contains scripts that can be used as cron jobs.
+Custom scripts are present in the folder *local/bin* for various things. This folder is present in the *$PATH* and all scripts can be called at any time. Some are meant to be called by other programs instead. For example, the folder *cron* contains scripts that can be used as cron jobs.
 
 # Documentation - Config Folder
 ## Default Applications (xdg-open)
