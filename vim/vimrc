@@ -317,7 +317,7 @@ inoremap ;hh <Esc>:call Header()<Enter>
 " Scripts
 "=============
 " Compile document
-map <leader>c :w! \| !compiler "<c-r%"<CR>
+map <leader>c :w! \| !compiler "<c-r>%"<CR>
 
 "=============
 " Macros
