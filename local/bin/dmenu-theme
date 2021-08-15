@@ -50,12 +50,20 @@ toggleCustom() {
 	vimColorscheme="kuroi"
 	vimLightline="jellybeans"
 
-	# Window managers
-	WMBackground="#282c34"
-	WMForeground="#d7d7d7"
-	WMBar="#5e81ec"
-	WMActiveBorder="#304569"
-	WMNormalBorder="#282c34"
+	# BSPWM
+	BSPWMBackground="#282c34"
+	BSPWMForeground="#d7d7d7"
+	BSPWMBar="#5e81ec"
+	BSPWMActiveBorder="#304569"
+	BSPWMNormalBorder="#282c34"
+
+	# DWM
+	DWMBackground="#282c34"
+	DWMForeground="#d7d7d7"
+	DWMBarFG="#d7d7d7"
+	DWMBarBG="#304569"
+	DWMNormalBorder="#282c34"
+	DWMActiveBorder="#304569"
 }
 
 #=======================
@@ -92,12 +100,20 @@ toggleGruvbox() {
 	vimColorscheme="gruvbox-material"
 	vimLightline="gruvbox_material"
 
-	# Window managers
-	WMBackground="#282828"
-	WMForeground="#acacac"
-	WMBar="#c98918"
-	WMActiveBorder="#79520e"
-	WMNormalBorder="#282828"
+	# BSPWM
+	BSPWMBackground="#282828"
+	BSPWMForeground="#acacac"
+	BSPWMBar="#c98918"
+	BSPWMActiveBorder="#79520e"
+	BSPWMNormalBorder="#282828"
+
+	# DWM
+	DWMBackground="#282828"
+	DWMForeground="#acacac"
+	DWMBarFG="#282828"
+	DWMBarBG="#c98918"
+	DWMNormalBorder="#282828"
+	DWMActiveBorder="#79520e"
 }
 
 #=======================
@@ -182,24 +198,24 @@ fi
 
 # BSPWM
 if type bspwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
-    sed -i --follow-symlinks "/^bspc config active_border_color/c bspc config active_border_color \\$WMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
-    sed -i --follow-symlinks "/^bspc config normal_border_color/c bspc config normal_border_color \\$WMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
-    sed -i --follow-symlinks "/^bspc config focused_border_color/c bspc config focused_border_color \\$WMActiveBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+    sed -i --follow-symlinks "/^bspc config active_border_color/c bspc config active_border_color \\$BSPWMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+    sed -i --follow-symlinks "/^bspc config normal_border_color/c bspc config normal_border_color \\$BSPWMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+    sed -i --follow-symlinks "/^bspc config focused_border_color/c bspc config focused_border_color \\$BSPWMActiveBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
 	if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
-    	sed -i --follow-symlinks "/^background = #/c background = $WMBackground" "$HOME"/.config/bspwm/polybar.config 2>&1
-    	sed -i --follow-symlinks "/^foreground = #/c foreground = $WMForeground" "$HOME"/.config/bspwm/polybar.config 2>&1
-    	sed -i --follow-symlinks "/^primary = #/c primary = $WMBar" "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^background = #/c background = $BSPWMBackground" "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^foreground = #/c foreground = $BSPWMForeground" "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^primary = #/c primary = $BSPWMBar" "$HOME"/.config/bspwm/polybar.config 2>&1
 	fi
 fi
 
 # DWM
 if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
-    sudo sed -i "/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = \"$WMBackground\";" /opt/dwm/config.h 2>&1
-    sudo sed -i "/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = \"$WMNormalBorder\";" /opt/dwm/config.h 2>&1
-    sudo sed -i "/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = \"$WMForeground\";" /opt/dwm/config.h 2>&1
-    sudo sed -i "/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = \"$WMForeground\";" /opt/dwm/config.h 2>&1
-    sudo sed -i "/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = \"$WMActiveBorder\";" /opt/dwm/config.h 2>&1
-    sudo sed -i "/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = \"$WMActiveBorder\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = \"$DWMBackground\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = \"$DWMNormalBorder\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = \"$DWMForeground\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = \"$DWMBarFG\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = \"$DWMBarBG\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = \"$DWMActiveBorder\";" /opt/dwm/config.h 2>&1
     sudo make -C /opt/dwm clean install > /dev/null 2>&1
 fi
 
