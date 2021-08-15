@@ -150,6 +150,23 @@ nnoremap <leader>v :vsplit<Space>
 
 " Enable syntax highlighting
 syntax on
+let s:syntax = 1
+function ToggleSyntax()
+    if s:syntax == 1
+        syntax off
+		let s:syntax = 0
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    else
+        syntax on
+		let s:syntax = 1
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    endif
+endfunction
+nnoremap <leader><F2> <Esc>:call ToggleSyntax()<Enter>
 
 " Set encoding to UTF-8
 set encoding=utf-8
@@ -163,7 +180,6 @@ highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
     if (g:colors_name == "gruvbox-material")
-        syntax on
         colorscheme kuroi
 		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
@@ -172,7 +188,6 @@ function ToggleColors()
 		call lightline#init()
 		call lightline#colorscheme()
     else
-        syntax on
         colorscheme gruvbox-material
 		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
@@ -183,7 +198,6 @@ function ToggleColors()
     endif
 endfunction
 nnoremap <leader><F1> <Esc>:call ToggleColors()<Enter>
-nnoremap <leader><F2> <Esc>:syntax off<Enter>
 
 " Enable status line
 set laststatus=2
@@ -264,10 +278,32 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Lightline
 let g:lightline = {'colorscheme': 'jellybeans'}
+let s:status_bar = 1
+function ToggleStatusBar()
+	if (s:status_bar == 0)
+    	let s:status_bar = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:status_bar = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+nnoremap <leader>h :call ToggleStatusBar()<CR>
 
 "=============
 " Auto-Commands
 "=============
+" Properly set filetype
+autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
+
 " Automatically deletes all trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -275,13 +311,17 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd VimLeave *.tex !texclear %
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
-autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
 
 " Disable auto-commenting on new lines
 autocmd FileType * setlocal formatoptions-=cro
 map <leader>C :setlocal formatoptions+=cro<CR>
 map <leader>c :setlocal formatoptions-=cro<CR>
+
+" Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
+if &diff
+    highlight! link DiffText MatchParen
+endif
 
 "=============
 " Code Snippets
@@ -318,6 +358,9 @@ inoremap ;hh <Esc>:call Header()<Enter>
 "=============
 " Compile document
 map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
+" Open corresponding .pdf/.html or preview
+map <leader>P :!opout <c-r>%<CR><CR>
 
 "=============
 " Macros
