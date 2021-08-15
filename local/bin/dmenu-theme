@@ -25,6 +25,32 @@ toggleCustom() {
     	sed -i --follow-symlinks '/^colorscheme/c colorscheme kuroi' "$HOME"/.vimrc 2>&1
     	sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': 'jellybeans'}" "$HOME"/.vimrc 2>&1
 	fi
+	# Alacritty
+	if [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
+		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/custom_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
+	fi
+	# ST
+	if [[ -f /opt/st/config.h ]]; then
+    	sudo sed -i '/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ "#333333",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal red \*\//c\/\* normal red \*\/\ \ \ \ \ \ \ \ "#cc6666",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal green \*\//c\/\* normal green \*\/\ \ \ \ \ \ \ \ "#81bd68",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal yellow \*\//c\/\* normal yellow \*\/\ \ \ \ \ \ \ \ "#f0c674",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal blue \*\//c\/\* normal blue \*\/\ \ \ \ \ \ \ \ "#6699ff",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal magenta \*\//c\/\* normal magenta \*\/\ \ \ \ \ \ \ \ "#b294bb",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal cyan \*\//c\/\* normal cyan \*\/\ \ \ \ \ \ \ \ "#789bba",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal white \*\//c\/\* normal white \*\/\ \ \ \ \ \ \ \ "#c5c6c8",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright black \*\//c\/\* bright black \*\/\ \ \ \ \ \ \ \ "#595959",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright red \*\//c\/\* bright red \*\/\ \ \ \ \ \ \ \ "#d98c8c",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright green \*\//c\/\* bright green \*\/\ \ \ \ \ \ \ \ "#a7d095",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright yellow \*\//c\/\* bright yellow \*\/\ \ \ \ \ \ \ \ "#f5daa3",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright blue \*\//c\/\* bright blue \*\/\ \ \ \ \ \ \ \ "#9ab4cb",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright magenta \*\//c\/\* bright magenta \*\/\ \ \ \ \ \ \ \ "#c7b1cd",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright cyan \*\//c\/\* bright cyan \*\/\ \ \ \ \ \ \ \ "#add2dc",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright white \*\//c\/\* bright white \*\/\ \ \ \ \ \ \ \ "#e5e6e5",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* foreground \*\//c\/\* foreground \*\/\ \ \ \ \ \ \ \ "#c5c8c6",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* background \*\//c\/\* background \*\/\ \ \ \ \ \ \ \ "#1c1c1c",' /opt/st/config.h 2>&1
+    	sudo make -C /opt/st clean install > /dev/null 2>&1
+	fi
 	# BSPWM
 	if [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
     	sed -i --follow-symlinks '/^bspc config active_border_color/c bspc config active_border_color \\#282c34' "$HOME"/.config/bspwm/bspwmrc 2>&1
@@ -61,6 +87,32 @@ toggleGruvbox() {
         	sed -i --follow-symlinks "/^call plug#begin/a \ \ \ \ \"\" Colorscheme" "$HOME"/.vimrc 2>&1
         	sed -i --follow-symlinks "/\"\" Colorscheme/a \ \ \ \ Plug 'sainnhe\/gruvbox-material'" "$HOME"/.vimrc 2>&1
     	fi
+	fi
+	# Alacritty
+	if [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
+		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/gruvbox_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
+	fi
+	# ST
+	if [[ -f /opt/st/config.h ]]; then
+    	sudo sed -i '/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ "#282828",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal red \*\//c\/\* normal red \*\/\ \ \ \ \ \ \ \ "#cc241d",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal green \*\//c\/\* normal green \*\/\ \ \ \ \ \ \ \ "#98971a",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal yellow \*\//c\/\* normal yellow \*\/\ \ \ \ \ \ \ \ "#d79921",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal blue \*\//c\/\* normal blue \*\/\ \ \ \ \ \ \ \ "#458588",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal magenta \*\//c\/\* normal magenta \*\/\ \ \ \ \ \ \ \ "#b16286",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal cyan \*\//c\/\* normal cyan \*\/\ \ \ \ \ \ \ \ "#689d6a",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* normal white \*\//c\/\* normal white \*\/\ \ \ \ \ \ \ \ "#a89984",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright black \*\//c\/\* bright black \*\/\ \ \ \ \ \ \ \ "#928374",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright red \*\//c\/\* bright red \*\/\ \ \ \ \ \ \ \ "#fb4934",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright green \*\//c\/\* bright green \*\/\ \ \ \ \ \ \ \ "#b8bb26",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright yellow \*\//c\/\* bright yellow \*\/\ \ \ \ \ \ \ \ "#fabd2f",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright blue \*\//c\/\* bright blue \*\/\ \ \ \ \ \ \ \ "#83a598",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright magenta \*\//c\/\* bright magenta \*\/\ \ \ \ \ \ \ \ "#d3869b",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright cyan \*\//c\/\* bright cyan \*\/\ \ \ \ \ \ \ \ "#8ec07c",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* bright white \*\//c\/\* bright white \*\/\ \ \ \ \ \ \ \ "#ebdbb2",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* foreground \*\//c\/\* foreground \*\/\ \ \ \ \ \ \ \ "#ebdbb2",' /opt/st/config.h 2>&1
+    	sudo sed -i '/^\/\* background \*\//c\/\* background \*\/\ \ \ \ \ \ \ \ "#282828",' /opt/st/config.h 2>&1
+    	sudo make -C /opt/st clean install > /dev/null 2>&1
 	fi
 	# BSPWM
 	if [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
