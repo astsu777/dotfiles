@@ -29,6 +29,10 @@ toggleCustom() {
 	if type alacritty > /dev/null 2>&1 && [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
 		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/custom_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
 	fi
+	# Kitty
+	if type kitty > /dev/null 2>&1 && [[ -f "$HOME"/.config/kitty/kitty.conf ]]; then
+		sed -i --follow-symlinks '/^include\s.*_theme\.conf/c include custom_theme\.conf' "$HOME"/.config/kitty/kitty.conf 2>&1
+	fi
 	# ST
 	if type st > /dev/null 2>&1 && [[ -f /opt/st/config.h ]]; then
     	sudo sed -i '/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ "#333333",' /opt/st/config.h 2>&1
@@ -119,6 +123,10 @@ toggleGruvbox() {
 	# Alacritty
 	if type alacritty > /dev/null 2>&1 && [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
 		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/gruvbox_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
+	fi
+	# Kitty
+	if type kitty > /dev/null 2>&1 && [[ -f "$HOME"/.config/kitty/kitty.conf ]]; then
+		sed -i --follow-symlinks '/^include\s.*_theme\.conf/c include gruvbox_theme\.conf' "$HOME"/.config/kitty/kitty.conf 2>&1
 	fi
 	# ST
 	if type st > /dev/null 2>&1 && [[ -f /opt/st/config.h ]]; then
