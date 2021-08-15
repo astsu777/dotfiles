@@ -9,13 +9,13 @@ unmountusb() {
 	chosen="$(echo "$drives" | dmenu -i -p "Unmount which drive?")" || exit 1
 	chosen="$(echo "$chosen" | awk '{print $1}')"
 	[ -z "$chosen" ] && exit
-	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted."
+	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted"
 	}
 
 unmountandroid() { \
 	chosen="$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | dmenu -i -p "Unmount which device?")" || exit 1
 	[ -z "$chosen" ] && exit
-	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted."
+	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted"
 	}
 
 asktype() { \
@@ -29,16 +29,16 @@ asktype() { \
 drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '!/\/efi/' | awk '$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
 
 if ! grep simple-mtpfs /etc/mtab; then
-	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
-	echo "Unmountable USB drive detected."
+	[ -z "$drives" ] && notify-send "No drives to unmount" &&  exit
+	notify-send "Unmountable USB drive detected"
 	unmountusb
 else
 	if [ -z "$drives" ]
 	then
-		echo "Unmountable Android device detected."
+		notify-send "Unmountable Android device detected"
 	       	unmountandroid
 	else
-		echo "Unmountable USB drive(s) and Android device(s) detected."
+		notify-send "Unmountable USB drive(s) and Android device(s) detected"
 		asktype
 	fi
 fi

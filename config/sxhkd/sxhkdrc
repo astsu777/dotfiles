@@ -108,6 +108,10 @@ super + alt + {w,W}
 super + alt + {y,Y}
 	"$SHELL" -c {'if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -S -l --sort ; else tui ytfzf -S -l --sort ; fi','if type ueberzug > /dev/null 2>&1; then tui ytfzf -t -s -l ; else tui ytfzf -s -l ; fi'}
 
+# Mount/Unmount Drives
+super + r ; {d,D}
+	"$SHELL" -c {'dmenu-mount','dmenu-umount'}
+
 # Sound mixer
 super + r ; m
 	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
