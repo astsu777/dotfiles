@@ -20,186 +20,84 @@ notify() {
 # Custom Theme
 #=======================
 toggleCustom() {
-	# VIM
-	if type vim > /dev/null 2>&1 && [[ -f "$HOME"/.vimrc ]]; then
-    	sed -i --follow-symlinks '/^colorscheme/c colorscheme kuroi' "$HOME"/.vimrc 2>&1
-    	sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': 'jellybeans'}" "$HOME"/.vimrc 2>&1
-	fi
+	# ST/Xresources
+	foreground="#c5c8c6"
+	background="#1c1c1c"
+	normalBlack="#333333"
+	normalRed="#cc6666"
+	normalGreen="#81bd68"
+	normalYellow="#f0c674"
+	normalBlue="#6699ff"
+	normalMagenta="#b294bb"
+	normalCyan="#789bba"
+	normalWhite="#c5c8c6"
+	brightBlack="#595959"
+	brightRed="#d98c8c"
+	brightGreen="#a7d095"
+	brightYellow="#f5daa3"
+	brightBlue="#9ab4cb"
+	brightMagenta="#c7b1cd"
+	brightCyan="#add2cd"
+	brightWhite="#e5e6e5"
+
 	# Alacritty
-	if type alacritty > /dev/null 2>&1 && [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
-		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/custom_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
-	fi
+	alacrittyTheme="custom_theme"
+
 	# Kitty
-	if type kitty > /dev/null 2>&1 && [[ -f "$HOME"/.config/kitty/kitty.conf ]]; then
-		sed -i --follow-symlinks '/^include\s.*_theme\.conf/c include custom_theme\.conf' "$HOME"/.config/kitty/kitty.conf 2>&1
-	fi
-	# ST
-	if type st > /dev/null 2>&1 && [[ -f /opt/st/config.h ]]; then
-    	sudo sed -i '/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ "#333333",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal red \*\//c\/\* normal red \*\/\ \ \ \ \ \ \ \ "#cc6666",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal green \*\//c\/\* normal green \*\/\ \ \ \ \ \ \ \ "#81bd68",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal yellow \*\//c\/\* normal yellow \*\/\ \ \ \ \ \ \ \ "#f0c674",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal blue \*\//c\/\* normal blue \*\/\ \ \ \ \ \ \ \ "#6699ff",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal magenta \*\//c\/\* normal magenta \*\/\ \ \ \ \ \ \ \ "#b294bb",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal cyan \*\//c\/\* normal cyan \*\/\ \ \ \ \ \ \ \ "#789bba",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal white \*\//c\/\* normal white \*\/\ \ \ \ \ \ \ \ "#c5c6c8",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright black \*\//c\/\* bright black \*\/\ \ \ \ \ \ \ \ "#595959",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright red \*\//c\/\* bright red \*\/\ \ \ \ \ \ \ \ "#d98c8c",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright green \*\//c\/\* bright green \*\/\ \ \ \ \ \ \ \ "#a7d095",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright yellow \*\//c\/\* bright yellow \*\/\ \ \ \ \ \ \ \ "#f5daa3",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright blue \*\//c\/\* bright blue \*\/\ \ \ \ \ \ \ \ "#9ab4cb",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright magenta \*\//c\/\* bright magenta \*\/\ \ \ \ \ \ \ \ "#c7b1cd",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright cyan \*\//c\/\* bright cyan \*\/\ \ \ \ \ \ \ \ "#add2dc",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright white \*\//c\/\* bright white \*\/\ \ \ \ \ \ \ \ "#e5e6e5",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* foreground \*\//c\/\* foreground \*\/\ \ \ \ \ \ \ \ "#c5c8c6",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* background \*\//c\/\* background \*\/\ \ \ \ \ \ \ \ "#1c1c1c",' /opt/st/config.h 2>&1
-    	sudo make -C /opt/st clean install > /dev/null 2>&1
-	fi
-	# XTerm
-	if type xterm > /dev/null 2>&1; then
-		if [[ -f "$HOME"/.config/X11/Xresources ]]; then
-			XRESOURCES="$HOME/.config/X11/Xresources"
-		elif [[ -f "$HOME"/.Xresources ]]; then
-			XRESOURCES="$HOME/.Xresources"
-		fi
-    	sed -i --follow-symlinks '/^\*\.foreground:/c \*\.foreground:\ \ \ #c5c8c6' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.background:/c \*\.background:\ \ \ #1c1c1c' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.cursorColor:/c \*\.cursorColor:\ \ #c5c8c6' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color0:/c \*\.color0:\ \ \ \ \ \ \ #333333' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color8:/c \*\.color8:\ \ \ \ \ \ \ #595959' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color1:/c \*\.color1:\ \ \ \ \ \ \ #cc6666' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color9:/c \*\.color9:\ \ \ \ \ \ \ #d98c8c' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color2:/c \*\.color2:\ \ \ \ \ \ \ #81bd68' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color10:/c \*\.color10:\ \ \ \ \ \ #a7d095' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color3:/c \*\.color3:\ \ \ \ \ \ \ #f0c674' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color11:/c \*\.color11:\ \ \ \ \ \ #f5daa3' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color4:/c \*\.color4:\ \ \ \ \ \ \ #6699ff' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color12:/c \*\.color12:\ \ \ \ \ \ #9ab4cb' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color5:/c \*\.color5:\ \ \ \ \ \ \ #b294bb' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color13:/c \*\.color13:\ \ \ \ \ \ #c7b1cd' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color6:/c \*\.color6:\ \ \ \ \ \ \ #789bba' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color14:/c \*\.color14:\ \ \ \ \ \ #add2cd' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color7:/c \*\.color7:\ \ \ \ \ \ \ #c5c8c6' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color15:/c \*\.color15:\ \ \ \ \ \ #e5e6e5' "$XRESOURCES" 2>&1
-    	xrdb -merge -I$HOME "$XRESOURCES" > /dev/null 2>&1
-	fi
-	# BSPWM
-	if type bspwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
-    	sed -i --follow-symlinks '/^bspc config active_border_color/c bspc config active_border_color \\#282c34' "$HOME"/.config/bspwm/bspwmrc 2>&1
-    	sed -i --follow-symlinks '/^bspc config normal_border_color/c bspc config normal_border_color \\#282c34' "$HOME"/.config/bspwm/bspwmrc 2>&1
-    	sed -i --follow-symlinks '/^bspc config focused_border_color/c bspc config focused_border_color \\#304569' "$HOME"/.config/bspwm/bspwmrc 2>&1
-		if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
-    		sed -i --follow-symlinks '/^background = #/c background = #282c34' "$HOME"/.config/bspwm/polybar.config 2>&1
-    		sed -i --follow-symlinks '/^foreground = #/c foreground = #d7d7d7' "$HOME"/.config/bspwm/polybar.config 2>&1
-    		sed -i --follow-symlinks '/^primary = #/c primary = #5e81ec' "$HOME"/.config/bspwm/polybar.config 2>&1
-		fi
-	fi
-	# DWM
-	if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
-    	sudo sed -i '/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = "#282c34";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = "#282c34";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = "#d7d7d7";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = "#304569";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#304569";' /opt/dwm/config.h 2>&1
-    	sudo make -C /opt/dwm clean install > /dev/null 2>&1
-	fi
-	notify
+	kittyTheme="custom_theme"
+
+	# VIM
+	vimColorscheme="kuroi"
+	vimLightline="jellybeans"
+
+	# Window managers
+	WMBackground="#282c34"
+	WMForeground="#d7d7d7"
+	WMBar="#5e81ec"
+	WMActiveBorder="#304569"
+	WMNormalBorder="#282c34"
 }
 
 #=======================
 # Gruvbox Theme
 #=======================
 toggleGruvbox() {
-	# VIM
-	if type vim > /dev/null 2>&1 && [[ -f "$HOME"/.vimrc ]]; then
-    	sed -i --follow-symlinks '/^colorscheme /c colorscheme gruvbox-material' "$HOME"/.vimrc 2>&1
-    	sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': 'gruvbox_material'}" "$HOME"/.vimrc 2>&1
-    	if ! grep "^\s*Plug 'sainnhe/gruvbox-material'" "$HOME"/.vimrc > /dev/null 2>&1; then
-        	sed -i --follow-symlinks "/^call plug#begin/a \ \ \ \ \"\" Colorscheme" "$HOME"/.vimrc 2>&1
-        	sed -i --follow-symlinks "/\"\" Colorscheme/a \ \ \ \ Plug 'sainnhe\/gruvbox-material'" "$HOME"/.vimrc 2>&1
-    	fi
-	fi
+	# ST/Xresources
+	foreground="#ebdbb2"
+	background="#282828"
+	normalBlack="#282828"
+	normalRed="#cc241d"
+	normalGreen="#98971a"
+	normalYellow="#d79921"
+	normalBlue="#458588"
+	normalMagenta="#b16286"
+	normalCyan="#689d6a"
+	normalWhite="#a89984"
+	brightBlack="#928374"
+	brightRed="#fb4934"
+	brightGreen="#b8bb26"
+	brightYellow="#fabd2f"
+	brightBlue="#83a598"
+	brightMagenta="#d3869b"
+	brightCyan="#8ec07c"
+	brightWhite="#ebdbb2"
+
 	# Alacritty
-	if type alacritty > /dev/null 2>&1 && [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
-		sed -i --follow-symlinks '/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/gruvbox_theme\.yml' "$HOME"/.config/alacritty/alacritty.yml 2>&1
-	fi
+	alacrittyTheme="gruvbox_theme"
+
 	# Kitty
-	if type kitty > /dev/null 2>&1 && [[ -f "$HOME"/.config/kitty/kitty.conf ]]; then
-		sed -i --follow-symlinks '/^include\s.*_theme\.conf/c include gruvbox_theme\.conf' "$HOME"/.config/kitty/kitty.conf 2>&1
-	fi
-	# ST
-	if type st > /dev/null 2>&1 && [[ -f /opt/st/config.h ]]; then
-    	sudo sed -i '/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ "#282828",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal red \*\//c\/\* normal red \*\/\ \ \ \ \ \ \ \ "#cc241d",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal green \*\//c\/\* normal green \*\/\ \ \ \ \ \ \ \ "#98971a",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal yellow \*\//c\/\* normal yellow \*\/\ \ \ \ \ \ \ \ "#d79921",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal blue \*\//c\/\* normal blue \*\/\ \ \ \ \ \ \ \ "#458588",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal magenta \*\//c\/\* normal magenta \*\/\ \ \ \ \ \ \ \ "#b16286",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal cyan \*\//c\/\* normal cyan \*\/\ \ \ \ \ \ \ \ "#689d6a",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* normal white \*\//c\/\* normal white \*\/\ \ \ \ \ \ \ \ "#a89984",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright black \*\//c\/\* bright black \*\/\ \ \ \ \ \ \ \ "#928374",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright red \*\//c\/\* bright red \*\/\ \ \ \ \ \ \ \ "#fb4934",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright green \*\//c\/\* bright green \*\/\ \ \ \ \ \ \ \ "#b8bb26",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright yellow \*\//c\/\* bright yellow \*\/\ \ \ \ \ \ \ \ "#fabd2f",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright blue \*\//c\/\* bright blue \*\/\ \ \ \ \ \ \ \ "#83a598",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright magenta \*\//c\/\* bright magenta \*\/\ \ \ \ \ \ \ \ "#d3869b",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright cyan \*\//c\/\* bright cyan \*\/\ \ \ \ \ \ \ \ "#8ec07c",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* bright white \*\//c\/\* bright white \*\/\ \ \ \ \ \ \ \ "#ebdbb2",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* foreground \*\//c\/\* foreground \*\/\ \ \ \ \ \ \ \ "#ebdbb2",' /opt/st/config.h 2>&1
-    	sudo sed -i '/^\/\* background \*\//c\/\* background \*\/\ \ \ \ \ \ \ \ "#282828",' /opt/st/config.h 2>&1
-    	sudo make -C /opt/st clean install > /dev/null 2>&1
-	fi
-	# XTerm
-	if type xterm > /dev/null 2>&1; then
-		if [[ -f "$HOME"/.config/X11/Xresources ]]; then
-			XRESOURCES="$HOME/.config/X11/Xresources"
-		elif [[ -f "$HOME"/.Xresources ]]; then
-			XRESOURCES="$HOME/.Xresources"
-		fi
-    	sed -i --follow-symlinks '/^\*\.foreground:/c \*\.foreground:\ \ \ #ebdbb2' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.background:/c \*\.background:\ \ \ #282828' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.cursorColor:/c \*\.cursorColor:\ \ #ebdbb2' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color0:/c \*\.color0:\ \ \ \ \ \ \ #282828' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color8:/c \*\.color8:\ \ \ \ \ \ \ #928374' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color1:/c \*\.color1:\ \ \ \ \ \ \ #cc241d' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color9:/c \*\.color9:\ \ \ \ \ \ \ #fb4934' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color2:/c \*\.color2:\ \ \ \ \ \ \ #98971a' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color10:/c \*\.color10:\ \ \ \ \ \ #b8bb26' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color3:/c \*\.color3:\ \ \ \ \ \ \ #d79921' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color11:/c \*\.color11:\ \ \ \ \ \ #fabd2f' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color4:/c \*\.color4:\ \ \ \ \ \ \ #458588' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color12:/c \*\.color12:\ \ \ \ \ \ #83a598' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color5:/c \*\.color5:\ \ \ \ \ \ \ #b16286' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color13:/c \*\.color13:\ \ \ \ \ \ #d3869b' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color6:/c \*\.color6:\ \ \ \ \ \ \ #689d6a' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color14:/c \*\.color14:\ \ \ \ \ \ #8ec07c' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color7:/c \*\.color7:\ \ \ \ \ \ \ #a89984' "$XRESOURCES" 2>&1
-    	sed -i --follow-symlinks '/^\*\.color15:/c \*\.color15:\ \ \ \ \ \ #ebdbb2' "$XRESOURCES" 2>&1
-    	xrdb -merge -I$HOME "$XRESOURCES" > /dev/null 2>&1
-	fi
-	# BSPWM
-	if type bspwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
-    	sed -i --follow-symlinks '/^bspc config active_border_color/c bspc config active_border_color \\#282828' "$HOME"/.config/bspwm/bspwmrc 2>&1
-    	sed -i --follow-symlinks '/^bspc config normal_border_color/c bspc config normal_border_color \\#282828' "$HOME"/.config/bspwm/bspwmrc 2>&1
-    	sed -i --follow-symlinks '/^bspc config focused_border_color/c bspc config focused_border_color \\#79520e' "$HOME"/.config/bspwm/bspwmrc 2>&1
-		if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
-    		sed -i --follow-symlinks '/^background = #/c background = #282828' "$HOME"/.config/bspwm/polybar.config 2>&1
-    		sed -i --follow-symlinks '/^foreground = #/c foreground = #acacac' "$HOME"/.config/bspwm/polybar.config 2>&1
-    		sed -i --follow-symlinks '/^primary = #/c primary = #c98918' "$HOME"/.config/bspwm/polybar.config 2>&1
-		fi
-	fi
-	# DWM
-	if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
-    	sudo sed -i '/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = "#acacac";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = "#282828";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = "#c98918";' /opt/dwm/config.h 2>&1
-    	sudo sed -i '/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = "#79520e";' /opt/dwm/config.h 2>&1
-    	sudo make -C /opt/dwm clean install > /dev/null 2>&1
-	fi
-	notify
+	kittyTheme="gruvbox_theme"
+
+	# VIM
+	vimColorscheme="gruvbox-material"
+	vimLightline="gruvbox_material"
+
+	# Window managers
+	WMBackground="#282828"
+	WMForeground="#acacac"
+	WMBar="#c98918"
+	WMActiveBorder="#79520e"
+	WMNormalBorder="#282828"
 }
 
 #=======================
@@ -210,3 +108,99 @@ case "$(printf "Custom\\nGruvbox" | sort | dmenu -l 2 -i -p "Choose a theme:")" 
 	"Gruvbox") toggleGruvbox ;;
 	*) exit 0 ;;
 esac
+
+#=======================
+# Change theme
+#=======================
+# VIM
+if type vim > /dev/null 2>&1 && [[ -f "$HOME"/.vimrc ]]; then
+    sed -i --follow-symlinks "/^colorscheme/c colorscheme $vimColorscheme" "$HOME"/.vimrc 2>&1
+    sed -i --follow-symlinks "/^let g:lightline = {'colorscheme'/c let g:lightline = {'colorscheme': '"$vimLightline"'}" "$HOME"/.vimrc 2>&1
+fi
+
+# Alacritty
+if type alacritty > /dev/null 2>&1 && [[ -f "$HOME"/.config/alacritty/alacritty.yml ]]; then
+	sed -i --follow-symlinks "/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/$alacrittyTheme\.yml" "$HOME"/.config/alacritty/alacritty.yml 2>&1
+fi
+
+# Kitty
+if type kitty > /dev/null 2>&1 && [[ -f "$HOME"/.config/kitty/kitty.conf ]]; then
+	sed -i --follow-symlinks "/^include\s.*_theme\.conf/c include $kittyTheme\.conf" "$HOME"/.config/kitty/kitty.conf 2>&1
+fi
+
+# ST
+if type st > /dev/null 2>&1 && [[ -f /opt/st/config.h ]]; then
+    sudo sed -i "/^\/\* normal black \*\//c\/\* normal black \*\/\ \ \ \ \ \ \ \ \"$normalBlack\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal red \*\//c\/\* normal red \*\/\ \ \ \ \ \ \ \ \"$normalRed\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal green \*\//c\/\* normal green \*\/\ \ \ \ \ \ \ \ \"$normalGreen\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal yellow \*\//c\/\* normal yellow \*\/\ \ \ \ \ \ \ \ \"$normalYellow\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal blue \*\//c\/\* normal blue \*\/\ \ \ \ \ \ \ \ \"$normalBlue\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal magenta \*\//c\/\* normal magenta \*\/\ \ \ \ \ \ \ \ \"$normalMagenta\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal cyan \*\//c\/\* normal cyan \*\/\ \ \ \ \ \ \ \ \"$normalCyan\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* normal white \*\//c\/\* normal white \*\/\ \ \ \ \ \ \ \ \"$normalWhite\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright black \*\//c\/\* bright black \*\/\ \ \ \ \ \ \ \ \"$brightBlack\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright red \*\//c\/\* bright red \*\/\ \ \ \ \ \ \ \ \"$brightRed\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright green \*\//c\/\* bright green \*\/\ \ \ \ \ \ \ \ \"$brightGreen\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright yellow \*\//c\/\* bright yellow \*\/\ \ \ \ \ \ \ \ \"$brightYellow\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright blue \*\//c\/\* bright blue \*\/\ \ \ \ \ \ \ \ \"$brightBlue\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright magenta \*\//c\/\* bright magenta \*\/\ \ \ \ \ \ \ \ \"$brightMagenta\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright cyan \*\//c\/\* bright cyan \*\/\ \ \ \ \ \ \ \ \"$brightCyan\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* bright white \*\//c\/\* bright white \*\/\ \ \ \ \ \ \ \ \"$brightWhite\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* foreground \*\//c\/\* foreground \*\/\ \ \ \ \ \ \ \ \"$foreground\"," /opt/st/config.h 2>&1
+    sudo sed -i "/^\/\* background \*\//c\/\* background \*\/\ \ \ \ \ \ \ \ \"$background\"," /opt/st/config.h 2>&1
+    sudo make -C /opt/st clean install > /dev/null 2>&1
+fi
+
+# XTerm
+if type xterm > /dev/null 2>&1; then
+	if [[ -f "$HOME"/.config/X11/Xresources ]]; then
+		XRESOURCES="$HOME/.config/X11/Xresources"
+	elif [[ -f "$HOME"/.Xresources ]]; then
+		XRESOURCES="$HOME/.Xresources"
+	fi
+    sed -i --follow-symlinks "/^\*\.foreground:/c \*\.foreground:\ \ \ $foreground" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.background:/c \*\.background:\ \ \ $background" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.cursorColor:/c \*\.cursorColor:\ \ $foreground" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color0:/c \*\.color0:\ \ \ \ \ \ \ $normalBlack" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color8:/c \*\.color8:\ \ \ \ \ \ \ $brightBlack" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color1:/c \*\.color1:\ \ \ \ \ \ \ $normalRed" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color9:/c \*\.color9:\ \ \ \ \ \ \ $brightRed" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color2:/c \*\.color2:\ \ \ \ \ \ \ $normalGreen" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color10:/c \*\.color10:\ \ \ \ \ \ $brightGreen" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color3:/c \*\.color3:\ \ \ \ \ \ \ $normalYellow" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color11:/c \*\.color11:\ \ \ \ \ \ $brightYellow" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color4:/c \*\.color4:\ \ \ \ \ \ \ $normalBlue" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color12:/c \*\.color12:\ \ \ \ \ \ $brightBlue" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color5:/c \*\.color5:\ \ \ \ \ \ \ $normalMagenta" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color13:/c \*\.color13:\ \ \ \ \ \ $brightMagenta" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color6:/c \*\.color6:\ \ \ \ \ \ \ $normalCyan" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color14:/c \*\.color14:\ \ \ \ \ \ $brightCyan" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color7:/c \*\.color7:\ \ \ \ \ \ \ $normalWhite" "$XRESOURCES" 2>&1
+    sed -i --follow-symlinks "/^\*\.color15:/c \*\.color15:\ \ \ \ \ \ $brightWhite" "$XRESOURCES" 2>&1
+    xrdb -merge -I$HOME "$XRESOURCES" > /dev/null 2>&1
+fi
+
+# BSPWM
+if type bspwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
+    sed -i --follow-symlinks "/^bspc config active_border_color/c bspc config active_border_color \\$WMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+    sed -i --follow-symlinks "/^bspc config normal_border_color/c bspc config normal_border_color \\$WMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+    sed -i --follow-symlinks "/^bspc config focused_border_color/c bspc config focused_border_color \\$WMActiveBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
+	if [[ -f "$HOME"/.config/bspwm/polybar.config ]]; then
+    	sed -i --follow-symlinks "/^background = #/c background = $WMBackground" "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^foreground = #/c foreground = $WMForeground" "$HOME"/.config/bspwm/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^primary = #/c primary = $WMBar" "$HOME"/.config/bspwm/polybar.config 2>&1
+	fi
+fi
+
+# DWM
+if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
+    sudo sed -i "/^static const char col_gray1\[\]/c static const char col_gray1\[\]\ \ \ \ \ \ \ = \"$WMBackground\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray2\[\]/c static const char col_gray2\[\]\ \ \ \ \ \ \ = \"$WMNormalBorder\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray3\[\]/c static const char col_gray3\[\]\ \ \ \ \ \ \ = \"$WMForeground\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_gray4\[\]/c static const char col_gray4\[\]\ \ \ \ \ \ \ = \"$WMForeground\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = \"$WMActiveBorder\";" /opt/dwm/config.h 2>&1
+    sudo sed -i "/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = \"$WMActiveBorder\";" /opt/dwm/config.h 2>&1
+    sudo make -C /opt/dwm clean install > /dev/null 2>&1
+fi
+
+notify
