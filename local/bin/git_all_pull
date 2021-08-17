@@ -37,7 +37,12 @@ do
 	echo -e "GIT repository found in \"$i\"..."
 	pull=$(mktemp)
 	git -C "$i" pull &>"$pull"
-	if grep 'Applied autostash' "$pull" > /dev/null; then
+	if grep 'Applied autostash' "$pull" > /dev/null && grep 'is up to date' "$pull" > /dev/null; then
+		echo -e "\033[32mAutostash applied. Nothing to update\033[0m"
+		echo -e "$(cat $pull)"
+		echo -e
+		rm -f "$pull" > /dev/null 2>&1
+	elif grep 'Applied autostash' "$pull" > /dev/null; then
 		echo -e "\033[33mAutostash applied. Local changes preserved\033[0m"
 		echo -e "$(cat $pull)"
 		echo -e
