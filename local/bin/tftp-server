@@ -1,27 +1,51 @@
-#!/bin/bash
-# Start the built-in TFTP server in macOS. Root is located at /private/tftpboot
-if [[ $OSTYPE == "darwin"* ]]; then
-	select name in StartTFTP StopTFTP Exit ;
-	do
-		case "$name" in
-			StartTFTP)
-	            sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
-				echo
-				echo "TFTP server started. The root is located in /private/tftpboot"
-				echo
-	            break
-	          ;;
-	        StopTFTP)
-	            sudo launchctl unload -F /System/Library/LaunchDaemons/tftp.plist
-				echo
-				echo "TFTP server stopped"
-				echo
-	            break
-	          ;;
-	        Exit)
-	            exit 0
-	            break
-	            ;;
-		esac
-	done
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Mon Aug 2021 14:57:49
+# Last modified: Mon Aug 2021 14:57:49
+# Version: 1.0
+#
+# Description: Start/stop local TFTP server
+#===================================================
+
+#=======================
+# Requirements
+#=======================
+if [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
+	echo .
+	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
+	exit 2
 fi
+
+#=======================
+# Functions
+#=======================
+startTFTP() {
+if [[ $OSTYPE == "darwin"* ]]; then
+	sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
+	echo "TFTP server started. The root is located in /private/tftpboot"
+fi
+}
+
+stopTFTP() {
+if [[ $OSTYPE == "darwin"* ]]; then
+	sudo launchctl unload -F /System/Library/LaunchDaemons/tftp.plist
+	echo "TFTP server stopped"
+fi
+}
+
+#=======================
+# TFTP
+#=======================
+case "$1" in
+	"--start") startTFTP ;;
+	"--stop") stopTFTP ;;
+	*)
+		echo "An action needs to be specified!
+Usage: tftp-server <ARGUMENT>
+	--start: start the local TFTP server
+	--stop: stop the local TFTP server
+	"
+	exit 1
+	;;
+esac

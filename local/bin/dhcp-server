@@ -1,27 +1,51 @@
-#!/bin/bash
-# Check /etc/bootpd.plist for DHCP parameters
-if [[ $OSTYPE == "darwin"* ]]; then
-	select name in StartDHCP StopDHCP Exit ;
-	do
-		case "$name" in
-			StartDHCP)
-	            sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist
-				echo
-				echo "DHCP server started. Modify its options in /etc/bootpd.list"
-				echo
-	            break
-	          ;;
-	        StopDHCP)
-	            sudo /bin/launchctl unload -w /System/Library/LaunchDaemons/bootps.plist
-				echo
-				echo "DHCP server stopped"
-				echo
-	            break
-	          ;;
-	        Exit)
-	            exit 0
-	            break
-	            ;;
-		esac
-	done
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Mon Aug 2021 14:57:49
+# Last modified: Mon Aug 2021 14:57:49
+# Version: 1.0
+#
+# Description: Start/stop local DHCP server
+#===================================================
+
+#=======================
+# Requirements
+#=======================
+if [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
+	echo .
+	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
+	exit 2
 fi
+
+#=======================
+# Functions
+#=======================
+startDHCP() {
+if [[ $OSTYPE == "darwin"* ]]; then
+	sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist
+	echo "DHCP server started. Modify its options in /etc/bootpd.list"
+fi
+}
+
+stopDHCP() {
+if [[ $OSTYPE == "darwin"* ]]; then
+	sudo /bin/launchctl unload -w /System/Library/LaunchDaemons/bootps.plist
+	echo "DHCP server stopped"
+fi
+}
+
+#=======================
+# DHCP
+#=======================
+case "$1" in
+	"--start") startDHCP ;;
+	"--stop") stopDHCP ;;
+	*)
+		echo "An action needs to be specified!
+Usage: dhcp-server <ARGUMENT>
+	--start: start the local DHCP server
+	--stop: stop the local DHCP server
+	"
+	exit 1
+	;;
+esac
