@@ -393,7 +393,7 @@ fi
 
 # Automatically start X if on Arch Linux, a xinitrc file is present
 # It also checks if the default TTY is /dev/tty1
-if [[ ! -h /etc/arch-release ]] && [[ -f "$HOME"/.xinitrc ]] && [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
+if { [[ ! -h /etc/arch-release ]] || [[ -d /usr/share/xbps.d ]] ;} && [[ -f "$HOME"/.xinitrc ]] && [[ -z "${DISPLAY}" ]] && [[ "${XDG_VTNR}" -eq 1 ]]; then
 	exec startx
 fi
 
