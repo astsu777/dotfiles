@@ -174,7 +174,7 @@ set fileencoding=utf-8
 
 " Color and theme setup
 " set termguicolors
-colorscheme gruvbox-material
+colorscheme kuroi
 highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
@@ -277,7 +277,7 @@ nnoremap <leader>O :Buffers<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Lightline
-let g:lightline = {'colorscheme': 'gruvbox_material'}
+let g:lightline = {'colorscheme': 'jellybeans'}
 let s:status_bar = 1
 function ToggleStatusBar()
 	if (s:status_bar == 0)
