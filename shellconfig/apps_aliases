@@ -110,6 +110,12 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; yay -Syu && yay -Scc --noconfirm yay -Rns $(yay -Qdtq) ; if type dwmupdates > /dev/null 2>&1 && { [[ "$SESSION" == "dwm" ]] || [[ "$GDMSESSION" =~ ^(dwm|DWM) ]] ;}; then dwmupdates > /tmp/dwmupdates.txt; fi'
 	elif type pacman > /dev/null 2>&1; then
 		alias update-system='sudo pacman -Syu && sudo pacman -Scc --noconfirm && sudo pacman -Rns $(sudo pacman -Qdtq) ; if type dwmupdates > /dev/null 2>&1 && { [[ "$SESSION" == "dwm" ]] || [[ "$GDMSESSION" =~ ^(dwm|DWM) ]] ;}; then dwmupdates > /tmp/dwmupdates.txt; fi'
+
+	# Void based systems using XBPS package manager
+	elif type xbps-install snap > /dev/null 2>&1; then
+		alias update-system='sudo xbps-install -Su && sudo xbps-remove -Oo ; sudo snap refresh'
+	elif type xbps-install > /dev/null 2>&1; then
+		alias update-system='sudo xbps-install -Su && sudo xbps-remove -Oo'
 	fi
 fi
 
