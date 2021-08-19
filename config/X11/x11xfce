@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Launch Simple X Hotkey Daemon
 if type sxhkd > /dev/null 2>&1; then

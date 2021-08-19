@@ -1,18 +1,18 @@
-#!/bin/bash
+#!/bin/sh
 
 # Common
 # Source necessary resources for auto-start to work (user's profile not loaded)
 export PATH="$HOME/.local/bin:$PATH"
-source "$HOME"/.dotfiles/shellconfig/common
+. "$HOME"/.dotfiles/shellconfig/common
 
 # Set screen layout if exist
 if [ -f "$HOME"/.config/screenlayout/layout.sh ]; then
-	source "$HOME"/.config/screenlayout/layout.sh &
+	. "$HOME"/.config/screenlayout/layout.sh &
 fi
 
 # Enable tap-to-click if exist
 if [ -f "$HOME"/.config/touchpad.sh ]; then
-	source "$HOME"/.config/touchpad.sh &
+	/bin/bash "$HOME"/.config/touchpad.sh &
 fi
 
 # Set keyboard layout to US-Intl w/ dead keys
@@ -48,24 +48,33 @@ if type slock > /dev/null 2>&1; then
 fi
 
 # Load .Xresources
-if [[ -f ~/.config/X11/Xresources ]]; then
+if [ -f ~/.config/X11/Xresources ]; then
 	xrdb -merge -I$HOME ~/.config/X11/Xresources
 else
 	xrdb -merge -I$HOME ~/.Xresources
 fi
 
 # DWM
-if [[ "$GDMSESSION" =~ ^(dwm|DWM)$ ]]; then
+if [ "$GDMSESSION" = "dwm" ]; then
 	export PATH="$HOME/.local/bin/statusbar:$PATH"
-	source "$HOME"/.dotfiles/config/X11/x11dwm
+	. "$HOME"/.dotfiles/config/X11/x11dwm
+elif [ "$GDMSESSION" = "DWM" ]; then
+	export PATH="$HOME/.local/bin/statusbar:$PATH"
+	. "$HOME"/.dotfiles/config/X11/x11dwm
 fi
 
 # Openbox
-if [[ "$GDMSESSION" =~ ^(openbox|Openbox)$ ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11openbox
+if [ "$GDMSESSION" = "openbox" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11openbox
+elif [ "$GDMSESSION" = "Openbox" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11openbox
 fi
 
 # XFCE
-if [[ "$GDMSESSION" =~ ^(xfce|Xfce|XFCE)$ ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11xfce
+if [ "$GDMSESSION" = "xfce" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11xfce
+elif [ "$GDMSESSION" = "Xfce" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11xfce
+elif [ "$GDMSESSION" = "XFCE" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11xfce
 fi

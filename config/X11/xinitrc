@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Default X11 scripts
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -26,12 +26,12 @@ get_session(){
 # Common
 # Set screen layout if exist
 if [ -f "$HOME"/.config/screenlayout/layout.sh ]; then
-	source "$HOME"/.config/screenlayout/layout.sh &
+	. "$HOME"/.config/screenlayout/layout.sh &
 fi
 
 # Enable tap-to-click if exist
 if [ -f "$HOME"/.config/touchpad.sh ]; then
-	source "$HOME"/.config/touchpad.sh &
+	/bin/bash "$HOME"/.config/touchpad.sh &
 fi
 
 # Set keyboard layout to US-Intl w/ dead keys
@@ -55,7 +55,7 @@ if type clipmenud > /dev/null 2>&1; then
 fi
 
 # Load .Xresources
-if [[ -f ~/.config/X11/Xresources ]]; then
+if [ -f ~/.config/X11/Xre.s ]; then
 	xrdb -merge -I$HOME ~/.config/X11/Xresources
 else
 	xrdb -merge -I$HOME ~/.Xresources
@@ -74,18 +74,18 @@ if type slock > /dev/null 2>&1; then
 fi
 
 # DWM
-if [[ "$SESSION" == "dwm" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11dwm
+if [ "$SESSION" = "dwm" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11dwm
 fi
 
 # Openbox
-if [[ "$SESSION" == "openbox" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11openbox
+if [ "$SESSION" = "openbox" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11openbox
 fi
 
 # XFCE
-if [[ "$SESSION" == "xfce" ]]; then
-	source "$HOME"/.dotfiles/config/X11/x11xfce
+if [ "$SESSION" = "xfce" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11xfce
 fi
 
 # Launch the chosen GUI environment (must be last)
