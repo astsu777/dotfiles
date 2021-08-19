@@ -241,7 +241,7 @@ if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
 fi
 
 # i3
-if type dwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/i3/config ]]; then
+if type i3 > /dev/null 2>&1 && [[ -f "$HOME"/.config/i3/config ]]; then
     sed -i --follow-symlinks "/^client\.focused\s.*/c client\.focused \ \ \ \ \ \ \ \ \ $I3ActiveBorder $I3ActiveBorder $I3ActiveBorder $I3Indicator \ \ $I3ActiveBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
     sed -i --follow-symlinks "/^client\.focused_inactive\s.*/c client\.focused_inactive $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
     sed -i --follow-symlinks "/^client\.unfocused\s.*/c client\.unfocused \ \ \ \ \ \ \ $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
