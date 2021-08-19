@@ -456,4 +456,4 @@ key_bindings:
 
 # Theme
 import:
-  - ~/.config/alacritty/custom_theme.yml
+  - ~/.config/alacritty/gruvbox_theme.yml

@@ -25,38 +25,38 @@ Sxiv.background:   #1c1c1c
 Sxiv.font: JetBrains Mono:style=Medium:size=10
 
 ! Colors
-*.foreground:   #c5c8c6
-*.background:   #1c1c1c
-*.cursorColor:  #c5c8c6
+*.foreground:   #ebdbb2
+*.background:   #282828
+*.cursorColor:  #ebdbb2
 
 ! black
-*.color0:       #333333
-*.color8:       #595959
+*.color0:       #282828
+*.color8:       #928374
 
 ! red
-*.color1:       #cc6666
-*.color9:       #d98c8c
+*.color1:       #cc241d
+*.color9:       #fb4934
 
 ! green
-*.color2:       #81bd68
-*.color10:      #a7d095
+*.color2:       #98971a
+*.color10:      #b8bb26
 
 ! yellow
-*.color3:       #f0c674
-*.color11:      #f5daa3
+*.color3:       #d79921
+*.color11:      #fabd2f
 
 ! blue
-*.color4:       #6699ff
-*.color12:      #9ab4cb
+*.color4:       #458588
+*.color12:      #83a598
 
 ! magenta
-*.color5:       #b294bb
-*.color13:      #c7b1cd
+*.color5:       #b16286
+*.color13:      #d3869b
 
 ! cyan
-*.color6:       #789bba
-*.color14:      #add2cd
+*.color6:       #689d6a
+*.color14:      #8ec07c
 
 ! white
-*.color7:       #c5c8c6
-*.color15:      #e5e6e5
+*.color7:       #a89984
+*.color15:      #ebdbb2
