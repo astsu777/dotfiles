@@ -63,6 +63,13 @@ elif [ "$GDMSESSION" = "DWM" ]; then
 	. "$HOME"/.dotfiles/config/X11/x11dwm
 fi
 
+# I3
+if [ "$GDMSESSION" = "i3" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11i3
+elif [ "$GDMSESSION" = "I3" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11i3
+fi
+
 # Openbox
 if [ "$GDMSESSION" = "openbox" ]; then
 	. "$HOME"/.dotfiles/config/X11/x11openbox

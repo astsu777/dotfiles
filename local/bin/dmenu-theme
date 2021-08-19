@@ -64,6 +64,14 @@ toggleCustom() {
 	DWMBarBG="#304569"
 	DWMNormalBorder="#282c34"
 	DWMActiveBorder="#304569"
+
+	# i3
+	I3Background="#282c34"
+	I3Foreground="#d7d7d7"
+	I3Bar="#5e81ec"
+	I3ActiveBorder="#304569"
+	I3NormalBorder="#282c34"
+	I3Indicator="#96abcf"
 }
 
 #=======================
@@ -114,6 +122,14 @@ toggleGruvbox() {
 	DWMBarBG="#c98918"
 	DWMNormalBorder="#282828"
 	DWMActiveBorder="#79520e"
+
+	# i3
+	I3Background="#282828"
+	I3Foreground="#acacac"
+	I3Bar="#c98918"
+	I3ActiveBorder="#79520e"
+	I3NormalBorder="#282828"
+	I3Indicator="#e7a432"
 }
 
 #=======================
@@ -206,6 +222,11 @@ if type bspwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/bspwm/bspwmrc ]]; then
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $BSPWMForeground" "$HOME"/.config/bspwm/polybar.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $BSPWMBar" "$HOME"/.config/bspwm/polybar.config 2>&1
 	fi
+	if [[ -f "$HOME"/.config/bspwm/polybar-txt.config ]]; then
+    	sed -i --follow-symlinks "/^background = #/c background = $BSPWMBackground" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
+    	sed -i --follow-symlinks "/^foreground = #/c foreground = $BSPWMForeground" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
+    	sed -i --follow-symlinks "/^primary = #/c primary = $BSPWMBar" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
+	fi
 fi
 
 # DWM
@@ -217,6 +238,23 @@ if type dwm > /dev/null 2>&1 && [[ -f /opt/dwm/config.h ]]; then
     sudo sed -i "/^static const char col_cyan\[\]/c static const char col_cyan\[\]\ \ \ \ \ \ \ = \"$DWMBarBG\";" /opt/dwm/config.h 2>&1
     sudo sed -i "/^static const char col_border\[\]/c static const char col_border\[\]\ \ \ \ \ \ \ = \"$DWMActiveBorder\";" /opt/dwm/config.h 2>&1
     sudo make -C /opt/dwm clean install > /dev/null 2>&1
+fi
+
+# i3
+if type dwm > /dev/null 2>&1 && [[ -f "$HOME"/.config/i3/config ]]; then
+    sed -i --follow-symlinks "/^client\.focused\s.*/c client\.focused \ \ \ \ \ \ \ \ \ $I3ActiveBorder $I3ActiveBorder $I3ActiveBorder $I3Indicator \ \ $I3ActiveBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
+    sed -i --follow-symlinks "/^client\.focused_inactive\s.*/c client\.focused_inactive $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
+    sed -i --follow-symlinks "/^client\.unfocused\s.*/c client\.unfocused \ \ \ \ \ \ \ $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
+	if [[ -f "$HOME"/.config/i3/polybar.config ]]; then
+    	sed -i --follow-symlinks "/^background = #/c background = $I3Background" "$HOME"/.config/i3/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^foreground = #/c foreground = $I3Foreground" "$HOME"/.config/i3/polybar.config 2>&1
+    	sed -i --follow-symlinks "/^primary = #/c primary = $I3Bar" "$HOME"/.config/i3/polybar.config 2>&1
+	fi
+	if [[ -f "$HOME"/.config/i3/polybar-txt.config ]]; then
+    	sed -i --follow-symlinks "/^background = #/c background = $I3Background" "$HOME"/.config/i3/polybar-txt.config 2>&1
+    	sed -i --follow-symlinks "/^foreground = #/c foreground = $I3Foreground" "$HOME"/.config/i3/polybar-txt.config 2>&1
+    	sed -i --follow-symlinks "/^primary = #/c primary = $I3Bar" "$HOME"/.config/i3/polybar-txt.config 2>&1
+	fi
 fi
 
 notify

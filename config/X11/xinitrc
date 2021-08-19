@@ -17,6 +17,7 @@ get_session(){
 	case "$SESSION" in
 		bspwm) exec bspwm ;;
 		dwm) exec dwm ;;
+		i3) exec i3 ;;
 		jwm) exec jwm ;;
 		openbox) exec openbox-session ;;
 		xfce) exec startxfce4 ;;
@@ -76,6 +77,11 @@ fi
 # DWM
 if [ "$SESSION" = "dwm" ]; then
 	. "$HOME"/.dotfiles/config/X11/x11dwm
+fi
+
+# I3
+if [ "$SESSION" = "i3" ]; then
+	. "$HOME"/.dotfiles/config/X11/x11i3
 fi
 
 # Openbox
