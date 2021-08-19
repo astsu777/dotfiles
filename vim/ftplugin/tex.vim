@@ -4,20 +4,20 @@ augroup ft_tex
 	" Insert comment block
 	inoremap ;bl %=======================<CR>%<Space><CR>%=======================<CR><++><Esc>2kA
 	" Insert section
-	inoremap ;sec \section{}<Esc>i
+	inoremap ;sec \section{}<CR><++><Esc>kf{a
 	" Insert subsection
-	inoremap ;sub \subsection{}<Esc>i
+	inoremap ;sub \subsection{}<CR><++><Esc>kf{a
 	" Insert sub-subsection
-	inoremap ;ssub \subsubsection{}<Esc>i
+	inoremap ;ssub \subsubsection{}<++><Esc>kf{a
 	" Insert bulleted list
-	inoremap ;bul \begin{itemize}<CR>\item<Space><CR>\end{itemize}<Esc>ka
+	inoremap ;bul \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR><++><Esc>2kA
 	" Insert ordered list
-	inoremap ;enu \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<Esc>ka
+	inoremap ;enu \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR><++><Esc>2kA
 
 	" Insert header
 	function TEXHeader() abort
 		execute "normal! i%=======================\<cr>% Global Properties\<cr>%=======================\<cr>"
-		execute "normal! i\\documentclass[12pt, a4paprer]{article}\<cr>"
+		execute "normal! i\\documentclass[12pt, a4paper]{article}\<cr>"
 		execute "normal! i\<cr>"
 		execute "normal! i\\usepackage[utf8]{inputenc}\<cr>"
 		execute "normal! i\\usepackage{hyperref}\<cr>"
@@ -29,7 +29,7 @@ augroup ft_tex
 		execute "normal! i\<tab>left = 1.90cm,\<cr>"
 		execute "normal! i\<tab>right = 1.32cm]{geometry}\<cr>"
 		execute "normal! i\\usepackage{sectsty} % Format all sections\<cr>"
-		execute "normal! i\<tab>\\allsectionsfont{\underline}\<cr>"
+		execute "normal! i\<tab>\\allsectionsfont{\\underline}\<cr>"
 		execute "normal! i\<tab>\\subsectionfont{}\<cr>"
 		execute "normal! i\\usepackage{soul} % Add '\\st' for strikethrough text\<cr>"
 		execute "normal! i\<cr>"
@@ -41,6 +41,11 @@ augroup ft_tex
 		execute "normal! i\<cr>"
 		execute "normal! i%=======================\<cr>% Document\<cr>%=======================\<cr>"
 		execute "normal! i\\begin{document}\<cr>"
+		execute "normal! i\<cr>"
+		execute "normal! i\\title{My \\LaTeX Document}\<cr>"
+		execute "normal! i\\author{Gaetan}\<cr>"
+		execute "normal! i\\date{\\today}\<cr>"
+		execute "normal! i\\maketitle\<cr>"
 		execute "normal! i\<cr>"
 		execute "normal! i<++>\<cr>"
 		execute "normal! i\<cr>"
