@@ -18,6 +18,7 @@ cd "$dir" || exit 1
 
 textype() { \
 	command="pdflatex"
+	( head -n5 "$file" | grep -qi 'lualatex' ) && command="lualatex"
 	( head -n5 "$file" | grep -qi 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -qi addbibresource "$file" &&
