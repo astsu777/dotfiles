@@ -1,0 +1,47 @@
+# Colors
+set default-fg "#c5c8c6"
+set default-bg "#282828"
+set statusbar-fg "#c5c8c6"
+set statusbar-bg "#1c1c1c"
+set recolor-darkcolor "#c5c8c6"
+set recolor-lightcolor "#1c1c1c"
+
+# Do not show any bars by default
+set guioptions ""
+
+# Status bar
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set statusbar-home-tilde true
+
+# Monitor the file for changes
+set filemonitor "glib"
+
+# Do not enable any protection
+set sandbox "none"
+
+# Adjust the width of the document automatically
+set adjust-open "best-fit"
+
+# Space between pages
+set page-padding 2
+
+# Selected text is copied to clipboard
+set selection-clipboard "clipboard"
+
+# Show hidden files/directories in completion
+set show-hidden true
+
+# Set window title to file basename
+set window-title-basename true
+
+# Keybindings
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map b toggle_statusbar
