@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Fri Aug 2021 18:13:13
+# Last modified: Fri Aug 2021 18:13:13
+# Version: 1.0
+#
+# Description: this is called by SXIV after pressing CTRL+X
+#===================================================
+
+#=======================
+# Keybindings
+#=======================
+while read file; do
+	case "$1" in
+		"y") echo -n "$file" | tr -d '\n' | xclip -selection clipboard && notify-send "$file copied to clipboard" & ;;
+		"d") [ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted" ;;
+		"i") notify-send "File information" "$(mediainfo "$file")" ;;
+		"r") if type convert > /dev/null 2>&1; then convert -rotate 90 "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
+		"R") if type convert > /dev/null 2>&1; then convert -rotate -90 "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
+		"m") if type convert > /dev/null 2>&1; then convert -flop "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
+		"e") if type gimp > /dev/null 2>&1; then setsid -f gimp "$file"; else notify-send "Gimp is not installed!"; fi ;;
+		"w") if type feh > /dev/null 2>&1; then feh --bg-fill --no-fehbg "$file" && notify-send "$file set as wallpaper"; else notify-send "Feh is not installed!";  fi ;;
+	esac
+done
