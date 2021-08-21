@@ -5,12 +5,16 @@
 
 case "$1" in
 	*.tex)
-	file=$(if type DirectoryService > /dev/null 2>&1; then realpath "$1"; else readlink -f "$1"; fi)
-	dir=$(dirname "$file")
-	base="${file%.*}"
-	if type DirectoryService > /dev/null 2>&1; then find "$dir" -maxdepth 1 -type f -regex "^$base\\.(4tc|xref|listing|tmp|pyc|pyg|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete; else find "$dir" -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|listing|tmp|pyc|pyg|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete; fi
-	rm -rdf "$dir/_minted-$(basename -- "$base")"
-	;;
+		file=$(if type DirectoryService > /dev/null 2>&1; then realpath "$1"; else readlink -f "$1"; fi)
+		dir=$(dirname "$file")
+		base="${file%.*}"
+		if type DirectoryService > /dev/null 2>&1; then
+			find -E "$dir" -maxdepth 1 -type f -regex "^$base\\.(4tc|xref|listing|tmp|pyc|pyg|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete
+		else
+			find "$dir" -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|listing|tmp|pyc|pyg|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete
+		fi
+		rm -rdf "$dir/_minted-$(basename -- "$base")"
+		;;
 	*) printf "Give .tex file as argument.\\n" ;;
 esac
 
