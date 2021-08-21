@@ -67,7 +67,7 @@ screens=$(echo "$allposs" | awk '/ connected/ {print $1}')
 
 # If there's only one screen
 [ "$(echo "$screens" | wc -l)" -lt 2 ] &&
-	{ onescreen "$screens"; postrun; notify-send " Only one screen detected";  exit ;}
+	{ onescreen "$screens"; postrun; notify-send "📺 Only one screen detected";  exit ;}
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | sort | dmenu -i -p "Select display arangement") &&

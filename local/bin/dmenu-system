@@ -51,7 +51,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Record Screen/Webcam") dmenu-record ;;
 		"Run") dmenu-run ;;
 		"Take Screenshot") "$SCROTBIN" || dmenu-screenshot ;;
-		"Toggle Compositor") if pgrep picom > /dev/null 2>&1; then pkill picom > /dev/null 2>&1; else picom -CGb --no-fading-openclose & ; fi ;;
+		"Toggle Compositor") if pgrep picom > /dev/null 2>&1; then pkill picom > /dev/null 2>&1; else nohup picom -CGb --no-fading-openclose > /dev/null 2>&1 ; fi ;;
 		"Toggle Cron Jobs") crontoggle ;;
 		"Unmount USB Drive") dmenu-umount ;;
 		"Web Search") dmenu-websearch ;;

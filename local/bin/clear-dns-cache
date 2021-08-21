@@ -31,7 +31,7 @@ if [ "$(uname)" = "Darwin" ]; then
 	sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache
 	echo "DNS cache has been flushed"
 	exit 0
-elif [ "$(uname)" = "Linux" ; then
+elif [ "$(uname)" = "Linux" ]; then
 	dnsResolver=$(sudo lsof -i :53 -S | awk 'FNR==2 {print $1}')
 	if [ -z "$dnsResolver" ]; then echo "No DNS cache found" && exit 0; fi
 	case "$dnsResolver" in

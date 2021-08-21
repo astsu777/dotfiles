@@ -2,7 +2,7 @@
 #===================================================
 # Author: Gaetan (gaetan@ictpourtous.com)
 # Creation: Sat Aug 2021 21:39:46
-# Last modified: Sat Aug 2021 21:40:37
+# Last modified: Sat Aug 2021 22:17:20
 # Version: 1.0
 #
 # Description: open a file/URL and define various actions

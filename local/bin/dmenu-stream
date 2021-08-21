@@ -52,5 +52,5 @@ Stream=$(sort "$Cache" | dmenu -i -l 30 -p "Online streams:")
 
 # Watch the stream
 if [ -z "$Stream" ]; then exit 3; fi
-if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & ; fi
+if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else nohup mpv --cache=yes --really-quiet "$Stream" > /dev/null 2>&1 ; fi
 exit 0
