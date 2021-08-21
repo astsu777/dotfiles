@@ -13,50 +13,12 @@ augroup ft_tex
 	inoremap ;bul \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR><++><Esc>2kA
 	" Insert ordered list
 	inoremap ;enu \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR><++><Esc>2kA
-
-	" Insert header
-	function TEXHeader() abort
-		execute "normal! i%=======================\<cr>% Global Properties\<cr>%=======================\<cr>"
-		execute "normal! i\\documentclass[12pt, a4paper]{article}\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i\\usepackage[utf8]{inputenc}\<cr>"
-		execute "normal! i\\usepackage{hyperref}\<cr>"
-		execute "normal! i\\usepackage{graphicx}\<cr>"
-		execute "normal! i\\usepackage{datetime}\<cr>"
-		execute "normal! i\\usepackage[\<cr>"
-		execute "normal! i\<tab>top = 1.90cm,\<cr>"
-		execute "normal! i\<tab>bottom = 1.67cm,\<cr>"
-		execute "normal! i\<tab>left = 1.90cm,\<cr>"
-		execute "normal! i\<tab>right = 1.32cm]{geometry}\<cr>"
-		execute "normal! i\\usepackage{sectsty} % Format all sections\<cr>"
-		execute "normal! i\<tab>\\allsectionsfont{\\underline}\<cr>"
-		execute "normal! i\<tab>\\subsectionfont{}\<cr>"
-		execute "normal! i\\usepackage{soul} % Add '\\st' for strikethrough text\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i\\setlength\\parindent{0pt}\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i%\\pagenumbering{gobble}\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i%\\renewcommand{\\familydefault}{\\sfdefault}\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i%=======================\<cr>% Document\<cr>%=======================\<cr>"
-		execute "normal! i\\begin{document}\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i\\title{My \\LaTeX Document}\<cr>"
-		execute "normal! i\\author{Gaetan}\<cr>"
-		execute "normal! i\\date{\\today}\<cr>"
-		execute "normal! i\\maketitle\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i<++>\<cr>"
-		execute "normal! i\<cr>"
-		execute "normal! i\\end{document}"
-		execute "normal! ?+\<cr>diW"
-	endfunction
-	inoremap ;hh <Esc>:call TEXHeader()<Enter>
-	" If the file is empty, insert the header
-	if line('$') == 1 && getline(1) == ''
-		:call TEXHeader()
-	endif
+	" Insert code block
+	inoremap ;cbl \bigskip<CR>\begin{codebl}{}<CR><++><CR>\end{codebl}<CR>\bigskip<CR><++><Esc>4k$i
+	" Insert To-Do list
+	inoremap ;tdl \begin{todolist}<CR>\item[\done]<Space><CR>\item[\wontfix]<Space><++><CR>\item<Space><++><CR>\end{todolist}<CR><++><Esc>4k$a
+	" Insert figures
+	inoremap ;fig \begin{figure}<CR>\includegraphics[width=cm]{}<CR>\centering<CR>\caption{}<CR>\end{figure}<Esc>3kf=a
 
 	" When exiting the file, clean-up Texlive build files
 	autocmd VimLeave *.tex !texclear %
