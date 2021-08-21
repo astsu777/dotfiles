@@ -9,7 +9,7 @@
 # Note that .tex files which you wish to compile with XeLaTeX should have the
 # string "xelatex" somewhere in a comment/command in the first 5 lines.
 
-file=$(readlink -f "$1")
+file=$(if type DirectoryService > /dev/null 2>&1; then realpath "$1"; else readlink -f "$1"; fi)
 dir=${file%/*}
 base="${file%.*}"
 ext="${file##*.}"
