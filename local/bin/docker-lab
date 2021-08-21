@@ -1,6 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:32:55
+# Last modified: Sat Aug 2021 21:32:55
+# Version: 1.0
 #
-# This script can be used to quickly deploy a set of Docker containers for test purposes
+# Description: quickly deploy a set of Docker containers for test purposes
+#===================================================
 
 # Determine the username to be created based on the logged on user
 USERNAME=$(id -nu)
@@ -23,7 +29,7 @@ Usage:
 fi
 
 # Proxy configuration
-if [ "$1" == "--proxy" ];then
+if [ "$1" = "--proxy" ];then
 	if [ -f "/etc/systemd/system/docker.service.d/http-proxy.conf" ];then
 		echo "Check if /etc/systemd/system/docker.service.d/http-proxy.conf exists"
 	else
@@ -35,9 +41,9 @@ if [ "$1" == "--proxy" ];then
 fi
 
 # Debian containers
-if [ "$1" == "--create-debian" ]; then
+if [ "$1" = "--create-debian" ]; then
 	nbserv=$2
-	[ "$nbserv" == "" ] && nbserv=2
+	[ "$nbserv" = "" ] && nbserv=2
 
 	# Pull Docker image if necessary
 	echo "Docker image installation "
@@ -55,7 +61,7 @@ if [ "$1" == "--create-debian" ]; then
 	for i in $( seq $id_min $id_max ); do
 		echo ""
 		echo "=> Container ${USERNAME}-deb-lab${i}"
-		if [[ $OSTYPE == "linux-gnu" ]]; then
+		if [ "$(uname)" = "Linux" ]; then
 			docker run -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-deb-lab"${i}" -h "${USERNAME}"-deb-lab"${i}" priximmo/stretch-systemd-ssh:v3.3
 		else
 			# Necessary due to docker0 interface missing in macOS and Windows
@@ -79,9 +85,9 @@ if [ "$1" == "--create-debian" ]; then
 fi
 
 # CentOS containers
-if [ "$1" == "--create-centos" ]; then
+if [ "$1" = "--create-centos" ]; then
 	nbserv=$2
-	[ "$nbserv" == "" ] && nbserv=2
+	[ "$nbserv" = "" ] && nbserv=2
 
 	# Pull Docker image if necessary
 	echo "Docker image installation "
@@ -99,7 +105,7 @@ if [ "$1" == "--create-centos" ]; then
 	for i in $( seq $id_min $id_max ); do
 		echo ""
 		echo "=> Container ${USERNAME}-centos-lab${i}"
-		if [[ $OSTYPE == "linux-gnu" ]]; then
+		if [ "$(uname)" = "Linux" ]; then
 			docker run -tid --publish-all=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name "${USERNAME}"-centos-lab"${i}" -h "${USERNAME}"-centos-lab"${i}" priximmo/centos7-systemctl-ssh:v3.2
 		else
 			# Necessary due to docker0 interface missing in macOS and Windows
@@ -123,7 +129,7 @@ if [ "$1" == "--create-centos" ]; then
 fi
 
 # Delete all lab containers
-if [ "$1" == "--drop" ]; then
+if [ "$1" = "--drop" ]; then
 	for i in $(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" );do
 		echo "Stopping ${i}..."
 		docker stop "$i" >> /dev/null 2>&1
@@ -133,7 +139,7 @@ if [ "$1" == "--drop" ]; then
 fi
 
 # Start the lab containers
-if [ "$1" == "--start" ]; then
+if [ "$1" = "--start" ]; then
     for i in $(docker ps -a --format "{{ .Names }}" |grep "${USERNAME}.*-lab" );do
 		echo "Starting ${i}..."
         docker start "$i"
@@ -141,7 +147,7 @@ if [ "$1" == "--start" ]; then
 fi
 
 # Display a summary of created containers
-if [ "$1" == "--status" ]; then
+if [ "$1" = "--status" ]; then
 	echo
 	echo "Lab Containers:"
 	echo

@@ -1,5 +1,12 @@
-#!/bin/sh
-# List all passwords from pass and copy them to clipboard
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:21:10
+# Last modified: Sat Aug 2021 21:21:10
+# Version: 1.0
+#
+# Description: list all passwords from pass and copy them to clipboard
+#===================================================
 clipctl disable
 password=$(find "$PASSWORD_STORE_DIR" -type f -name '*.gpg' | sed 's/.*store\///' | sed 's/.\{4\}$//' | sort | dmenu -i -l 30 -p "Passwords:")
 [ -n "$password" ] && pass show -c "$password"

@@ -1,8 +1,12 @@
-#!/bin/sh
-
-# Clears the build files of a LaTeX/XeLaTeX build.
-# I have vim run this file whenever I exit a .tex file.
-
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:36:22
+# Last modified: Sat Aug 2021 21:36:22
+# Version: 1.0
+#
+# Description: clear the build files of a LaTeX/XeLaTeX build.
+#===================================================
 case "$1" in
 	*.tex)
 		file=$(if type DirectoryService > /dev/null 2>&1; then realpath "$1"; else readlink -f "$1"; fi)

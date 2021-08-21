@@ -1,4 +1,12 @@
-#! /bin/bash
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:18:41
+# Last modified: Sat Aug 2021 21:18:41
+# Version: 1.0
+#
+# Description: show bookmarks in a DMenu menu
+#===================================================
 
 # set prefered launcher
 PREFERED_LAUNCHER=dmenu
@@ -57,7 +65,7 @@ bmks_browser(){
 
 bmks_display() {
 	bmks_check
-	if [[ "$OSTYPE" == 'darwin'* ]]; then
+	if [ "$(uname)" = "Darwin" ]; then
 		url="$(fzf <"$URL_FILE_PATH/$URL_FILE_NAME" | awk '{print $(NF)}')"
 		if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi
 	fi

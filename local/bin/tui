@@ -1,5 +1,12 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:38:24
+# Last modified: Sat Aug 2021 21:38:24
+# Version: 1.0
+#
+# Description: execute a program in a terminal emulator
+#===================================================
 [[ $1 == -* ]] && shift
 
 if [[ $# == 0 ]]; then

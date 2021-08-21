@@ -1,9 +1,12 @@
-#!/bin/sh
-
-# opout: "open output": A general handler for opening a file's intended output,
-# usually the pdf of a compiled document.  I find this useful especially
-# running from vim.
-
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:35:37
+# Last modified: Sat Aug 2021 21:35:37
+# Version: 1.0
+#
+# Description: a general handler for opening a file's intended output,
+#===================================================
 basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
 
 case "${*}" in

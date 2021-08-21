@@ -1,4 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:31:51
+# Last modified: Sat Aug 2021 21:31:51
+# Version: 1.0
+#
+# Description: list opened windows using EWMH properties
+#===================================================
 
 #=======================
 # Dependencies
@@ -13,7 +21,7 @@ fi
 # List Windows
 #=======================
 windows=$(wmctrl -xl | tr -s '[:blank:]' | cut -d ' ' -f 3-3,5- | sed 's/^[a-zA-Z0-9-]*\.//' | sort | uniq)
-if [[ -z "$windows" ]]; then
+if [ -z "$windows" ]; then
 	notify-send "No opened windows"
 	echo "No opened windows"
 	exit 0
@@ -29,6 +37,6 @@ windows=$(echo "$windows" | \
     for(i=0; i < max - cur + 1; i++) printf " "; \
         $1 = ""; printf "%s\n", $0}')
 target=$(echo "$windows" | dmenu -l 10 -i -p "Window(s):" | tr -s '[:blank:]' | cut -d ' ' -f 2-)
-if [[ -n $target ]]; then
+if [ -n "$target" ]; then
     wmctrl -a "$target"
 fi

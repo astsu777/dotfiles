@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #===================================================
 # Author: Gaetan (gaetan@ictpourtous.com)
 # Creation: Mon Aug 2021 14:57:49
@@ -24,6 +24,7 @@ https://blocklistproject.github.io/Lists/tracking.txt
 EOF
 leadmark="#### BLOCKLIST ####"
 tailmark="#### BLOCKLIST END ####"
+EUID=$(id -u)
 
 #=======================
 # Requirements
@@ -32,11 +33,11 @@ if ! type sed grep sort uniq curl > /dev/null 2>&1; then
 	echo .
 	echo "Please make sure the packages 'curl sed grep sort uniq' are installed on your system!"
 	exit 4
-elif ! [[ -f "$hostsfile" ]] || ! type curl > /dev/null 2>&1; then
+elif ! [ -f "$hostsfile" ] || ! type curl > /dev/null 2>&1; then
 	echo .
 	echo "No hosts file was found on your system! This script cannot be executed"
 	exit 2
-elif [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
+elif [ "$EUID" != 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
 	exit 3
@@ -47,7 +48,7 @@ fi
 #=======================
 installblocklist() {
 	cleanblocklist=$(<"$blocklists" xargs -n1 curl -s | grep '^0' | sort | uniq)
-	if [[ "$EUID" = 0 ]]; then
+	if [ "$EUID" = 0 ]; then
 		cp "$hostsfile" "$hostsfile"_.BACKUP
 		echo "$leadmark" | tee -a "$hostsfile" > /dev/null 2>&1
 		echo "$cleanblocklist" | tee -a "$hostsfile" > /dev/null 2>&1
@@ -79,7 +80,7 @@ case "$1" in
 		;;
 	"--uninstall")
 		if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
-			if [[ "$EUID" = 0 ]]; then
+			if [ "$EUID" = 0 ]; then
 				sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
 			elif type sudo > /dev/null 2>&1; then
 				sudo sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
@@ -93,7 +94,7 @@ case "$1" in
 		;;
 	"--update")
 		if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
-			if [[ "$EUID" = 0 ]]; then
+			if [ "$EUID" = 0 ]; then
 				sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
 				installblocklist
 			elif type sudo > /dev/null 2>&1; then

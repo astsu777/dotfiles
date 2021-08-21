@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-# Description: Listen to online radio
-
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:21:40
+# Last modified: Sat Aug 2021 21:21:40
+# Version: 1.0
+#
+# Description: listen to online radio
+#===================================================
 # Search engine config
 declare -A radios
 radios[Blues Music Fan Radio]="http://ais-sa2.cdnstream1.com/1992_128.mp3"

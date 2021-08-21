@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
-# Description: Search various search engines (inspired by surfraw).
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:31:19
+# Last modified: Sat Aug 2021 21:31:19
+# Version: 1.0
+#
+# Description: search various search engines (inspired by surfraw).
+#===================================================
 
 # Search engine config
 declare -A search_options

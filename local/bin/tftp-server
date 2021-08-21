@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #===================================================
 # Author: Gaetan (gaetan@ictpourtous.com)
 # Creation: Mon Aug 2021 14:57:49
@@ -11,7 +11,7 @@
 #=======================
 # Requirements
 #=======================
-if [[ "$EUID" != 0 ]] && ! type sudo > /dev/null 2>&1; then
+if [ "$(id -u)" != 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
 	exit 2
@@ -21,17 +21,17 @@ fi
 # Functions
 #=======================
 startTFTP() {
-if [[ $OSTYPE == "darwin"* ]]; then
-	sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
-	echo "TFTP server started. The root is located in /private/tftpboot"
-fi
+	if [ "$(uname)" = "Darwin" ]; then
+		sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
+		echo "TFTP server started. The root is located in /private/tftpboot"
+	fi
 }
 
 stopTFTP() {
-if [[ $OSTYPE == "darwin"* ]]; then
-	sudo launchctl unload -F /System/Library/LaunchDaemons/tftp.plist
-	echo "TFTP server stopped"
-fi
+	if [ "$(uname)" = "Darwin" ]; then
+		sudo launchctl unload -F /System/Library/LaunchDaemons/tftp.plist
+		echo "TFTP server stopped"
+	fi
 }
 
 #=======================

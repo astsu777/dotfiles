@@ -1,4 +1,11 @@
-#!/bin/sh
-
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:37:56
+# Last modified: Sat Aug 2021 21:37:56
+# Version: 1.0
+#
+# Description: provide a constant binary to run task-spooler
+#===================================================
 [ -x "$(command -v tsp)" ] && tsp "$@"
 [ -x "$(command -v ts)" ] && ts "$@"

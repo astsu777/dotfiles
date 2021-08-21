@@ -1,5 +1,12 @@
-#!/bin/bash
-# Loop through all attached batteries and format the info
+#!/usr/bin/env bash
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:42:15
+# Last modified: Sat Aug 2021 21:42:28
+# Version: 1.0
+#
+# Description: loop through all attached batteries and format the info
+#===================================================
 if [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
 	for battery in /sys/class/power_supply/BAT?*; do
 		# If non-first battery, print a space separator.

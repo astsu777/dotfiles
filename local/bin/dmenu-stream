@@ -1,6 +1,12 @@
-#!/usr/bin/env bash
-# Description: Check online streams and watch them
-
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:25:14
+# Last modified: Sat Aug 2021 21:25:14
+# Version: 1.0
+#
+# Description: check online streams and watch them
+#===================================================
 # Requirements check
 if ! type youtube-dl mpv > /dev/null 2>&1; then
 	notify-send "⚠️ Error" "Please install 'mpv' and 'youtube-dl' to use this script"
@@ -23,7 +29,7 @@ fi
 # Check online streams
 Cache="$XDG_CACHE_HOME/onlinestreams"
 if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; then
-	OPTS=$(echo -e "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose:")
+	OPTS=$(printf "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose:")
 	case "$OPTS" in
 		'Refresh Online Streams')
 			rm "$Cache"
@@ -46,5 +52,5 @@ Stream=$(sort "$Cache" | dmenu -i -l 30 -p "Online streams:")
 
 # Watch the stream
 if [ -z "$Stream" ]; then exit 3; fi
-if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & disown ; fi
+if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else mpv --cache=yes --really-quiet "$Stream" 2> /dev/null & ; fi
 exit 0

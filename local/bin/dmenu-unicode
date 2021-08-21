@@ -1,4 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:29:55
+# Last modified: Sat Aug 2021 21:29:55
+# Version: 1.0
+#
+# Description: list of all unicode characters
+#===================================================
 
 # Get user selection via dmenu from emoji file.
 chosen=$(cut -d ';' -f1 ~/.local/share/emoji | sort | dmenu -i -l 30 -p "Unicode Characters List:" | sed "s/ .*//")

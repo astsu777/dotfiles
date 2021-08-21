@@ -1,10 +1,12 @@
-#!/bin/sh
-
-# Feed script a url or file location.
-# If an image, it will view in sxiv,
-# if a video or gif, it will view in mpv
-# if a music file or pdf, it will download,
-# otherwise it opens link in browser.
+#!/usr/bin/env sh
+#===================================================
+# Author: Gaetan (gaetan@ictpourtous.com)
+# Creation: Sat Aug 2021 21:39:46
+# Last modified: Sat Aug 2021 21:40:37
+# Version: 1.0
+#
+# Description: open a file/URL and define various actions
+#===================================================
 
 # If no url given. Opens browser. For using script as $BROWSER.
 [ -z "$1" ] && { "$BROWSER"; exit; }
