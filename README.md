@@ -45,7 +45,7 @@ It is necessary to modify either the *.bashrc* or the *.zshrc* file and change t
 * **REPOS**: defines the default location of git repositories ($HOME/.sources/repos)
 
 The installation can be automated when using my [bootstrap script](https://github.com/GSquad934/bootstrap.git). This script is modular so it is possible to only deploy the dotfiles and nothing else.
-The location of the dotfile is as illustrated in this repository. The repository represents the root of the home folder. The folders *config*, *local*, *vim*, etc... are hidden folders in the root. The folder *shellconfig* is a bit different as only some files are meant to be installed as dotfiles.
+The location of the dotfiles is as illustrated in this repository. The repository represents the root of the home folder. The folders *config*, *local*, *vim*, etc... are hidden folders in the root. The folder *shellconfig* is a bit different as only some files are meant to be installed as dotfiles.
 
 # Documentation - Root Folder
 ## DOSBox
@@ -72,8 +72,8 @@ The logic of every file is the following:
 * *common*: settings that are common to both shells (environment variables, some settings, etc...)
 * *functions*: all functions are defined here. I wanted them to be separated from aliases
 * *apps_aliases*: contains all aliases for external applications (not built-in to the shell AND not drop-in replacements for important commands such as *ls* for example)
-* *basecmds_aliases*: contains aliases that replace certain basic commands such as *cat* replaced by *ccat* for example
-* *enhancements_aliases*: alias basic commands such as *ls* and automatically add some parameters such as auto-colour
+* *basecmds_aliases*: contains aliases that replace certain basic commands such as *cat* replaced by *highlight* for example
+* *enhancements_aliases*: alias basic commands such as *ls* and automatically add some parameters such as auto-color
 * *files_aliases*: if *FZF* is not installed on the system, it makes aliases for most configuration files to quickly edit them
 
 <u>**Note**</u>: all the files contain a lot of checks/tests to not deploy useless aliases/functions that won't work on the system. For example, if an application is not installed and some aliases are defined for it, these aliases will not be set at all.
@@ -89,7 +89,7 @@ The same is available for other applications. For example, *VIM*/*Neovim* can be
 ## VIM/Neovim
 ![](https://i.postimg.cc/bvK0ZNTJ/screenshot-20210718-029.png)
 
-In this repository, the *vim* folder contains all the necessary configuration files for *VIM*. However, I use *Neovim* as my text editor (mostly for new window stuff) but don't have a specific config file for it: the *~/.config/nvim/init.vim"* is actually a symlink to the *.vimrc*. When deploying my dotfiles, simply simlink the *vim* folder to *~/.config/nvim* and it will work.
+In this repository, the *vim* folder contains all the necessary configuration files for *VIM*. However, I use *Neovim* as my text editor (mostly for new window stuff) but don't have a specific config file for it: the *~/.config/nvim/init.vim"* is actually a symlink to the *.vimrc*. When deploying my dotfiles, simply symlink the *vim* folder to *~/.config/nvim* and it will work.
 
 Because the *VIM* configuration is quite light, it is fully compatible with *Neovim*. There is no *Neovim* specific setting present. The colorscheme used is called *[kuroi](https://github.com/aonemd/kuroi.vim)* ans is made by *Aonemd*. I simply disabled the background to use the one set by the terminal emulator (usually a little bit transparent and dark).
 
@@ -117,12 +117,12 @@ The *Gemini* project is an alternative protocol to *HTTP* and can be used to ser
 ![](https://i.postimg.cc/bY1g2b4j/screenshot-20210718-032.png)
 
 ## Terminal Emulators
-Configuration files for three terminal emulators are available: *Alacritty*, *Kitty*, and *xTerm*. I don't use the three of them obviously, my daily driver being *ST* as it is fast and minimalistic. However, it is not GPU-accelerated unlike *Alacritty* and *Kitty*, so it can be less performant sometimes when rendering a lot of text/colors. GPU-accelerated terminal emulators are based on *OpenGL*: this means that they cannot be used when *OpenGL* libraries are updated and/or if they are missing/buggy. If the GPU is really poor, it can also be worst than anything else. Therefore, I usually use *ST* even though it has no config file in this repository. Finally, *xTerm* is the last resort terminal emulators if all else is not working. *xTerm* is also the default terminal emulator in the failsafe GUI environment (see chapter about *JWM*).
+Configuration files for three terminal emulators are available: *Alacritty*, *Kitty*, and *xTerm*. I don't use the three of them obviously, my daily driver being *ST* as it is fast and minimalist. However, it is not GPU-accelerated unlike *Alacritty* and *Kitty*, so it can give less performance sometimes when rendering a lot of text/colors. GPU-accelerated terminal emulators are based on *OpenGL*: this means that they cannot be used when *OpenGL* libraries are updated and/or if they are missing/buggy. If the GPU is really poor, it can also be worst than anything else. Therefore, I usually use *ST* even though it has no config file in this repository. Finally, *xTerm* is the last resort terminal emulators if all else is not working. *xTerm* is also the default terminal emulator in the failsafe GUI environment (see chapter about *JWM*).
 
 A few comments about each terminal emulators:
 
 * *Alacritty* is rendering fonts differently depending on the screen resolution and the configuration files differ slightly between macOS/Linux. Therefore, multiple *Alacritty* config files are available for my different computers
-* *Kitty* works like *Alacritty* but does a much better job at rendering unicode characters: this is the main reason I keep it around. It has much more features that I don't use. It has almost the same configuration as *Alacritty*, no extra plugins/*kittens*. Depending on the machine, it can also be more performant than *Alacritty* and renders ligatures and unicode characters better. Also, I prefer the way fonts are rendered in *Kitty*
+* *Kitty* works like *Alacritty* but does a much better job at rendering unicode characters: this is the main reason I keep it around. It has much more features that I don't use. It has almost the same configuration as *Alacritty*, no extra plugins/*kittens*. Depending on the machine, it can also give more performance than *Alacritty* and renders ligatures and unicode characters better. Also, I prefer the way fonts are rendered in *Kitty*
 * *Simple Terminal (ST)* works well enough and is my default
 * *xTerm* is never used, but I have it installed on all my workstations for a failsafe environment. If my WM/DE fails, I can work inside a failsafe GUI and *xTerm* is the default terminal emulator there
 
@@ -144,12 +144,12 @@ It is much more efficient to extract useful information from a lot of Websites u
 * *config/newsboat/urls*: this is the list of all the followed RSS feeds
 
 ## PCManFM
-This application is a minimalistic graphical file manager. I mostly use it to manage MTP devices and network drives. The entire configuration of the application is in the file *config/pcmanfm/default/pcmanfm.conf* and *config/libfm/libfm.conf*. The theming for the application is done via GTK. The configuration is quite standard, it only defines the layout that I prefer for browsing the files.
+This application is a minimalist graphical file manager. I mostly use it to manage MTP devices and network drives. The entire configuration of the application is in the file *config/pcmanfm/default/pcmanfm.conf* and *config/libfm/libfm.conf*. The theme for the application is done via GTK. The configuration is quite standard, it only defines the layout that I prefer for browsing the files.
 
 ## Qutebrowser
 ![](https://i.postimg.cc/DwpPKc41/screenshot-20210718-034.png)
 
-*Qutebrowser* is a very minimalistic Web browser made mainly for *VIM* users. The entire Web browsing experience can be performed via keybindings. The configuratiln file *config/qutebrowser/config.py* cam be fully customized within the Web browser itself. The theme, the keybindings, the Web engine, etc... is defined in this file.
+*Qutebrowser* is a very minimalist Web browser made mainly for *VIM* users. The entire Web browsing experience can be performed via keybindings. The configuration file *config/qutebrowser/config.py* cam be fully customized within the Web browser itself. The theme, the keybindings, the Web engine, etc... are defined in this file.
 
 ## Redshift
 This application is used to adjust the color temperature of the screen according to the sun position. The file *config/redshift/redshift.conf* is adjusting the color temperature as I like it.
@@ -212,9 +212,9 @@ The configuration files stored in *config/X11* are meant to be used for graphica
 
 * *xinitrc*: this file is supposed to be located in *$HOME/.xinitrc* and is loaded by *xorg-xinit* when logging in without any display manager. The very first line defines which GUI needs to be loaded and the rest is executing commands automatically to setup the screen layout, keyboard, programs required to start automatically, etc...
 * *xprofile*: this file is the equivalent of *xinitrc* but is used by display managers at logon
-* *x11dwm*, *x11...*: these files are sourced in the *xinitrc* and *xprofile* files and there is one per supported GUI. The reason for this is to provide modularity and avoid repeatetiveness in both *xinitrc* and *xprofile*
+* *x11dwm*, *x11...*: these files are sourced in the *xinitrc* and *xprofile* files and there is one per supported GUI. The reason for this is to provide modularity and avoid repetitiveness in both *xinitrc* and *xprofile*
 * *lightdm*: these are configuration files for *LightDM* display manager when using the GTK greeter. The customization is very light as I do not use any display managers at all (but I offer the option)
-* *Xresources*: this file is used to configure the theming of *Xterm* and of *SXIV*
+* *Xresources*: this file is used to configure the theme of *Xterm* and of *SXIV*
 
 The deployment of the supported GUIs can be automated with my [bootstrap script](https://github.com/GSquad934/bootstrap.git) and the relevant x-file will also be automatically installed and configured.
 
