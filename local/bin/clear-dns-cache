@@ -38,6 +38,7 @@ elif [ "$(uname)" = "Linux" ]; then
 		systemd-resolve) sudo killall -USR2 systemd-resolved ;;
 		dnsmasq) sudo killall -USR1 dnsmasq ;;
 		nscd) sudo systemctl restart nscd.service ;;
+		pihole-FT) sudo pihole restartdns reload ;;
 		*) echo "DNS cache $dnsResolver not supported" && exit 3 ;;
 	esac
 fi
