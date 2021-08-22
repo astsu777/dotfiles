@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 17:03:50
+# Last modified: Sun 22 Aug 2021 17:34:05
+# Version: 1.0
+#
+# Description: easy script to archive YouTube channels/playlists/videos
+#=========================================================================
+
+#=======================
+# Requirements
+#=======================
+if ! type youtube-dl >/dev/null 2>&1; then
+	printf "The package 'youtube-dl' is not installed!"
+	exit 1
+fi
+
+#=======================
+# Functions
+#=======================
+archive() {
+	youtube-dl -ci --download-archive "$2"/archive.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$1" -o "$2"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+}
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+	echo "Some arguments are missing!
+Usage: yt-archive <URL> <DIRECTORY>
+
+Example: yt-archive https://www.youtube.com/user/GSquad934 ~/Videos
+"
+    exit 2
+else
+	archive "$@"
+fi
