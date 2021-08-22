@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sun Aug 2021 15:54:18
-# Last modified: Sun Aug 2021 16:12:40
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:13:51
+# Last modified: Sun 22 Aug 2021 12:14:05
 # Version: 1.0
 #
 # Description: toggle graphical themes
-#===================================================
+#=========================================================================
 
 #=======================
 # Functions

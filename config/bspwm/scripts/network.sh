@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:42:44
-# Last modified: Sat Aug 2021 21:43:09
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:03:21
+# Last modified: Sun 22 Aug 2021 12:03:29
 # Version: 1.0
 #
 # Description: prints the upload/download speed
-#===================================================
+#=========================================================================
+
 update() {
     sum=0
     for arg; do

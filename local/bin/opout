@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:35:37
-# Last modified: Sat Aug 2021 21:35:37
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:15:32
+# Last modified: Sun 22 Aug 2021 12:15:38
 # Version: 1.0
 #
 # Description: a general handler for opening a file's intended output,
-#===================================================
+#=========================================================================
+
 basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
 
 case "${*}" in

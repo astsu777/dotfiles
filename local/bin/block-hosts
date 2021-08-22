@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Mon Aug 2021 14:57:49
-# Last modified: Mon Aug 2021 14:57:49
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:07:41
+# Last modified: Sun 22 Aug 2021 12:07:55
 # Version: 1.0
 #
-# Description: Retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
-#===================================================
+# Description: retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
+#=========================================================================
 
 #=======================
 # Variables

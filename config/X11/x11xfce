@@ -1,4 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:20:01
+# Last modified: Sun 22 Aug 2021 12:20:09
+# Version: 1.0
+#
+# Description: script executed by Xinit when the GUI is XFCE
+#=========================================================================
 
 # Launch Simple X Hotkey Daemon
 if type sxhkd > /dev/null 2>&1; then

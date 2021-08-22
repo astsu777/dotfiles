@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:23:07
-# Last modified: Sat Aug 2021 21:23:07
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:08
+# Last modified: Sun 22 Aug 2021 12:12:16
 # Version: 1.0
 #
 # Description: run applications with DMenu and build a cache of TUI/GUI programs
-#===================================================
+#=========================================================================
+
 TERM="st -e"
 CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent-apps
 mkdir -p ${XDG_CACHE_HOME:-$HOME/.cache}

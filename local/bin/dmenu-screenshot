@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 20:55:51
-# Last modified: Sat Aug 2021 20:55:51
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:21
+# Last modified: Sun 22 Aug 2021 12:12:29
 # Version: 1.0
 #
-# Description: Take screenshot and shows a menu with different methods
-#===================================================
+# Description: take screenshot and shows a menu with different methods
+#=========================================================================
+
 screenshot="$(mktemp --suffix ".jpg")"
 case "$(printf "Selected Area\\nCurrent Window\\nFull Screen" | sort | dmenu -l 3 -i -p "Take a screenshot of:")" in
 	"Selected Area") maim -s "$screenshot"  ;;

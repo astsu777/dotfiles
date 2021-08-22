@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:39:46
-# Last modified: Sat Aug 2021 22:17:20
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:16:53
+# Last modified: Sun 22 Aug 2021 12:16:58
 # Version: 1.0
 #
 # Description: open a file/URL and define various actions
-#===================================================
+#=========================================================================
 
 # If no url given. Opens browser. For using script as $BROWSER.
 [ -z "$1" ] && { "$BROWSER"; exit; }

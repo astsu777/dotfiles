@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:30:15
-# Last modified: Sat Aug 2021 21:30:15
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:14:28
+# Last modified: Sun 22 Aug 2021 12:14:36
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
-#===================================================
+#=========================================================================
 
 # Prerequisites
 if ! type streamlink mpv youtube-dl ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "youtube-dl, streamlink & ffmpeg must be installed" & exit 1; fi

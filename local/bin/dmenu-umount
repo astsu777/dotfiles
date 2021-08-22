@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:29:24
-# Last modified: Sat Aug 2021 21:29:24
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:14:10
+# Last modified: Sun 22 Aug 2021 12:14:15
 # Version: 1.0
 #
 # Description: DMenu prompt to unmount drives.
-#===================================================
+#=========================================================================
 
 unmountusb() {
 	[ -z "$drives" ] && exit

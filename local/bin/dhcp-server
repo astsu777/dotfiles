@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Mon Aug 2021 14:57:49
-# Last modified: Mon Aug 2021 14:57:49
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:08:54
+# Last modified: Sun 22 Aug 2021 12:09:03
 # Version: 1.0
 #
-# Description: Start/stop local DHCP server
-#===================================================
+# Description: start/stop local DHCP server
+#=========================================================================
 
 #=======================
 # Requirements

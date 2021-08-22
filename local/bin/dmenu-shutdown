@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:24:17
-# Last modified: Sat Aug 2021 21:24:17
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:33
+# Last modified: Sun 22 Aug 2021 12:12:39
 # Version: 1.0
 #
 # Description: logout/shutdown/reboot the system
-#===================================================
+#=========================================================================
+
 OPTS=$(printf "Lock Screen\nDisable Lock on Idle\nEnable Lock on Idle\nLogout\nSuspend\nHibernate\nReboot\nShutdown" | sort | dmenu -i -p "Logout/Shutdown:")
 case $OPTS in
 	"Lock Screen") slock ;;

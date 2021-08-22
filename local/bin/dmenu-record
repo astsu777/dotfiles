@@ -1,20 +1,20 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:22:29
-# Last modified: Sat Aug 2021 21:22:29
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:11:23
+# Last modified: Sun 22 Aug 2021 12:12:04
 # Version: 1.0
 #
 # Description: record the screen
-#===================================================
 # Usage:
 # `$0`: Ask for recording type via dmenu
 # `$0 screencast`: Record both audio and screen
 # `$0 video`: Record only screen
 # `$0 audio`: Record only audio
 # `$0 kill`: Kill existing recording
-#
 # If there is already a running instance, user will be prompted to end it.
+#=========================================================================
+
 updateicon() { \
 	echo "$1" > /tmp/recordingicon
 	pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}"

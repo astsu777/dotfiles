@@ -1,4 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:20:45
+# Last modified: Sun 22 Aug 2021 12:20:59
+# Version: 1.0
+#
+# Description: script executed by a display manager
+#=========================================================================
 
 # Common
 # Source necessary resources for auto-start to work (user's profile not loaded)

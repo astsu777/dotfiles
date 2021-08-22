@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:32:55
-# Last modified: Sat Aug 2021 21:32:55
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:15:11
+# Last modified: Sun 22 Aug 2021 12:15:16
 # Version: 1.0
 #
 # Description: quickly deploy a set of Docker containers for test purposes
-#===================================================
+#=========================================================================
 
 # Determine the username to be created based on the logged on user
 USERNAME=$(id -nu)

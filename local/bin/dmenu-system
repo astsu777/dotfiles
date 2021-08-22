@@ -1,26 +1,35 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:26:25
-# Last modified: Sat Aug 2021 21:26:25
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:55
+# Last modified: Sun 22 Aug 2021 12:13:41
 # Version: 1.0
 #
 # Description: perform various system operations
-#===================================================
+#=========================================================================
+
+#=======================
 # Top menu
+#=======================
 TOPMENU=$(printf "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nCancel" | dmenu -i -p "Choose:")
 
-# Logout/Shutdown
+#=======================
+# Logout/shutdown
+#=======================
 if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
 	dmenu-shutdown
 fi
 
+#=======================
 # Display management
+#=======================
 if [ "$TOPMENU" = 'Display Management' ]; then
 	displayselect
 fi
 
+#=======================
 # Network management
+#=======================
 if [ "$TOPMENU" = 'Network Management' ]; then
 	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
@@ -35,7 +44,9 @@ if [ "$TOPMENU" = 'Network Management' ]; then
 	esac
 fi
 
+#=======================
 # Miscellaneous
+#=======================
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
 	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nListen To Radio\nMount USB Drive\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in

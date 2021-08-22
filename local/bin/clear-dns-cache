@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Mon Aug 2021 15:09:17
-# Last modified: Mon Aug 2021 15:09:17
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:07:59
+# Last modified: Sun 22 Aug 2021 12:08:07
 # Version: 1.0
 #
-# Description: Flush local DNS cache
-#===================================================
+# Description: flush local DNS cache
+#=========================================================================
 
 #=======================
 # Requirements

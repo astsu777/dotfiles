@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:36:22
-# Last modified: Sat Aug 2021 21:36:22
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:16:01
+# Last modified: Sun 22 Aug 2021 12:16:06
 # Version: 1.0
 #
 # Description: clear the build files of a LaTeX/XeLaTeX build.
-#===================================================
+#=========================================================================
+
 case "$1" in
 	*.tex)
 		file=$(if type DirectoryService > /dev/null 2>&1; then realpath "$1"; else readlink -f "$1"; fi)

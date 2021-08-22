@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:21:40
-# Last modified: Sat Aug 2021 21:21:40
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:10:21
+# Last modified: Sun 22 Aug 2021 12:10:57
 # Version: 1.0
 #
 # Description: listen to online radio
-#===================================================
+#=========================================================================
+
+#=======================
 # Search engine config
+#=======================
 declare -A radios
 radios[Blues Music Fan Radio]="http://ais-sa2.cdnstream1.com/1992_128.mp3"
 radios[Chillhop Radio]="http://hyades.shoutca.st:8043/stream"
@@ -26,11 +29,15 @@ radios[Studio Brussels]="http://icecast.vrtcdn.be/stubru-high.mp3"
 radios[Synthwave]="https://ecast.myautodj.com/public1channel"
 radios[Stop Playing]=""
 
+#=======================
 # Choose a radio
+#=======================
 radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station:') "$@" || exit
 station="${radios["${radio}"]}"
 
+#=======================
 # Listen to the stream
+#=======================
 if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
 mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
 exit 0

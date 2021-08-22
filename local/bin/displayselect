@@ -1,8 +1,15 @@
-#!/bin/sh
-
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:09:07
+# Last modified: Sun 22 Aug 2021 12:09:12
+# Version: 1.0
+#
+# Description:
 # A UI for detecting and selecting all displays. Probes xrandr for connected
 # displays and lets user select one to use. User may also select "manual
 # selection" which opens arandr.
+#=========================================================================
 
 twoscreen() { # If multi-monitor is selected and there are two screens.
 

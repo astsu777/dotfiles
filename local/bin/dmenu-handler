@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:20:06
-# Last modified: Sat Aug 2021 21:20:06
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:09:45
+# Last modified: Sun 22 Aug 2021 12:09:51
 # Version: 1.0
 #
 # Description: feed this script a link and it will give dmenu some choice programs to use to open it.
-#===================================================
+#=========================================================================
+
 feed="$(printf "%s" "$1" | dmenu -p 'Paste URL or file path:')"
 
 if [ -n "$feed" ]; then case "$(printf "Copy URL\\nsxiv\\nsetbg\\nPDF\\nbrowser\\nlynx\\nvim\\nmpv\\nmpv loop\\nmpv float\\nqueue download\\nqueue yt-dl\\nqueue yt-dl audio" | sort | dmenu -i -p "Open it with:")" in

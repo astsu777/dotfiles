@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:35:05
-# Last modified: Sat Aug 2021 21:35:05
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:15:19
+# Last modified: Sun 22 Aug 2021 12:15:26
 # Version: 1.0
 #
 # Description: this script finds all Git repositories and pull the changes
-#===================================================
+#=========================================================================
 
 #====================
 # Print help if no input

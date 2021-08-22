@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: 03 April 2020
-# Last modified: Tue Aug 2021 23:17:19
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:17:02
+# Last modified: Sun 22 Aug 2021 12:17:14
 # Version: 1.0
 #
-# Description: Check if a list of URLs returns a HTTP/200 OK or not
-#===================================================
+# Description: check if a list of URLs returns a HTTP/200 OK or not
+#=========================================================================
 
 #=======================
 # Requirements

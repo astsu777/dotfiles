@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:25:14
-# Last modified: Sat Aug 2021 21:25:14
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:43
+# Last modified: Sun 22 Aug 2021 12:12:51
 # Version: 1.0
 #
 # Description: check online streams and watch them
-#===================================================
+#=========================================================================
+
 # Requirements check
 if ! type youtube-dl mpv > /dev/null 2>&1; then
 	notify-send "⚠️ Error" "Please install 'mpv' and 'youtube-dl' to use this script"

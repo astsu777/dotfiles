@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Sat Aug 2021 21:18:41
-# Last modified: Sat Aug 2021 21:18:41
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:09:15
+# Last modified: Sun 22 Aug 2021 12:09:21
 # Version: 1.0
 #
 # Description: show bookmarks in a DMenu menu
-#===================================================
+#=========================================================================
 
 # set prefered launcher
 PREFERED_LAUNCHER=dmenu

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-#===================================================
-# Author: Gaetan (gaetan@ictpourtous.com)
-# Creation: Tue Aug 2021 22:58:12
-# Last modified: Tue Aug 2021 22:58:12
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:16:41
+# Last modified: Sun 22 Aug 2021 12:16:50
 # Version: 1.0
 #
-# Description: Manage servers hosted at UpCloud
-#===================================================
+# Description: manage servers hosted at UpCloud
+#=========================================================================
 
 #=======================
 # Requirements
