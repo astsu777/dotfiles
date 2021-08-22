@@ -44,5 +44,5 @@ export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 if type starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"
 elif [[ -z "$SSH_CLIENT" ]] || [[ -z "$SSH_TTY" ]] && [[ -f "$HOME"/.config/starship.toml ]]; then
-	curl -fsSL https://starship.rs/install.sh | bash -s -- -y
+	\curl -fsSL https://starship.rs/install.sh | bash -s -- -y
 fi

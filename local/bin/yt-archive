@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 17:03:50
-# Last modified: Sun 22 Aug 2021 17:34:05
+# Last modified: Sun 22 Aug 2021 18:18:04
 # Version: 1.0
 #
 # Description: easy script to archive YouTube channels/playlists/videos
@@ -11,25 +11,36 @@
 #=======================
 # Requirements
 #=======================
-if ! type youtube-dl >/dev/null 2>&1; then
-	printf "The package 'youtube-dl' is not installed!"
+if ! type youtube-dl ffmpeg >/dev/null 2>&1; then
+	printf "The packages 'youtube-dl', 'ffmpeg' are not installed!"
 	exit 1
 fi
 
 #=======================
 # Functions
 #=======================
-archive() {
-	youtube-dl -ci --download-archive "$2"/archive.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$1" -o "$2"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+archiveVideo() {
+	youtube-dl -q -ci --download-archive "$3"/.archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+}
+archiveAudio() {
+	youtube-dl -q -ci --download-archive "$3"/.archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 
-if [ -z "$1" ] || [ -z "$2" ]; then
+#=======================
+# Archive
+#=======================
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 	echo "Some arguments are missing!
-Usage: yt-archive <URL> <DIRECTORY>
+Usage: yt-archive [--video|--audio] <URL> <DIRECTORY>
 
 Example: yt-archive https://www.youtube.com/user/GSquad934 ~/Videos
+Example2: yt-archive --audio https://www.youtube.com/user/GSquad934 ~/Videos
+
+Note: the '--audio' option will only archive audio in MP3 format
 "
     exit 2
-else
-	archive "$@"
+elif [ "$1" = "--audio" ]; then
+	archiveAudio "$@"
+elif [ "$1" = "--video" ]; then
+	archiveVideo "$@"
 fi

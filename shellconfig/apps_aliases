@@ -15,7 +15,7 @@ if type php > /dev/null 2>&1; then
 fi
 
 # Get the current public IP address
-alias getpublicip="curl -s http://ipinfo.io/ip"
+alias getpublicip="\curl -s http://ipinfo.io/ip"
 
 # Generate random secure passwords of 64 characters
 if type pwgen > /dev/null 2>&1; then

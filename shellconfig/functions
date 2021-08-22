@@ -83,14 +83,14 @@ fi
 # Get the current weather forecast
 if type curl > /dev/null 2>&1; then
 	weather() {
-		curl -s http://wttr.in/"$1"\?A\&F
+		\curl -s http://wttr.in/"$1"\?A\&F
 	}
 fi
 
 # Bootstrap
 if type curl > /dev/null 2>&1; then
 	bootstrap() {
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
+		/bin/bash -c "$(\curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
 	}
 fi
 
@@ -155,21 +155,21 @@ fi
 # Shorten a URL
 if type curl > /dev/null 2>&1; then
 	urlshortener() {
-    	curl -F "shorten=$1" https://0x0.st
+    	\curl -F "shorten=$1" https://0x0.st
 	}
 fi
 
 # Have a reverse traceroute
 if type curl > /dev/null 2>&1; then
 	tracerouterev() {
-    	curl http://icanhaztraceroute.com/
+    	\curl http://icanhaztraceroute.com/
 	}
 fi
 
 # IP subnet calculator
 if type curl > /dev/null 2>&1 && ! type ipcalc > /dev/null 2>&1; then
 	ipcalc() {
-    	curl "api.hackertarget.com/subnetcalc/?q=$1"
+    	\curl "api.hackertarget.com/subnetcalc/?q=$1"
 	}
 fi
 
@@ -188,7 +188,7 @@ if type curl > /dev/null 2>&1; then
 		local ua='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
 		local qry=$( echo $@ | sed -e "s/\ /+/g" )
 		local full_url=${base_url}${qry}
-		local response=$(curl -sA "${ua}" "${full_url}")
+		local response=$(\curl -sA "${ua}" "${full_url}")
 		echo ${response} | jq -r '.[0][0][0]'
 	}
 fi
