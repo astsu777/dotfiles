@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:05:32
-# Last modified: Sun 22 Aug 2021 12:05:41
+# Last modified: Mon 23 Aug 2021 11:39:17
 # Version: 1.0
 #
 # Description: loop through all attached batteries and format the info
@@ -24,6 +24,6 @@ if [ -f /sys/class/power_supply/BAT?*/charge_now ]; then
 		# Will make a warn variable if discharging and low
 		[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
 		# Prints the info
-		printf "%s %s%d%% " "B:" "$capacity"; unset warn
+		printf "%s %d%%" "B:" "$capacity"; unset warn
 	done && exit 0
 fi

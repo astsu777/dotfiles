@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:05:56
-# Last modified: Sun 22 Aug 2021 12:06:01
+# Last modified: Mon 23 Aug 2021 11:39:34
 # Version: 1.0
 #
 # Description: prints the upload/download speed
@@ -23,4 +23,4 @@ update() {
 rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
 tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
 
-printf "DL: %4sB UL: %4sB\\n " $(numfmt --to=iec $rx) $(numfmt --to=iec $tx)
+printf "DL: %4sB UL: %4sB\\n" $(numfmt --to=iec $rx) $(numfmt --to=iec $tx)
