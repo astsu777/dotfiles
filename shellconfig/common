@@ -43,7 +43,7 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 
 # Auto-start SSH agent
-if [[ "$OSTYPE" == "linux-gnu" ]] && { [[ ! -z "$SESSION" ]] || [[ ! -z "$GDMSESSION" ]] ;}; then
+if [[ "$OSTYPE" == "linux-gnu" ]] && { { [[ ! -z "$SESSION" ]] || [[ ! -z "$GDMSESSION" ]] ;} || { [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]] ;} ;}; then
 	if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1 && [[ -z "$SSH_AUTH_SOCK" ]]; then
   		eval $(ssh-agent)
 		export SSH_AUTH_SOCK
