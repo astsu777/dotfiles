@@ -43,18 +43,17 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 
 # Auto-start SSH agent
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if [[ ! -z "$SESSION" ]] && [[ -d "$HOME"/.ssh ]] && { ! pgrep gnome-keyring >/dev/null 2>&1 || [[ ! -S ~/.ssh/ssh_auth_sock ]] ;}; then
-		if [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
-  			eval $(ssh-agent)
-			export SSH_AUTH_SOCK
-			ssh-add -l >/dev/null || ssh-add
-  			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-		fi
+if [[ "$OSTYPE" == "linux-gnu" ]] && { [[ ! -z "$SESSION" ]] || [[ ! -z "$GDMSESSION" ]] ;}; then
+	if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1 && [[ -z "$SSH_AUTH_SOCK" ]]; then
+  		eval $(ssh-agent)
+		export SSH_AUTH_SOCK
+		ssh-add -l >/dev/null || ssh-add
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -d "$HOME"/.ssh ]]; then
-  		find ~/.ssh/ -type f -regex ".*id_rsa.*" | xargs ssh-add -K >/dev/null 2>&1
+		if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1 && [[ -z "$SSH_AUTH_SOCK" ]]; then
+  			find ~/.ssh/ -type f -regex ".*id_rsa.*" | xargs ssh-add -K >/dev/null 2>&1
+  		fi
 	fi
 fi
 # elif [[ "$OSTYPE" == "darwin"* ]]; then
