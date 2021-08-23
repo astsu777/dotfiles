@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 17:03:50
-# Last modified: Sun 22 Aug 2021 18:18:04
+# Last modified: Mon 23 Aug 2021 10:28:38
 # Version: 1.0
 #
 # Description: easy script to archive YouTube channels/playlists/videos
@@ -20,10 +20,10 @@ fi
 # Functions
 #=======================
 archiveVideo() {
-	youtube-dl -q -ci --download-archive "$3"/.archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+	youtube-dl -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 archiveAudio() {
-	youtube-dl -q -ci --download-archive "$3"/.archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+	youtube-dl -q -ci --download-archive "$3"/archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 
 #=======================
