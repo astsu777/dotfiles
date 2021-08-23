@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Sun 22 Aug 2021 12:20:59
+# Last modified: Mon 23 Aug 2021 16:06:53
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -60,6 +60,13 @@ if [ -f ~/.config/X11/Xresources ]; then
 	xrdb -merge -I$HOME ~/.config/X11/Xresources
 else
 	xrdb -merge -I$HOME ~/.Xresources
+fi
+
+# GNOME-Keyring for password/SSH keys caching
+if type gnome-keyring > /dev/null 2>&1; then
+	eval $(gnome-keyring-daemon --start)
+	export SSH_AUTH_SOCK
+  	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
 
 # DWM

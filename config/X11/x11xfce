@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:01
-# Last modified: Sun 22 Aug 2021 12:20:09
+# Last modified: Mon 23 Aug 2021 16:06:24
 # Version: 1.0
 #
 # Description: script executed by Xinit when the GUI is XFCE
@@ -41,12 +41,6 @@ fi
 # Launch Nextcloud client
 if type nextcloud > /dev/null 2>&1; then
 	nextcloud --background &
-fi
-
-# GNOME-Keyring for password caching
-if type gnome-keyring > /dev/null 2>&1; then
-	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-	export SSH_AUTH_SOCK
 fi
 
 # Launch Pamac

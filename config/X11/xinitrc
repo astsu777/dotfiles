@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Mon 23 Aug 2021 10:55:57
+# Last modified: Mon 23 Aug 2021 16:05:35
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -64,7 +64,7 @@ if type clipmenud > /dev/null 2>&1; then
 fi
 
 # Load .Xresources
-if [ -f ~/.config/X11/Xresources ]; then
+if [ -f ~/.config/X11/Xre.s ]; then
 	xrdb -merge -I$HOME ~/.config/X11/Xresources
 else
 	xrdb -merge -I$HOME ~/.Xresources
@@ -80,6 +80,13 @@ if type slock > /dev/null 2>&1; then
 	if type xss-lock > /dev/null 2>&1; then
 		xss-lock -- slock &
 	fi
+fi
+
+# GNOME-Keyring for password/SSH keys caching
+if type gnome-keyring > /dev/null 2>&1; then
+	eval $(gnome-keyring-daemon --start)
+	export SSH_AUTH_SOCK
+  	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
 
 # DWM

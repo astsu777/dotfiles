@@ -44,14 +44,10 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Auto-start SSH agent
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if [[ ! -z "$SESSION" ]] && [[ -d "$HOME"/.ssh ]]; then
-		if type gnome-keyring >/dev/null 2>&1 && [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
-			eval $(gnome-keyring-daemon --start)
-			export SSH_AUTH_SOCK
-  			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-		elif [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
+	if [[ ! -z "$SESSION" ]] && [[ -d "$HOME"/.ssh ]] && { ! pgrep gnome-keyring >/dev/null 2>&1 || [[ ! -S ~/.ssh/ssh_auth_sock ]] ;}; then
+		if [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
   			eval $(ssh-agent)
-			export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+			export SSH_AUTH_SOCK
 			ssh-add -l >/dev/null || ssh-add
   			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 		fi
