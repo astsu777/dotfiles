@@ -41,26 +41,35 @@ fi
 # Remove any duplicates from PATH environment variable
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 
+
 # Auto-start SSH agent
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	if [[ ! -z "$SESSION" ]] && [[ -d "$HOME"/.ssh ]]; then
-		if [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
-  			eval `ssh-agent`
+		if type gnome-keyring >/dev/null 2>&1; then
+			eval $(gnome-keyring-daemon --start)
+			export SSH_AUTH_SOCK
+		elif [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
+  			eval $(ssh-agent)
   			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+			export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+			ssh-add -l >/dev/null || ssh-add
 		fi
-		export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-		ssh-add -l > /dev/null || ssh-add
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -d "$HOME"/.ssh ]]; then
-		if [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
-  			eval `ssh-agent`
-  			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-		fi
-		export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-		ssh-add -l > /dev/null || ssh-add
+  		find ~/.ssh/ -type f -regex ".*id_rsa.*" | xargs ssh-add -K >/dev/null 2>&1
 	fi
 fi
+# elif [[ "$OSTYPE" == "darwin"* ]]; then
+# 	if [[ -d "$HOME"/.ssh ]]; then
+# 		if [[ ! -S ~/.ssh/ssh_auth_sock ]]; then
+#   			eval `ssh-agent`
+#   			ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+# 		fi
+# 		export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+# 		ssh-add -l > /dev/null || ssh-add
+# 	fi
+# fi
 
 # Define colors when displaying files on BSD
 if [[ "$OSTYPE" == "darwin"* ]] || [[ "$OSTYPE" == *"bsd"* ]] || [[ "$OSTYPE" == *"BSD"* ]]; then
