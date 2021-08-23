@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Sun 22 Aug 2021 12:20:42
+# Last modified: Mon 23 Aug 2021 10:55:57
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -64,7 +64,7 @@ if type clipmenud > /dev/null 2>&1; then
 fi
 
 # Load .Xresources
-if [ -f ~/.config/X11/Xre.s ]; then
+if [ -f ~/.config/X11/Xresources ]; then
 	xrdb -merge -I$HOME ~/.config/X11/Xresources
 else
 	xrdb -merge -I$HOME ~/.Xresources
