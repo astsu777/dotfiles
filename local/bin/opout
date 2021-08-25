@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:15:32
-# Last modified: Sun 22 Aug 2021 12:15:38
+# Last modified: Wed 25 Aug 2021 19:30:58
 # Version: 1.0
 #
 # Description: a general handler for opening a file's intended output,
@@ -11,7 +11,7 @@
 basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
 
 case "${*}" in
-	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) setsid -f xdg-open "$basename".pdf >/dev/null 2>&1 ;;
-	*.html) setsid -f "$BROWSER" "$basename".html >/dev/null 2>&1 ;;
-	*.sent) setsid -f sent "$1" >/dev/null 2>&1 ;;
+	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) if [ "$(uname)" = "Darwin" ]; then open "$basename".pdf >/dev/null 2>&1; else setsid -f xdg-open "$basename".pdf >/dev/null 2>&1; fi ;;
+	*.html) if [ "$(uname)" = "Darwin" ]; then "$BROWSER" "$basename".html >/dev/null 2>&1; else setsid -f "$BROWSER" "$basename".html >/dev/null 2>&1; fi ;;
+	*.sent) if [ "$(uname)" = "Darwin" ]; then sent "$1" >/dev/null 2>&1; else setsid -f sent "$1" >/dev/null 2>&1; fi ;;
 esac
