@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Sun 22 Aug 2021 12:13:41
+# Last modified: Thu 26 Aug 2021 13:47:52
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -31,13 +31,14 @@ fi
 # Network management
 #=======================
 if [ "$TOPMENU" = 'Network Management' ]; then
-	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
+	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nMount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
 		"Block Ads") tui 'block-hosts ; bash' ;;
 		"Clear DNS Cache") tui 'clear-dns-cache' ;;
 		"Cloud Manager") tui 'upcloud-manager' ;;
 		"DHCP Server") tui 'dhcp-server' ;;
 		"Manage Network") tui 'nmtui' ;;
+		"Mount URI") tui 'dmenu-urimount' ;;
 		"TFTP Server") tui 'tftp-server' ;;
 		"Websites Monitor") tui 'websites-monitor ; bash' ;;
 		*) exec dmenu-system ;;

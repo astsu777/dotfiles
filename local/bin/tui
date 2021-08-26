@@ -1,27 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:16:29
-# Last modified: Sun 22 Aug 2021 12:16:37
+# Last modified: Thu 26 Aug 2021 14:00:17
 # Version: 1.0
 #
 # Description: execute a program in a terminal emulator
 #=========================================================================
 
-[[ $1 == -* ]] && shift
-
-if [[ $# == 0 ]]; then
-    "$TERMINAL" ||
-    st ||
-    xterm &
-elif [[ $1 == /* ]]; then
-    "$TERMINAL" -e "$@" ||
-    st -e "$@" ||
-    xterm -e "$@" &
-else
-    s=${1%% *}
-    set -- "printf \"\033]0;${s^}\a\"; $@"
-    "$TERMINAL" -e $SHELL -ic "$*" ||
-    st -e $SHELL -ic "$*" ||
-    xterm -e $SHELL -ic "$*" &
-fi
+[ -z "$*" ] && exit 1
+"$TERMINAL" -e "$@" || kitty -e "$@" || alacritty -e "$@" || xterm -e "$@"

@@ -1,0 +1,73 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Thu 26 Aug 2021 10:51:38
+# Last modified: Thu 26 Aug 2021 13:50:04
+# Version: 1.0
+#
+# Description: mount network shares
+#=========================================================================
+
+#=======================
+# Variables
+#=======================
+uriTypes='smb|ftp|nfs|cifs'
+
+#=======================
+# Functions
+#=======================
+scanNetworks() {
+	if ! type avahi-browse >/dev/null 2>&1; then
+		notify-send "⚠️ ERROR" "AVAHI is not installed. Scan is not possible"
+		printf "ERROR\nAVAHI is not installed. Scan is not possible\n"
+		exit 1
+	fi
+	fsSrv=$(avahi-browse _smb._tcp -l -t | awk '{print $4}')
+	ftpSrv=$(avahi-browse _ftp._tcp -l -t | awk '{print $4}')
+	nfsSrv=$(avahi-browse _nfs._tcp -l -t | awk '{print $4}')
+	if [ -z "$fsSrv" ] && [ -z "$ftpSrv" ] && [ -z "$nfsSrv" ]; then notify-send "No services were discovered" && exit 2; fi
+	scannedSrv=$(printf "%s" "SMB:\n$fsSrv\n\nFTP:\n$ftpSrv\n\nNFS:\n$nfsSrv")
+	share=$(printf "%s" "$scannedSrv" | dmenu -i -p "Discovered Services:")
+	mountNet
+}
+mountNet() {
+	if [ -z "$share" ]; then share=$(printf "%s" "$@" | dmenu -p "URI address:"); fi
+	if type gio >/dev/null 2>&1; then
+		gio mount "$share" && notify-send "URI Mounted" "$share mounted in /var/run/user/$(id -u)/"
+		exit 0
+	else
+		mountType=$(printf "%s" "$share" | cut -d':' -f1) && if [ "$mountType" = smb ]; then mountType=cifs; fi
+		share2Mount=$(printf "%s" "$share" | cut -d':' -f2)
+		shareFolder=$(printf "%s" "$share" | cut -d':' -f2 | sed 's/\/\///' | sed 's/\//-/' | sed 's/\./-/')
+		if [ ! -d /mnt/"$shareFolder" ]; then sudo mkdir -pv /mnt/"$shareFolder"; fi
+		sudo mount -t "$mountType" "$share2Mount" -o user="$(whoami)",noperm /mnt/"$shareFolder" && notify-send "URI Mounted" "$share mounted in /mnt/$shareFolder"
+		exit 0
+	fi
+}
+umountNet() {
+	if type gio >/dev/null 2>&1; then
+		mountedShare=$(gio mount -l | grep -E "$uriTypes" | awk '{print $6}')
+	else
+		mountedShare=$(mount -v | grep -E "$uriTypes" | awk '{print $1}')
+	fi
+	if [ -z "$mountedShare" ]; then
+		notify-send "No URIs mounted"
+		printf "No URIs mounted"
+		exit 2
+	else
+		choice=$(printf "%s" "$mountedShare" | dmenu -i -p "Choose share to unmount:")
+	fi
+	if type gio >/dev/null 2>&1; then gio mount -u "$choice" && notify-send "URI Unmounted" "$choice successfully unmounted"; else sudo umount "$choice" && notify-send "URI Unmounted" "$choice successfully unmounted"; fi
+	exit 0
+}
+
+#=======================
+# Options
+#=======================
+options=$(printf "Scan network for shares\nMount network share\nUnmount network share" | sort | dmenu -i -p "Choose:")
+case "$options" in
+	"Scan network for shares") scanNetworks ;;
+	"Mount network share") mountNet "$@" ;;
+	"Unmount network share") umountNet ;;
+	*) exit 3 ;;
+esac
