@@ -234,9 +234,15 @@ if type fzf > /dev/null 2>&1; then
 				sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs -I{} -o sudo peco '{}'
 			}
 		fi
+		# Search shell history
+		if type xdotool >/dev/null 2>&1; then
+			hs(){
+				cmd=$(history | fzf +s | awk '{print $1}')
+				xdotool type "!$cmd" && xdotool key KP_Enter
+			}
+		fi
 	fi
 fi
-
 
 #=================
 # OpenSSL
@@ -281,6 +287,36 @@ if type mpv youtube-dl > /dev/null 2>&1 && ! type dmenu > /dev/null 2>&1; then
 	# Randomly play a YouTube channel or playlist
 	ytshuf-hd() {
 		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	}
+fi
+
+#=======================
+# Wget
+#=======================
+if type wget >/dev/null 2>&1; then
+	wget-extension() {
+  	  if [ $# -lt 2 ]; then
+    	echo -e "Download all files with specific extension on a webpage"
+    	echo -e "\nUsage: wget-extension <file_extension> <url>"
+    	echo -e "\nExample:\nwget-extension mp4 http://example.com/files/"
+    	echo -e "wget-extension mp3,ogg,wma http://samples.com/files/"
+    	return 1
+  	  fi
+  	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
+  	  mkdir -pv "$outputdir_name"
+  	  cd "$outputdir_name" && wget -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2"
+	}
+	wget-recursively() {
+  	  if [ $# -lt 1 ]; then
+    	echo -e "Download all files with specific extension on a webpage"
+    	echo -e "\nUsage: wget-recursively <file_extension> <url>"
+    	echo -e "\nExample:\nwget-recursively mp4 http://example.com/files/"
+    	echo -e "wget-recursively mp3,ogg,wma http://samples.com/files/"
+    	return 1
+  	  fi
+  	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
+  	  mkdir -pv "$outputdir_name"
+  	  cd "$outputdir_name" && wget -r -H -t1 -nd -N -np --reject index.html -e robots=off "$1"
 	}
 fi
 

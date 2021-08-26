@@ -1,6 +1,9 @@
 # Skip this file for non-interactive shells
 [[ $- != *i* ]] && return
 
+# Do not execute commands from history directly
+shopt -s histverify histreedit
+
 # Set the dotfiles' location
 export DOTFILES="$HOME/.dotfiles"
 

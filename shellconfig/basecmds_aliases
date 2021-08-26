@@ -16,3 +16,8 @@ fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'
 fi
+
+# Display calendar
+if type cal > /dev/null 2>&1; then
+	alias cal="cal -m -w -3"
+fi
