@@ -206,7 +206,7 @@ fi
 
 # YTFZF
 if type ytfzf mpv > /dev/null 2>&1; then
-	export YTFZF_PLAYER="mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title='mpvfloating'"
+	export YTFZF_PLAYER="devour mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title='mpvfloating'"
 fi
 
 # If NVIM is installed, set it as default editor. Otherwise, fallback to vim or vi
