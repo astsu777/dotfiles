@@ -10,15 +10,15 @@ augroup ft_tex
 	" Insert sub-subsection
 	inoremap ;ssub \subsubsection{}<CR><++><Esc>kf{a
 	" Insert bulleted list
-	inoremap ;bul \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR><++><Esc>2kA
+	inoremap ;bul \begin{itemize}<CR>\item<Space><CR>\end{itemize}<CR>\bigskip<CR><++><Esc>3kA
 	" Insert ordered list
-	inoremap ;enu \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR><++><Esc>2kA
+	inoremap ;enu \begin{enumerate}<CR>\item<Space><CR>\end{enumerate}<CR>\bigskip<CR><++><Esc>3kA
 	" Insert code block
 	inoremap ;cbl \bigskip<CR>\begin{codebl}{}<CR><++><CR>\end{codebl}<CR>\bigskip<CR><++><Esc>4k$i
 	" Insert To-Do list
-	inoremap ;tdl \begin{todolist}<CR>\item[\done]<Space><CR>\item[\wontfix]<Space><++><CR>\item<Space><++><CR>\end{todolist}<CR><++><Esc>4k$a
+	inoremap ;tdl \begin{todolist}<CR>\item[\done]<Space><CR>\item[\wontfix]<Space><++><CR>\item<Space><++><CR>\end{todolist}<CR>\bigskip<CR><++><Esc>5k$a
 	" Insert figures
-	inoremap ;fig \begin{figure}<CR>\includegraphics[width=cm]{}<CR>\centering<CR>\caption{}<CR>\end{figure}<Esc>3kf=a
+	inoremap ;fig \begin{figure}[H]<CR>\includegraphics[scale=0.7]{}<CR>\centering<CR>\caption{<++>}<CR>\end{figure}<CR>\bigskip<Esc>4k$i
 	" Insert slide (beamer)
 	inoremap ;sli \section{<++>}<CR>\begin{frame}<CR>\frametitle{<++>}<CR>\begin{itemize}<CR>\item <++><CR>\end{itemize}<CR><++><CR>\end{frame}<CR><++><Esc>/<++><CR>"_c4l
 
@@ -40,6 +40,7 @@ augroup ft_tex
 		execute "normal! i\\usepackage{pifont}\<cr>"
 		execute "normal! i\\usepackage[most]{tcolorbox}\<cr>"
 		execute "normal! i\\usepackage{fontspec}\<cr>"
+		execute "normal! i\\usepackage{float}\<cr>"
 		execute "normal! i\<cr>"
 		execute "normal! i\% \\setmainfont{Calibri}\<cr>"
 		execute "normal! i\\begin{document}\<cr>"
@@ -108,6 +109,7 @@ augroup ft_tex
 		execute "normal! i\\usepackage{pifont}\<cr>"
 		execute "normal! i\\usepackage[most]{tcolorbox}\<cr>"
 		execute "normal! i\\usepackage{fontspec}\<cr>"
+		execute "normal! i\\usepackage{float}\<cr>"
 		execute "normal! i\<cr>"
 		execute "normal! i\% \\setmainfont{Calibri}\<cr>"
 		execute "normal! i\<cr>"
@@ -158,7 +160,7 @@ augroup ft_tex
 		execute "normal! i\<cr>"
 		execute "normal! i\\begin{document}\<cr>"
 		execute "normal! i\<cr>"
-		execute "normal! i\\title{\\textbf{\\uppercase{\\huge <++>}}\\\\[0.5cm]\<cr>"
+		execute "normal! i\\title{\\textbf{\\uppercase{\\huge Intervention Report}}\\\\[0.5cm]\<cr>"
 		execute "normal! i\\uppercase{\\large <++>}}\<cr>"
 		execute "normal! i\\author{{\\large <++>}\\\\\<cr>"
 		execute "normal! i\\small E: \\href{mailto:<++>}{<++>}}\<cr>"
