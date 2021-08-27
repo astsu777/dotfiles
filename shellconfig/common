@@ -170,6 +170,13 @@ if type nvidia-settings > /dev/null 2>&1; then
 	export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 fi
 
+# TeXLive
+if type lualatex >/dev/null 2>&1; then
+	export TEXMFHOME="$XDG_DATA_HOME/texmf"
+	export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
+	export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
+fi
+
 # # GnuPG
 # # Disabled as this breaks SystemD calls
 # if type gpg > /dev/null 2>&1; then
