@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Thu 26 Aug 2021 13:47:52
+# Last modified: Fri 27 Aug 2021 10:27:56
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -52,7 +52,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nListen To Radio\nMount USB Drive\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
 		"Bookmarks List") dmenu-bookmarks ;;
-		"Change Theme") "$SHELL" -c 'tui dmenu-theme' ;;
+		"Change Theme") tui dmenu-theme ;;
 		"Check Online Streams") dmenu-stream ;;
 		"Check System Queue") tui 'tspool ; bash' ;;
 		"Listen To Radio") dmenu-radio ;;
