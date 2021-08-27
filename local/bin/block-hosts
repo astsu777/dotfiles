@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:07:41
-# Last modified: Sun 22 Aug 2021 12:07:55
+# Last modified: Fri 27 Aug 2021 14:16:21
 # Version: 1.0
 #
 # Description: retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
@@ -13,6 +13,7 @@
 #=======================
 hostsfile="/etc/hosts"
 blocklists=$(mktemp) && cat <<-'EOF' >"$blocklists"
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 https://blocklistproject.github.io/Lists/abuse.txt
 https://blocklistproject.github.io/Lists/ads.txt
 https://blocklistproject.github.io/Lists/fraud.txt
