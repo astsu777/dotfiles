@@ -97,7 +97,7 @@ map <leader>of :setlocal spell! spelllang=fr_fr<CR>
 " Configuration
 "=============
 " Store .viminfo in different location
-set viminfo+=n~/.cache/viminfo
+set viminfo+=n$XDG_CACHE_HOME/.cache/viminfo
 
 " Organize backups, swaps and undo files
 set undodir=$HOME/.vim/undo//
