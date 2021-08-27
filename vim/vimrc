@@ -81,8 +81,6 @@ nnoremap <C-l> <C-w>l
 set clipboard^="+
 noremap <leader>y "+y
 noremap <leader>p "+p
-noremap <leader>Y "+Y
-noremap <leader>P "+P
 
 " Quickly move around document
 noremap <silent> K 10j
