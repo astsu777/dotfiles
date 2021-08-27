@@ -2,24 +2,40 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:18:20
-# Last modified: Sun 22 Aug 2021 12:18:29
+# Last modified: Fri 27 Aug 2021 11:14:04
 # Version: 1.0
 #
 # Description: this is called by SXIV after pressing CTRL+X
 #=========================================================================
 
 #=======================
+# Variables
+#=======================
+wallpapersloc="$HOME/.local/share/wallpapers/"
+
+#=======================
 # Keybindings
 #=======================
-while read file; do
+while read -r file; do
 	case "$1" in
-		"y") echo -n "$file" | tr -d '\n' | xclip -selection clipboard && notify-send "$file copied to clipboard" & ;;
+		# Copy to clipboard
+		"y") printf "%s" "$file" | tr -d '\n' | xclip -selection clipboard && notify-send "$file copied to clipboard" & ;;
+		# Delete the file
 		"d") [ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted" ;;
+		# Delete the file without confirmation
+		"D") rm -f "$file" && notify-send "$file deleted" ;;
+		# Show file information
 		"i") notify-send "File information" "$(mediainfo "$file")" ;;
-		"r") if type convert > /dev/null 2>&1; then convert -rotate 90 "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
-		"R") if type convert > /dev/null 2>&1; then convert -rotate -90 "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
-		"m") if type convert > /dev/null 2>&1; then convert -flop "$file" "$file"; else notify-send "Imagemagick is not installed!"; fi ;;
-		"e") if type gimp > /dev/null 2>&1; then setsid -f gimp "$file"; else notify-send "Gimp is not installed!"; fi ;;
-		"w") if type feh > /dev/null 2>&1; then feh --bg-fill --no-fehbg "$file" && notify-send "$file set as wallpaper"; else notify-send "Feh is not installed!";  fi ;;
+		# Rotate the image permanently
+		"r") if type convert > /dev/null 2>&1; then convert -rotate 90 "$file" "$file"; else notify-send "❗ Imagemagick is not installed!"; fi ;;
+		"R") if type convert > /dev/null 2>&1; then convert -rotate -90 "$file" "$file"; else notify-send "❗ Imagemagick is not installed!"; fi ;;
+		# Mirror the image horizontally
+		"m") if type convert > /dev/null 2>&1; then convert -flop "$file" "$file"; else notify-send "❗ Imagemagick is not installed!"; fi ;;
+		# Open the file in GIMP
+		"e") if type gimp > /dev/null 2>&1; then setsid -f gimp "$file"; else notify-send "❗ Gimp is not installed!"; fi ;;
+		# Set the file as wallpaper
+		"w") if type feh > /dev/null 2>&1; then feh --bg-fill --no-fehbg "$file" && notify-send "$file set as wallpaper"; else notify-send "❗ Feh is not installed!";  fi ;;
+		# Copy the file to wallpapers folder
+		"W") cp -n "$file" "$wallpapersloc" && notify-send "$file copied to $wallpapersloc" || notify-send "⚠️ $file already exists" ;;
 	esac
 done

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=sxiview
+Exec=sxiview %f
+Categories=Other;
+NoDisplay=true
+MimeType=image/jpeg
+Terminal=false
