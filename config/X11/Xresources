@@ -20,7 +20,7 @@ XTerm*loginshell: true
 XTerm*savelines: 50000
 
 ! SXIV
-Sxiv.foreground:   #c5c8c6
+Sxiv.foreground:   #595959
 Sxiv.background:   #1c1c1c
 Sxiv.font: JetBrains Mono:style=Medium:size=10
 
