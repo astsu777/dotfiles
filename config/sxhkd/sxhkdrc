@@ -121,8 +121,8 @@ super + r ; s
 	pkill mpv ; pkill mplayer ; pkill vlc
 
 # Set a random wallpaper
-super + r ; w
-	feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*
+super + r ; {w,W}
+	"$SHELL" -c {'feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*','sxiv -r -t "$HOME"/.local/share/wallpapers/*'}
 
 # Reload sxhkdrc
 super + r ; r ; s

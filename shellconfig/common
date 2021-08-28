@@ -377,8 +377,8 @@ fi
 # Configure the default screenshot utility
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	if type flameshot > /dev/null 2>&1; then
-		export SCROTBIN="screenshot"
-	elif type main > /dev/null 2>&1; then
+		export SCROTBIN="flameshot gui"
+	elif type maim > /dev/null 2>&1; then
 		export SCROTBIN="dmenu-screenshot"
 	fi
 fi
