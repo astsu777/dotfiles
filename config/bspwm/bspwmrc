@@ -23,7 +23,7 @@ bspc rule -a 'mpv floating' state=floating sticky=on
 # Scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on
 if ! pgrep -f 'st -c scratchpad' >/dev/null 2>&1; then
-	st -c scratchpad &
+	st -c scratchpad -g 120x34 &
 fi
 
 # Configure wallpaper
