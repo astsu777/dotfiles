@@ -7,8 +7,4 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar
-if [[ -d /usr/share/xbps.d ]]; then
-	polybar mainbar0 -r --config="$HOME"/.config/bspwm/polybar-txt.config &
-else
-	polybar mainbar0 -r --config="$HOME"/.config/bspwm/polybar.config &
-fi
+polybar mainbar0 -r --config="$HOME"/.config/bspwm/polybar.config &
