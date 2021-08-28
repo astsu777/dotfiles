@@ -38,7 +38,7 @@ super + shift + Return
 
 # Screenshot
 super + alt + 5
-	"$SHELL" -c '"$SCROTBIN"'
+	"$SHELL" -c "$SCROTBIN"
 
 # Bookmarks manager
 super + alt + b
