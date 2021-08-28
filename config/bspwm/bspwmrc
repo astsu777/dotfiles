@@ -22,11 +22,13 @@ bspc rule -a 'mpv floating' state=floating sticky=on
 
 # Scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on
-st -c scratchpad &
+if ! pgrep -f 'st -c scratchpad' >/dev/null 2>&1; then
+	st -c scratchpad &
+fi
 
 # Configure wallpaper
-if type feh > /dev/null 2>&1; then
-	if [[ -d "$HOME/.local/share/wallpapers" ]]; then
+if type feh >/dev/null 2>&1; then
+	if [ -d "$HOME/.local/share/wallpapers" ]; then
 		feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* &
 	else
 		feh --bg-fill --no-fehbg "$HOME"/.config/bspwm/background.jpg &
@@ -34,67 +36,67 @@ if type feh > /dev/null 2>&1; then
 fi
 
 # Set default mouse cursor when not over window
-if type xsetroot > /dev/null 2>&1; then
+if type xsetroot >/dev/null 2>&1; then
 	xsetroot -cursor_name left_ptr &
 fi
 
 # Launch Simple X Hotkey Daemon
-if type sxhkd > /dev/null 2>&1; then
+if type sxhkd >/dev/null 2>&1; then
 	sxhkd -c "$HOME"/.config/sxhkd/sxhkdrc "$HOME"/.config/sxhkd/sxhkdrc_bspwm &
 fi
 
 # Launch Dunst if installed (notification)
-if type dunst > /dev/null 2>&1; then
+if type dunst >/dev/null 2>&1; then
 	dunst &
 fi
 
 # Launch Unclutter (hide mouse cursor)
-if type unclutter > /dev/null 2>&1; then
+if type unclutter >/dev/null 2>&1; then
 	unclutter &
 fi
 
 # Launch Flameshot if installed
-if type flameshot > /dev/null 2>&1; then
+if type flameshot >/dev/null 2>&1; then
 	flameshot &
 fi
 
 # Display volume icon in systray
-if type volumeicon > /dev/null 2>&1 && [ ! -n "$(pgrep volumeicon)" ]; then
+if type volumeicon >/dev/null 2>&1 && [ ! -n "$(pgrep volumeicon)" ]; then
 	volumeicon &
 fi
 
 # Turn on Numlock
-if type numlockx > /dev/null 2>&1; then
+if type numlockx >/dev/null 2>&1; then
 	numlockx on &
 fi
 
 # Launch a session manager
-if type lxpolkit > /dev/null 2>&1; then
+if type lxpolkit >/dev/null 2>&1; then
 	lxpolkit &
 fi
 
 # Launch a session manager
-if type lxsession > /dev/null 2>&1 && [ ! -d /usr/share/xbps.d ]; then
+if type lxsession >/dev/null 2>&1 && [ ! -d /usr/share/xbps.d ]; then
 	lxsession &
 fi
 
 # Launch Redshift (night light)
-if type redshift > /dev/null 2>&1 && [ ! -n "$(pgrep redshift-gtk)" ]; then
+if type redshift >/dev/null 2>&1 && [ ! -n "$(pgrep redshift-gtk)" ]; then
 	redshift-gtk &
 fi
 
 # Launch Nextcloud client
-if type nextcloud > /dev/null 2>&1; then
+if type nextcloud >/dev/null 2>&1; then
 	nextcloud --background &
 fi
 
 # Launch compositer for fancy graphical effects
-if type picom > /dev/null 2>&1; then
+if type picom >/dev/null 2>&1; then
 	picom -CGb --no-fading-openclose &
 fi
 
 # GNOME-Keyring for password caching
-if type gnome-keyring > /dev/null 2>&1; then
+if type gnome-keyring >/dev/null 2>&1; then
 	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 	export SSH_AUTH_SOCK
 fi
