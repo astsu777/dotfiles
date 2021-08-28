@@ -117,5 +117,10 @@ mode "resize" {
 }
 bindsym Mod1+r mode "resize"
 
+# Scratchpad
+exec --no-startup-id if ! pgrep -f 'st -c scratchpad' >/dev/null 2>&1; then st -c scratchpad & ; fi
+for_window [class="scratchpad"] move scratchpad
+bindsym F12 [class="scratchpad"] scratchpad show
+
 # Status bar
 exec --no-startup-id polybar mainbar0 -r --config="$HOME"/.config/i3/polybar.config
