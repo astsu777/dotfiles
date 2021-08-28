@@ -4,8 +4,7 @@
 
 # Scratchpad
 F12
-	id=$(xdotool search --class scratchpad)
-	if [ "$id" != "" ]; then bspc node "$id" --flag hidden -f ; fi
+	"$SHELL" -c '"$HOME"/.config/bspwm/scratchpad.sh scratchpad'
 
 # Quit or restart BSPWM
 super + shift + {q,r}
