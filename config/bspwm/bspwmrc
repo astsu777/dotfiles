@@ -70,7 +70,7 @@ if type lxpolkit > /dev/null 2>&1; then
 fi
 
 # Launch a session manager
-if type lxsession > /dev/null 2>&1; then
+if type lxsession > /dev/null 2>&1 && [ ! -d /usr/share/xbps.d ]; then
 	lxsession &
 fi
 

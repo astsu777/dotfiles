@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:19:21
-# Last modified: Mon 23 Aug 2021 16:06:11
+# Last modified: Sat 28 Aug 2021 10:14:29
 # Version: 1.0
 #
 # Description: script executed by Xinit when the GUI is i3
@@ -53,7 +53,7 @@ if type lxpolkit > /dev/null 2>&1; then
 fi
 
 # Launch a session manager
-if type lxsession > /dev/null 2>&1; then
+if type lxsession > /dev/null 2>&1 && [ ! -d /usr/share/xbps.d ]; then
 	lxsession &
 fi
 

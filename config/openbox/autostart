@@ -16,7 +16,7 @@ xset -b
 (sleep 1s && lxsession) &
 
 # Policy kit
-(sleep 1s && lxpolkit) &
+(sleep 1s && [ ! -d /usr/share/xbps.d ] && lxpolkit) &
 
 # System Tray
 (sleep 1s && volumeicon) &
