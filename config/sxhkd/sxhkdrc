@@ -8,6 +8,10 @@ XF86AudioMute
 XF86Calculator
 	"$CALCULATOR"
 
+# System manager
+F11
+	"$SHELL" -c 'dmenu-system'
+
 # Window switcher
 alt + Tab
 	"$SHELL" -c 'dmenu-wm'
@@ -31,10 +35,6 @@ super + shift + Escape
 # Launcher menu
 super + shift + Return
 	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
-
-# System manager
-super + alt + Escape
-	"$SHELL" -c 'dmenu-system'
 
 # Screenshot
 super + alt + 5
