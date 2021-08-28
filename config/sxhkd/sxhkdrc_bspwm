@@ -2,6 +2,11 @@
 # BSPWM
 #================
 
+# Scratchpad
+F12
+	id=$(xdotool search --class scratchpad)
+	if [ "$id" != "" ]; then bspc node "$id" --flag hidden -f ; fi
+
 # Quit or restart BSPWM
 super + shift + {q,r}
 	bspc {quit,wm -r}

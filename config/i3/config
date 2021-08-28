@@ -12,6 +12,9 @@ client.unfocused        #282c34 #282c34 #282c34 #282c34   #282c34
 gaps inner 10
 gaps outer 2
 
+# Focus follows mouse
+focus_follows_mouse yes
+
 # Define Mod key as SUPER
 set $mod Mod4
 

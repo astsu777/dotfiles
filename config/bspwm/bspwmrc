@@ -19,6 +19,10 @@ bspc rule -a Picture-in-Picture state=floating sticky=on
 bspc rule -a 'Picture in picture' state=floating sticky=on
 bspc rule -a galculator state=floating
 bspc rule -a 'mpv floating' state=floating sticky=on
+bspc rule -a scratchpad sticky=on state=floating hidden=on
+
+# Scratchpad
+[ "$(ps -x | grep -c 'scratchpad')" -eq "1" ] && st -c scratchpad &
 
 # Configure wallpaper
 if type feh > /dev/null 2>&1; then
