@@ -15,6 +15,10 @@ XF86AudioPrev
 	playerctl previous
 XF86AudioNext
 	playerctl next
+XF86KbdBrightnessUp
+	xbacklight -inc 5
+XF86KbdBrightnessDown
+	xbacklight -inc 5
 
 # System manager
 F11
