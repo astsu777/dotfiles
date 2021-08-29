@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sun 29 Aug 2021 15:51:08
+# Last modified: Sun 29 Aug 2021 16:09:40
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -191,12 +191,71 @@ toggleDracula() {
 }
 
 #=======================
+# Onedark Theme
+#=======================
+toggleOnedark() {
+	# ST/Xresources
+	foreground="#abb2bf"
+	background="#1e2127"
+	normalBlack="#1e2127"
+	normalRed="#e06c75"
+	normalGreen="#98c379"
+	normalYellow="#d19a66"
+	normalBlue="#61afef"
+	normalMagenta="#c678dd"
+	normalCyan="#56b6c2"
+	normalWhite="#abb2bf"
+	brightBlack="#5c6370"
+	brightRed="#e06c75"
+	brightGreen="#98c379"
+	brightYellow="#d19a66"
+	brightBlue="#61afef"
+	brightMagenta="#c678dd"
+	brightCyan="#56b6c2"
+	brightWhite="#ffffff"
+
+	# Alacritty
+	alacrittyTheme="onedark_theme"
+
+	# Kitty
+	kittyTheme="onedark_theme"
+
+	# VIM
+	vimColorscheme="onedark"
+	vimLightline="onedark"
+
+	# BSPWM
+	BSPWMBackground="#1e2127"
+	BSPWMForeground="#abb2bf"
+	BSPWMBar="#e06c75"
+	BSPWMActiveBorder="#e06c75"
+	BSPWMNormalBorder="#1e2127"
+
+	# DWM
+	DWMBackground="#1e2127"
+	DWMForeground="#abb2bf"
+	DWMBarFG="#1e2127"
+	DWMBarBG="#e06c75"
+	DWMNormalBorder="#1e2127"
+	DWMActiveBorder="#e06c75"
+
+	# i3
+	I3Background="#1e2127"
+	I3Foreground="#abb2bf"
+	I3Bar="#e06c75"
+	I3ActiveBorder="#e06c75"
+	I3NormalBorder="#1e2127"
+	I3Indicator="#edabb0"
+}
+
+#=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDracula\\nGruvbox" | sort | dmenu -l 3 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nDracula\\nGruvbox\\nOnedark" | sort | dmenu -l 4 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
 	"Dracula") toggleDracula ;;
 	"Gruvbox") toggleGruvbox ;;
+	"Onedark") toggleOnedark ;;
 	*) exit 0 ;;
 esac
 
