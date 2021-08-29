@@ -29,6 +29,7 @@ autocmd VimEnter *
 call plug#begin('~/.vim/bundle')
     "" Colorscheme
     Plug 'sainnhe/gruvbox-material'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 	"" Linters
 	Plug 'chr4/nginx.vim'
 	"" Status bar
