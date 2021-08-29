@@ -549,11 +549,6 @@ c.content.blocking.method = 'auto'
 c.content.blocking.adblock.lists = [
     'https://easylist.to/easylist/easylist.txt',
     'https://easylist.to/easylist/easyprivacy.txt',
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/badlists.txt',
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/badware.txt',
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/filters.txt',
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/privacy.txt',
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/resource-abuse.txt',
     'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_English/filter.txt',
     'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt',
     'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_16_French/filter.txt',
@@ -576,9 +571,7 @@ c.content.blocking.hosts.lists = [
     'https://blocklistproject.github.io/Lists/tracking.txt'
 ]
 
-c.content.blocking.whitelist = [
-    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/unbreak.txt',
-]
+c.content.blocking.whitelist = []
 
 
 #=======================
