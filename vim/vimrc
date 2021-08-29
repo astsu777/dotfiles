@@ -158,13 +158,13 @@ function ToggleSyntax()
     if s:syntax == 1
         syntax off
 		let s:syntax = 0
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
     else
         syntax on
 		let s:syntax = 1
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
     endif
@@ -178,13 +178,13 @@ set fileencoding=utf-8
 " Color and theme setup
 " set termguicolors
 colorscheme kuroi
-highlight Comment cterm=italic gui=italic
+" highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
     if (g:colors_name == "onedark")
         colorscheme kuroi
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
@@ -192,7 +192,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "dracula")
         colorscheme onedark
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'onedark'}
@@ -200,7 +200,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "gruvbox-material")
         colorscheme dracula
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'dracula'}
@@ -208,7 +208,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     else
         colorscheme gruvbox-material
-		highlight Comment cterm=italic gui=italic
+		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline.colorscheme = 'gruvbox_material'
