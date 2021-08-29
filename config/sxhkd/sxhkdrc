@@ -1,12 +1,12 @@
-# Multimedia Keys
+# Volume keys
 XF86AudioLowerVolume
 	pactl set-sink-volume 0 -2%
 XF86AudioRaiseVolume
 	pactl set-sink-volume 0 +2%
 XF86AudioMute
 	pactl set-sink-mute 0 toggle
-XF86Calculator
-	"$CALCULATOR"
+
+# Multimedia keys
 XF86AudioPlay
 	playerctl play-pause
 XF86AudioStop
@@ -15,10 +15,22 @@ XF86AudioPrev
 	playerctl previous
 XF86AudioNext
 	playerctl next
-XF86KbdBrightnessUp
-	xbacklight -inc 5
-XF86KbdBrightnessDown
-	xbacklight -inc 5
+
+# Calculator media key
+XF86Calculator
+	"$CALCULATOR"
+
+# Uncomment to manage screen's brightness if it does not work out-of-the-box
+# XF86MonBrightnessUp
+# 	xbacklight -inc 5
+# XF86MonBrightnessDown
+# 	xbacklight -inc 5
+
+# Uncomment to manage keyboard's brightness if it does not work out-of-the-box
+# XF86KbdBrightnessUp
+# 	kbdbacklight up
+# XF86KbdBrightnessDown
+# 	kbdbacklight down
 
 # System manager
 F11
