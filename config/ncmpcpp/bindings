@@ -401,10 +401,11 @@
 #	find
 #def_key "f"
 #	find_item_forward
+#
+# def_key "+"
+#     show_clock
 
 def_key "+"
-    show_clock
-def_key "="
     volume_up
 
 def_key "j"
@@ -477,3 +478,7 @@ def_key "x"
   delete_playlist_items
 def_key "P"
   show_playlist
+def_key "="
+  seek_forward
+def_key "-"
+  seek_backward
