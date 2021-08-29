@@ -182,12 +182,20 @@ highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
-    if (g:colors_name == "dracula")
+    if (g:colors_name == "onedark")
         colorscheme kuroi
 		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
+		call lightline#init()
+		call lightline#colorscheme()
+    elseif (g:colors_name == "dracula")
+        colorscheme onedark
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline = {'colorscheme': 'onedark'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "gruvbox-material")
