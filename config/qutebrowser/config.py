@@ -545,9 +545,40 @@ c.colors.webpage.darkmode.enabled = False
 #=======================
 c.content.blocking.enabled = True
 c.content.blocking.method = 'auto'
-c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt", "https://easylist.to/easylist/easyprivacy.txt"]
-c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
-c.content.blocking.whitelist = []
+
+c.content.blocking.adblock.lists = [
+    'https://easylist.to/easylist/easylist.txt',
+    'https://easylist.to/easylist/easyprivacy.txt',
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/badlists.txt',
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/badware.txt',
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/filters.txt',
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/privacy.txt',
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/resource-abuse.txt',
+    'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_English/filter.txt',
+    'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt',
+    'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_16_French/filter.txt',
+    'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_8_Dutch/filter.txt',
+    'https://secure.fanboy.co.nz/fanboy-annoyance.txt',
+    'https://www.fanboy.co.nz/fanboy-antifacebook.txt',
+    'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt'
+]
+
+c.content.blocking.hosts.lists = [
+    'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts',
+    'https://pgl.yoyo.org/adservers/serverlist.php?showintro=0;hostformat=hosts',
+    'https://someonewhocares.org/hosts/zero/hosts',
+    'https://blocklistproject.github.io/Lists/abuse.txt',
+    'https://blocklistproject.github.io/Lists/fraud.txt',
+    'https://blocklistproject.github.io/Lists/malware.txt',
+    'https://blocklistproject.github.io/Lists/phishing.txt',
+    'https://blocklistproject.github.io/Lists/ransomware.txt',
+    'https://blocklistproject.github.io/Lists/scam.txt',
+    'https://blocklistproject.github.io/Lists/tracking.txt'
+]
+
+c.content.blocking.whitelist = [
+    'https://github.com/uBlockOrigin/uAssets/blob/master/filters/unbreak.txt',
+]
 
 
 #=======================
@@ -561,5 +592,6 @@ config.bind('xD', 'hint links spawn youtube-dl -ci --add-metadata --extract-audi
 # Browsing experience
 config.bind('xj', 'config-cycle -p content.javascript.enabled ;; reload')
 config.bind('xi', 'config-cycle -p content.images ;; reload')
+config.bind('xc', 'config-cycle -p content.blocking.enabled ;; reload')
 # Web browser interface
 config.bind('xb', 'config-cycle -p statusbar.show always never ;; config-cycle -p tabs.show always never')
