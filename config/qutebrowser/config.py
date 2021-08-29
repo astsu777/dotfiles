@@ -539,3 +539,27 @@ c.colors.tabs.pinned.even.bg = 'darkblue'
 # selective inversion of everything": Combines the two variants   above.
 # Type: Bool
 c.colors.webpage.darkmode.enabled = False
+
+#=======================
+# Adblock
+#=======================
+c.content.blocking.enabled = True
+c.content.blocking.method = 'auto'
+c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt", "https://easylist.to/easylist/easyprivacy.txt"]
+c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+c.content.blocking.whitelist = []
+
+
+#=======================
+# Keybindings
+#=======================
+# Media manipulation
+config.bind('xv', 'hint links spawn mpv --cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" {hint-url}')
+config.bind('xV', 'hint links spawn mpv --cache=yes --really-quiet --no-video {hint-url}')
+config.bind('xd', 'hint links spawn youtube-dl -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best {hint-url} -o "$HOME"/Downloads/"%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s"')
+config.bind('xD', 'hint links spawn youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 {hint-url} -o "$HOME"/Downloads/"%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s"')
+# Browsing experience
+config.bind('xj', 'config-cycle -p content.javascript.enabled ;; reload')
+config.bind('xi', 'config-cycle -p content.images ;; reload')
+# Web browser interface
+config.bind('xb', 'config-cycle -p statusbar.show always never ;; config-cycle -p tabs.show always never')
