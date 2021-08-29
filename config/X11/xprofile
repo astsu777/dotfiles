@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Mon 23 Aug 2021 16:06:53
+# Last modified: Sun 29 Aug 2021 14:00:52
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -24,33 +24,33 @@ if [ -f "$HOME"/.config/touchpad.sh ]; then
 fi
 
 # Set keyboard layout to US-Intl w/ dead keys
-if type setxkbmap > /dev/null 2>&1; then
-	setxkbmap -layout us -variant intl > /dev/null 2>&1
+if type setxkbmap >/dev/null 2>&1; then
+	setxkbmap -layout us -variant intl >/dev/null 2>&1
 fi
 
 # Manage light multimedia keys
-if type xfce4-power-manager > /dev/null 2>&1; then
+if type xfce4-power-manager >/dev/null 2>&1; then
 	xfce4-power-manager --daemon &
 fi
 
 # Configure keyboard repeat rate
-if type xset > /dev/null 2>&1; then
-	xset r rate 200 70 > /dev/null 2>&1
+if type xset >/dev/null 2>&1; then
+	xset r rate 200 70 >/dev/null 2>&1
 fi
 
 # Launch clipboard manager
-if type clipmenud > /dev/null 2>&1; then
+if type clipmenud >/dev/null 2>&1; then
 	clipmenud &
 fi
 
 # Lock screen
-if type slock > /dev/null 2>&1; then
+if type slock >/dev/null 2>&1; then
 	# Lock screen after 10 minutes of inactivity
-	if type xautolock > /dev/null 2>&1; then
+	if type xautolock >/dev/null 2>&1; then
 		xautolock -secure -detectsleep -time 10 -locker slock &
 	fi
 	# Lock screen on suspend/hibernate/lock-session systemd-events
-	if type xss-lock > /dev/null 2>&1; then
+	if type xss-lock >/dev/null 2>&1; then
 		xss-lock -- slock &
 	fi
 fi
@@ -63,10 +63,18 @@ else
 fi
 
 # GNOME-Keyring for password/SSH keys caching
-if type gnome-keyring > /dev/null 2>&1; then
+if type gnome-keyring >/dev/null 2>&1; then
 	eval $(gnome-keyring-daemon --start)
 	export SSH_AUTH_SOCK
   	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+
+# MPD
+if type mpd >/dev/null 2>&1; then
+	mpd &
+fi
+if type mpDris2 >/dev/null 2>&1; then
+	mpDris2 &
 fi
 
 # DWM

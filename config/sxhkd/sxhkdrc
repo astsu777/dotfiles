@@ -7,6 +7,14 @@ XF86AudioMute
 	pactl set-sink-mute 0 toggle
 XF86Calculator
 	"$CALCULATOR"
+XF86AudioPlay
+	playerctl play-pause
+XF86AudioStop
+	playerctl stop
+XF86AudioPrev
+	playerctl previous
+XF86AudioNext
+	playerctl next
 
 # System manager
 F11
