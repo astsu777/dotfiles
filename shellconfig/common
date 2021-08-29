@@ -329,8 +329,8 @@ fi
 
 # Configure the default music player
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type mocp > /dev/null 2>&1; then
-		export MUSICPLAYER="mocp -M /home/gaetan/.config/moc -O MOCDir=/home/gaetan/.config/moc"
+	if type ncmpcpp > /dev/null 2>&1; then
+		export MUSICPLAYER="ncmpcpp"
 	elif type mpv > /dev/null 2>&1; then
 		export MUSICPLAYER="mpv"
 	elif type vlc > /dev/null 2>&1; then
