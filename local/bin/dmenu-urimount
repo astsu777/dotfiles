@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Thu 26 Aug 2021 10:51:38
-# Last modified: Thu 26 Aug 2021 13:50:04
+# Last modified: Sun 29 Aug 2021 14:29:38
 # Version: 1.0
 #
 # Description: mount network shares
@@ -69,5 +69,5 @@ case "$options" in
 	"Scan network for shares") scanNetworks ;;
 	"Mount network share") mountNet "$@" ;;
 	"Unmount network share") umountNet ;;
-	*) exit 3 ;;
+	*) exit 0 ;;
 esac

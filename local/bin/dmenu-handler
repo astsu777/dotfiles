@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:09:45
-# Last modified: Sun 22 Aug 2021 12:09:51
+# Last modified: Sun 29 Aug 2021 14:30:24
 # Version: 1.0
 #
 # Description: feed this script a link and it will give dmenu some choice programs to use to open it.
@@ -24,6 +24,6 @@ if [ -n "$feed" ]; then case "$(printf "Copy URL\\nsxiv\\nsetbg\\nPDF\\nbrowser\
 	setbg) curl -L "$feed" > "$XDG_CACHE_HOME"/pic ; xwallpaper --zoom "$XDG_CACHE_HOME"/pic >/dev/null 2>&1 ;;
 	browser) setsid -f "$BROWSER" "$feed" >/dev/null 2>&1 ;;
 	lynx) lynx "$feed" >/dev/null 2>&1 ;;
-	*) ;;
+	*) exit 0 ;;
 esac
 fi

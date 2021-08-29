@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:33
-# Last modified: Sun 22 Aug 2021 12:12:39
+# Last modified: Sun 29 Aug 2021 14:31:09
 # Version: 1.0
 #
 # Description: logout/shutdown/reboot the system
@@ -18,5 +18,5 @@ case $OPTS in
 	Hibernate) systemctl hibernate || loginctl hibernate ;;
 	Reboot) systemctl reboot || loginctl reboot ;;
 	Shutdown) systemctl poweroff || loginctl poweroff ;;
-	*) ;;
+	*) exit 0 ;;
 esac
