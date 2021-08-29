@@ -128,10 +128,8 @@ A few comments about each terminal emulators:
 
 I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for VMs mainly and machines where I don't deploy my applications and dotfiles. My built of *ST* can be found [here](https://github.com/GSquad934/st.git).
 
-## Music On Console (MOC)
-![](https://i.postimg.cc/KYKrcgtw/screenshot-20210718-033.png)
-
-*Music On Console* is a very simple TUI based music player. I do not use this application that much because most of my music is played bu other devices rather than my computer, but a minimalist music player is still necessary. Its configuration is stored in the *config/moc* folder which contains a *config* file and a custom theme.
+## Music Player Daemon (MPD) & NCMPCPP
+*Music Player Daemon* is a daemon running in the background used to play music. In order to interact with it, a client is necessary. This repository hosts configuration files for *ncmpcpp*, but others can be used to play music. I used to use *MOC* in the past, but *MPD* allows for more flexbility and also for a centralized architecture and multiple clients.
 
 ## MSMTP
 I use this application to send emails from my workstations if necessary. This can be useful for certain cron jobs and/or certain scripts. The config file *config/msmtp/config* defines the mail relay to be used and the credentials for the default account to use as sender. The configuration file is written so the credentials are meant to be decrypted using GPG.
