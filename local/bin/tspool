@@ -2,11 +2,11 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:16:20
-# Last modified: Sun 22 Aug 2021 12:16:27
+# Last modified: Sun 29 Aug 2021 22:07:31
 # Version: 1.0
 #
 # Description: provide a constant binary to run task-spooler
 #=========================================================================
 
-[ -x "$(command -v tsp)" ] && tsp "$@"
-[ -x "$(command -v ts)" ] && ts "$@"
+{ [ -x "$(command -v tsp)" ] && tsp "$@" ;} || { [ -x "$(command -v ts)" ] && ts "$@" ;} || "$@"
+exit 0
