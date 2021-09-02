@@ -4,7 +4,7 @@
 if type ccat > /dev/null 2>&1; then
     alias cat="ccat"
 elif type highlight > /dev/null 2>&1; then
-    alias cat="highlight -O ansi"
+    alias cat="highlight -O ansi --force"
 fi
 
 # If the program "prettyping" is installed, replace "ping" with it
