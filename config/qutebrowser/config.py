@@ -539,6 +539,7 @@ c.colors.tabs.pinned.even.bg = 'darkblue'
 # selective inversion of everything": Combines the two variants   above.
 # Type: Bool
 c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 #=======================
 # Adblock
@@ -586,5 +587,6 @@ config.bind('xD', 'hint links spawn tspool youtube-dl -ci --add-metadata --extra
 config.bind('xj', 'config-cycle -p content.javascript.enabled ;; reload')
 config.bind('xi', 'config-cycle -p content.images ;; reload')
 config.bind('xc', 'config-cycle -p content.blocking.enabled ;; reload')
+config.bind('xC', 'config-cycle content.user_stylesheets "~/.config/qutebrowser/dark.css" ""')
 # Web browser interface
 config.bind('xb', 'config-cycle -p statusbar.show always never ;; config-cycle -p tabs.show always never')
