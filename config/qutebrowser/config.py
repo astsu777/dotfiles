@@ -579,8 +579,8 @@ c.content.blocking.whitelist = []
 # Keybindings
 #=======================
 # Media manipulation
-config.bind('xv', 'hint links spawn tspool mpv --cache=yes --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" {hint-url}')
-config.bind('xV', 'hint links spawn tspool mpv --cache=yes --really-quiet --no-video {hint-url}')
+config.bind('xv', 'hint links spawn tspool mpv --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" {hint-url}')
+config.bind('xV', 'hint links spawn tspool mpv --really-quiet --no-video {hint-url}')
 config.bind('xd', 'hint links spawn tspool youtube-dl -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best {hint-url} -o "$HOME"/Downloads/"%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s"')
 config.bind('xD', 'hint links spawn tspool youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 {hint-url} -o "$HOME"/Downloads/"%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s"')
 # Browsing experience
