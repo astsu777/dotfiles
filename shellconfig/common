@@ -301,20 +301,20 @@ fi
 
 # Configure the default graphical Web browser
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type firefox > /dev/null 2>&1; then
-		export BROWSER="firefox"
+	if type qutebrowser > /dev/null 2>&1; then
+		export BROWSER="qutebrowser"
 	elif type brave > /dev/null 2>&1; then
 		export BROWSER="brave"
-	elif type chromium > /dev/null 2>&1; then
-		export BROWSER="chromium"
+	elif type firefox > /dev/null 2>&1; then
+		export BROWSER="firefox"
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	if [[ -d /Applications/Firefox.app ]]; then
-		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
+	if [[ -d /Applications/qutebrowser.app ]]; then
+		export BROWSER="/Applications/qutebrowser.app/Contents/MacOS/qutebrowser"
 	elif [[ -d /Applications/Brave\ Browser.app ]]; then
 		export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
-	elif [[ -d /Applications/Safari.app ]]; then
-		export BROWSER="/Applications/Safari.app/Contents/MacOS/Safari"
+	elif [[ -d /Applications/Firefox.app ]]; then
+		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
 	fi
 fi
 
