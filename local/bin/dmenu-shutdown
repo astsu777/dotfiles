@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:33
-# Last modified: Thu 02 Sep 2021 22:10:55
+# Last modified: Fri 03 Sep 2021 16:04:05
 # Version: 1.0
 #
 # Description: logout/shutdown/reboot the system
@@ -14,9 +14,9 @@ case $OPTS in
 	"Disable Lock on Idle") pkill xautolock ;;
 	"Enable Lock on Idle") pgrep xautolock || xautolock -secure -detectsleep -time 10 -locker slock & ;;
 	Logout) xdotool key "super+shift+q" ;;
-	Suspend) systemctl suspend || loginctl suspend ;;
-	Hibernate) systemctl hibernate || loginctl hibernate ;;
-	Reboot) systemctl reboot || loginctl reboot ;;
-	Shutdown) systemctl poweroff || loginctl poweroff ;;
+	Suspend) suspend ;;
+	Hibernate) hibernate ;;
+	Reboot) reboot ;;
+	Shutdown) poweroff ;;
 	*) exit 0 ;;
 esac
