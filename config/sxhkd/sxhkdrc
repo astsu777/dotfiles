@@ -32,10 +32,6 @@ XF86Calculator
 # XF86KbdBrightnessDown
 # 	kbdbacklight down
 
-# System manager
-F11
-	"$SHELL" -c 'dmenu-system'
-
 # Window switcher
 alt + Tab
 	"$SHELL" -c 'dmenu-wm'
@@ -47,6 +43,10 @@ super + Return
 # Kill all media players
 super + XF86AudioMute
 	pkill mpv ; pkill mplayer ; pkill vlc ; pkill hypnotix
+
+# System manager
+super + F11
+	"$SHELL" -c 'dmenu-system'
 
 # Toggle compositor
 super + Insert
