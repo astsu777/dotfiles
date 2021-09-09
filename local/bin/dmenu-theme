@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sun 29 Aug 2021 16:09:40
+# Last modified: Thu 09 Sep 2021 10:16:22
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -249,12 +249,70 @@ toggleOnedark() {
 }
 
 #=======================
+# Nord Theme
+#=======================
+toggleNord() {
+	# ST/Xresources
+	foreground="#d8dee9"
+	background="#2e3440"
+	normalBlack="#3b4252"
+	normalRed="#bf616a"
+	normalGreen="#a3be8c"
+	normalYellow="#ebcb8b"
+	normalBlue="#81a1c1"
+	normalMagenta="#b48ead"
+	normalCyan="#88c0d0"
+	normalWhite="#e5e9f0"
+	brightBlack="#3b4252"
+	brightRed="#bf616a"
+	brightGreen="#a3be8c"
+	brightYellow="#ebcb8b"
+	brightBlue="#81a1c1"
+	brightMagenta="#b48ead"
+	brightCyan="#88c0d0"
+	brightWhite="#e5e9f0"
+
+	# Alacritty
+	alacrittyTheme="nord_theme"
+
+	# Kitty
+	kittyTheme="nord_theme"
+
+	# VIM
+	vimColorscheme="nord"
+	vimLightline="nord"
+
+	# BSPWM
+	BSPWMBackground="#2e3440"
+	BSPWMForeground="#d8dee9"
+	BSPWMBar="#e5e9f0"
+	BSPWMActiveBorder="#d8dee9"
+	BSPWMNormalBorder="#2e3440"
+
+	# DWM
+	DWMBackground="#2e3440"
+	DWMForeground="#d8dee9"
+	DWMBarFG="#2e3440"
+	DWMBarBG="#e5e9f0"
+	DWMNormalBorder="#2e3440"
+	DWMActiveBorder="#d8dee9"
+
+	# i3
+	I3Background="#2e3440"
+	I3Foreground="#d8dee9"
+	I3Bar="#e5e9f0"
+	I3ActiveBorder="#d8dee9"
+	I3NormalBorder="#2e3440"
+	I3Indicator="#e5e9f0"
+}
+#=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDracula\\nGruvbox\\nOnedark" | sort | dmenu -l 4 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nDracula\\nGruvbox\\nNord\\nOnedark" | sort | dmenu -l 5 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
 	"Dracula") toggleDracula ;;
 	"Gruvbox") toggleGruvbox ;;
+	"Nord") toggleNord ;;
 	"Onedark") toggleOnedark ;;
 	*) exit 0 ;;
 esac

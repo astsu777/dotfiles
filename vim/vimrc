@@ -31,6 +31,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'sainnhe/gruvbox-material'
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'joshdick/onedark.vim', { 'as': 'onedark' }
+    Plug 'arcticicestudio/nord-vim'
 	"" Linters
 	Plug 'chr4/nginx.vim'
 	"" Status bar
@@ -182,12 +183,20 @@ colorscheme kuroi
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
-    if (g:colors_name == "onedark")
+    if (g:colors_name == "nord")
         colorscheme kuroi
 		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
+		call lightline#init()
+		call lightline#colorscheme()
+    elseif (g:colors_name == "onedark")
+        colorscheme nord
+		" highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline = {'colorscheme': 'nord'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "dracula")
