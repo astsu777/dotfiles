@@ -177,7 +177,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Color and theme setup
-" set termguicolors
+set termguicolors
 colorscheme kuroi
 " highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
