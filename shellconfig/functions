@@ -294,29 +294,57 @@ fi
 # Wget
 #=======================
 if type wget >/dev/null 2>&1; then
-	wget-extension() {
+
+	wget-files() {
   	  if [ $# -lt 2 ]; then
     	echo -e "Download all files with specific extension on a webpage"
-    	echo -e "\nUsage: wget-extension <file_extension> <url>"
-    	echo -e "\nExample:\nwget-extension mp4 http://example.com/files/"
-    	echo -e "wget-extension mp3,ogg,wma http://samples.com/files/"
+    	echo -e "\nUsage: wget-files <FILE_EXTENSION> <URL>"
+    	echo -e "\nExample:\nwget-files mp4,ogg,wma http://example.com/files/"
     	return 1
   	  fi
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
-  	  mkdir -pv "$outputdir_name"
-  	  cd "$outputdir_name" && wget -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2"
+  	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
+  	  echo -e "Downloading files from Website..."
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
 	}
-	wget-recursively() {
+
+	wget-audio() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Download all files with specific extension on a webpage"
-    	echo -e "\nUsage: wget-recursively <file_extension> <url>"
-    	echo -e "\nExample:\nwget-recursively mp4 http://example.com/files/"
-    	echo -e "wget-recursively mp3,ogg,wma http://samples.com/files/"
+    	echo -e "Download all audio files on a webpage"
+    	echo -e "\nUsage: wget-audio <URL>"
+    	echo -e "\nExample:\nwget-audio http://example.com/music/"
     	return 1
   	  fi
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
-  	  mkdir -pv "$outputdir_name"
-  	  cd "$outputdir_name" && wget -r -H -t1 -nd -N -np --reject index.html -e robots=off "$1"
+  	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
+  	  echo -e "Downloading audio files from Website..."
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
+	}
+
+	wget-images() {
+  	  if [ $# -lt 1 ]; then
+    	echo -e "Download all images on a webpage"
+    	echo -e "\nUsage: wget-images <URL>"
+    	echo -e "\nExample:\nwget-images http://example.com/pictures/"
+    	return 1
+  	  fi
+  	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
+  	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
+  	  echo -e "Downloading pictures from Website..."
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
+	}
+
+	wget-save() {
+  	  if [ $# -lt 1 ]; then
+    	echo -e "Mirror a full Website recursively"
+    	echo -e "\nUsage: wget-save <URL>"
+    	echo -e "\nExample:\nwget-save myarchive http://example.com/"
+    	return 1
+  	  fi
+  	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
+  	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
+  	  echo -e "Mirrorring Website..."
+  	  wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait "$1"
 	}
 fi
 

@@ -76,9 +76,6 @@ if type iperf3 > /dev/null 2>&1; then
 	alias wan-speedtest-us="iperf3 -c iperf.he.net -p 5201 -P 20"
 fi
 
-# Mirror a Website on the local machine
-alias websave='wget -E -H -k -K -nd -N -p -e robots=off --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" -P'
-
 # Update systems globally and check if a reboot is necessary whenever possible
 	# macOS based systems using HOMEBREW package manager
 if [[ "$OSTYPE" == "darwin"* ]] && type brew > /dev/null 2>&1; then
