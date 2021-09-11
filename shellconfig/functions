@@ -338,13 +338,26 @@ if type wget >/dev/null 2>&1; then
   	  if [ $# -lt 1 ]; then
     	echo -e "Mirror a full Website recursively"
     	echo -e "\nUsage: wget-save <URL>"
-    	echo -e "\nExample:\nwget-save myarchive http://example.com/"
+    	echo -e "\nExample:\nwget-save http://example.com/"
     	return 1
   	  fi
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Mirrorring Website..."
-  	  wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait "$1"
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait "$1" >/dev/null 2>&1
+	}
+
+	wget-save-recursive() {
+  	  if [ $# -lt 1 ]; then
+    	echo -e "Mirror a full Website recursively"
+    	echo -e "\nUsage: wget-save-recursive <EXCLUDE_DOMAINS> <URL>"
+    	echo -e "\nExample:\nwget-save-recursive www.instagram.com,twitter.com http://example.com/"
+    	return 1
+  	  fi
+  	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
+  	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
+  	  echo -e "Mirrorring Website..."
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -D "$1" "$2" >/dev/null 2>&1
 	}
 fi
 
