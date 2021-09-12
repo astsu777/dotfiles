@@ -1,5 +1,5 @@
 # My i3 Configuration
-![](https://i.postimg.cc/jdgGK62W/screenshot-20210819-040.png)
+![](https://i.postimg.cc/5tMjX64R/screenshot-20210912-043.jpg)
 
 This repository hosts the configuration files for [i3](https://i3wm.org/). However, it is truly using *i3-gaps* as I like gaps between windows. The entire configuration can be made in a single configuration file called *config*. This configuration does not use the *i3bar* but instead is using *Polybar* for the top panel. The reason for this is the ease of configuration and the scripts used by the bar are custom-made. This window manager and configuration features:
 
@@ -20,6 +20,7 @@ The following software are not mandatory but recommended:
 * dmenu (hard-coded run launcher)
 * st (hard-coded terminal emulator)
 * polybar (if you want a status bar)
+* ttf-nerd-fonts-symbols (for the icons in the status bar)
 
 *feh*, *st* and *dmenu* are very recommended because those programs are in my i3 configuration.
 
@@ -100,7 +101,25 @@ While in resize mode, the following keybindings are available:
 | `Escape` | Return to 'default' mode |
 
 # Status Bar
-i3 ships with a status bar called *i3bar*, but I don't use it. *Polybar* has been configured to show the following:
+i3 ships with a status bar called *i3bar*, but I don't use it. Two *Polybar* configurations are available: a fancy one and a more classic one.
+
+The fancy bar has been configured to show the following:
+
+![](https://i.postimg.cc/HxzfQPQy/screenshot-20210912-044.jpg)
+
+* Linux logo on the far left
+* IP address for a given NIC (hard-coded in the *config.ini* file)
+* Disk usage
+* RAM usage
+* CPU usage
+* Active workspaces in the middle
+* Volume level on the right
+* The current date and time
+* A power menu on the far right
+* An optional system tray is available but has been disabled (for aestetics)
+
+
+The classic bar has been configured to show the following:
 
 ![](https://i.postimg.cc/bvrT4sTz/screenshot-20210704-027.png)
 
