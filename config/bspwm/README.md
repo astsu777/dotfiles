@@ -1,5 +1,5 @@
 # My BSPWM Configuration
-![](https://i.postimg.cc/QtKf92Lc/screenshot-20210704-026.png)
+![](https://i.postimg.cc/76c05qft/screenshot-20210912-041.jpg)
 
 This repository hosts the configuration files for [BSPWM](https://github.com/baskerville/bspwm). A single file is necessary to the configuration: *bspwmrc*. However, this window manager does not handle keybindings by itself as windows are managed by a program called *bspc*. Its author created a tool called *SXHKD* that can be used to manage keybindings. This repository of dotfiles includes a configuration of *SXHKD* using */config/sxhkd/sxhkdrc* as a configuration file + *sxhkdrc_bspwm* for the window manager specific keybindings. These two programs combined provide the following features:
 
@@ -20,6 +20,7 @@ The following software are not mandatory but recommended:
 * dmenu (hard-coded run launcher in *sxhkdrc*)
 * st (the hard-coded terminal emulator in *sxhkdrc*)
 * polybar (if you want a status bar)
+* ttf-nerd-fonts-symbols (for the icons in the status bar)
 
 *feh*, *st* and *dmenu* are very recommended because those programs are in my BSPWM configuration. This can be customized by modifying the *sxhkdrc* file.
 
@@ -130,9 +131,29 @@ I configured the key bindings that I like. They are all configured in the *sxhkd
 | `Super + SHIFT + left-down-up-right arrow` | Move current floating window to the given direction |
 
 # Status Bar
-BSPWM does not ship with a status bar. *Polybar* has been configure to show the following:
+BSPWM does not ship with a status bar. Two *Polybar* configurations are available. The first one is called *polybar-fancy* and looks like this:
+
+![](https://i.postimg.cc/LX7QmKR2/screenshot-20210912-042.jpg)
+
+It has been configured to show the following:
+
+* Linux logo on the far left
+* IP address for a given NIC (hard-coded in the *config.ini* file)
+* Disk usage
+* RAM usage
+* CPU usage
+* Workspaces in the middle
+* Volume level on the right
+* The current date and time
+* A power menu on the far right
+* An optional system tray is available but has been disabled (for aestetics)
+
+
+The second one is called *polybar-regular* and looks like the following:
 
 ![](https://i.postimg.cc/bvrT4sTz/screenshot-20210704-027.png)
+
+It has been configured to show the following:
 
 * The workspaces and focused window name on the far left
 * 📦 1 : indicates how many updates are available (script: *updates.sh*)
