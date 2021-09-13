@@ -51,7 +51,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]] && { { [[ ! -z "$SESSION" ]] || [[ ! -z "$GDMS
 	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -d "$HOME"/.ssh ]]; then
-		if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1 && [[ -z "$SSH_AUTH_SOCK" ]]; then
+		if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1; then
   			find ~/.ssh/ -type f -regex ".*id_rsa.*" | xargs ssh-add -K >/dev/null 2>&1
   		fi
 	fi
