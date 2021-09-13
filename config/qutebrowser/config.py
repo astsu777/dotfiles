@@ -675,5 +675,7 @@ config.bind('xj', 'config-cycle -p content.javascript.enabled ;; reload')
 config.bind('xi', 'config-cycle -p content.images ;; reload')
 config.bind('xc', 'config-cycle -p content.blocking.enabled ;; reload')
 config.bind('xC', 'config-cycle content.user_stylesheets "~/.config/qutebrowser/dark.css" ""')
+config.bind('xg', 'set-cmd-text :open {url:pretty}')
+config.bind('xG', 'set-cmd-text :open -t {url:pretty}')
 # Web browser interface
 config.bind('xb', 'config-cycle -p statusbar.show always never ;; config-cycle -p tabs.show always never')
