@@ -88,6 +88,10 @@ super + alt + h
 super + alt + i
 	"$SHELL" -c 'if [[ "$IRCCLIENT" == "weechat" ]]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
 
+# Toggle screenkey
+super + alt + {k,K}
+	"$SHELL" -c {'screenkey --no-systray -t 1 -p bottom -s small --key-mode composed --bak-mode baked --mods-mode normal -f "JetBrains Mono Regular 20" --font-color "#8c1aff" --bg-color "#000000" --opacity 0.4','pkill screenkey'}
+
 # Lock the screen
 super + alt + l
 	slock
