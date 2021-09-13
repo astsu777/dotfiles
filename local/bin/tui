@@ -2,11 +2,11 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:16:29
-# Last modified: Thu 26 Aug 2021 14:40:20
+# Last modified: Mon 13 Sep 2021 22:21:31
 # Version: 1.0
 #
 # Description: execute a program in a terminal emulator
 #=========================================================================
 
 [ -z "$*" ] && exit 1
-"$TERMINAL" -e "$@" || st -e "$@" || kitty -e "$@" || alacritty -e "$@" || xterm -e "$@"
+{ "$TERMINAL" -e "$@" && exit 0 ;} || { st -e "$@" && exit 0 ;} || { kitty -e "$@" && exit 0 ;} || { alacritty -e "$@" && exit 0 ;} || { xterm -e "$@" && exit 0 ;}
