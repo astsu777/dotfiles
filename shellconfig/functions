@@ -43,6 +43,20 @@ ttouch() {
 	fi
 }
 
+# Write ISO image and make sure it is bootable (BIOS+EFI)
+ddiso() {
+	if [ -z "$1" ] || [ -z "$2" ]; then
+    	echo -e "Write a bootable ISO image to a drive"
+    	echo -e "\nUsage: ddiso '<INPUT>' '<OUTPUT>'"
+    	echo -e "Ex.: ddiso ./linux.iso /dev/sda"
+    	return 1
+	elif [ "$OSTYPE" = "linux-gnu" ]; then
+		sudo dd bs=4M if="$1" of="$2" conv=fsync oflag=direct status=progress
+	else
+		sudo dd bs=4M if="$1" of="$2" conv=fsync oflag=direct
+	fi
+}
+
 #=================
 # NNN
 #=================
