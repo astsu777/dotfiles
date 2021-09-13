@@ -678,4 +678,5 @@ config.bind('xC', 'config-cycle content.user_stylesheets "~/.config/qutebrowser/
 config.bind('xg', 'set-cmd-text :open {url:pretty}')
 config.bind('xG', 'set-cmd-text :open -t {url:pretty}')
 # Web browser interface
-config.bind('xb', 'config-cycle -p statusbar.show always never ;; config-cycle -p tabs.show always never')
+config.bind('xb', 'config-cycle -p statusbar.show always never')
+config.bind('xB', 'config-cycle -p tabs.show always never')
