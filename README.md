@@ -470,6 +470,8 @@ In addition to the above, some custom keybindings are defined:
 | :--- | :--- |
 | `u/d` | scroll half a page up/down |
 | `D` | toggle page mode (dual/single) |
+| `s` | fit zoom to window width |
+| `a` | fit zoom to 100% |
 | `F` | hint links |
 | `/` | search for text (VIM like) |
 | `r` | reload the document |
