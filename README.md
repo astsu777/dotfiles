@@ -270,6 +270,7 @@ Custom keybindings are defined on the *config* file. Here is the list:
 
 ## PCManFM
 ![](https://i.postimg.cc/j5MNbWyk/screenshot-20210914-046.jpg)
+
 This application is a minimalist graphical file manager. I mostly use it to manage MTP devices and network drives. The entire configuration of the application is in the file *config/pcmanfm/default/pcmanfm.conf* and *config/libfm/libfm.conf*. The theme for the application is done via GTK. The configuration is quite standard, it only defines the layout that I prefer for browsing the files.
 
 ## Qutebrowser
