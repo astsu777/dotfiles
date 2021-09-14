@@ -43,6 +43,12 @@ for f in "$DOTFILES"/shellconfig/*aliases; do source $f; done
 # XDG config location
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 
+# Load FZF resources if installed
+if type fzf >/dev/null 2>&1; then
+	[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+	[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+fi
+
 # Load Starship prompt if installed
 if type starship > /dev/null 2>&1; then
 	eval "$(starship init bash)"

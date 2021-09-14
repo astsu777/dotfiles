@@ -106,6 +106,12 @@ if ! zplug check; then
 fi
 zplug load
 
+# Load FZF resources
+if type fzf >/dev/null 2>&1; then
+        [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+        [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+fi
+
 # Load Starship prompt
 if type starship > /dev/null 2>&1; then
 	eval "$(starship init zsh)"
