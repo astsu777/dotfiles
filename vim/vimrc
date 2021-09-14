@@ -39,17 +39,18 @@ call plug#begin('~/.vim/bundle')
 	"" File browser
 	Plug 'scrooloose/nerdtree'
 	"" Easily comment lines with 'gcc' for a line, 'gcap' for a paragraph, etc...
+		"" Custom comment string can be implemented with the following:
+		"" autocmd FileType apache setlocal commentstring=#\ %s
 	Plug 'tpope/vim-commentary'
 	"" Easily modify surrounding of a text with 'cs' followed by surrounds. 'ds' deletes surroundings
 	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
 	"" Center the text for distraction free typing
 	Plug 'junegunn/goyo.vim'
 	"" Colorize color codes
 	Plug 'lilydjwg/colorizer'
 	"" Match sections begin/end (like if/fi) using '%' and 'g%'
 	Plug 'https://github.com/adelarsq/vim-matchit'
-	"" Quickly comment multiple lines of text using <leader>cc and <leader>cn
-	Plug 'preservim/nerdcommenter'
 	"" Fuzzy Finder
 	set rtp+=~/.vim/bundle/fzf
 	Plug 'junegunn/fzf'
@@ -286,11 +287,12 @@ hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Check file in shellcheck
-map <leader>s :!clear && shellcheck %<CR>
+" Renamer
+nnoremap <leader>rr :Renamer<CR>
 
 " Goyo
-map <leader>f :Goyo \| set linebreak<CR>
+map <leader>f :Goyo 70%x70% \| set linebreak<CR>
+map <leader>ff :Goyo! \| set nolinebreak<CR>
 
 " Colorizer
 let g:colorizer_fgcontrast = 1
@@ -340,7 +342,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Disable auto-commenting on new lines
 autocmd FileType * setlocal formatoptions-=cro
 map <leader>C :setlocal formatoptions+=cro<CR>
-map <leader>c :setlocal formatoptions-=cro<CR>
+map <leader>Cd :setlocal formatoptions-=cro<CR>
 
 " Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff
@@ -386,10 +388,3 @@ map <leader>c :w! \| !compiler "<c-r>%"<CR>
 
 " Open corresponding .pdf/.html or preview
 map <leader>P :!opout <c-r>%<CR><CR>
-
-"=============
-" Macros
-"=============
-" Newsboat to FreshRSS
-" let @q = 'viWS"Wdt|dt|xxi"j0'
-" let @w = 'Wv$hy0P0i<outline text=f"f"a type="rss" xmlUrl=lvt"lyf"a htmlUrl=plf"idescription=$a/>j0'

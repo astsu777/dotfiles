@@ -63,11 +63,12 @@ I mainly use *DWM* as my window manager, but all my workstations have *JWM* inst
 *Links* is a text Web browser to run inside a terminal emulator. It can be very useful to read certain Web pages by only getting the text and not all the JavaScript, CSS, etc... It is very useful to be combined with a RSS reader such as *newsboat* for example. The custom config files stored in *links/* contains some customization but it stays very close to the defaults of the program.
 
 ## Shell/Prompt
-The folder *shellconfig* contains all the config files used to customize my shell and my command prompt. It is modular: this means that both *Bash* and *ZSH* configurations are split between different files so it is common in both shells. I use *ZSH* on my workstations and *Bash* on all my servers and sometimes workstations: both are using the same dotfiles.
+The folder *shellconfig* contains all the config files used to customize my shell and my command prompt. It is modular: this means that both *BASH* and *ZSH* configurations are split between different files so it is common in both shells. I use *ZSH* on my workstations and *BASH* on all my servers and sometimes workstations: both are using the same dotfiles.
 
 The logic of every file is the following:
 
-* *bashrc*/*zshrc*: the configuration file of both *Bash* and *ZSH* respectively
+* *bashrc*/*zshrc*: the configuration file of both *BASH* and *ZSH* respectively
+* *inputrc*: customization for *BASH*
 * *zshenv*: file necessary to load my *.zshrc* because it is not located in my *$HOME* folder
 * *common*: settings that are common to both shells (environment variables, some settings, etc...)
 * *functions*: all functions are defined here. I wanted them to be separated from aliases
@@ -79,9 +80,9 @@ The logic of every file is the following:
 <u>**Note**</u>: all the files contain a lot of checks/tests to not deploy useless aliases/functions that won't work on the system. For example, if an application is not installed and some aliases are defined for it, these aliases will not be set at all.
 
 ### Quick Discharge
-Sometimes, it can be useful to drop all the customization and have a plain vanilla *Bash*/*ZSH* environment. In order to do this, it is pretty simple:
+Sometimes, it can be useful to drop all the customization and have a plain vanilla *BASH*/*ZSH* environment. In order to do this, it is pretty simple:
 
-* *Bash*: type *bbash* and a new shell will be opened without any configuration whatsoever
+* *BASH*: type *bbash* and a new shell will be opened without any configuration whatsoever
 * *ZSH*: type *zzsh* and a new shell will be opened without any configuration whatsoever
 
 The same is available for other applications. For example, *VIM*/*Neovim* can be launched with the alias *vvim* and no configuration will be loaded.
@@ -91,7 +92,64 @@ The same is available for other applications. For example, *VIM*/*Neovim* can be
 
 In this repository, the *vim* folder contains all the necessary configuration files for *VIM*. However, I use *Neovim* as my text editor (mostly for new window stuff) but don't have a specific config file for it: the *~/.config/nvim/init.vim"* is actually a symlink to the *.vimrc*. When deploying my dotfiles, simply symlink the *vim* folder to *~/.config/nvim* and it will work.
 
-Because the *VIM* configuration is quite light, it is fully compatible with *Neovim*. There is no *Neovim* specific setting present. The colorscheme used is called *[kuroi](https://github.com/aonemd/kuroi.vim)* ans is made by *Aonemd*. I simply disabled the background to use the one set by the terminal emulator (usually a little bit transparent and dark).
+Because the *VIM* configuration is quite light, it is fully compatible with *Neovim*. There is no *Neovim* specific setting present. The colorscheme used by default is called *[kuroi](https://github.com/aonemd/kuroi.vim)* and is made by *Aonemd*. I simply disabled the background to use the one set by the terminal emulator (usually a little bit transparent and dark). Other color schemes are installed and custom keybindings can be used to toggle between them.
+
+A folder called *ftplugin* contain specific configuration for various file types.
+
+The following keybindings are configured:
+
+* **LEADER** has been configured to be **,** (=comma)
+
+| Key Binding | Mode | Action |
+| :--- | :--- | :--- |
+| `LEADER + r` | NORMAL | reload VIM/Neovim configuration |
+| `LEADER + +` | NORMAL | increase size of split |
+| `LEADER + -` | NORMAL | decrease size of split |
+| `LEADER + -` | NORMAL | reset size of split |
+| `CTRL + h` | NORMAL | navigate to the window on the left |
+| `CTRL + j` | NORMAL | navigate to the window on the bottom |
+| `CTRL + k` | NORMAL | navigate to the window on the top |
+| `CTRL + l` | NORMAL | navigate to the window on the right |
+| `LEADER + y` | NORMAL | copy to the system clipboard |
+| `LEADER + p` | NORMAL | paste from the system clipboard |
+| `K` | NORMAL | navigate down 10 lines |
+| `L` | NORMAL | navigate up 10 lines |
+| `LEADER + o` | NORMAL | toggle spell check in English (US) |
+| `LEADER + o + f` | NORMAL | toggle spell check in French (FR) |
+| `LEADER + h` | NORMAL | type command to open a horizontal split |
+| `LEADER + v` | NORMAL | type command to open a vertical split |
+| `LEADER + F1` | NORMAL | toggle through the color schemes (all plugins except the custom default one) |
+| `LEADER + F2` | NORMAL | toggle syntax highlighting (enabled by default) |
+| `LEADER + n` | NORMAL | toggle Nerd Tree (plugin: nerdtree) |
+| `LEADER + s` | NORMAL | check the file with Shellcheck |
+| `LEADER + f` | NORMAL | enable Goyo (distraction-free typing) |
+| `LEADER + f + f` | NORMAL | disable Goyo (distraction-free typing) |
+| `LEADER + t + c` | NORMAL | toggle color code highlighting |
+| `LEADER + SHIFT + f` | NORMAL | search files (plugin: fzf) |
+| `LEADER + SHIFT + r` | NORMAL | search files' content (plugin: fzf) |
+| `LEADER + SHIFT + o` | NORMAL | search available buffers (plugin: fzf) |
+| `w + ! + !` | COMMAND | write the file using sudo |
+| `LEADER + h` | NORMAL | toggle the status bar |
+| `LEADER + SHIFT + c` | NORMAL | enable auto-commenting on new lines |
+| `LEADER + SHIFT + c + d` | NORMAL | disable auto-commenting on new lines |
+| `LEADER + Space` | NORMAL | jump to <++> marker and enter insert mode |
+| `LEADER + Space` | VISUAL | jump to <++> marker and enter insert mode |
+| `LEADER + LEADER + Space` | INSERT | jump to the next <++> marker |
+| `; + l + o` | INSERT | insert *Lorem ipsum* paragraph |
+| `; + b + l` | INSERT | insert comment block (may vary depending on file type) |
+| `; + h + h` | INSERT | insert custom header (may vary depending on file type) |
+| `LEADER + c` | NORMAL | process current file with a script called *compiler* (mainly for LaTeX) |
+| `LEADER + SHIFT + p` | NORMAL | open preview of the compiled version of the current file |
+| `g + c + <MOTION>` | VISUAL | (un)comment some text using a motion such as *gcap* to comment a whole paragraph (plugin: vim-commentary) |
+| `c + s + <CURR_SURROUND> + <NEW_SURROUND>` | NORMAL | modify the surrounding quotes/parenthesies/etc... (plugin: vim-surround) |
+| `d + s + <CURR_SURROUND>` | NORMAL | delete the surrounding quotes/parenthesies/etc... (plugin: vim-surround) |
+| `y + s + <MOTION> + <NEW_SURROUND>` | NORMAL | surround text with quotes/parenthesies/etc... Use *yss* for the whole line, *ysiw* for a word, etc... (plugin: vim-surround) |
+| `S + <NEW_SURROUNDINGS>` | VISUAL | surround paragraph with specified surroundings above and below the selected text (plugin: vim-surround) |
+| `LEADER + r + r` | NORMAL | bulk rename files in the current directory (plugin: vim-renamer) |
+
+Additional keybindings are configured per filetype. All of them are described in the *ftplugin* folder. Most keybindings are for code snippets though and/or shortcuts while writing certain file types.
+
+Finally, some keybindings are also provided by the installed plugins. All the useful ones are described in the above table.
 
 # Documentation - Local Folder
 ## Resources
@@ -99,6 +157,51 @@ The folder *local/share* contains resources that can be useful for either other 
 
 ### Scripts
 Custom scripts are present in the folder *local/bin* for various things. This folder is present in the *$PATH* and all scripts can be called at any time. Some are meant to be called by other programs instead. For example, the folder *cron* contains scripts that can be used as cron jobs.
+
+The following table provides a description of all the scripts:
+
+| Script | Description |
+| :--- | :--- |
+| `block-hosts` | implement various block-lists to the hosts file |
+| `clear-dns-cache` | clear the local DNS cache if any is detected |
+| `compiler` | compile a document to another format (mainly used for LaTeX) |
+| `crontoggle` | enable/disable the cron jobs |
+| `devour` | launch a new program and hide the current window (useful to hide terminal emulator) |
+| `dhcp-server` | launch a local DHCP server |
+| `displayselect` | quickly configure screen layout, mirroring, etc... |
+| `dmenu-bookmarks` | display Web bookmarks in DMenu and open one in the default Web browser |
+| `dmenu-handler` | open an URL/URI in DMenu with its associated default application |
+| `dmenu-mount` | mount connected USB devices using DMenu |
+| `dmenu-pass` | use the *pass* password manager via DMenu |
+| `dmenu-radio` | listen to Web radios via DMenu |
+| `dmenu-record` | record the current screen, audio and/or the webcam via DMenu |
+| `dmenu-run` | run prompt using DMenu with caching (remembers if TUI/GUI programs) |
+| `dmenu-screenshot` | take a screenshot via DMenu |
+| `dmenu-shutdown` | logout/suspend/hibernate/shutdown the computer via DMenu |
+| `dmenu-stream` | check online streams and watch one via DMenu |
+| `dmenu-system` | general menu with various options to manage the system via DMenu |
+| `dmenu-theme` | change the overall WM/terminal emulator/VIM theme via DMenu |
+| `dmenu-umount` | unmount connected USB devices using DMenu |
+| `dmenu-unicode` | display all unicode and free font-awesome characters via DMenu and insert ehem anywhere |
+| `dmenu-urimount` | mount a network share via DMenu |
+| `dmenu-video` | watch/listen/download a local/online video via DMenu |
+| `dmenu-websearch` | search online using various search engines via DMenu |
+| `dmenu-wm` | list all opened windows and focus on one (like ALT-Tab on Windows) via DMenu |
+| `docker-lab` | quickly spawn one or multiple CentOS/Debian containers for test purposes |
+| `fzfmenu` | TUI alternative to DMenu using *FZF* |
+| `git_all_pull` | find all GIT repositories recursively and pull from them |
+| `kbdbacklight` | adjust the keyboard backlight easily |
+| `lsw` | list opened windows |
+| `opout` | open a preview of certain file (most useful when called from Neovim/VIM) |
+| `sxiview` | when opening a single image with *SXIV*, automatically expand to all other images in the same folder |
+| `texclear` | clean all the build files generated by LaTeX |
+| `tftp-server` | launch a local TFTP server |
+| `tspool` | interact with task-spooler using either the *ts* or *tsp* command (or none if *task-spooler* is not installed) |
+| `tui` | open a terminal emulator and execute a specific command (Ex.: 'tui htop' from DMenu) |
+| `upcloud-manager` | easily interact with *Upcloud* API |
+| `url_handler.sh` | used by *tuir* (but can be used generally), it is a general file mapper |
+| `websites-monitor` | quickly test many websites and test for error codes |
+| `yt-archive` | easily download YouTube channels/playlists/videos with caching (backend: youtube-dl) |
 
 # Documentation - Config Folder
 ## Default Applications (xdg-open)
@@ -128,7 +231,10 @@ A few comments about each terminal emulators:
 
 I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for VMs mainly and machines where I don't deploy my applications and dotfiles. My built of *ST* can be found [here](https://github.com/GSquad934/st.git).
 
+<u>**Note**</u>: every terminal emulator has its own set of keybindings. None of them are described here as I do not use them very often. Classic shortcuts such as CTRL+SHIFT+c (copy) and CTRL+SHIFT+v (paste) work as intended.
+
 ## Music Player Daemon (MPD) & NCMPCPP
+![](https://i.postimg.cc/KzzJXhdF/screenshot-20210914-045.jpg)
 *Music Player Daemon* is a daemon running in the background used to play music. In order to interact with it, a client is necessary. This repository hosts configuration files for *ncmpcpp*, but others can be used to play music. I used to use *MOC* in the past, but *MPD* allows for more flexbility and also for a centralized architecture and multiple clients.
 
 ## MSMTP
@@ -141,13 +247,56 @@ It is much more efficient to extract useful information from a lot of Websites u
 * *config/newsboat/config*: this is the configuration file of the application itself. It is used for the customization, keybindings and also how to open certain links in the feeds
 * *config/newsboat/urls*: this is the list of all the followed RSS feeds
 
+Custom keybindings are defined on the *config* file. Here is the list:
+
+* **MACRO** has been defined as ',' (=comma)
+
+| Key Binding | Action |
+| :--- | :--- |
+| `j/k` | go down/up |
+| `J/K` | go to previous/next feed |
+| `g/G` | go to the top/bottom |
+| `d/u` | page down/page up |
+| `l` | open a feed/article |
+| `h` | quit a feed/article |
+| `a` | mark article as read |
+| `n/N` | next/previous unread article |
+| `U` | show URLs in an article |
+| `MACRO + ,` OR `o` | open article in the default Web browser |
+| `MACRO + t` | open article in the TUI Web browser |
+| `MACRO + m` | download video from the article |
+| `MACRO + v` | watch video from the article using *MPV* |
+
 ## PCManFM
+![](https://i.postimg.cc/j5MNbWyk/screenshot-20210914-046.jpg)
 This application is a minimalist graphical file manager. I mostly use it to manage MTP devices and network drives. The entire configuration of the application is in the file *config/pcmanfm/default/pcmanfm.conf* and *config/libfm/libfm.conf*. The theme for the application is done via GTK. The configuration is quite standard, it only defines the layout that I prefer for browsing the files.
 
 ## Qutebrowser
 ![](https://i.postimg.cc/DwpPKc41/screenshot-20210718-034.png)
 
-*Qutebrowser* is a very minimalist Web browser made mainly for *VIM* users. The entire Web browsing experience can be performed via keybindings. The configuration file *config/qutebrowser/config.py* cam be fully customized within the Web browser itself. The theme, the keybindings, the Web engine, etc... are defined in this file.
+*Qutebrowser* is a very minimalist Web browser made mainly for *VIM* users. The entire Web browsing experience can be performed via keybindings. The configuration file *config/qutebrowser/config.py* can be fully customized within the Web browser itself. The theme, the keybindings, the Web engine, etc... are defined in this file.
+
+The configuration file contains adblock lists and also custom keybindings to execute external programs (Ex.: watch a video in MPV, toggle dark mode, etc...).
+
+| Key Binding | Action |
+| :--- | :--- |
+| `h/j/k/l` | navigate left/up/down/right on the page |
+| `H/L` | go to previous/next page |
+| `r/R/F5` | reload the page |
+| `/` | search text on the page |
+| `x + v` | hint links and queue to *MPV* for playing |
+| `x + SHIFT + v` | hint links and queue to *MPV* for listening |
+| `x + d` | hint links and queue to download |
+| `x + SHIFT + d` | hint links and queue to download audio only |
+| `x + j` | toggle javascript and reload the page |
+| `x + i` | toggle images and reload the page |
+| `x + c` | toggle content blocking (adblock) and reload the page |
+| `x + SHIFT + c` | toggle dark mode using custom CSS |
+| `x + g` | edit current URL |
+| `x + SHIFT + g` | edit current URL to open in a new tab |
+| `w + SHIFT + o` | edit current URL to open in a new window |
+| `x + b` | toggle the status bar |
+| `x + SHIFT + b` | toggle the tabs bar |
 
 ## Redshift
 This application is used to adjust the color temperature of the screen according to the sun position. The file *config/redshift/redshift.conf* is adjusting the color temperature as I like it.
@@ -170,14 +319,73 @@ I almost never use this application as I have my own script to perform Web searc
 ## Simple X Hotkey Daemon (SXHKD)
 I use this application to globally define my keybindings to do... everything. A lot of environment variables are defined in this file as I don't like to hard-code applications, paths, etc... All of these environment variables are configured in the file *shellconfig/common*.
 
-Doing this allows modularity: for example, Mod4+ALT+w opens the Web browser defined by the *$BROWSER* variable. This variable sets *Firefox* as the primary browser, but then several fallbacks such as *Qutebrowser*, *Chromium*, etc...
+Doing this allows modularity: for example, a shortcut opens the Web browser defined by the *$BROWSER* variable. This variable sets *Qutebrowser* as the primary browser, but then several fallbacks such as *Firefox*, *Brave*, etc... A default fallback option is also hard-coded in case the variable does not exit.
 
 Two configuration files are present in this repository: one called *sxhkdrc* which contains all the keybindings. The second one is called *sxhkdrc_bspwm* and is solely called when running *BSPWM*.
+
+The following table provides all the configured keybindings **except** for the *BSPWM* one (see chapter about *BSPWM* for more details):
+
+* Keybindings containing a combinationand a *&* character means a key chord.
+
+| Key Binding | Action |
+| :--- | :--- |
+| `Volume Down (media key)` | decrease the volume level by 2% |
+| `Volume Up (media key)` | increase the volume level by 2% |
+| `Volume Mute (media key)` | mute the audio |
+| `Play (media key)` | play the audio (using *playerctl*) |
+| `Stop (media key)` | stop the audio (using *playerctl*) |
+| `Previous (media key)` | play the previous audio (using *playerctl*) |
+| `Next (media key)` | play the next audio (using *playerctl*) |
+| `Calculator (media key)` | launch the calculator (variable: $CALCULATOR) |
+| `ALT + Tab` | list opened windows in DMenu and focus the selected one (script: dmenu-wm) |
+| `SUPER + Return` | launch a terminal emulator (variable: $TERMINAL) |
+| `SUPER + Mute (media key)` | kill all multimedia player |
+| `SUPER + F11` | launch a general system menu with various choices (script: dmenu-system) |
+| `SUPER + Insert` | toggle the Xorg compositor (*picom*) |
+| `SUPER + SHIFT + Escape` | open a menu to logout/suspend/hibernate/shutdown the computer (script: dmenu-shutdown) |
+| `SUPER + SHIFT + Return` | open a run launcher (variable: $LMENU) |
+| `SUPER + ALT + 5` | take a screenshot of a region (variable: $SCROTBIN) |
+| `SUPER + ALT + b` | open bookmarks in the default Web browser (script: dmenu-bookmarks) |
+| `SUPER + ALT + c` | show the clipboard manager using *clipmenu* |
+| `SUPER + ALT + e` | open the default TUI text editor (variable: $EDITOR) |
+| `SUPER + ALT + f` | open the default TUI file manager (variable: $FILEMANAGER) |
+| `SUPER + ALT + SHIFT + f` | poor file manager using DMenu |
+| `SUPER + ALT + h` | launch a TUI system monitor (variable: $SYSMONITOR) |
+| `SUPER + ALT + i` | launch an IRC client (variable: $IRCCLIENT) |
+| `SUPER + ALT + k` | launch and enable *screenkey* to display key strokes |
+| `SUPER + ALT + SHIFT + k` | kill *screenkey* |
+| `SUPER + ALT + l` | lock the computer using *slock* |
+| `SUPER + ALT + m` | launch the mail client (variable: $MAILER) |
+| `SUPER + ALT + SHIFT + m` | launch the music player (variable: $MUSICPLAYER) |
+| `SUPER + ALT + n` | launch the TUI RSS reader (variable: $RSSREADER) |
+| `SUPER + ALT + p` | launch the password manager (variable: $PASSWORDMGR) |
+| `SUPER + ALT + SHIFT + p` | launch *pass* to quickly copy passwords (script: dmenu-pass) |
+| `SUPER + ALT + r` | show a menu to listen to Web radios (script: dmenu-radio) |
+| `SUPER + ALT + SHIFT + r` | launch the TUI Reddit client (variable: $REDDITCLI) |
+| `SUPER + ALT + s` | open a menu to search online (script: dmenu-websearch) |
+| `SUPER + ALT + t` | launch a SMS application (variable: $SMSMGR) |
+| `SUPER + ALT + SHIFT + t` | launch a direct messaging application (variable: $CHATTER) |
+| `SUPER + ALT + u` | open a menu with all emojis and insert them anywhere (script: dmenu-unicode) |
+| `SUPER + ALT + SHIFT + u` | open a menu with all emojis and it to the clipboard (script: dmenu-unicode) |
+| `SUPER + ALT + v` | open a menu to watch/listen/download a video (script: dmenu-video) |
+| `SUPER + ALT + SHIFT + v` | check online streams and open a menu to watch/listen/download them (script: dmenu-stream) |
+| `SUPER + ALT + w` | launch the Web browser (variable: $BROWSER) |
+| `SUPER + ALT + SHIFT + w` | launch the TUI Web browser (variable: $BROWSERCLI) |
+| `SUPER + ALT + y` | launch *YTFZF* and display all subscriptions |
+| `SUPER + ALT + SHIFT + y` | launch *YTFZF* and prompt to search YouTube |
+| `SUPER + r & d` | open a menu to mount USB devices (script: dmenu-mount) |
+| `SUPER + r & SHIFT + d` | open a menu to unmount USB devices (script: dmenu-umount) |
+| `SUPER + r & m` | launch the audio mixer (variable: $AUDIOMIXER) |
+| `SUPER + r & s` | kill all multimedia player (useful if no media keys) |
+| `SUPER + r & w` | set a random wallpaper from *"$HOME"/.local/share/wallpapers* using *feh* |
+| `SUPER + r & SHIFT + w` | open a grid view of all the wallpapers stored in *"$HOME"/.local/share/wallpapers* using *sxiv* |
+| `SUPER + r & r & s` | refresh the *SXHKD* configuration |
 
 ## TMUX
 *TMUX* configuration has changed over the years and multiple config files are available. A single one is present for my workstations and two are aimed for remote SSH connections. The file called *tmux24-server.conf* is meant to be used on servers with *TMUX* v2.9 or higher (earlier versions should use the file called *tmuxpre29-server.conf* for compatibility purposes).
 
-My dotfiles will open *TMUX* automatically unless the window manager is *DWM* or *BSPWM*: I tend to open multiple terminal emulators when using a tiling window manager. This is configured in the file called *shellconfig/common*. On a remote server, *TMUX* is also automatically loaded upon login.
+My dotfiles will open *TMUX* automatically unless the window manager is *DWM*, *BSPWM* or *i3*: I tend to open multiple terminal emulators when using a tiling window manager. This is configured in the file called *shellconfig/common*. On a remote server, *TMUX* is also automatically loaded upon login.
+The look & feel differs between the workstation and the server configuration. The prefix keybinding too differs: CTRL+A for the workstation, CTRL+B for the server.
 
 <u>**Note**</u>: even though I also use a tiling window manager in macOS (called *Amethyst*), I still use *TMUX* automatically on my Mac as it is more convenient.
 
@@ -188,6 +396,24 @@ A *screenrc* file is present in this repository in case I would not be able to u
 * Set new windows as logged in automatically (avoid having to login manually)
 * Enable SHIFT+PgUP/SHIFT+PgDOWN
 * True colors and bold colors are enabled
+
+## SXIV
+It is a very simple image viewer, and quite minimalist. However, a custom script (=*.config/sxiv/exec/key-handler*) can be used to implement custom functions and call external programs. Therefore, several keybindings are defined to perform various actions:
+
+* For any of the keybinding to work, the prefix **CTRL+x** must be pressed first!
+
+| Key Binding | Action |
+| :--- | :--- |
+| `PREFIX & y` | copy the current image to the clipboard |
+| `PREFIX & d` | delete the current image |
+| `PREFIX & SHIFT + d` | delete the current image without prompt |
+| `PREFIX & i` | display current image media information |
+| `PREFIX & r` | rotate the current image 90 degrees permanently |
+| `PREFIX & SHIFT + r` | rotate the current image -90 degrees permanently |
+| `PREFIX & m` | mirror the current image permanently |
+| `PREFIX & e` | open the current image in *GIMP* |
+| `PREFIX & w` | set the current image as the wallpaper |
+| `PREFIX & SHIFT + w` | copy the current image to the wallpapers collection |
 
 ## Weechat
 ![](https://i.postimg.cc/9MZdZ58B/screenshot-20210718-037.png)
@@ -222,8 +448,37 @@ In the *config* folder, there are configuration files for GTK v2/v3 to setup a d
 #### BSPWM
 The folder *config/bspwm* contains the entire configuration for the *BSPWM* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/bspwm#readme).
 
+#### i3
+The folder *config/i3* contains the entire configuration for the *i3-gaps* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/i3#readme).
+
 #### Openbox
 The folder *config/openbox* contains the entire configuration for the *Openbox* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/openbox#readme). In addition to this, there are folders for *Tint2* panel and *volumeicon* which themes the volume icon in the systray.
+
+## Zathura
+This program is used to display PDFs, eBooks, etc... It is very minimalist and can be customized via a configuration file (=*.config/zathura/zathurarc*). The configuration file sets the following:
+
+* Get rid of any GUI distractions such as bars, etc...
+* Remove any horizontal/vertical padding
+* All selected text will be copied to the system clipboard
+* Monitor opened file and refresh it automatically
+
+In addition to the above, some custom keybindings are defined:
+
+| Key Binding | Action |
+| :--- | :--- |
+| `u/d` | scroll half a page up/down |
+| `D` | toggle page mode (dual/single) |
+| `F` | hint links |
+| `/` | search for text (VIM like) |
+| `r` | reload the document |
+| `R` | rotate the document 90 degrees (only in preview) |
+| `K/J` | zoom in/out |
+| `i` | invert the color (dark mode) |
+| `b` | toggle the status bar |
+| `F5` | switch to presentation mode (toggle) |
+| `F11` | switch to fullscreen mode (toggle) |
+
+Most VIM keybindings can be used within *Zathura* too: navigation with h/j/k/l, marks (=m), etc...
 
 # Contact
 You can always reach out to me:

@@ -36,3 +36,6 @@ augroup ft_shell
 	autocmd BufWritePre,FileWritePre * :silent! %s/# Last modified: \zs.*/\=strftime('%a %d %b %Y %H:%M:%S')
 	autocmd BufWritePre,FileWritePre * :silent! normal! g`'
 augroup END
+
+" Check file in shellcheck
+map <leader>s :!clear && shellcheck %<CR>
