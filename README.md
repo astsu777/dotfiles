@@ -342,6 +342,7 @@ The following table provides all the configured keybindings **except** for the *
 | `ALT + Tab` | list opened windows in DMenu and focus the selected one (script: dmenu-wm) |
 | `SUPER + Return` | launch a terminal emulator (variable: $TERMINAL) |
 | `SUPER + Mute (media key)` | kill all multimedia player |
+| `SUPER + F1` | display a system documentation with all the keybindings |
 | `SUPER + F11` | launch a general system menu with various choices (script: dmenu-system) |
 | `SUPER + Insert` | toggle the Xorg compositor (*picom*) |
 | `SUPER + SHIFT + Escape` | open a menu to logout/suspend/hibernate/shutdown the computer (script: dmenu-shutdown) |

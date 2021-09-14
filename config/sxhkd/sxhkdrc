@@ -44,6 +44,10 @@ super + Return
 super + XF86AudioMute
 	pkill mpv ; pkill mplayer ; pkill vlc ; pkill hypnotix
 
+# Show system documentation
+super + F1
+	"$SHELL" -c 'groff -mom "$HOME"/.local/share/help.mom -Tpdf | zathura -'
+
 # System manager
 super + F11
 	"$SHELL" -c 'dmenu-system'

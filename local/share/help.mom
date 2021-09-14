@@ -1,0 +1,692 @@
+.de LI
+.LIST
+.SHIFT_LIST 10p
+..
+.PARA_SPACE 1m
+.TITLE "\s+7System Documentation\s0"
+.AUTHOR "\s+2Gaetan\s0"
+.DOCTYPE    DEFAULT
+.COPYSTYLE  FINAL
+.PRINTSTYLE TYPESET
+.PT_SIZE 12
+.START
+The purpose of this document is to provide all the necessary keybindings for the window managers, various applications and the universal keyboard shortcuts to launch applications.
+
+.PP
+This document is available offline and written in the \f(CWGroff Mom\fP format. The reason for this choice instead of another format such as \f(CWLaTeX\fP is simple: the necessary tools to compile \f(CWGroff\fP documents is available on any GNU/Linux system.
+
+.HEADING 1 "General Guidelines"
+The workflow of this system follows a general flow: pretty much all keybindings are centralized in an application called \fBSXHKD\fP (Simply X Hotkey Daemon). This application allows to launch applications, control media keys, etc... Window Managers' configuration only contain keyboard shortcuts for their relevant actions (=window management). The same is true for other applications.
+
+.HEADING 2 "Lexicon"
+.PP
+There will be references to particular keyboard keys in this document with specific names. Here is the list and the mearning of each name:
+.LI
+.ITEM
+\f(CWMod4/Super\fP \(en This is commonly known as the \f(CWWindows\fP key
+.ITEM
+\f(CWMod1\fP \(en This is commonly known as the \f(CWAlt\fP key
+\f(CWMod1\fP \(en This is commonly known as the \f(CWAlt\fP key
+.LIST OFF
+
+.HEADING 2 "Environment Variables"
+.PP
+The overall dotfiles are based on the concept of flexibility: nothing useless will be set and modifying any configuration should be as easy as possible. In order to do so, a lot of configuration files are referencing some environment variables.
+
+These environment variables are all configured in the file \f(CW~/.dotfiles/config/shellconfig/common\fP. The full list is not documented here as it is mainly a living file. However, variables such as \f(CW$BROWSER, $TERMINAL, $MUSICPLAYER\fP, ... are referenced a lot in the configuration files of many applications.
+For example, if \f(CW$BROWSER\fP is set to "Firefox", modifying that variable to "Chromium" would apply the modification to all the applications on the system.
+
+.bp
+.HEADING 1 "SXHKD (Simple X Hotkey Daemon)"
+The universal keybindings configured in \f(CWSXHKD\fP are available in any graphical environment (WM or DE): this really ease the configuration of a new graphical environment.
+
+The following keybindings are configured:
+
+.LI
+.ITEM
+\f(CWVolume Down (media key)\fP \(en  decrease the volume level by 2%
+.ITEM
+\f(CWVolume Up (media key)\fP \(en  increase the volume level by 2%
+.ITEM
+\f(CWVolume Mute (media key)\fP \(en  mute the audio
+.ITEM
+\f(CWPlay (media key)\fP \(en  play the audio (using \fBplayerctl\fP)
+.ITEM
+\f(CWStop (media key)\fP \(en  stop the audio (using \fBplayerctl\fP)
+.ITEM
+\f(CWPrevious (media key)\fP \(en  play the previous audio (using \fBplayerctl\fP)
+.ITEM
+\f(CWNext (media key)\fP \(en  play the next audio (using \fBplayerctl\fP)
+.ITEM
+\f(CWCalculator (media key)\fP \(en  launch the calculator (variable: $CALCULATOR)
+.ITEM
+\f(CWALT + Tab\fP \(en  list opened windows in DMenu and focus the selected one (script: dmenu-wm)
+.ITEM
+\f(CWSUPER + Return\fP \(en  launch a terminal emulator (variable: $TERMINAL)
+.ITEM
+\f(CWSUPER + Mute (media key)\fP \(en  kill all multimedia player
+.ITEM
+\f(CWSUPER + F1\fP \(en  display this document
+.ITEM
+\f(CWSUPER + F11\fP \(en  launch a general system menu with various choices (script: dmenu-system)
+.ITEM
+\f(CWSUPER + Insert\fP \(en  toggle the Xorg compositor (\fBpicom\fP)
+.ITEM
+\f(CWSUPER + SHIFT + Escape\fP \(en  open a menu to logout/suspend/hibernate/shutdown the computer (script: dmenu-shutdown)
+.ITEM
+\f(CWSUPER + SHIFT + Return\fP \(en  open a run launcher (variable: $LMENU)
+.ITEM
+\f(CWSUPER + ALT + 5\fP \(en  take a screenshot of a region (variable: $SCROTBIN)
+.ITEM
+\f(CWSUPER + ALT + b\fP \(en  open bookmarks in the default Web browser (script: dmenu-bookmarks)
+.ITEM
+\f(CWSUPER + ALT + c\fP \(en  show the clipboard manager using \fBclipmenu\fP
+.ITEM
+\f(CWSUPER + ALT + e\fP \(en  open the default TUI text editor (variable: $EDITOR)
+.ITEM
+\f(CWSUPER + ALT + f\fP \(en  open the default TUI file manager (variable: $FILEMANAGER)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + f\fP \(en  poor file manager using DMenu
+.ITEM
+\f(CWSUPER + ALT + h\fP \(en  launch a TUI system monitor (variable: $SYSMONITOR)
+.ITEM
+\f(CWSUPER + ALT + i\fP \(en  launch an IRC client (variable: $IRCCLIENT)
+.ITEM
+\f(CWSUPER + ALT + k\fP \(en  launch and enable \fBscreenkey\fP to display key strokes
+.ITEM
+\f(CWSUPER + ALT + SHIFT + k\fP \(en  kill \fBscreenkey\fP
+.ITEM
+\f(CWSUPER + ALT + l\fP \(en  lock the computer using \fBslock\fP
+.ITEM
+\f(CWSUPER + ALT + m\fP \(en  launch the mail client (variable: $MAILER)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + m\fP \(en  launch the music player (variable: $MUSICPLAYER)
+.ITEM
+\f(CWSUPER + ALT + n\fP \(en  launch the TUI RSS reader (variable: $RSSREADER)
+.ITEM
+\f(CWSUPER + ALT + p\fP \(en  launch the password manager (variable: $PASSWORDMGR)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + p\fP \(en  launch \fBpass\fP to quickly copy passwords (script: dmenu-pass)
+.ITEM
+\f(CWSUPER + ALT + r\fP \(en  show a menu to listen to Web radios (script: dmenu-radio)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + r\fP \(en  launch the TUI Reddit client (variable: $REDDITCLI)
+.ITEM
+\f(CWSUPER + ALT + s\fP \(en  open a menu to search online (script: dmenu-websearch)
+.ITEM
+\f(CWSUPER + ALT + t\fP \(en  launch a SMS application (variable: $SMSMGR)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + t\fP \(en  launch a direct messaging application (variable: $CHATTER)
+.ITEM
+\f(CWSUPER + ALT + u\fP \(en  open a menu with all emojis and insert them anywhere (script: dmenu-unicode)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + u\fP \(en  open a menu with all emojis and it to the clipboard (script: dmenu-unicode)
+.ITEM
+\f(CWSUPER + ALT + v\fP \(en  open a menu to watch/listen/download a video (script: dmenu-video)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + v\fP \(en  check online streams and open a menu to watch/listen/download them (script: dmenu-stream)
+.ITEM
+\f(CWSUPER + ALT + w\fP \(en  launch the Web browser (variable: $BROWSER)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + w\fP \(en  launch the TUI Web browser (variable: $BROWSERCLI)
+.ITEM
+\f(CWSUPER + ALT + y\fP \(en  launch \fBYTFZF\fP and display all subscriptions
+.ITEM
+\f(CWSUPER + ALT + SHIFT + y\fP \(en  launch \fBYTFZF\fP and prompt to search YouTube
+.ITEM
+\f(CWSUPER + r & d\fP \(en  open a menu to mount USB devices (script: dmenu-mount)
+.ITEM
+\f(CWSUPER + r & SHIFT + d\fP \(en  open a menu to unmount USB devices (script: dmenu-umount)
+.ITEM
+\f(CWSUPER + r & m\fP \(en  launch the audio mixer (variable: $AUDIOMIXER)
+.ITEM
+\f(CWSUPER + r & s\fP \(en  kill all multimedia player (useful if no media keys)
+.ITEM
+\f(CWSUPER + r & w\fP \(en  set a random wallpaper from \fB"$HOME"/.local/share/wallpapers\fP using \fBfeh\fP
+.ITEM
+\f(CWSUPER + r & SHIFT + w\fP \(en  open a grid view of all the wallpapers stored in \fB"$HOME"/.local/share/wallpapers\fP using \fBsxiv\fP
+.ITEM
+\f(CWSUPER + r & r & s\fP \(en  refresh the \fBSXHKD\fP configuration
+.LIST OFF
+
+.bp
+.HEADING 1 "Window Managers"
+This chapter will contain the general keybindings for the various window managers.
+.HEADING 2 "DWM"
+The following keyboard shortcuts are available in DWM:
+.LI
+.ITEM
+\f(CWSUPER + RETURN\fP \(en  opens terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSUPER + SHIFT + RETURN\fP \(en  opens run launcher (dmenu is the run launcher but it can be modified)
+.ITEM
+\f(CWSUPER + SHIFT + c\fP \(en  closes window with focus
+.ITEM
+\f(CWSUPER + SHIFT + r\fP \(en  reloads dwm
+.ITEM
+\f(CWSUPER + SHIFT + q\fP \(en  quits dwm
+.ITEM
+\f(CWSUPER + 1-9\fP \(en  switch focus to tag (1 to 9)
+.ITEM
+\f(CWSUPER + CTRL + 1-9\fP \(en  show windows of multiple tags (1 to 9)
+.ITEM
+\f(CWSUPER + CTRL + SHIFT + 1-9\fP \(en  show focused window on multiple tags (1 to 9)
+.ITEM
+\f(CWSUPER + SHIFT + 1-9\fP \(en  send focused window to tag (1 to 9)
+.ITEM
+\f(CWSUPER + j\fP \(en  focus stack +1 (switches focus between windows in the stack)
+.ITEM
+\f(CWSUPER + k\fP \(en  focus stack -1 (switches focus between windows in the stack)
+.ITEM
+\f(CWSUPER + SHIFT + j\fP \(en  rotates stack +1 (rotates the windows in the stack)
+.ITEM
+\f(CWSUPER + SHIFT + k\fP \(en  rotates stack -1 (rotates the windows in the stack)
+.ITEM
+\f(CWSUPER + h\fP \(en  setmfact -0.05 (expands size of window)
+.ITEM
+\f(CWSUPER + l\fP \(en  setmfact +0.05 (shrinks size of window)
+.ITEM
+\f(CWSUPER + z\fP \(en  incrgaps +1 (increases the gaps)
+.ITEM
+\f(CWSUPER + x\fP \(en  incrgaps -1 (decreases the gaps)
+.ITEM
+\f(CWSUPER + a\fP \(en  toggles gaps (enable/disable)
+.ITEM
+\f(CWSUPER + SHIFT + a\fP \(en  resets the gaps to their default size
+.ITEM
+\f(CWSUPER + i\fP \(en  increases the number of master windows
+.ITEM
+\f(CWSUPER + d\fP \(en  decreases the number of master windows
+.ITEM
+\f(CWSUPER + .\fP \(en  focusmon +1 (switches focus next monitors)
+.ITEM
+\f(CWSUPER + ,\fP \(en  focusmon -1 (switches focus to prev monitors)
+.ITEM
+\f(CWSUPER + b\fP \(en  toggles the bar
+.ITEM
+\f(CWSUPER + Tab\fP \(en  cycles to the next layout
+.ITEM
+\f(CWSUPER + SHIFT + Tab\fP \(en  cycles to the previous layout
+.ITEM
+\f(CWSUPER + SHIFT + Space\fP \(en  toggles floating mode for focused window
+.ITEM
+\f(CWSUPER + SHIFT + f\fP \(en  toggles fullscreen mode for focused window
+.ITEM
+\f(CWSUPER + SHIFT + s\fP \(en  toggles sticky mode for focused window
+.ITEM
+\f(CWSUPER + Space\fP \(en  toggles floating
+.ITEM
+\f(CWSUPER + ALT + l\fP \(en  locks the screen
+.ITEM
+\f(CWSUPER + CTRL + t\fP \(en  displays the system tray
+.ITEM
+\f(CWSUPER + CTRL + SHIFT + t\fP \(en  closes the system tray
+.ITEM
+\f(CWF12\fP \(en  open a scratchpad
+.LIST OFF
+
+.HEADING 2 "BSPWM"
+The following keyboard shortcuts are available in BSPWM:
+
+.LI
+.ITEM
+\f(CWSuper + RETURN\fP \(en  Open terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + RETURN\fP \(en  Open run launcher (dmenu is the run launcher but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + c\fP \(en  Kill window with focus
+.ITEM
+\f(CWSuper + SHIFT + q\fP \(en  Quit BSPWM
+.ITEM
+\f(CWSuper + SHIFT + r\fP \(en  Reload BSPWM
+.ITEM
+\f(CWSuper + 1-9\fP \(en  Switch focus to workspace (1 to 9)
+.ITEM
+\f(CWSuper + SHIFT + 1-9\fP \(en  Move focused window to workspace (1 to 9)
+.ITEM
+\f(CWSuper + Space\fP \(en  Switch between monocle and tiled layout
+.ITEM
+\f(CWSuper + SHIFT + Space\fP \(en  Focused window becomes sticky
+.ITEM
+\f(CWSuper + t\fP \(en  Focused window set to tiled state
+.ITEM
+\f(CWSuper + SHIFT + t\fP \(en  Focused window set to pseudo tiled state
+.ITEM
+\f(CWSuper + f\fP \(en  Focused window set to floating state
+.ITEM
+\f(CWSuper + SHIFT + f\fP \(en  Focused window set to fullscreen state
+.ITEM
+\f(CWSuper + h-j-k-l\fP \(en  Give focus to window in either the west-south-north-east direction
+.ITEM
+\f(CWSuper + SHIFT + h-j-k-l\fP \(en  Move the focused window to the west-south-north-east
+.ITEM
+\f(CWSuper + [\fP \(en  Move to the previous workspace on the current monitor
+.ITEM
+\f(CWSuper + ]\fP \(en  Move to the next workspace on the current monitor
+.ITEM
+\f(CWSuper + Grave\fP \(en  Move to the last focused window
+.ITEM
+\f(CWSuper + Tab\fP \(en  Move to the last focused workspace
+.ITEM
+\f(CWSuper + o\fP \(en  Focus to the older opened window regardless of its workspace
+.ITEM
+\f(CWSuper + i\fP \(en  Focus to the newer opened window regardless of its workspace
+.ITEM
+\f(CWSuper + left-down-up-right arrow\fP \(en  Expand current window to the given direction
+.ITEM
+\f(CWSuper + Alt + left-down-up-right arrow\fP \(en  Reduce current window to the given direction
+.ITEM
+\f(CWSuper + SHIFT + left-down-up-right arrow\fP \(en  Move current floating window to the given direction
+.LIST OFF
+
+.bp
+.HEADING 2 "i3"
+The following keyboard shortcuts are available in i3:
+
+.LI
+.ITEM
+\f(CWSuper + RETURN\fP \(en  Open terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + RETURN\fP \(en  Open run launcher (dmenu is the run launcher but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + c\fP \(en  Kill window with focus
+.ITEM
+\f(CWSuper + SHIFT + q\fP \(en  Quit i3
+.ITEM
+\f(CWSuper + SHIFT + r\fP \(en  Reload i3's configuration file
+.ITEM
+\f(CWSuper + SHIFT + ALT + r\fP \(en  Restart i3
+.ITEM
+\f(CWSuper + 1-9\fP \(en  Switch focus to workspace (1 to 9)
+.ITEM
+\f(CWSuper + SHIFT + 1-9\fP \(en  Move focused window to workspace (1 to 9)
+.ITEM
+\f(CWSuper + SHIFT + Space\fP \(en  Toggle focused window between floating/tiling mode
+.ITEM
+\f(CWSuper + SHIFT + f\fP \(en  Focused window set to fullscreen state
+.ITEM
+\f(CWSuper + h-j-k-l\fP \(en  Give focus to window in either the west-south-north-east direction
+.ITEM
+\f(CWSuper + SHIFT + h-j-k-l\fP \(en  Move the focused window to the west-south-north-east
+.ITEM
+\f(CWSuper + ALT + h-j-k-l\fP \(en  Choose if the next window will open to the west-south-north-east (manual tiling)
+.ITEM
+\f(CWSuper + F10\fP \(en  Choose the stacking layout
+.ITEM
+\f(CWSuper + F11\fP \(en  Choose the tabbed layout
+.ITEM
+\f(CWSuper + F12\fP \(en  Toggle the split layout
+.ITEM
+ALT + r`  Switch to 'resize' mode
+.LIST OFF
+
+.HEADING 2 "Openbox"
+The following keyboard shortcuts are available in Openbox:
+
+.LI
+.ITEM
+\f(CWSuper + RETURN\fP \(en  Open terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + RETURN\fP \(en  Open run launcher (dmenu is the run launcher but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + c\fP \(en  Close window with focus
+.ITEM
+\f(CWSuper + SHIFT + q\fP \(en  Quit Openbox
+.ITEM
+\f(CWSuper + 1-4\fP \(en  Switch focus to workspace (1 to 4)
+.ITEM
+\f(CWSuper + SHIFT + Left/Right\fP \(en  Send focused window to previous/next workspace
+.ITEM
+\f(CWShift + CONTROL + Left\fP \(en  Tile focused window to the left of the screen
+.ITEM
+\f(CWShift + CONTROL + Right\fP \(en  Tile focused window to the right of the screen
+.ITEM
+\f(CWShift + CONTROL + Up\fP \(en  Tile focused window to the top of the screen
+.ITEM
+\f(CWShift + CONTROL + Down\fP \(en  Tile focused window to the bottom of the screen
+.ITEM
+\f(CWSuper + CONTROL + Up\fP \(en  Maximize focused window
+.ITEM
+\f(CWSuper + CONTROL + Down\fP \(en  Unmaximize focused window
+.ITEM
+\f(CWSuper + SHIFT + F\fP \(en  Maximise focused window and remove its decoration
+.ITEM
+\f(CWCONTROL + SHIFT + F\fP \(en  Unmaximize focused window and decore it
+.ITEM
+\f(CWALT + Space\fP \(en  Open window's contextual menu
+.ITEM
+\f(CWALT + Tab\fP \(en  Cycle between opened windows
+.ITEM
+\f(CWSuper + Alt + l\fP \(en  Lock screen
+.LIST OFF
+
+.HEADING 1 "Miscellaneous Applications"
+Many applications have their own set of keybindings to peform various actions. All the following subchapters provide the custom keyboard shortcuts of every application installed on the system.
+
+.HEADING 2 "Neovim/VIM"
+The \f(CW.vimrc\fP file is compatible with both \fBNeovim\fP and \fBVIM\fP. All the keybindings below use a special key called the \fBLEADER\fP key. This has been configured to be \f(CW,\fP (=comma).
+
+.LI
+.ITEM
+\f(CWLEADER + r\fP \(en  (NORMAL)  reload VIM/Neovim configuration
+.ITEM
+\f(CWLEADER + +\fP \(en  (NORMAL)  increase size of split
+.ITEM
+\f(CWLEADER + -\fP \(en  (NORMAL)  decrease size of split
+.ITEM
+\f(CWLEADER + -\fP \(en  (NORMAL)  reset size of split
+.ITEM
+\f(CWCTRL + h\fP \(en  (NORMAL)  navigate to the window on the left
+.ITEM
+\f(CWCTRL + j\fP \(en  (NORMAL)  navigate to the window on the bottom
+.ITEM
+\f(CWCTRL + k\fP \(en  (NORMAL)  navigate to the window on the top
+.ITEM
+\f(CWCTRL + l\fP \(en  (NORMAL)  navigate to the window on the right
+.ITEM
+\f(CWLEADER + y\fP \(en  (NORMAL)  copy to the system clipboard
+.ITEM
+\f(CWLEADER + p\fP \(en  (NORMAL)  paste from the system clipboard
+.ITEM
+\f(CWK\fP \(en  (NORMAL)  navigate down 10 lines
+.ITEM
+\f(CWL\fP \(en  (NORMAL)  navigate up 10 lines
+.ITEM
+\f(CWLEADER + o\fP \(en  (NORMAL)  toggle spell check in English (US)
+.ITEM
+\f(CWLEADER + o + f\fP \(en  (NORMAL)  toggle spell check in French (FR)
+.ITEM
+\f(CWLEADER + h\fP \(en  (NORMAL)  type command to open a horizontal split
+.ITEM
+\f(CWLEADER + v\fP \(en  (NORMAL)  type command to open a vertical split
+.ITEM
+\f(CWLEADER + F1\fP \(en  (NORMAL)  toggle through the color schemes (all plugins except the custom default one)
+.ITEM
+\f(CWLEADER + F2\fP \(en  (NORMAL)  toggle syntax highlighting (enabled by default)
+.ITEM
+\f(CWLEADER + n\fP \(en  (NORMAL)  toggle Nerd Tree (plugin: nerdtree)
+.ITEM
+\f(CWLEADER + s\fP \(en  (NORMAL)  check the file with Shellcheck
+.ITEM
+\f(CWLEADER + f\fP \(en  (NORMAL)  enable Goyo (distraction-free typing)
+.ITEM
+\f(CWLEADER + f + f\fP \(en  (NORMAL)  disable Goyo (distraction-free typing)
+.ITEM
+\f(CWLEADER + t + c\fP \(en  (NORMAL)  toggle color code highlighting
+.ITEM
+\f(CWLEADER + SHIFT + f\fP \(en  (NORMAL)  search files (plugin: fzf)
+.ITEM
+\f(CWLEADER + SHIFT + r\fP \(en  (NORMAL)  search files' content (plugin: fzf)
+.ITEM
+\f(CWLEADER + SHIFT + o\fP \(en  (NORMAL)  search available buffers (plugin: fzf)
+.ITEM
+\f(CWw + ! + !\fP \(en  COMMAND  write the file using sudo
+.ITEM
+\f(CWLEADER + h\fP \(en  (NORMAL)  toggle the status bar
+.ITEM
+\f(CWLEADER + SHIFT + c\fP \(en  (NORMAL)  enable auto-commenting on new lines
+.ITEM
+\f(CWLEADER + SHIFT + c + d\fP \(en  (NORMAL)  disable auto-commenting on new lines
+.ITEM
+\f(CWLEADER + Space\fP \(en  (NORMAL)  jump to <++> marker and enter insert mode
+.ITEM
+\f(CWLEADER + Space\fP \(en  (VISUAL)  jump to <++> marker and enter insert mode
+.ITEM
+\f(CWLEADER + LEADER + Space\fP \(en  (INSERT)  jump to the next <++> marker
+.ITEM
+\f(CW; + l + o\fP \(en  (INSERT)  insert *Lorem ipsum* paragraph
+.ITEM
+\f(CW; + b + l\fP \(en  (INSERT)  insert comment block (may vary depending on file type)
+.ITEM
+\f(CW; + h + h\fP \(en  (INSERT)  insert custom header (may vary depending on file type)
+.ITEM
+\f(CWLEADER + c\fP \(en  (NORMAL)  process current file with a script called *compiler* (mainly for LaTeX)
+.ITEM
+\f(CWLEADER + SHIFT + p\fP \(en  (NORMAL)  open preview of the compiled version of the current file
+.ITEM
+\f(CWg + c + <MOTION>\fP \(en  (VISUAL)  (un)comment some text using a motion such as *gcap* to comment a whole paragraph (plugin: vim-commentary)
+.ITEM
+\f(CWc + s + <CURR_SURROUND> + <NEW_SURROUND>\fP \(en  (NORMAL)  modify the surrounding quotes/parenthesies/etc... (plugin: vim-surround)
+.ITEM
+\f(CWd + s + <CURR_SURROUND>\fP \(en  (NORMAL)  delete the surrounding quotes/parenthesies/etc... (plugin: vim-surround)
+.ITEM
+\f(CWy + s + <MOTION> + <NEW_SURROUND>\fP \(en  (NORMAL)  surround text with quotes/parenthesies/etc... Use *yss* for the whole line, *ysiw* for a word, etc... (plugin: vim-surround)
+.ITEM
+\f(CWS + <NEW_SURROUNDINGS>\fP \(en  (VISUAL)  surround paragraph with specified surroundings above and below the selected text (plugin: vim-surround)
+.ITEM
+\f(CWLEADER + r + r\fP \(en  (NORMAL)  bulk rename files in the current directory (plugin: vim-renamer)
+.LIST OFF
+
+.bp
+.HEADING 2 "Newsboat"
+This application is a TUI RSS reader. It is very minimalist but is also extensible as custom macros can be written to perform actions on the RSS articles.
+
+The following keybindings are available in this application:
+
+.LI
+.ITEM
+\f(CWj/k\fP \(en  go down/up
+.ITEM
+\f(CWJ/K\fP \(en  go to previous/next feed
+.ITEM
+\f(CWg/G\fP \(en  go to the top/bottom
+.ITEM
+\f(CWd/u\fP \(en  page down/page up
+.ITEM
+\f(CWl\fP \(en  open a feed/article
+.ITEM
+\f(CWh\fP \(en  quit a feed/article
+.ITEM
+\f(CWa\fP \(en  mark article as read
+.ITEM
+\f(CWn/N\fP \(en  next/previous unread article
+.ITEM
+\f(CWU\fP \(en  show URLs in an article
+.ITEM
+\f(CWMACRO + ,\fP \(en OR `o`  open article in the default Web browser
+.ITEM
+\f(CWMACRO + t\fP \(en  open article in the TUI Web browser
+.ITEM
+\f(CWMACRO + m\fP \(en  download video from the article
+.ITEM
+\f(CWMACRO + v\fP \(en  watch video from the article using *MPV*
+.LIST OFF
+
+.HEADING 2 "SXIV"
+Simple X Image Viewer is a minimalist image viewer that can take a shell script for extensibility. The shell script is \f(CW.config/sxiv/exec/key-handler\fP. All keybindings must have the prefix \fBCTRL+x\fP.
+
+.LI
+\f(CWPREFIX & y\fP \(en  copy the current image to the clipboard
+.ITEM
+\f(CWPREFIX & d\fP \(en  delete the current image
+.ITEM
+\f(CWPREFIX & SHIFT + d\fP \(en  delete the current image without prompt
+.ITEM
+\f(CWPREFIX & i\fP \(en  display current image media information
+.ITEM
+\f(CWPREFIX & r\fP \(en  rotate the current image 90 degrees permanently
+.ITEM
+\f(CWPREFIX & SHIFT + r\fP \(en  rotate the current image -90 degrees permanently
+.ITEM
+\f(CWPREFIX & m\fP \(en  mirror the current image permanently
+.ITEM
+\f(CWPREFIX & e\fP \(en  open the current image in *GIMP*
+.ITEM
+\f(CWPREFIX & w\fP \(en  set the current image as the wallpaper
+.ITEM
+\f(CWPREFIX & SHIFT + w\fP \(en  copy the current image to the wallpapers collection
+.LIST OFF
+
+.HEADING 2 "Qutebrowser"
+This Web browser has been made for VIM users: the entire Web browser can be driven by keyboard shortcuts and a lot of similarities with VIM are present.
+Once again, this Web browser's configuration is extensible as it allows defining custom keybindings to call external programs.
+
+.LI
+.ITEM
+\f(CWh/j/k/l\fP \(en  navigate left/up/down/right on the page
+.ITEM
+\f(CWH/L\fP \(en  go to previous/next page
+.ITEM
+\f(CWr/R/F5\fP \(en  reload the page
+.ITEM
+\f(CW/\fP \(en  search text on the page
+.ITEM
+\f(CWx + v\fP \(en  hint links and queue to *MPV* for playing
+.ITEM
+\f(CWx + SHIFT + v\fP \(en  hint links and queue to *MPV* for listening
+.ITEM
+\f(CWx + d\fP \(en  hint links and queue to download
+.ITEM
+\f(CWx + SHIFT + d\fP \(en  hint links and queue to download audio only
+.ITEM
+\f(CWx + j\fP \(en  toggle javascript and reload the page
+.ITEM
+\f(CWx + i\fP \(en  toggle images and reload the page
+.ITEM
+\f(CWx + c\fP \(en  toggle content blocking (adblock) and reload the page
+.ITEM
+\f(CWx + SHIFT + c\fP \(en  toggle dark mode using custom CSS
+.ITEM
+\f(CWx + g\fP \(en  edit current URL
+.ITEM
+\f(CWx + SHIFT + g\fP \(en  edit current URL to open in a new tab
+.ITEM
+\f(CWw + SHIFT + o\fP \(en  edit current URL to open in a new window
+.ITEM
+\f(CWx + b\fP \(en  toggle the status bar
+.ITEM
+\f(CWx + SHIFT + b\fP \(en  toggle the tabs bar
+.LIST OFF
+.HEADING 2 "Zathura"
+This application can be used to read documents such as PDF, EPUB, etc... It is very minimalist but has very useful features that can be called with various keyboard shortcuts.
+
+.LI
+\f(CWu/d\fP \(en  scroll half a page up/down
+.ITEM
+\f(CWD\fP \(en  toggle page mode (dual/single)
+.ITEM
+\f(CWs\fP \(en  fit zoom to window width
+.ITEM
+\f(CWa\fP \(en  fit zoom to 100%
+.ITEM
+\f(CWF\fP \(en  hint links
+.ITEM
+\f(CW/\fP \(en  search for text (VIM like)
+.ITEM
+\f(CWr\fP \(en  reload the document
+.ITEM
+\f(CWR\fP \(en  rotate the document 90 degrees (only in preview)
+.ITEM
+\f(CWK/J\fP \(en  zoom in/out
+.ITEM
+\f(CWi\fP \(en  invert the color (dark mode)
+.ITEM
+\f(CWb\fP \(en  toggle the status bar
+.ITEM
+\f(CWF5\fP \(en  switch to presentation mode (toggle)
+.ITEM
+\f(CWF11\fP \(en  switch to fullscreen mode (toggle)
+.LIST OFF
+
+.bp
+.HEADING 1 "Scripts"
+A lot of custom scripts are written to use the system the way it is intended to. A lot of keybindings and applications are using these scripts. They are all stored in the \f(CW.local/bin\fP folder.
+
+Here is a small description for every script:
+
+.LI
+.ITEM
+\f(CWblock-hosts\fP \(en  implement various block-lists to the hosts file
+.ITEM
+\f(CWclear-dns-cache\fP \(en  clear the local DNS cache if any is detected
+.ITEM
+\f(CWcompiler\fP \(en  compile a document to another format (mainly used for LaTeX)
+.ITEM
+\f(CWcrontoggle\fP \(en  enable/disable the cron jobs
+.ITEM
+\f(CWdevour\fP \(en  launch a new program and hide the current window (useful to hide terminal emulator)
+.ITEM
+\f(CWdhcp-server\fP \(en  launch a local DHCP server
+.ITEM
+\f(CWdisplayselect\fP \(en  quickly configure screen layout, mirroring, etc...
+.ITEM
+\f(CWdmenu-bookmarks\fP \(en  display Web bookmarks in DMenu and open one in the default Web browser
+.ITEM
+\f(CWdmenu-handler\fP \(en  open an URL/URI in DMenu with its associated default application
+.ITEM
+\f(CWdmenu-mount\fP \(en  mount connected USB devices using DMenu
+.ITEM
+\f(CWdmenu-pass\fP \(en  use the *pass* password manager via DMenu
+.ITEM
+\f(CWdmenu-radio\fP \(en  listen to Web radios via DMenu
+.ITEM
+\f(CWdmenu-record\fP \(en  record the current screen, audio and/or the webcam via DMenu
+.ITEM
+\f(CWdmenu-run\fP \(en  run prompt using DMenu with caching (remembers if TUI/GUI programs)
+.ITEM
+\f(CWdmenu-screenshot\fP \(en  take a screenshot via DMenu
+.ITEM
+\f(CWdmenu-shutdown\fP \(en  logout/suspend/hibernate/shutdown the computer via DMenu
+.ITEM
+\f(CWdmenu-stream\fP \(en  check online streams and watch one via DMenu
+.ITEM
+\f(CWdmenu-system\fP \(en  general menu with various options to manage the system via DMenu
+.ITEM
+\f(CWdmenu-theme\fP \(en  change the overall WM/terminal emulator/VIM theme via DMenu
+.ITEM
+\f(CWdmenu-umount\fP \(en  unmount connected USB devices using DMenu
+.ITEM
+\f(CWdmenu-unicode\fP \(en  display all unicode and free font-awesome characters via DMenu and insert ehem anywhere
+.ITEM
+\f(CWdmenu-urimount\fP \(en  mount a network share via DMenu
+.ITEM
+\f(CWdmenu-video\fP \(en  watch/listen/download a local/online video via DMenu
+.ITEM
+\f(CWdmenu-websearch\fP \(en  search online using various search engines via DMenu
+.ITEM
+\f(CWdmenu-wm\fP \(en  list all opened windows and focus on one (like ALT-Tab on Windows) via DMenu
+.ITEM
+\f(CWdocker-lab\fP \(en  quickly spawn one or multiple CentOS/Debian containers for test purposes
+.ITEM
+\f(CWfzfmenu\fP \(en  TUI alternative to DMenu using *FZF*
+.ITEM
+\f(CWgit_all_pull\fP \(en  find all GIT repositories recursively and pull from them
+.ITEM
+\f(CWkbdbacklight\fP \(en  adjust the keyboard backlight easily
+.ITEM
+\f(CWlsw\fP \(en  list opened windows
+.ITEM
+\f(CWopout\fP \(en  open a preview of certain file (most useful when called from Neovim/VIM)
+.ITEM
+\f(CWsxiview\fP \(en  when opening a single image with *SXIV*, automatically expand to all other images in the same folder
+.ITEM
+\f(CWtexclear\fP \(en  clean all the build files generated by LaTeX
+.ITEM
+\f(CWtftp-server\fP \(en  launch a local TFTP server
+.ITEM
+\f(CWtspool\fP \(en  interact with task-spooler using either the *ts* or *tsp* command (or none if *task-spooler* is not installed)
+.ITEM
+\f(CWtui\fP \(en  open a terminal emulator and execute a specific command (Ex.: 'tui htop' from DMenu)
+.ITEM
+\f(CWupcloud-manager\fP \(en  easily interact with *Upcloud* API
+.ITEM
+\f(CWurl_handler.sh\fP \(en  used by *tuir* (but can be used generally), it is a general file mapper
+.ITEM
+\f(CWwebsites-monitor\fP \(en  quickly test many websites and test for error codes
+.ITEM
+\f(CWyt-archive\fP \(en  easily download YouTube channels/playlists/videos with caching (backend: youtube-dl)
+.LIST OFF
+
+.HEADING 1 "Contact"
+You can always reach out to me:
+.LI
+.ITEM
+.PDF_WWW_LINK "mailto:gaetan@ictpourtous.com" "gaetan@ictpourtous.com"
+\(en For questions, info, etc...
+.ITEM
+.PDF_WWW_LINK "https://twitter.com/GaetanICT" "Twitter @GaetanICT"
+\(en For stalking online
+.ITEM
+.PDF_WWW_LINK "https://github.com/GSquad934" "My Github Page"
+\(en For all the projects I share
+.LIST OFF
