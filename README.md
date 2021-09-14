@@ -235,6 +235,7 @@ I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for
 
 ## Music Player Daemon (MPD) & NCMPCPP
 ![](https://i.postimg.cc/KzzJXhdF/screenshot-20210914-045.jpg)
+
 *Music Player Daemon* is a daemon running in the background used to play music. In order to interact with it, a client is necessary. This repository hosts configuration files for *ncmpcpp*, but others can be used to play music. I used to use *MOC* in the past, but *MPD* allows for more flexbility and also for a centralized architecture and multiple clients.
 
 ## MSMTP
