@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Thu 09 Sep 2021 15:15:18
+# Last modified: Thu 16 Sep 2021 00:38:09
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -305,11 +305,71 @@ toggleNord() {
 	I3NormalBorder="#2e3440"
 	I3Indicator="#e5e9f0"
 }
+
+#=======================
+# Doom-one Theme
+#=======================
+toggleDoomone() {
+	# ST/Xresources
+	foreground="#bbc2cf"
+	background="#282c34"
+	normalBlack="#282c34"
+	normalRed="#ff6c6b"
+	normalGreen="#98be65"
+	normalYellow="#ecbe7b"
+	normalBlue="#51afef"
+	normalMagenta="#c678dd"
+	normalCyan="#46d9ff"
+	normalWhite="#bbc2cf"
+	brightBlack="#282c34"
+	brightRed="#ff6c6b"
+	brightGreen="#98be65"
+	brightYellow="#ecbe7b"
+	brightBlue="#51afef"
+	brightMagenta="#c678dd"
+	brightCyan="#46d9ff"
+	brightWhite="#bbc2cf"
+
+	# Alacritty
+	alacrittyTheme="doomone_theme"
+
+	# Kitty
+	kittyTheme="doomone_theme"
+
+	# VIM
+	vimColorscheme="doom-one"
+	vimLightline="jellybeans"
+
+	# BSPWM
+	BSPWMBackground="#282c34"
+	BSPWMForeground="#bbc2cf"
+	BSPWMBar="#c678dd"
+	BSPWMActiveBorder="#98be65"
+	BSPWMNormalBorder="#282c34"
+
+	# DWM
+	DWMBackground="#282c34"
+	DWMForeground="#bbc2cf"
+	DWMBarFG="#282c34"
+	DWMBarBG="#c678dd"
+	DWMNormalBorder="#282c34"
+	DWMActiveBorder="#98be65"
+
+	# i3
+	I3Background="#282c34"
+	I3Foreground="#bbc2cf"
+	I3Bar="#c678dd"
+	I3ActiveBorder="#98be65"
+	I3NormalBorder="#282c34"
+	I3Indicator="#51afef"
+}
+
 #=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDracula\\nGruvbox\\nNord\\nOnedark" | sort | dmenu -l 5 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nNord\\nOnedark" | sort | dmenu -l 6 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
+	"Doom-One") toggleDoomone ;;
 	"Dracula") toggleDracula ;;
 	"Gruvbox") toggleGruvbox ;;
 	"Nord") toggleNord ;;
