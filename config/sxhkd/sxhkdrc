@@ -77,8 +77,8 @@ super + alt + c
 	clipmenu
 
 # Text editor
-super + alt + e
-	"$SHELL" -c 'tui "$EDITOR"'
+super + alt + {e,E}
+	"$SHELL" -c {'tui $EDITOR','emacs'}
 
 # File manager
 super + alt + {f,F}
