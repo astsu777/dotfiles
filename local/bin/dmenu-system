@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Fri 27 Aug 2021 10:27:56
+# Last modified: Sun 19 Sep 2021 11:47:01
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -63,7 +63,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Record Screen/Webcam") dmenu-record ;;
 		"Run") dmenu-run ;;
 		"Take Screenshot") "$SCROTBIN" || dmenu-screenshot ;;
-		"Toggle Compositor") if pgrep picom > /dev/null 2>&1; then pkill picom > /dev/null 2>&1; else nohup picom -CGb --no-fading-openclose > /dev/null 2>&1 ; fi ;;
+		"Toggle Compositor") if pgrep picom > /dev/null 2>&1; then pkill picom > /dev/null 2>&1; else nohup picom --experimental-backends > /dev/null 2>&1 ; fi ;;
 		"Toggle Cron Jobs") crontoggle ;;
 		"Unmount USB Drive") dmenu-umount ;;
 		"Web Search") dmenu-websearch ;;

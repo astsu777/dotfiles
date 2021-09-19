@@ -92,7 +92,7 @@ fi
 
 # Launch compositer for fancy graphical effects
 if type picom >/dev/null 2>&1; then
-	picom -CGb --no-fading-openclose &
+	picom --experimental-backends &
 fi
 
 # GNOME-Keyring for password caching

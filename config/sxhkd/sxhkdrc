@@ -54,7 +54,7 @@ super + F11
 
 # Toggle compositor
 super + Insert
-	"$SHELL" -c 'if pgrep picom; then pkill picom; else picom -CGb --no-fading-openclose & disown ; fi'
+	"$SHELL" -c 'if pgrep picom; then pkill picom; else picom --experimental-backends & disown ; fi'
 
 # Shutdown the system
 super + shift + Escape

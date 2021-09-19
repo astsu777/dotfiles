@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:18:53
-# Last modified: Sat 28 Aug 2021 10:15:08
+# Last modified: Sun 19 Sep 2021 11:46:05
 # Version: 1.0
 #
 # Description: script executed by Xinit when the GUI is DWM
@@ -74,5 +74,5 @@ fi
 
 # Launch compositer for fancy graphical effects
 if type picom > /dev/null 2>&1; then
-	picom -CGb --no-fading-openclose &
+	picom --experimental-backends &
 fi
