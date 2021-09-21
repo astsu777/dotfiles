@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Fri 27 Aug 2021 21:25:24
-# Last modified: Fri 27 Aug 2021 21:25:59
+# Last modified: Tue 21 Sep 2021 23:51:00
 # Version: 1.0
 #
 # Description: use FZF as a DMenu replacement
@@ -23,7 +23,7 @@ chmod 600 "$input" "$output"
 # sadly we can't use "$@" here directly because we are inside sh -c "..." call
 # already.
 # you can also set window dimensions via -g '=COLSxROWS', see man st.
-st -c fzfmenu -n fzfmenu -e bash -c "cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
+st -c fzfmenu -n fzfmenu -g 120x34 -e bash -c "cat $input | fzf $(printf -- " '%s'" "$@" | sed "s/^ ''$//") | tee $output" &
 
 # handle ctrl+c outside child terminal window
 trap 'kill "$!" 2>/dev/null; rm -f "$input" "$output"' EXIT
