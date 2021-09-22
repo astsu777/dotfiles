@@ -248,9 +248,10 @@ if type fzf > /dev/null 2>&1; then
 				sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs -I{} -o sudo peco '{}'
 			}
 		fi
+
 		# Search shell history
 		if type xdotool >/dev/null 2>&1; then
-			hs(){
+			hs() {
 				cmd=$(history | fzf +s | awk '{print $1}')
 				xdotool type "!$cmd" && xdotool key KP_Enter
 			}
