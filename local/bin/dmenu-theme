@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Thu 16 Sep 2021 00:38:09
+# Last modified: Sat 25 Sep 2021 10:19:54
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -365,13 +365,72 @@ toggleDoomone() {
 }
 
 #=======================
+# Light Theme
+#=======================
+toggleLight() {
+	# ST/Xresources
+	foreground="#000000"
+	background="#f7f7f7"
+	normalBlack="#000000"
+	normalRed="#aa3731"
+	normalGreen="#448c27"
+	normalYellow="#cb9000"
+	normalBlue="#325cc0"
+	normalMagenta="#7a3e9d"
+	normalCyan="#0083b2"
+	normalWhite="#f7f7f7"
+	brightBlack="#777777"
+	brightRed="#f05050"
+	brightGreen="#60cb00"
+	brightYellow="#ffbc5d"
+	brightBlue="#007acc"
+	brightMagenta="#e64ce6"
+	brightCyan="#00aacb"
+	brightWhite="#f7f7f7"
+
+	# Alacritty
+	alacrittyTheme="light_theme"
+
+	# Kitty
+	kittyTheme="light_theme"
+
+	# VIM
+	vimColorscheme="alabaster"
+	vimLightline="one"
+
+	# BSPWM
+	BSPWMBackground="#777777"
+	BSPWMForeground="#d8dee9"
+	BSPWMBar="#e5e9f0"
+	BSPWMActiveBorder="#d8dee9"
+	BSPWMNormalBorder="#777777"
+
+	# DWM
+	DWMBackground="#777777"
+	DWMForeground="#d8dee9"
+	DWMBarFG="#777777"
+	DWMBarBG="#e5e9f0"
+	DWMNormalBorder="#777777"
+	DWMActiveBorder="#d8dee9"
+
+	# i3
+	I3Background="#777777"
+	I3Foreground="#d8dee9"
+	I3Bar="#e5e9f0"
+	I3ActiveBorder="#d8dee9"
+	I3NormalBorder="#777777"
+	I3Indicator="#e5e9f0"
+}
+
+#=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nNord\\nOnedark" | sort | dmenu -l 6 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nLight\\nNord\\nOnedark" | sort | dmenu -l 7 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
 	"Doom-One") toggleDoomone ;;
 	"Dracula") toggleDracula ;;
 	"Gruvbox") toggleGruvbox ;;
+	"Light") toggleLight ;;
 	"Nord") toggleNord ;;
 	"Onedark") toggleOnedark ;;
 	*) exit 0 ;;
