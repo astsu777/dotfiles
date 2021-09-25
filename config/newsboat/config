@@ -34,6 +34,8 @@ bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
 bind-key U show-urls
+bind-key d pb-download
+bind-key c pb-cancel
 
 # Configure browsers for various type of URLs
 browser $BROWSER
@@ -61,3 +63,9 @@ highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
 highlight article ":.*\\(link\\)$" cyan default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
+
+# Podboat
+podcast-auto-enqueue no
+download-path "~/.local/share/newsboat/%n"
+max-downloads 5
+player mpv

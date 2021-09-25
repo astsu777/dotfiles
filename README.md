@@ -269,16 +269,18 @@ Custom keybindings are defined on the *config* file. Here is the list:
 | `j/k` | go down/up |
 | `J/K` | go to previous/next feed |
 | `g/G` | go to the top/bottom |
-| `d/u` | page down/page up |
 | `l` | open a feed/article |
 | `h` | quit a feed/article |
 | `a` | mark article as read |
+| `e` | enqueue podcast for download |
 | `n/N` | next/previous unread article |
 | `U` | show URLs in an article |
 | `MACRO + ,` OR `o` | open article in the default Web browser |
 | `MACRO + t` | open article in the TUI Web browser |
 | `MACRO + m` | download video from the article |
 | `MACRO + v` | watch video from the article using *MPV* |
+
+*Newsboat* comes with another program called *Podboat*. This is a companion application to download and listen to podcasts. When some podcasts are enqueued for download, *Podboat* can be used to download and listen to the podcasts. The keybindings for *Podboat* are all described in the program's status bar.
 
 ## PCManFM
 ![](https://i.postimg.cc/j5MNbWyk/screenshot-20210914-046.jpg)

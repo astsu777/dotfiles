@@ -19,6 +19,15 @@ https://www.cyberciti.biz/atom/atom.xml "~nixCraft: Linux Tips"
 http://www.taltan.fr/feed/atom "~Taltan.blog.bkp"
 ---NEWS---
 http://www.informaticien.be/index.ks?page=rss_news "~Informaticien.be"
+---PODCASTS---
+https://feeds.buzzsprout.com/1142720.rss "~Blueprint, by SANS"
+https://feeds.megaphone.fm/cyberwire-daily-podcast "~CyberWire Daily, by CyberWire"
+https://isc.sans.edu/dailypodcast.xml "~Daily StormCast, by SANS"
+https://feeds.packetpushers.net/packetpushersfatpipe/ "~Fat Pipe Of The Packet Pushers, by The Packet Pushers Team"
+https://feeds.feedwrench.com/TheFreelancersShow.rss "~Freelancers' Show, by DevChat.tv"
+https://rss.acast.com/mydadwroteaporno "~My Dad Wrote A Porno"
+https://feedproxy.google.com/RandomInterestingFactsBy42 "~Random Interesting Facts, by Thoughty2"
+https://risky.biz/feeds/risky-business "~Risky Business, by Patrick Gray"
 ---SECURITY---
 https://blog.gdssecurity.com/labs/rss.xml "~Blog GDS Security"
 https://www.circl.lu/rss.xml "~CIRCL Luxembourg"

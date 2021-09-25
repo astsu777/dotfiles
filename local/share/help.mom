@@ -461,6 +461,8 @@ The \f(CW.vimrc\fP file is compatible with both \fBNeovim\fP and \fBVIM\fP. All 
 .HEADING 2 "Newsboat"
 This application is a TUI RSS reader. It is very minimalist but is also extensible as custom macros can be written to perform actions on the RSS articles.
 
+Some keybindings below use a special key called the \fBMACRO\fP key. This has been configured to be \f(CW,\fP (=comma).
+
 The following keybindings are available in this application:
 
 .LI
@@ -471,13 +473,13 @@ The following keybindings are available in this application:
 .ITEM
 \f(CWg/G\fP \(en  go to the top/bottom
 .ITEM
-\f(CWd/u\fP \(en  page down/page up
-.ITEM
 \f(CWl\fP \(en  open a feed/article
 .ITEM
 \f(CWh\fP \(en  quit a feed/article
 .ITEM
 \f(CWa\fP \(en  mark article as read
+.ITEM
+\f(CWe\fP \(en  enqueue podcast for download
 .ITEM
 \f(CWn/N\fP \(en  next/previous unread article
 .ITEM
@@ -491,6 +493,8 @@ The following keybindings are available in this application:
 .ITEM
 \f(CWMACRO + v\fP \(en  watch video from the article using *MPV*
 .LIST OFF
+
+\f(CWNewsboat\fP comes with another program called \f(CWPodboat\fP. This is a companion application to download and listen to podcasts. When some podcasts are enqueued for download, \f(CWPodboat\fP can be used to download and listen to the podcasts. The keybindings for \f(CWPodboat\fP are all described in the program's status bar.
 
 .HEADING 2 "SXIV"
 Simple X Image Viewer is a minimalist image viewer that can take a shell script for extensibility. The shell script is \f(CW.config/sxiv/exec/key-handler\fP. All keybindings must have the prefix \fBCTRL+x\fP.
