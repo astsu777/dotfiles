@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Sun 26 Sep 2021 18:06:10
+# Last modified: Sun 26 Sep 2021 23:18:43
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -33,15 +33,15 @@ fi
 if [ "$TOPMENU" = 'Network Management' ]; then
 	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nNordVPN Connection\nMount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
-		"Block Ads") tui 'block-hosts ; bash' ;;
-		"Clear DNS Cache") tui 'clear-dns-cache' ;;
-		"Cloud Manager") tui 'upcloud-manager' ;;
-		"DHCP Server") tui 'dhcp-server' ;;
+		"Block Ads") tui $SHELL -c "block-hosts ; $SHELL" ;;
+		"Clear DNS Cache") tui $SHELL -c "clear-dns-cache ; $SHELL" ;;
+		"Cloud Manager") tui $SHELL -c "upcloud-manager ; $SHELL" ;;
+		"DHCP Server") tui $SHELL -c "dhcp-server ; $SHELL" ;;
 		"Manage Network") tui 'nmtui' ;;
 		"NordVPN Connection") dmenu-nordvpn ;;
 		"Mount URI") tui 'dmenu-urimount' ;;
-		"TFTP Server") tui 'tftp-server' ;;
-		"Websites Monitor") tui 'websites-monitor ; bash' ;;
+		"TFTP Server") tui $SHELL -c "tftp-server ; $SHELL" ;;
+		"Websites Monitor") tui $SHELL -c "websites-monitor ; $SHELL" ;;
 		*) exec dmenu-system ;;
 	esac
 fi
@@ -55,7 +55,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Bookmarks List") dmenu-bookmarks ;;
 		"Change Theme") tui dmenu-theme ;;
 		"Check Online Streams") dmenu-stream ;;
-		"Check System Queue") tui 'tspool ; bash' ;;
+		"Check System Queue") tui $SHELL -c "tspool ; $SHELL" ;;
 		"Listen To Radio") dmenu-radio ;;
 		"Mount USB Drive") dmenu-mount ;;
 		"Password List") dmenu-pass ;;
