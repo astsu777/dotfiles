@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Sun 22 Aug 2021 12:14:59
+# Last modified: Sun 26 Sep 2021 16:36:57
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -49,6 +49,7 @@ search_options[Google Translate \(EN\)]="https://translate.google.com/?&q=%s&sl=
 search_options[Google Translate \(FR\)]="https://translate.google.com/?&q=%s&sl=auto&tl=fr"
 search_options[Google]="https://www.google.com/search?q=%s"
 search_options[Homebrew]="https://formulae.brew.sh/formula/%s"
+search_options[Homebrew Casks]="https://formulae.brew.sh/cask/%s"
 search_options[Instant Gaming]="https://www.instant-gaming.com/en/search/?q=%s"
 search_options[LaTeX WikiBooks]="https://en.wikibooks.org/w/index.php?search=latex%2F%s&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1&ns4=1&ns102=1&ns110=1&ns112=1"
 search_options[Linux Packages]="https://pkgs.org/search/?q=%s"

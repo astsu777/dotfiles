@@ -454,6 +454,7 @@ c.url.searchengines = {
     "Google_Translate_\(FR\)": "https://translate.google.com/?&q={}&sl=auto&tl=fr",
     "Google": "https://www.google.com/search?q={}",
     "Homebrew": "https://formulae.brew.sh/formula/{}",
+    "Homebrew_Casks": "https://formulae.brew.sh/cask/{}",
     "Instant_Gaming": "https://www.instant-gaming.com/en/search/?q={}",
     "LaTeX_WikiBooks": "https://en.wikibooks.org/w/index.php?search=latex%2F{}&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1&ns4=1&ns102=1&ns110=1&ns112=1",
     "Linux_Packages": "https://pkgs.org/search/?q={}",
