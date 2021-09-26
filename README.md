@@ -170,7 +170,6 @@ The following table provides a description of all the scripts:
 | `dhcp-server` | launch a local DHCP server |
 | `displayselect` | quickly configure screen layout, mirroring, etc... |
 | `dmenu-bookmarks` | display Web bookmarks in DMenu and open one in the default Web browser |
-| `dmenu-handler` | open an URL/URI in DMenu with its associated default application |
 | `dmenu-mount` | mount connected USB devices using DMenu |
 | `dmenu-pass` | use the *pass* password manager via DMenu |
 | `dmenu-radio` | listen to Web radios via DMenu |

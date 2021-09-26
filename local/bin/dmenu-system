@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Sun 19 Sep 2021 11:47:01
+# Last modified: Sun 26 Sep 2021 14:52:31
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -49,7 +49,7 @@ fi
 # Miscellaneous
 #=======================
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
-	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nListen To Radio\nMount USB Drive\nOpen URI/URL\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
+	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nListen To Radio\nMount USB Drive\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
 		"Bookmarks List") dmenu-bookmarks ;;
 		"Change Theme") tui dmenu-theme ;;
@@ -57,7 +57,6 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Check System Queue") tui 'tspool ; bash' ;;
 		"Listen To Radio") dmenu-radio ;;
 		"Mount USB Drive") dmenu-mount ;;
-		"Open URI/URL") dmenu-handler ;;
 		"Password List") dmenu-pass ;;
 		"Play Audio/Video") dmenu-video ;;
 		"Record Screen/Webcam") dmenu-record ;;
