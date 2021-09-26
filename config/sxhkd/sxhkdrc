@@ -82,7 +82,7 @@ super + alt + {e,E}
 
 # File manager
 super + alt + {f,F}
-	"$SHELL" -c {'if [[ "$FILEMANAGER" == "nnn" ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi','xdg-open "$(locate home media | dmenu -i -p "File to open")"'}
+	"$SHELL" -c {'if [[ "$FILEMANAGER" == "nnn"* ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi','xdg-open "$(locate home media | dmenu -i -p "File to open")"'}
 
 # System monitor
 super + alt + h

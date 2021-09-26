@@ -82,7 +82,7 @@ if type nnn > /dev/null 2>&1; then
     	# stty lwrap undef
     	# stty lnext undef
 
-    	nnn "$@"
+    	nnn -c "$@"
 
     	if [ -f "$NNN_TMPFILE" ]; then
             	. "$NNN_TMPFILE"
