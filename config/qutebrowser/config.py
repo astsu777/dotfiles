@@ -435,7 +435,7 @@ c.url.searchengines = {
     "CommandLineFu": "https://www.commandlinefu.com/commands/matching/{}/bys=/sort-by-votes",
     "CVE_Details": "https://www.cvedetails.com/google-search-results.php?q={}",
     "CVE_Mitre": "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword={}",
-    "DaFont": "https://search.azlyrics.com/search.php?q={}",
+    "DaFont": "https://www.dafont.com/search.php?q={}",
     "DuckDuckGo": "https://duckduckgo.com/?q={}&key=156e688cb0dde7e4558a853154db4b02f5b831c07f124ef90c48c6c0e372e4f4e0299c4073d0de7199994a409a65c5d6ab999b4c7105085dd6a0e653f4430b95",
     "eBay": "https://www.befr.ebay.be/sch/i.html?_nkw={}",
     "eBooks_-_Zlibrary": "https://be1lib.org/s/{}",

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Sun 26 Sep 2021 16:36:57
+# Last modified: Sun 26 Sep 2021 16:39:00
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -30,7 +30,7 @@ search_options[Cisco]="https://search.cisco.com/search?query=%s"
 search_options[CommandLineFu]="https://www.commandlinefu.com/commands/matching/%s/bys=/sort-by-votes"
 search_options[CVE Details]="https://www.cvedetails.com/google-search-results.php?q=%s"
 search_options[CVE Mitre]="https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=%s"
-search_options[DaFont]="https://search.azlyrics.com/search.php?q=%s"
+search_options[DaFont]="https://www.dafont.com/search.php?q=%s"
 search_options[DuckDuckGo]="https://duckduckgo.com/?q=%s&key=156e688cb0dde7e4558a853154db4b02f5b831c07f124ef90c48c6c0e372e4f4e0299c4073d0de7199994a409a65c5d6ab999b4c7105085dd6a0e653f4430b95"
 search_options[eBay]="https://www.befr.ebay.be/sch/i.html?_nkw=%s"
 search_options[eBooks - Zlibrary]="https://be1lib.org/s/%s"
