@@ -7,4 +7,4 @@ configuration {
 	sort: true;
 	sorting-method: "levenshtein";
 }
-@import "/usr/share/rofi/themes/Arc-Dark.rasi"
+@import "dark.rasi"

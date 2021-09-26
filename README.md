@@ -329,7 +329,7 @@ This application is used to adjust the color temperature of the screen according
 ## Rofi
 ![](https://i.postimg.cc/650hMK9j/screenshot-20210718-035.png)
 
-While *DMenu* is a very good application that can be used as a basic launcher menu, I prefer *Rofi* as it provides more option and can also be used as a drop-in replacement of *DMenu*. The file *config/rofi/config.rasi* contains the configuration of *Rofi*. It defines how the content presented by the application is sorted, the fuzzy search and also the theme used by the application.
+While *DMenu* is a very good application that can be used as a basic launcher menu, I prefer *Rofi* as it provides more option and can also be used as a drop-in replacement of *DMenu*. The file *config/rofi/config.rasi* contains the configuration of *Rofi*. It defines how the content presented by the application is sorted, the fuzzy search and also the theme used by the application. The other files are just themes called by the configuration file.
 
 ## Starship Prompt
 The *[Starship](https://starship.rs/)* prompt is a cross-shell prompt compatible with *BASH*, *ZSH*, *FISH* and is written in *Rust*. I use this prompt on all my workstations so I can enjoy the same experience everywhere with some nice customization. When the *Starship* prompt is not installed, a more standard but yet customized prompt is also configured for *BASH* and *ZSH*. The following screenshot illustrates the *Starship* prompt vs. my customized *BASH* prompt:
