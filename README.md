@@ -287,6 +287,13 @@ Custom keybindings are defined on the *config* file. Here is the list:
 
 This application is a minimalist graphical file manager. I mostly use it to manage MTP devices and network drives. The entire configuration of the application is in the file *config/pcmanfm/default/pcmanfm.conf* and *config/libfm/libfm.conf*. The theme for the application is done via GTK. The configuration is quite standard, it only defines the layout that I prefer for browsing the files.
 
+## Picom
+A compositor is not a necessary program, but recommended to help with tearing on the screen. It also can provide nice graphic effects such as fading, transparency to windows, shadows, etc... There are many available, but the recommended one is the standard version of *Picom*. A custom configuration file (*config/picom/picom.conf*) contains custom settings for the compositor.
+
+In this repository, the configuration file disables shadows, fading animations and blur. It also disables all sorts of transparency for all window types. I only like my terminal emulators to be somewhat transparent, but I am managing this via the terminal emulator's settings.
+
+However, the configuration file contains all the necessary settings to easily enable any kind of graphic effects. For example, an opacity rule exists for *XTerm* so this particular program is somewhat transparent, although *XTerm* does not support transparency by itself.
+
 ## Qutebrowser
 ![](https://i.postimg.cc/DwpPKc41/screenshot-20210718-034.png)
 
