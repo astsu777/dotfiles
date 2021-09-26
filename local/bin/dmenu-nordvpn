@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Sun 26 Sep 2021 18:54:00
+# Last modified: Sun 26 Sep 2021 18:57:15
 # Version: 1.0
 #
 # Description: manage NordVPN connectivity
@@ -35,7 +35,7 @@ checkStatus() {
 }
 
 connect() {
-	country=$(printf "%s\n" $(nordvpn countries) | sed '/-/d; s/,//' | sort | dmenu -p 'Choose a country:') || exit
+	country=$(printf "%s\n" $(nordvpn countries) | sed '/-/d; s/,//' | sort | dmenu -i -p 'Choose a country:') || exit
 	[ "$status" -eq 0 ] && nordvpn connect "$country"
 }
 
