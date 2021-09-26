@@ -97,7 +97,7 @@ style = "purple"
 
 # Git repo status (ahead, etc...)
 [git_status]
-disabled=true
+disabled=false
 style = "bold purple"
 
 # Background jobs customization
