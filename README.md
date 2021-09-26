@@ -171,6 +171,7 @@ The following table provides a description of all the scripts:
 | `displayselect` | quickly configure screen layout, mirroring, etc... |
 | `dmenu-bookmarks` | display Web bookmarks in DMenu and open one in the default Web browser |
 | `dmenu-mount` | mount connected USB devices using DMenu |
+| `dmenu-nordvpn` | manage NordVPN using DMenu |
 | `dmenu-pass` | use the *pass* password manager via DMenu |
 | `dmenu-radio` | listen to Web radios via DMenu |
 | `dmenu-record` | record the current screen, audio and/or the webcam via DMenu |

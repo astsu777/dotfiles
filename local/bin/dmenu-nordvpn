@@ -1,0 +1,131 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:12:43
+# Last modified: Sun 26 Sep 2021 18:54:00
+# Version: 1.0
+#
+# Description: manage NordVPN connectivity
+#=========================================================================
+
+#=======================
+# Prerequisites
+#=======================
+if ! type nordvpn >/dev/null 2>&1; then
+	notify-send "⚠️ Error" "Please install 'nordvpn'"
+	exit 1
+fi
+
+if ! groups | grep nordvpn >/dev/null 2>&1; then
+	notify-send "⚠️ Error" "You're not a member of the 'nordvpn' group"
+	exit 1
+fi
+
+#=======================
+# Functions
+#=======================
+
+checkStatus() {
+	account=$(nordvpn account)
+	printf %s "$account" | grep 'You are not logged in.' && tui nordvpn login && notify-send "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
+
+	status=$(nordvpn status)
+	printf %s "$status" | grep 'Disconnected' && status=0
+	printf %s "$status" | grep 'Connected' && status=1
+}
+
+connect() {
+	country=$(printf "%s\n" $(nordvpn countries) | sed '/-/d; s/,//' | sort | dmenu -p 'Choose a country:') || exit
+	[ "$status" -eq 0 ] && nordvpn connect "$country"
+}
+
+disconnect() {
+	[ "$status" -eq 1 ] && nordvpn disconnect
+}
+
+ctrlTech() {
+	currentTech=$(nordvpn settings | awk '/Tech/ {print $4}')
+	choice=$(printf "%s\n" 'NordLynx (Wireguard)' 'OpenVPN' | dmenu -i -p "Current tech is $currentTech. Please choose:")
+	case "$choice" in
+		"NordLynx (Wireguard)")
+			nordvpn set technology NordLynx && notify-send "Protocol Modified" "NordLynx has been set as the used protocol" ;;
+		"OpenVPN")
+			nordvpn set technology OpenVPN && notify-send "Protocol Modified" "OpenVPN has been set as the used protocol" ;;
+	esac
+}
+
+ctrlFW() {
+	currentFW=$(nordvpn settings | awk '/Firewall/ {print $2}')
+	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "Firewall is $currentFW. Please choose:")
+	case "$choice" in
+		"Enable") nordvpn set firewall on && notify-send "Firewall Enabled" "The firewall is now enabled" ;;
+		"Disable") nordvpn set firewall off && notify-send "Firewall Disabled" "The firewall is now disabled" ;;
+	esac
+}
+
+ctrlKS() {
+	currentKS=$(nordvpn settings | awk '/Kill/ {print $3}')
+	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "Kill Switch is $currentKS. Please choose:")
+	case "$choice" in
+		"Enable") nordvpn set killswitch on && notify-send "Kill Switch Enabled" "The kill switch is now enabled" ;;
+		"Disable") nordvpn set killswitch off && notify-send "Kill Switch Disabled" "The kill switch is now disabled" ;;
+	esac
+}
+
+ctrlCS() {
+	currentCS=$(nordvpn settings | awk '/CyberSec/ {print $2}')
+	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "CyberSec is $currentCS. Please choose:")
+	case "$choice" in
+		"Enable") nordvpn set cybersec on && notify-send "CyberSec Enabled" "CyberSec is now enabled" ;;
+		"Disable") nordvpn set cybersec off && notify-send "CyberSec Disabled" "CyberSec is now disabled" ;;
+	esac
+}
+
+ctrlDNS() {
+	currentDNS=$(nordvpn settings | awk '/DNS/ {print $2}')
+	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "DNS is $currentDNS. Please choose:")
+	case "$choice" in
+		"Enable")
+			servers=$(printf "%s" "$@" | dmenu -p 'DNS Servers (space separated):')
+			nordvpn set dns $servers && notify-send "DNS Configured" "DNS servers $servers are set"
+			;;
+		"Disable") nordvpn set dns off && notify-send "DNS Disabled" "Custom DNS servers are disabled" ;;
+	esac
+}
+
+#=======================
+# Code
+#=======================
+
+checkStatus
+
+case "$status" in
+	1)
+		OPTS=$(printf "%s\n" 'Change Country' 'Options' 'Disconnect' | dmenu -i -p 'Already connected. Choose Action:')
+		case "$OPTS" in
+			"Change Country") disconnect && exec dmenu-nordvpn ;;
+			"Options") OPTS=options ;;
+			"Disconnect") disconnect ;;
+		esac
+		;;
+	0)
+		OPTS=$(printf "%s\n" 'Connect' 'Options' | dmenu -i -p 'Choose Action:')
+		case "$OPTS" in
+			"Connect") connect ;;
+			"Options") OPTS=options ;;
+		esac
+		;;
+esac
+
+if [ "$OPTS" = 'options' ]; then
+	OPTS=$(printf "%s\n" 'Protocol/Technology' 'Firewall' 'Kill Switch' 'CyberSec' 'DNS' | dmenu -i -p 'Choose Action:')
+	case "$OPTS" in
+		"Protocol/Technology") ctrlTech ;;
+		"Firewall") ctrlFW ;;
+		"Kill Switch") ctrlKS ;;
+		"CyberSec") ctrlCS ;;
+		"DNS") ctrlDNS ;;
+		*) exec dmenu-nordvpn ;;
+	esac
+fi
+exit 0

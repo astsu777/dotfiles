@@ -620,6 +620,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWdmenu-mount\fP \(en  mount connected USB devices using DMenu
 .ITEM
+\f(CWdmenu-nordvpn\fP \(en  manage NordVPN using DMenu
+.ITEM
 \f(CWdmenu-pass\fP \(en  use the *pass* password manager via DMenu
 .ITEM
 \f(CWdmenu-radio\fP \(en  listen to Web radios via DMenu
