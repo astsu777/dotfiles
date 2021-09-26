@@ -7,4 +7,4 @@ configuration {
 	sort: true;
 	sorting-method: "levenshtein";
 }
-@import "dark.rasi"
+@import "custom_theme.rasi"

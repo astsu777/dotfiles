@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sat 25 Sep 2021 10:19:54
+# Last modified: Sun 26 Sep 2021 22:12:02
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -72,6 +72,9 @@ toggleCustom() {
 	I3ActiveBorder="#304569"
 	I3NormalBorder="#282c34"
 	I3Indicator="#96abcf"
+
+	# Rofi
+	rofiTheme="custom_theme"
 }
 
 #=======================
@@ -130,6 +133,9 @@ toggleGruvbox() {
 	I3ActiveBorder="#79520e"
 	I3NormalBorder="#282828"
 	I3Indicator="#e7a432"
+
+	# Rofi
+	rofiTheme="gruvbox_theme"
 }
 
 #=======================
@@ -188,6 +194,9 @@ toggleDracula() {
 	I3ActiveBorder="#d3b7fb"
 	I3NormalBorder="#282a36"
 	I3Indicator="#caa9fa"
+
+	# Rofi
+	rofiTheme="dracula_theme"
 }
 
 #=======================
@@ -246,6 +255,9 @@ toggleOnedark() {
 	I3ActiveBorder="#e06c75"
 	I3NormalBorder="#1e2127"
 	I3Indicator="#edabb0"
+
+	# Rofi
+	rofiTheme="onedark_theme"
 }
 
 #=======================
@@ -304,6 +316,9 @@ toggleNord() {
 	I3ActiveBorder="#d8dee9"
 	I3NormalBorder="#2e3440"
 	I3Indicator="#e5e9f0"
+
+	# Rofi
+	rofiTheme="nord_theme"
 }
 
 #=======================
@@ -362,6 +377,9 @@ toggleDoomone() {
 	I3ActiveBorder="#98be65"
 	I3NormalBorder="#282c34"
 	I3Indicator="#51afef"
+
+	# Rofi
+	rofiTheme="doomone_theme"
 }
 
 #=======================
@@ -420,6 +438,9 @@ toggleLight() {
 	I3ActiveBorder="#d8dee9"
 	I3NormalBorder="#777777"
 	I3Indicator="#e5e9f0"
+
+	# Rofi
+	rofiTheme="light_theme"
 }
 
 #=======================
@@ -550,6 +571,11 @@ if type i3 > /dev/null 2>&1 && [ -f "$HOME"/.config/i3/config ]; then
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $I3Foreground" "$HOME"/.config/i3/polybar-txt.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $I3Bar" "$HOME"/.config/i3/polybar-txt.config 2>&1
 	fi
+fi
+
+# Rofi
+if type rofi > /dev/null 2>&1 && [ -f "$HOME"/.config/rofi/config.rasi ]; then
+	sed -i --follow-symlinks "/^@import\s.*\.rasi/c @import \"$rofiTheme\.rasi\"" "$HOME"/.config/rofi/config.rasi 2>&1
 fi
 
 notify
