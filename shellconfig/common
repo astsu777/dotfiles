@@ -214,7 +214,7 @@ if type nnn > /dev/null 2>&1; then
 	export NNN_BMS="h:$HOME;d:$DOTFILES;s:$SCRIPTS"
 	export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
 	export NNN_TMPFILE="/tmp/.lastd"
-	export NNN_OPENER="url_handler.sh"
+	export NNN_OPENER="handler"
 fi
 
 # YTFZF

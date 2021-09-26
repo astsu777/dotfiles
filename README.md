@@ -189,6 +189,7 @@ The following table provides a description of all the scripts:
 | `docker-lab` | quickly spawn one or multiple CentOS/Debian containers for test purposes |
 | `fzfmenu` | TUI alternative to DMenu using *FZF* |
 | `git_all_pull` | find all GIT repositories recursively and pull from them |
+| `handler` | general file/URL mapper |
 | `kbdbacklight` | adjust the keyboard backlight easily |
 | `lsw` | list opened windows |
 | `opout` | open a preview of certain file (most useful when called from Neovim/VIM) |
@@ -198,11 +199,10 @@ The following table provides a description of all the scripts:
 | `tspool` | interact with task-spooler using either the *ts* or *tsp* command (or none if *task-spooler* is not installed) |
 | `tui` | open a terminal emulator and execute a specific command (Ex.: 'tui htop' from DMenu) |
 | `upcloud-manager` | easily interact with *Upcloud* API |
-| `url_handler.sh` | used by *urlview* (but can be used generally), it is a general file mapper |
 | `websites-monitor` | quickly test many websites and test for error codes |
 | `yt-archive` | easily download YouTube channels/playlists/videos with caching (backend: youtube-dl) |
 
-<u>**Note**</u>: the script *url_handler.sh* is named like that because its name is hardcoded in the program *Urlview*.
+<u>**Note**</u>: a symlink called *url_handler.sh* is referencing *handler* because this name is hardcoded in the program *Urlview*.
 
 # Documentation - Config Folder
 ## Default Applications (xdg-open)

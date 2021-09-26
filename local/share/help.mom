@@ -656,6 +656,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWgit_all_pull\fP \(en  find all GIT repositories recursively and pull from them
 .ITEM
+\f(CWhandler\fP \(en  general file/URL mapper
+.ITEM
 \f(CWkbdbacklight\fP \(en  adjust the keyboard backlight easily
 .ITEM
 \f(CWlsw\fP \(en  list opened windows
@@ -674,12 +676,12 @@ Here is a small description for every script:
 .ITEM
 \f(CWupcloud-manager\fP \(en  easily interact with *Upcloud* API
 .ITEM
-\f(CWurl_handler.sh\fP \(en  used by *tuir* (but can be used generally), it is a general file mapper
-.ITEM
 \f(CWwebsites-monitor\fP \(en  quickly test many websites and test for error codes
 .ITEM
 \f(CWyt-archive\fP \(en  easily download YouTube channels/playlists/videos with caching (backend: youtube-dl)
 .LIST OFF
+
+\fBNote\fP: a symlink called \f(CWurl_handler.sh\fP is referencing \f(CWhandler\fP because this name is hardcoded in the program \f(CWUrlview\fP.
 
 .HEADING 1 "Contact"
 You can always reach out to me:
