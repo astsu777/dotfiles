@@ -2,14 +2,14 @@
 
 * {
     foreground: rgba(196,203,212,1);
-    background: rgba(40,44,52,0.7);
-    active-background: rgba(198,120,221,0.7);
-    urgent-background: rgba(255,85,85,0.7);
+    background: rgba(40,44,52,0.8);
+    active-background: rgba(198,120,221,0.8);
+    urgent-background: rgba(255,85,85,0.8);
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
     selected-active-background: @active-background;
     separatorcolor: @bordercolor;
-    bordercolor: rgba(152,190,101,0.7);
+    bordercolor: rgba(152,190,101,0.8);
 }
 
 #window {
