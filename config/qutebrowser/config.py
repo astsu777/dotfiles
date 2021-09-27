@@ -295,7 +295,7 @@ c.scrolling.bar = 'never'
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
 # Type: Bool
-c.scrolling.smooth = True
+c.scrolling.smooth = False
 
 # When to show the statusbar.
 # Type: String
