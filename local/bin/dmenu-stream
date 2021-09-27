@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Sun 22 Aug 2021 12:12:51
+# Last modified: Mon 27 Sep 2021 15:13:18
 # Version: 1.0
 #
 # Description: check online streams and watch them
@@ -40,6 +40,7 @@ if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; th
 				youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
 			done < "$Streams"
 			mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
+			notify-send "🎬 Refreshed online streams" "The online streams cache has been generated" && setsid -f paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
 			;;
 		'Use Cache')
 			;;

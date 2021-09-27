@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sun 26 Sep 2021 22:12:02
+# Last modified: Mon 27 Sep 2021 15:05:26
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -12,7 +12,9 @@
 # Functions
 #=======================
 notify() {
+	notifySound="$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1 )"
 	notify-send "🖌️ Theme Installed" "Please reload your WM to apply new theme (or reboot)"
+	setsid -f paplay "$notifySound"
 	echo "Theme Installed. Please reload your WM to apply new theme (or reboot)"
 }
 
