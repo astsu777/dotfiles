@@ -111,7 +111,7 @@ In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been 
 *Feh* is used to setup the wallpaper. A default wallpaper (file: *background.jpg*) is supplied with this configuration of Openbox. *Feh* is executed by the *autostart* file to set the default wallpaper. In order to setup a custom wallpaper, it is possible to either replace the *background.jpg* file or to modify the execution of *feh* in the *autostart* file with something like the following:
 
 ```
-feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
+feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
 ```
 
 This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/GSquad934/wallpapers).

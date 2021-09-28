@@ -172,7 +172,7 @@ It has been configured to show the following:
 *Feh* is used to setup the wallpaper. A default wallpaper (file: *background.jpg*) is supplied with this configuration of BSPWM. *Feh* is executed by the *bspwmrc* file to set the default wallpaper. In order to setup a custom wallpaper, it is possible to either replace the *background.jpg* file or to modify the execution of *feh* in the *bspwmrc* file with something like the following:
 
 ```
-feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
+feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
 ```
 
 This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/GSquad934/wallpapers).

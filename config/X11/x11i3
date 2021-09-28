@@ -11,9 +11,9 @@
 # Configure wallpaper
 if type feh > /dev/null 2>&1; then
 	if [ -d "$HOME/.local/share/wallpapers" ]; then
-		feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* &
+		feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* &
 	else
-		feh --bg-fill --no-fehbg "$HOME"/.config/i3/background.jpg &
+		feh --bg-scale --no-fehbg "$HOME"/.config/i3/background.jpg &
 	fi
 fi
 

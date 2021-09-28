@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:18:20
-# Last modified: Fri 27 Aug 2021 11:14:04
+# Last modified: Tue 28 Sep 2021 23:58:53
 # Version: 1.0
 #
 # Description: this is called by SXIV after pressing CTRL+X
@@ -34,7 +34,7 @@ while read -r file; do
 		# Open the file in GIMP
 		"e") if type gimp > /dev/null 2>&1; then setsid -f gimp "$file"; else notify-send "❗ Gimp is not installed!"; fi ;;
 		# Set the file as wallpaper
-		"w") if type feh > /dev/null 2>&1; then feh --bg-fill --no-fehbg "$file" && notify-send "$file set as wallpaper"; else notify-send "❗ Feh is not installed!";  fi ;;
+		"w") if type feh > /dev/null 2>&1; then feh --bg-scale --no-fehbg "$file" && notify-send "$file set as wallpaper"; else notify-send "❗ Feh is not installed!";  fi ;;
 		# Copy the file to wallpapers folder
 		"W") cp -n "$file" "$wallpapersloc" && notify-send "$file copied to $wallpapersloc" || notify-send "⚠️ $file already exists" ;;
 	esac

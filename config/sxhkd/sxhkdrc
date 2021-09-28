@@ -154,7 +154,7 @@ super + r ; s
 
 # Set a random wallpaper
 super + r ; {w,W}
-	"$SHELL" -c {'feh --bg-fill --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*','sxiv -r -t "$HOME"/.local/share/wallpapers/*'}
+	"$SHELL" -c {'feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers/*','sxiv -r -t "$HOME"/.local/share/wallpapers/*'}
 
 # Reload sxhkdrc
 super + r ; r ; s
