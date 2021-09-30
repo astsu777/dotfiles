@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Sun 26 Sep 2021 18:57:15
+# Last modified: Thu 30 Sep 2021 18:58:02
 # Version: 1.0
 #
 # Description: manage NordVPN connectivity
@@ -28,6 +28,7 @@ fi
 checkStatus() {
 	account=$(nordvpn account)
 	printf %s "$account" | grep 'You are not logged in.' && tui nordvpn login && notify-send "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
+	printf %s "$account" | grep 'username and password not provided' && nordvpn logout && tui nordvpn login && notify-send "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
 
 	status=$(nordvpn status)
 	printf %s "$status" | grep 'Disconnected' && status=0
