@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Sun 26 Sep 2021 23:18:43
+# Last modified: Thu 07 Oct 2021 11:30:29
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -24,6 +24,13 @@ fi
 # Display management
 #=======================
 if [ "$TOPMENU" = 'Display Management' ]; then
+	OPTS=$(printf "Manage Screens\nToggle Virtual Terminals" | sort | dmenu -i -p "Network Management:")
+	case $OPTS in
+		"Manage Screens") exec displayselect ;;
+		"Toggle Virtual Terminals") exec vttoggle ;;
+		*) exec dmenu-system ;;
+	esac
+fi
 	displayselect
 fi
 

@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Thu 07 Oct 2021 11:29:52
+# Last modified: Thu 07 Oct 2021 11:35:00
+# Version: 1.0
+#
+# Description: Toggle the ability to switch to other VTs using CTRL-ALT-Fx
+#=========================================================================
+
+setxkbmap -print | grep -q 'no_srvr_keys' && { setxkbmap -option '' && notify-send "VTs Switching Enabled" "Switching to VTs using CTRL-ALT-Fx is now enabled" ;} || { setxkbmap -option srvrkeys:none && notify-send "VTs Switching Disabled" "Switching to VTs using CTRL-ALT-Fx is now disabled" ;}
