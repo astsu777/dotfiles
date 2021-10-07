@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Thu 07 Oct 2021 11:30:29
+# Last modified: Thu 07 Oct 2021 15:43:20
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -30,8 +30,6 @@ if [ "$TOPMENU" = 'Display Management' ]; then
 		"Toggle Virtual Terminals") exec vttoggle ;;
 		*) exec dmenu-system ;;
 	esac
-fi
-	displayselect
 fi
 
 #=======================
