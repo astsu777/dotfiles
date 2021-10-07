@@ -678,6 +678,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWupcloud-manager\fP \(en  easily interact with *Upcloud* API
 .ITEM
+\f(CWvttoggle\fP \(en  toggle the ability to switch to other Virtual Terminals using CTRL-ALT-Fx
+.ITEM
 \f(CWwebsites-monitor\fP \(en  quickly test many websites and test for error codes
 .ITEM
 \f(CWyt-archive\fP \(en  easily download YouTube channels/playlists/videos with caching (backend: youtube-dl)
