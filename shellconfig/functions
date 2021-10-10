@@ -94,22 +94,19 @@ fi
 #=================
 # Curl
 #=================
-# Get the current weather forecast
 if type curl > /dev/null 2>&1; then
+
+	# Get the current weather forecast
 	weather() {
 		\curl -s http://wttr.in/"$1"\?A\&F
 	}
-fi
 
-# Bootstrap
-if type curl > /dev/null 2>&1; then
+	# Bootstrap
 	bootstrap() {
 		/bin/bash -c "$(\curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
 	}
-fi
 
-# Get song lyrics
-if type curl > /dev/null 2>&1; then
+	# Get song lyrics
 	lyrics() {
 		if [ -z "$1" ] || [ -z "$2" ]; then
 			echo "Usage: lyrics '<ARTIST>' '<TITLE>'"
@@ -119,76 +116,56 @@ if type curl > /dev/null 2>&1; then
 			\curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$1" --data-urlencode "title=$2"
 		fi
 	}
-fi
 
-# Get cheat sheets for specified commands
-if type curl > /dev/null 2>&1; then
+	# Get cheat sheets for specified commands
 	cheat() {
     	\curl https://cheat.sh/"$1"
 	}
-fi
 
-# Get cryptocurrency exchange rate
-if type curl > /dev/null 2>&1; then
+	# Get cryptocurrency exchange rate
 	cryptorate() {
 		\curl https://eur.rate.sx/"$1"
 	}
 	cryptorates() {
 		\curl https://eur.rate.sx/?n=20
 	}
-fi
 
-# Get a Website's speed statistics
-if type curl > /dev/null 2>&1; then
+	# Get a Website's speed statistics
 	speedsite() {
 		curl -s -w 'Testing Website Response Time for :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nAppCon Time:\t\t%{time_appconnect}\nRedirect Time:\t\t%{time_redirect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null "$1"
 	}
-fi
 
-# Check if a Website is UP
-if type curl > /dev/null 2>&1; then
+	# Check if a Website is UP
 	checkwebsite() {
     	curl -LIs "$1" | grep HTTP | cut -d$' ' -f2
 	}
-fi
 
-# Generate QR code for a URL
-if type curl > /dev/null 2>&1; then
+	# Generate QR code for a URL
 	qrcodegen() {
     	\curl qrenco.de/"$1"
 	}
-fi
 
-# Get the definition of a word
-if type curl > /dev/null 2>&1; then
+	# Get the definition of a word
 	dico() {
     	\curl dict.org/d:"$1"
 	}
-fi
 
-# Shorten a URL
-if type curl > /dev/null 2>&1; then
+	# Shorten a URL
 	urlshortener() {
     	\curl -F "shorten=$1" https://0x0.st
 	}
-fi
 
-# Have a reverse traceroute
-if type curl > /dev/null 2>&1; then
+	# Have a reverse traceroute
 	tracerouterev() {
     	\curl http://icanhaztraceroute.com/
 	}
-fi
 
-# IP subnet calculator
-if type curl > /dev/null 2>&1 && ! type ipcalc > /dev/null 2>&1; then
+	# IP subnet calculator
 	ipcalc() {
     	\curl "api.hackertarget.com/subnetcalc/?q=$1"
 	}
-fi
 
-# Use Google Translate
-if type curl > /dev/null 2>&1; then
+	# Use Google Translate
 	trag() {
 		local sl=$1
 		local tl=$2
@@ -205,6 +182,21 @@ if type curl > /dev/null 2>&1; then
 		local response=$(\curl -sA "${ua}" "${full_url}")
 		echo ${response} | jq -r '.[0][0][0]'
 	}
+
+	# DNS lookup over HTTPS
+	if type jq > /dev/null 2>&1; then
+		dnslookup() {
+			if [ $# -lt 2 ]; then
+				echo -e "Perform DNS lookup over HTTPS"
+				echo -e "Usage: dnslookup <VALUE> <RECORD_TYPE>"
+				echo -e "\nExample:\ndnslookup example.com A"
+				echo -e "\nExample:\ndnslookup 1.1.1.1 PTR"
+				return 1
+			fi
+			curl -sH 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$1&type=$2" | jq --raw-output '.Answer[].data'
+		}
+	fi
+
 fi
 
 #=================
