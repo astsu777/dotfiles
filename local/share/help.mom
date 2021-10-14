@@ -682,7 +682,7 @@ Here is a small description for every script:
 .ITEM
 \f(CWwebsites-monitor\fP \(en  quickly test many websites and test for error codes
 .ITEM
-\f(CWyt-archive\fP \(en  easily download YouTube channels/playlists/videos with caching (backend: youtube-dl)
+\f(CWyt-archive\fP \(en  easily download YouTube channels/playlists/videos with caching (backend: yt-dlp)
 .LIST OFF
 
 \fBNote\fP: a symlink called \f(CWurl_handler.sh\fP is referencing \f(CWhandler\fP because this name is hardcoded in the program \f(CWUrlview\fP.

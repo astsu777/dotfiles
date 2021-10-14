@@ -132,9 +132,9 @@ if type exa > /dev/null 2>&1; then
 	alias ll="exa -lSag --git --icons"
 fi
 
-# Make 'youtube-dl' easier to use
-if type youtube-dl > /dev/null 2>&1; then
-	alias yt-audio="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
+# Make 'yt-dlp' easier to use
+if type yt-dlp > /dev/null 2>&1; then
+	alias yt-audio="yt-dlp -i --extract-audio --audio-format mp3 --audio-quality 0"
 fi
 
 # If the program "neovim" is installed, replace "vim" with it

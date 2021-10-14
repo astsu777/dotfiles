@@ -2,14 +2,14 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Sun 03 Oct 2021 04:07:40
+# Last modified: Thu 14 Oct 2021 16:10:15
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
 #=========================================================================
 
 # Prerequisites
-if ! type streamlink mpv youtube-dl ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "youtube-dl, streamlink & ffmpeg must be installed" & exit 1; fi
+if ! type streamlink mpv yt-dlp ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "yt-dlp, streamlink & ffmpeg must be installed" & exit 1; fi
 
 # Determine queue software (optional)
 if type ts > /dev/null 2>&1; then
@@ -98,11 +98,11 @@ yt-revhd(){
 }
 yt-dlvideo(){
 	notify-send " Video queued for download..."
-	if [ -z "$queue" ]; then youtube-dl -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci -f 299+bestaudio/137+bestaudio/best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
+	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci -f 299+bestaudio/137+bestaudio/best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
 yt-dlaudio(){
 	notify-send " Audio queued for download..."
-	if [ -z "$queue" ]; then youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" youtube-dl -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
+	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
 
 # Choose preferred video format

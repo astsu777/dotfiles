@@ -1,1 +1,296 @@
-handler
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 26 Sep 2021 10:13:54
+# Last modified: Sun 26 Sep 2021 14:45:50
+# Version: 1.0
+#
+# Description: file handler using file extensions, but can also use MIME types
+#=========================================================================
+
+#=======================
+# Variables
+#=======================
+
+# Shell options
+set -euf -o noclobber -o noglob -o nounset
+IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}" # protect trailing \n
+
+# NNN
+PATH=$PATH:"${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins"
+
+# Unmodified path
+FPATH="$1"
+MIMETYPE="$( file -bL --mime-type -- "${FPATH}" )"
+
+# File path
+FNAME=$(basename "$1")
+
+# File extension
+ext="${FNAME##*.}"
+if [ -n "$ext" ]; then
+    ext="$(printf "%s" "${ext}" | tr '[:upper:]' '[:lower:]')"
+fi
+
+# Set default EDITOR/PAGER if not defined already
+EDITOR="${VISUAL:-${EDITOR:-vi}}"
+PAGER="${PAGER:-less -R}"
+
+# Determine OS
+if [ "$(uname)" = "Darwin" ]; then
+    OS=macOS
+elif [ "$(uname)" = "Linux" ]; then
+	OS=Linux
+fi
+
+#=======================
+# Functions
+#=======================
+
+handle_pdf() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+    	if type zathura >/dev/null 2>&1; then
+            zathura "${FPATH}" >/dev/null 2>&1 &
+    	elif type qpdfview >/dev/null 2>&1; then
+            qpdfview "${FPATH}" >/dev/null 2>&1 &
+        fi
+    fi
+    exit 0
+}
+
+handle_audio() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+    	if type mpv >/dev/null 2>&1; then
+        	mpv --really-quiet "${FPATH}" >/dev/null 2>&1 &
+    	elif type mplayer >/dev/null 2>&1; then
+        	mplayer "${FPATH}" >/dev/null 2>&1 &
+    	elif type vlc >/dev/null 2>&1; then
+        	vlc "${FPATH}" >/dev/null 2>&1 &
+    	fi
+    fi
+    exit 0
+}
+
+handle_video() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+    	if type mpv >/dev/null 2>&1; then
+        	mpv --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpv floating" "${FPATH}" >/dev/null 2>&1 &
+    	elif type mplayer >/dev/null 2>&1; then
+        	mplayer "${FPATH}" >/dev/null 2>&1 &
+    	elif type vlc >/dev/null 2>&1; then
+        	vlc "${FPATH}" >/dev/null 2>&1 &
+    	fi
+    fi
+    exit 0
+}
+
+handle_image() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+		if type sxiview >/dev/null 2>&1; then
+			{ sxiview "${FNAME}" >/dev/null 2>&1 && exit 0 ;} || curl -sL "${FPATH}" > "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" && sxiview "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" >/dev/null 2>&1 && rm -f "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" >/dev/null 2>&1 &
+		elif type sxiv >/dev/null 2>&1; then
+			{ sxiv -a "${FNAME}" >/dev/null 2>&1 && exit 0 ;} || curl -sL "${FPATH}" > "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" && sxiv -a "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" >/dev/null 2>&1 && rm -f "/tmp/$(echo "${FPATH}" | sed "s/.*\///;s/%20/ /g")" >/dev/null 2>&1 &
+		elif type feh >/dev/null 2>&1; then
+			feh -g 640x480 "${FPATH}" >/dev/null 2>&1 &
+    	fi
+    fi
+    exit 0
+}
+
+handle_archive() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+        if type atool >/dev/null 2>&1; then
+            atool --list -- "${FPATH}" | eval "$PAGER"
+        elif type bsdtar >/dev/null 2>&1; then
+            bsdtar --list --file "${FPATH}" | eval "$PAGER"
+    	fi
+    fi
+    exit 0
+}
+
+handle_torrent() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+        if type rtorrent >/dev/null 2>&1; then
+            rtorrent "${FPATH}" &
+        elif type transmission-show >/dev/null 2>&1; then
+            transmission-show -- "${FPATH}" &
+    	fi
+    fi
+    exit 0
+}
+
+handle_document() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+    	if type libreoffice >/dev/null 2>&1; then
+    		libreoffice "${FPATH}" &
+    	fi
+    fi
+    exit 0
+}
+
+handle_html() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+        if type links >/dev/null 2>&1; then
+            links -dump "${FPATH}" | eval "$PAGER"
+        elif type w3m >/dev/null 2>&1; then
+            w3m -dump "${FPATH}" | eval "$PAGER"
+        elif type lynx >/dev/null 2>&1; then
+            lynx -dump -- "${FPATH}" | eval "$PAGER"
+        elif type elinks >/dev/null 2>&1; then
+            elinks -dump "${FPATH}" | eval "$PAGER"
+        fi
+    fi
+    exit 0
+}
+
+handle_json() {
+    if [ "$OS" = "macOS" ]; then
+        nohup open "${FPATH}" >/dev/null 2>&1 &
+    elif [ "$OS" = "Linux" ]; then
+        if type jq >/dev/null 2>&1; then
+            jq --color-output . "${FPATH}" | eval "$PAGER"
+            exit 0
+        elif type python >/dev/null 2>&1; then
+            python -m json.tool -- "${FPATH}" | eval "$PAGER"
+            exit 0
+        fi
+    fi
+    exit 0
+}
+
+#=======================
+# File Extensions
+#=======================
+
+# File Extensions
+handle_extension() {
+    ## URLs
+    case "${FPATH}" in
+    	*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*)
+    		if type dmenu-video >/dev/null 2>&1; then
+    			dmenu-video "${FPATH}" &
+    			exit 0
+    		fi
+    		exit 1 ;;
+	esac
+
+    case "${ext}" in
+
+        ## Archive
+        a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
+        rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
+        	handle_archive
+            exit 1 ;;
+        rar)
+            if type unrar >/dev/null 2>&1; then
+                unrar lt -p- -- "${FPATH}" | eval "$PAGER"
+            fi
+            exit 1 ;;
+        7z)
+            if type 7z >/dev/null 2>&1; then
+                7z l -p -- "${FPATH}" | eval "$PAGER"
+            fi
+            exit 1 ;;
+
+        ## RO Document
+        pdf|cbz|cbr|epub|djvu)
+            handle_pdf
+            exit 1 ;;
+
+        ## Audio
+        aac|flac|m4a|mid|midi|mpa|mp2|mp3|ogg|wav|wma|opus)
+            handle_audio
+            exit 1 ;;
+
+        ## Video
+        avi|mkv|mp4|webm)
+            handle_video
+            exit 1 ;;
+
+        ## BitTorrent
+        torrent)
+        	handle_torrent
+            exit 1 ;;
+
+        ## Document
+        odt|ods|odp|sxw|xls|xlsx|doc|docx|ppt|pptx|pps|ppsx)
+        	handle_document
+            exit 1 ;;
+
+        ## HTML
+        htm|html|xhtml)
+        	handle_html
+            exit 1 ;;
+
+        ## JSON
+        json)
+        	handle_json
+            exit 1 ;;
+
+        ## Pictures
+        png|jpg|jpe|jpeg|gif)
+			handle_image
+			exit 1 ;;
+
+    esac
+}
+
+#=======================
+# Fallback Option
+#=======================
+
+handle_fallback() {
+    if type xdg-open >/dev/null 2>&1; then
+        xdg-open "${FPATH}" >/dev/null 2>&1 &
+        exit 0
+    elif type open >/dev/null 2>&1; then
+        open "${FPATH}" >/dev/null 2>&1 &
+        exit 0
+    fi
+    echo '----- File details -----' && file --dereference --brief -- "${FPATH}"
+    exit 1
+}
+
+#=======================
+# Blocked File Types
+#=======================
+
+handle_blocked() {
+    case "${MIMETYPE}" in
+        application/x-sharedlib)
+            exit 0 ;;
+        application/x-shared-library-la)
+            exit 0 ;;
+        application/x-executable)
+            exit 0 ;;
+        application/x-shellscript)
+            exit 0 ;;
+        application/octet-stream)
+            exit 0 ;;
+    esac
+}
+
+#=======================
+# File Handler
+#=======================
+handle_extension
+handle_blocked "${MIMETYPE}"
+handle_fallback
+
+exit 1

@@ -265,7 +265,7 @@ fi
 #=================
 # MPV
 #=================
-if type mpv youtube-dl > /dev/null 2>&1 && ! type dmenu > /dev/null 2>&1; then
+if type mpv yt-dlp > /dev/null 2>&1 && ! type dmenu > /dev/null 2>&1; then
 	# YouTube in 480p
 	yt-480p() {
 		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$1" 2>/dev/null & disown

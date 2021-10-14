@@ -9,8 +9,8 @@
 #=========================================================================
 
 # Requirements check
-if ! type youtube-dl mpv > /dev/null 2>&1; then
-	notify-send "⚠️ Error" "Please install 'mpv' and 'youtube-dl' to use this script"
+if ! type yt-dlp mpv > /dev/null 2>&1; then
+	notify-send "⚠️ Error" "Please install 'mpv' and 'yt-dlp' to use this script"
 	exit 1
 fi
 
@@ -37,7 +37,7 @@ if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; th
 			OnlineStreams=$(mktemp)
 			notify-send "🎬 Checking online streams" "Please wait, it may take a while..."
 			while IFS="" read -r i; do
-				youtube-dl -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
+				yt-dlp -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
 			done < "$Streams"
 			mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
 			notify-send "🎬 Refreshed online streams" "The online streams cache has been generated" && setsid -f paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"

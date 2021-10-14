@@ -202,7 +202,7 @@ The following table provides a description of all the scripts:
 | `upcloud-manager` | easily interact with *Upcloud* API |
 | `vttoggle` | toggle the ability to switch to other Virtual Terminals using CTRL-ALT-Fx |
 | `websites-monitor` | quickly test many websites and test for error codes |
-| `yt-archive` | easily download YouTube channels/playlists/videos with caching (backend: youtube-dl) |
+| `yt-archive` | easily download YouTube channels/playlists/videos with caching (backend: yt-dlp) |
 
 <u>**Note**</u>: a symlink called *url_handler.sh* is referencing *handler* because this name is hardcoded in the program *Urlview*.
 

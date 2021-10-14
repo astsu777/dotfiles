@@ -30,7 +30,7 @@ image/gif; mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
 image/*; feh -g 640x480 -. '%s'; test=test -n "$DISPLAY"
 
 # Youtube videos are assigned a custom mime-type, which can be streamed with
-# vlc or youtube-dl.
+# vlc or yt-dlp.
 video/x-youtube; mpv --ytdl-format=bestvideo+bestaudio/best '%s' --autofit=640x480; test=test -n "$DISPLAY"
 video/x-youtube; vlc '%s' --width 640 --height 480; test=test -n "$DISPLAY"
 
@@ -66,5 +66,5 @@ video/x-youtube; mpv -vo drm -quiet '%s'; needsterminal
 video/*; mpv -vo drm -quiet '%s'; needsterminal
 
 # Ascii videos
-# video/x-youtube; youtube-dl -q -o - '%s' | mplayer -cache 8192 -vo caca -quiet -; needsterminal
+# video/x-youtube; yt-dlp -q -o - '%s' | mplayer -cache 8192 -vo caca -quiet -; needsterminal
 # video/*; wget '%s' -O - | mplayer -cache 8192 -vo caca -quiet -; needsterminal

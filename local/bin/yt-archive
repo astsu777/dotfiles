@@ -11,8 +11,8 @@
 #=======================
 # Requirements
 #=======================
-if ! type youtube-dl ffmpeg >/dev/null 2>&1; then
-	printf "The packages 'youtube-dl', 'ffmpeg' are not installed!"
+if ! type yt-dlp ffmpeg >/dev/null 2>&1; then
+	printf "The packages 'yt-dlp', 'ffmpeg' are not installed!"
 	exit 1
 fi
 
@@ -20,10 +20,10 @@ fi
 # Functions
 #=======================
 archiveVideo() {
-	youtube-dl -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+	yt-dlp -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 299+bestaudio/137+bestaudio/best "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 archiveAudio() {
-	youtube-dl -q -ci --download-archive "$3"/archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+	yt-dlp -q -ci --download-archive "$3"/archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 
 #=======================
