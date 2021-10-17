@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Thu 14 Oct 2021 16:33:35
+# Last modified: Sun 17 Oct 2021 02:25:31
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -36,7 +36,7 @@ fi
 # Network management
 #=======================
 if [ "$TOPMENU" = 'Network Management' ]; then
-	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nNordVPN Connection\nMount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
+	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nNordVPN Connection\n(Un)mount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
 		"Block Ads") tui $SHELL -c "block-hosts ; $SHELL" ;;
 		"Clear DNS Cache") tui $SHELL -c "clear-dns-cache ; $SHELL" ;;
@@ -44,7 +44,7 @@ if [ "$TOPMENU" = 'Network Management' ]; then
 		"DHCP Server") tui $SHELL -c "dhcp-server ; $SHELL" ;;
 		"Manage Network") tui 'nmtui' ;;
 		"NordVPN Connection") dmenu-nordvpn ;;
-		"Mount URI") tui 'dmenu-urimount' ;;
+		"(Un)mount URI") tui 'dmenu-urimount' ;;
 		"TFTP Server") tui $SHELL -c "tftp-server ; $SHELL" ;;
 		"Websites Monitor") tui $SHELL -c "websites-monitor ; $SHELL" ;;
 		*) exec dmenu-system ;;
