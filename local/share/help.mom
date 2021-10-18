@@ -560,6 +560,8 @@ Once again, this Web browser's configuration is extensible as it allows defining
 \f(CWx + b\fP \(en  toggle the status bar
 .ITEM
 \f(CWx + SHIFT + b\fP \(en  toggle the tabs bar
+.ITEM
+\f(CWx + y\fP \(en  hint links and copy it to clipboard
 .LIST OFF
 .HEADING 2 "Zathura"
 This application can be used to read documents such as PDF, EPUB, etc... It is very minimalist but has very useful features that can be called with various keyboard shortcuts.

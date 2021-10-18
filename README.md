@@ -323,6 +323,7 @@ The configuration file contains adblock lists and also custom keybindings to exe
 | `w + SHIFT + o` | edit current URL to open in a new window |
 | `x + b` | toggle the status bar |
 | `x + SHIFT + b` | toggle the tabs bar |
+| `x + y` | hint links and copy it to clipboard |
 
 ## Redshift
 This application is used to adjust the color temperature of the screen according to the sun position. The file *config/redshift/redshift.conf* is adjusting the color temperature as I like it.

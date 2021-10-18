@@ -681,3 +681,5 @@ config.bind('xG', 'set-cmd-text :open -t {url:pretty}')
 # Web browser interface
 config.bind('xb', 'config-cycle -p statusbar.show always never')
 config.bind('xB', 'config-cycle -p tabs.show multiple never')
+# Link management
+config.bind('xy', 'hint links yank')
