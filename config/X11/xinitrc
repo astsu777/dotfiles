@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Sun 29 Aug 2021 14:00:02
+# Last modified: Tue 19 Oct 2021 22:35:12
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -28,6 +28,7 @@ get_session(){
 		i3) exec i3 ;;
 		jwm) exec jwm ;;
 		openbox) exec openbox-session ;;
+		spectrwm) exec spectrwm ;;
 		xfce) exec startxfce4 ;;
 	esac
 }
