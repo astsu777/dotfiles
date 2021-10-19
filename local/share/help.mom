@@ -360,6 +360,72 @@ The following keyboard shortcuts are available in Openbox:
 \f(CWSuper + Alt + l\fP \(en  Lock screen
 .LIST OFF
 
+.HEADING 2 "SpectrWM"
+The following keyboard shortcuts are available in SpectrWM:
+
+.LI
+.ITEM
+\f(CWSUPER + RETURN \fP \(en  opens terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSUPER + SHIFT + RETURN \fP \(en  opens run launcher (dmenu is the run launcher but it can be modifie
+.ITEM
+\f(CWSUPER + SHIFT + c \fP \(en  closes window with focus
+.ITEM
+\f(CWSUPER + SHIFT + r \fP \(en  reloads spectrwm
+.ITEM
+\f(CWSUPER + SHIFT + q \fP \(en  quits spectrwm
+.ITEM
+\f(CWSUPER + 1-9 \fP \(en  switch focus to workspace (1 to 9)
+.ITEM
+\f(CWSUPER + SHIFT + 1-9 \fP \(en  send focused window to workspace (1 to 9)
+.ITEM
+\f(CWSUPER + j \fP \(en  focus next window in layout
+.ITEM
+\f(CWSUPER + k \fP \(en  focus previous window in layout
+.ITEM
+\f(CWSUPER + SHIFT + j \fP \(en  rotate forward window in layout
+.ITEM
+\f(CWSUPER + SHIFT + k \fP \(en  rotate backward window in layout
+.ITEM
+\f(CWSUPER + h \fP \(en  expand size of master window
+.ITEM
+\f(CWSUPER + l \fP \(en  shrink size of master window
+.ITEM
+\f(CWSUPER + i \fP \(en  increase the number of master windows
+.ITEM
+\f(CWSUPER + d \fP \(en  decrease the number of master windows
+.ITEM
+\f(CWSUPER + . \fP \(en  switch focus next region
+.ITEM
+\f(CWSUPER + , \fP \(en  switch focus to previous region
+.ITEM
+\f(CWSUPER + b \fP \(en  toggle the status bar
+.ITEM
+\f(CWSUPER + \fP \(en  Tab cycle to the next layout
+.ITEM
+\f(CWSUPER + SHIFT + Space \fP \(en  toggles floating mode for focused window
+.ITEM
+\f(CWSUPER + CTRL + h \fP \(en  move floating window to the left
+.ITEM
+\f(CWSUPER + CTRL + j \fP \(en  move floating window down
+.ITEM
+\f(CWSUPER + CTRL + k \fP \(en  move floating window up
+.ITEM
+\f(CWSUPER + CTRL + l \fP \(en  move floating window to the right
+.ITEM
+\f(CWSUPER + CTRL + Shift + h \fP \(en  increase floating widow width
+.ITEM
+\f(CWSUPER + CTRL + Shift + j \fP \(en  decrease floating widow height
+.ITEM
+\f(CWSUPER + CTRL + Shift + k \fP \(en  increase floating widow height
+.ITEM
+\f(CWSUPER + CTRL + Shift + l \fP \(en  decrease floating widow width
+.ITEM
+\f(CWSUPER + Space \fP \(en  maximize focused window
+.ITEM
+\f(CWSUPER + ALT + l \fP \(en  lock the screen
+.LIST OFF
+
 .HEADING 1 "Miscellaneous Applications"
 Many applications have their own set of keybindings to peform various actions. All the following subchapters provide the custom keyboard shortcuts of every application installed on the system.
 

@@ -482,6 +482,9 @@ The folder *config/i3* contains the entire configuration for the *i3-gaps* windo
 #### Openbox
 The folder *config/openbox* contains the entire configuration for the *Openbox* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/openbox#readme). In addition to this, there are folders for *Tint2* panel and *volumeicon* which themes the volume icon in the systray.
 
+#### SpectrWM
+The folder *config/spectrwm* contains the entire configuration for the *SpectrWM* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/spectrwm#readme).
+
 ## Zathura
 This program is used to display PDFs, eBooks, etc... It is very minimalist and can be customized via a configuration file (=*.config/zathura/zathurarc*). The configuration file sets the following:
 
