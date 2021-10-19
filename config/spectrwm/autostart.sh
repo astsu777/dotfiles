@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Tue 19 Oct 2021 18:42:01
-# Last modified: Tue 19 Oct 2021 19:02:20
+# Last modified: Tue 19 Oct 2021 20:33:35
 # Version: 1.0
 #
 # Description: SpectrWM autostart script
@@ -19,7 +19,7 @@ fi
 
 # Launch Simple X Hotkey Daemon
 if type sxhkd >/dev/null 2>&1; then
-	sxhkd -c "$HOME"/.config/sxhkd/sxhkdrc
+	sxhkd -c "$HOME"/.config/sxhkd/sxhkdrc &
 fi
 
 # Launch Dunst if installed (notification)
