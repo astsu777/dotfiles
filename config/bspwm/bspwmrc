@@ -95,11 +95,5 @@ if type picom >/dev/null 2>&1; then
 	picom --experimental-backends &
 fi
 
-# GNOME-Keyring for password caching
-if type gnome-keyring >/dev/null 2>&1; then
-	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-	export SSH_AUTH_SOCK
-fi
-
 # Status bar
 "$HOME"/.config/bspwm/bar.sh &
