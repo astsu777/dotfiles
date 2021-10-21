@@ -2,11 +2,14 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:15:11
-# Last modified: Sun 22 Aug 2021 12:15:16
+# Last modified: Thu 21 Oct 2021 11:44:43
 # Version: 1.0
 #
 # Description: quickly deploy a set of Docker containers for test purposes
 #=========================================================================
+
+# Requirements
+type docker >/dev/null 2>&1 || { printf "ERROR: Docker is not installed\n" && exit 1 ;}
 
 # Determine the username to be created based on the logged on user
 USERNAME=$(id -nu)
