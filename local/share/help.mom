@@ -633,6 +633,7 @@ Once again, this Web browser's configuration is extensible as it allows defining
 This application can be used to read documents such as PDF, EPUB, etc... It is very minimalist but has very useful features that can be called with various keyboard shortcuts.
 
 .LI
+.ITEM
 \f(CWu/d\fP \(en  scroll half a page up/down
 .ITEM
 \f(CWD\fP \(en  toggle page mode (dual/single)
