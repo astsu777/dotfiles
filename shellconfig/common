@@ -432,13 +432,3 @@ if [[ ! "$SESSION" =~ ^(dwm|DWM|bspwm|BSPWM|i3)$ ]] && [[ ! "$GDMSESSION" =~ ^(d
 		tmux attach-session -t "$USER"0 || tmux new-session -s "$USER"0
 	fi
 fi
-
-# Check if dotfiles are up-to-date
-# DISABLED due to delays when proxy are required or when GitHub is blocked
-# if [[ -d "$DOTFILES"/.git ]]; then
-# 	git -C "$DOTFILES" fetch > /dev/null 2>&1
-# 	alias dotrefresh="git -C $DOTFILES pull"
-# 	if git -C "$DOTFILES" status -sb | grep behind > /dev/null 2>&1; then
-# 		printf '%s\n' "An update for your dotfiles is available. Please run \"dotrefresh\" to update"
-# 	fi
-# fi
