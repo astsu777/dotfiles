@@ -7,11 +7,6 @@ elif type highlight > /dev/null 2>&1; then
     alias cat="highlight -O ansi --force"
 fi
 
-# If the program "prettyping" is installed, replace "ping" with it
-if type prettyping > /dev/null 2>&1; then
-	alias ping="prettyping --nolegend"
-fi
-
 # Refresh Touch Bar on MacBook Pro
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'

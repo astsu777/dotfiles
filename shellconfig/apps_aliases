@@ -3,7 +3,7 @@
 
 # Attach or create a TMUX session with username as session name
 if type tmux > /dev/null 2>&1; then
-	alias t="tmux attach-session -t $USER || tmux new-session -s $USER"
+	alias t="tmux attach-session -t "$USER"0 || tmux new-session -s "$USER"0"
 fi
 
 # Display time and date at the top right corner of the terminal
@@ -122,11 +122,6 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	fi
 fi
 
-# Make 'etckeeper' easier to use
-if type etckeeper > /dev/null 2>&1; then
-	alias etcgit="sudo etckeeper vcs"
-fi
-
 # Use the common alias 'll' to display files with exa
 if type exa > /dev/null 2>&1; then
 	alias ll="exa -lSag --git --icons"
@@ -156,19 +151,9 @@ if type tsp > /dev/null 2>&1; then
 	alias ts="tsp"
 fi
 
-# Music on console
-if type mocp > /dev/null 2>&1; then
-	alias mocp="mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc"
-fi
-
 # DOSBox
 if type dosbox > /dev/null 2>&1 && [[ -f "$XDG_CONFIG_HOME"/dosbox/dosbox.conf ]]; then
 	alias dosbox="dosbox -conf $XDG_CONFIG_HOME/dosbox/dosbox.conf"
-fi
-
-# Get a list of all media types defined by IANA
-if type w3m > /dev/null 2>&1 || type lynx > /dev/null 2>&1 || type links > /dev/null 2>&1; then
-	alias mimetypes="$BROWSERCLI https://www.iana.org/assignments/media-types/media-types.txt"
 fi
 
 # Quickly spawn a nested X server
@@ -180,6 +165,11 @@ fi
 #=======================
 # Work
 #=======================
+
+# Get a list of all media types defined by IANA
+if type w3m > /dev/null 2>&1 || type lynx > /dev/null 2>&1 || type links > /dev/null 2>&1; then
+	alias mimetypes="$BROWSERCLI https://www.iana.org/assignments/media-types/media-types.txt"
+fi
 
 # Plow - HTTP benchmarking tool
 if type docker > /dev/null 2>&1; then
