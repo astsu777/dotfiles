@@ -420,6 +420,7 @@ c.url.searchengines = {
     "1337x_Torrents": "https://1337x.to/search/{}/1/",
     "2ememain": "https://www.2ememain.be/q/{}/",
     "9Gag": "https://9gag.com/v1/tag-suggest?query={}",
+    "AlternativeTo": "https://alternativeto.net/browse/search/?q={}&license=free",
     "Amazon": "https://www.amazon.fr/s?k={}",
     "Ansible": "https://docs.ansible.com/ansible/latest/#stq={}&stp=1",
     "ArchWiki": "https://wiki.archlinux.org/index.php?search={}",

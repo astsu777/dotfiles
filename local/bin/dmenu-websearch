@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Sun 26 Sep 2021 16:39:00
+# Last modified: Sun 31 Oct 2021 09:41:34
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -15,6 +15,7 @@ declare -A search_options
 search_options[1337x Torrents]="https://1337x.to/search/%s/1/"
 search_options[2ememain]="https://www.2ememain.be/q/%s/"
 search_options[9Gag]="https://9gag.com/v1/tag-suggest?query=%s"
+search_options[AlternativeTo]="https://alternativeto.net/browse/search/?q=%s&license=free"
 search_options[Amazon]="https://www.amazon.fr/s?k=%s"
 search_options[Ansible]="https://docs.ansible.com/ansible/latest/#stq=%s&stp=1"
 search_options[ArchWiki]="https://wiki.archlinux.org/index.php?search=%s"
