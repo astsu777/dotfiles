@@ -70,7 +70,11 @@
 
 	# Perform operation on all git subfolders
 	all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; f"
+
 [pull]
+	# Automatically rebase when pulling
 	rebase = true
+
 [rebase]
+	# Automatically stash local modifications when rebase
 	autostash = true
