@@ -26,13 +26,21 @@ colortest() {
 # Function to perform basic maths
 if type bc > /dev/null 2>&1; then
 	calc() {
-		printf "%s\n" "$*" | bc -l
+		if [ -z "$1" ]; then
+    		echo -e "Perform calculation in the CLI"
+			echo "Usage: calc '<CALCULATION>'"
+			echo "Ex.: calc 1+1"
+			echo
+		else
+			printf "%s\n" "$*" | bc -l
+		fi
 	}
 fi
 
 # Create many files with random content
 ttouch() {
-	if [ "$1" = "-h" ]; then
+	if [ -z "$1" ]; then
+    	echo -e "Create random binary files"
 		echo "Usage: ttouch '<INTEGER>'"
 		echo "Ex.: ttouch 10 --> will create 10 files"
 		echo
@@ -61,7 +69,8 @@ ddiso() {
 # NNN
 #=================
 if type nnn > /dev/null 2>&1; then
-# CD on exit when pressing ^G
+
+	# CD on exit when pressing ^G
 	n3()
 	{
     	# Block nesting of nnn in subshells
@@ -89,6 +98,7 @@ if type nnn > /dev/null 2>&1; then
             	rm -f "$NNN_TMPFILE" > /dev/null
     	fi
 	}
+
 fi
 
 #=================
@@ -109,6 +119,7 @@ if type curl > /dev/null 2>&1; then
 	# Get song lyrics
 	lyrics() {
 		if [ -z "$1" ] || [ -z "$2" ]; then
+    		echo -e "Get lyrics for a song"
 			echo "Usage: lyrics '<ARTIST>' '<TITLE>'"
 			echo "Ex.: lyrics 'elvis presley' 'heartbreak hotel'"
 			echo
@@ -132,27 +143,75 @@ if type curl > /dev/null 2>&1; then
 
 	# Get a Website's speed statistics
 	speedsite() {
-		curl -s -w 'Testing Website Response Time for :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nAppCon Time:\t\t%{time_appconnect}\nRedirect Time:\t\t%{time_redirect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null "$1"
+		if [ -z "$1" ]; then
+    		echo -e "Get statistics on a Website's performances"
+			echo "Usage: speedsite '<URL>'"
+			echo "Ex.: speedsite https://www.example.com"
+			echo
+		else
+			curl -s -w 'Testing Website Response Time for: %{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nAppCon Time:\t\t%{time_appconnect}\nRedirect Time:\t\t%{time_redirect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null "$1"
+		fi
 	}
 
 	# Check if a Website is UP
 	checkwebsite() {
-    	curl -LIs "$1" | grep HTTP | cut -d$' ' -f2
+		if [ -z "$1" ]; then
+    		echo -e "Print HTTP codes for a given Website"
+			echo "Usage: checkwebsite '<URL>'"
+			echo "Ex.: checkwebsite https://www.example.com"
+			echo
+		else
+    		curl -LIs "$1" | grep HTTP | cut -d$' ' -f2
+    	fi
 	}
 
-	# Generate QR code for a URL
+	# Generate QR code for a given input
 	qrcodegen() {
-    	\curl qrenco.de/"$1"
+		if [ -z "$1" ]; then
+    		echo -e "Generate a QR code for a given input"
+			echo "Usage: qrcodegen '<INPUT>'"
+			echo "Ex.: qrcodegen https://www.example.com"
+			echo "Ex.: qrcodegen Hell0 W0rld"
+			echo
+		else
+    		\curl qrenco.de/"$1"
+    	fi
 	}
 
 	# Get the definition of a word
 	dico() {
-    	\curl dict.org/d:"$1"
+		if [ -z "$1" ]; then
+    		echo -e "Get definitions for a word"
+			echo "Usage: dico '<INPUT>'"
+			echo "Ex.: dico example"
+			echo
+		else
+    		\curl -s dict.org/d:"$1"
+    	fi
 	}
 
 	# Shorten a URL
 	urlshortener() {
-    	\curl -F "shorten=$1" https://0x0.st
+		if [ -z "$1" ]; then
+    		echo -e "Create short URL from the CLI"
+			echo "Usage: urlshortener '<LONG_URL>'"
+			echo "Ex.: urlshortener https://www.example.com"
+			echo
+		else
+    		local shorturl=$(\curl -s "https://is.gd/create.php?format=simple&url=$1") && printf "%s\n" "$shorturl"
+    	fi
+	}
+
+	# Deshhorten a URL
+	urldeshortener() {
+		if [ -z "$1" ]; then
+    		echo -e "Get the long URL from a short one"
+			echo "Usage: urldeshortener '<SHORT_URL>'"
+			echo "Ex.: urldeshortener https://is.gd/EuvYes"
+			echo
+		else
+    		curl -sLI "$1" | grep -i Location
+    	fi
 	}
 
 	# Have a reverse traceroute
@@ -162,7 +221,14 @@ if type curl > /dev/null 2>&1; then
 
 	# IP subnet calculator
 	ipcalc() {
-    	\curl "api.hackertarget.com/subnetcalc/?q=$1"
+		if [ -z "$1" ]; then
+    		echo -e "Calculate details for an IP/IP Subnet (broadcast address, subnet mask, etc...)"
+			echo "Usage: ipcalc '<IP_ADDRESS_CIDR>'"
+			echo "Ex.: ipcalc 192.168.1.1/24"
+			echo
+		else
+    		local ip=$(\curl -s "https://api.hackertarget.com/subnetcalc/?q=$1") && printf "%s\n" "$ip"
+    	fi
 	}
 
 	# Use Google Translate
@@ -170,8 +236,9 @@ if type curl > /dev/null 2>&1; then
 		local sl=$1
 		local tl=$2
 		if [[ ! "$1" =~ ^[a-z][a-z]$ ]] || [[ ! "$2" =~ ^[a-z][a-z]$ ]]; then
+    		echo -e "Use Google Translate from the CLI"
 			echo "Please input a valid source and destination language (Ex.: \"en\" for English)"
-			echo "Usage: trag [SL] [DL] TEXT_TO_TRANSLATE"
+			echo "Usage: trag <SRC_LANG> <DEST_LANG> <TEXT_TO_TRANSLATE>"
 			return 1
 		fi
 		shift 2
@@ -203,27 +270,35 @@ fi
 # Fuzzy Finder
 #=================
 if type fzf > /dev/null 2>&1; then
+
 	if type fd > /dev/null 2>&1; then
+
 		# Find file in current folder and open it with default editor
  		fcd() {
 			fd -H . | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
+
 		# Find file in home folder and open it with default editor
  		fch() {
 			fd -H . "$HOME" -E vim/backup | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
 	else
+
 		# Find file in current folder and open it with default editor
  		fcc() {
 			du -a . | awk '{print$2}'| fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
+
 		# Find file in home folder and open it with default editor
 		fch() {
 			du -a "$HOME" | awk '{print$2}' | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
+
 	fi
+
 	## LINUX
 	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+
 		# Open and follow a log file
 		flogs() {
 			sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs I{} -o sudo tail -f '{}'
@@ -248,53 +323,137 @@ if type fzf > /dev/null 2>&1; then
 				xdotool type "!$cmd" && xdotool key KP_Enter
 			}
 		fi
+
 	fi
+
 fi
 
 #=================
 # OpenSSL
 #=================
 if type openssl > /dev/null 2>&1; then
+
 	# Check SSL certificate of a Website
 	checkssl() {
-		openssl s_client -connect "$1":443 < /dev/null | openssl x509 -text
+		if [ -z "$1" ]; then
+    		echo -e "Print details of a Website's SSL certificate"
+			echo "Usage: checkssl '<URL>'"
+			echo "Ex.: checkssl https://www.example.com"
+			echo
+		else
+			openssl s_client -connect "$1":443 < /dev/null | openssl x509 -text
+		fi
 	}
+
 fi
 
 
 #=================
 # MPV
 #=================
-if type mpv yt-dlp > /dev/null 2>&1 && ! type dmenu > /dev/null 2>&1; then
-	# YouTube in 480p
-	yt-480p() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+if type mpv yt-dlp > /dev/null 2>&1; then
+
+	yt-listen(){
+		if [ -z "$1" ]; then
+    		echo -e "Listen to an online video"
+				echo "Usage: yt-listen '<URL>'"
+				echo "Ex.: yt-listen https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown
+				fi
 	}
 
-	# YouTube in 720p
-	yt-720p() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=136+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+	yt-wsd() {
+		if [ -z "$1" ]; then
+    		echo -e "Watch a video in low quality"
+				echo "Usage: yt-wsd '<URL>'"
+				echo "Ex.: yt-wsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$1" 2>/dev/null & disown
+				fi
 	}
 
-	# YouTube in 1080p
 	yt-hd() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet "$1" 2>/dev/null & disown
+		if [ -z "$1" ]; then
+    		echo -e "Watch a video in HD quality"
+				echo "Usage: yt-hd '<URL>'"
+				echo "Ex.: yt-hd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$1" 2>/dev/null & disown
+				fi
 	}
 
-	# Randomly play a YouTube channel or playlist in 480p
-	ytshuf-480p() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	yt-shufsd() {
+		if [ -z "$1" ]; then
+    		echo -e "Shuffle a playlist in low quality"
+				echo "Usage: yt-shufsd '<URL>'"
+				echo "Ex.: yt-shufsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$1" 2>/dev/null & disown
+				fi
 	}
 
-	# Randomly play a YouTube channel or playlist in 720p
-	ytshuf-720p() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=136+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	yt-shufhd() {
+		if [ -z "$1" ]; then
+    		echo -e "Shuffle a playlist in HD quality"
+				echo "Usage: yt-shufhd '<URL>'"
+				echo "Ex.: yt-shufhd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$1" 2>/dev/null & disown
+				fi
 	}
 
-	# Randomly play a YouTube channel or playlist
-	ytshuf-hd() {
-		mpv --cache=yes --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=137+bestaudio/best --really-quiet --ytdl --shuffle "$1" 2>/dev/null & disown
+	yt-revsd(){
+		if [ -z "$1" ]; then
+    		echo -e "Reverse a playlist in low quality"
+				echo "Usage: yt-revsd '<URL>'"
+				echo "Ex.: yt-revsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
+				fi
 	}
+
+	yt-revhd(){
+		if [ -z "$1" ]; then
+    		echo -e "Reverse a playlist in HD quality"
+				echo "Usage: yt-revhd '<URL>'"
+				echo "Ex.: yt-revhd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
+				fi
+	}
+
+	yt-dlvideo(){
+		if [ -z "$1" ]; then
+    		echo -e "Download an online video"
+				echo "Usage: yt-dlvideo '<URL>'"
+				echo "Ex.: yt-dlvideo https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			echo -e "Video queued for download..."
+				yt-dlp -ci -f 299+bestaudio/137+bestaudio/best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown
+				fi
+	}
+
+	yt-dlaudio(){
+		if [ -z "$1" ]; then
+    		echo -e "Extract audio of an online video"
+				echo "Usage: yt-dlaudio '<URL>'"
+				echo "Ex.: yt-dlaudio https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+				echo
+		else
+			echo -e "Audio queued for download..."
+				yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown
+				fi
+	}
+
 fi
 
 #=======================
@@ -366,6 +525,7 @@ if type wget >/dev/null 2>&1; then
   	  echo -e "Mirrorring Website..."
   	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -D "$1" "$2" >/dev/null 2>&1
 	}
+
 fi
 
 #=================
