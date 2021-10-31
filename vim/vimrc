@@ -34,6 +34,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'arcticicestudio/nord-vim'
     Plug 'romgrk/doom-one.vim'
     Plug 'agudulin/vim-colors-alabaster'
+    Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 	"" Linters
 	Plug 'chr4/nginx.vim'
 	"" Status bar
@@ -188,12 +189,20 @@ colorscheme kuroi
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
-    if (g:colors_name == "alabaster")
+    if (g:colors_name == "spaceduck")
         colorscheme kuroi
 		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
+		call lightline#init()
+		call lightline#colorscheme()
+    elseif (g:colors_name == "alabaster")
+        colorscheme spaceduck
+		" highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline = {'colorscheme': 'spaceduck'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "doom-one")

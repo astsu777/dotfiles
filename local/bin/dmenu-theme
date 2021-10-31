@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Mon 27 Sep 2021 15:05:26
+# Last modified: Sun 31 Oct 2021 20:57:39
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -446,9 +446,70 @@ toggleLight() {
 }
 
 #=======================
+# Spaceduck Theme
+#=======================
+toggleSpaceduck() {
+	# ST/Xresources
+	foreground="#ecf0c1"
+	background="#0f111b"
+	normalBlack="#000000"
+	normalRed="#e33400"
+	normalGreen="#5ccc96"
+	normalYellow="#b3a1e6"
+	normalBlue="#00a3cc"
+	normalMagenta="#ce6f8f"
+	normalCyan="#7a5ccc"
+	normalWhite="#686f9a"
+	brightBlack="#686f9a"
+	brightRed="#e33400"
+	brightGreen="#5ccc96"
+	brightYellow="#b3a1e6"
+	brightBlue="#00a3cc"
+	brightMagenta="#ce6f8f"
+	brightCyan="#7a5ccc"
+	brightWhite="#ecf0c1"
+
+	# Alacritty
+	alacrittyTheme="spaceduck_theme"
+
+	# Kitty
+	kittyTheme="spaceduck_theme"
+
+	# VIM
+	vimColorscheme="spaceduck"
+	vimLightline="spaceduck"
+
+	# BSPWM
+	BSPWMBackground="#0f111b"
+	BSPWMForeground="#ecf0c1"
+	BSPWMBar="#2b885b"
+	BSPWMActiveBorder="#2b885b"
+	BSPWMNormalBorder="#0f111b"
+
+	# DWM
+	DWMBackground="#0f111b"
+	DWMForeground="#ecf0c1"
+	DWMBarFG="#ecf0c1"
+	DWMBarBG="#2b885b"
+	DWMNormalBorder="#0f111b"
+	DWMActiveBorder="#2b885b"
+
+	# i3
+	I3Background="#0f111b"
+	I3Foreground="#d7d7d7"
+	I3Bar="#2b885b"
+	I3ActiveBorder="#2b885b"
+	I3NormalBorder="#0f111b"
+	I3Indicator="#00a3cc"
+
+	# Rofi
+	rofiTheme="spaceduck_theme"
+}
+
+#=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nLight\\nNord\\nOnedark" | sort | dmenu -l 7 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nLight\\nNord\\nOnedark\\nSpaceduck" | sort | dmenu -l 8 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
 	"Doom-One") toggleDoomone ;;
 	"Dracula") toggleDracula ;;
@@ -456,6 +517,7 @@ case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nLight\\nNord\\nOnedark" 
 	"Light") toggleLight ;;
 	"Nord") toggleNord ;;
 	"Onedark") toggleOnedark ;;
+	"Spaceduck") toggleSpaceduck ;;
 	*) exit 0 ;;
 esac
 
