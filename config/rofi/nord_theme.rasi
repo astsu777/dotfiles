@@ -1,5 +1,5 @@
 * {
-    selected-normal-foreground:  rgba(249,249,249,1);
+    selected-normal-foreground:  rgba(46,52,64,0.8);
     foreground:                  rgba(196,203,212,1);
     normal-foreground:           @foreground;
     alternate-normal-background: rgba(96,109,133,0.8);
@@ -10,7 +10,7 @@
     alternate-urgent-background: rgba(75,81,96,0.8);
     active-foreground:           rgba(229,233,240,0.8);
     lightbg:                     rgba(238,232,213,1);
-    selected-active-foreground:  rgba(249,249,249,1);
+    selected-active-foreground:  rgba(46,52,64,0.8);
     alternate-active-background: rgba(75,81,96,0.8);
     background:                  rgba(46,52,64,0.8);
     alternate-normal-foreground: @foreground;
