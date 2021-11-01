@@ -8,4 +8,3 @@ configuration {
 	sorting-method: "levenshtein";
 }
 @import "custom_theme.rasi"
-@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
