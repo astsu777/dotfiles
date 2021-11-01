@@ -1,5 +1,3 @@
-# Base commands aliases and replacements
-#
 # If the program "bat" is installed, replace "cat" with it
 if type ccat > /dev/null 2>&1; then
     alias cat="ccat"

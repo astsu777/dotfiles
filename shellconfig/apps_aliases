@@ -1,6 +1,3 @@
-# Application aliases
-#
-
 # Attach or create a TMUX session with username as session name
 if type tmux > /dev/null 2>&1; then
 	alias t="tmux attach-session -t "$USER"0 || tmux new-session -s "$USER"0"

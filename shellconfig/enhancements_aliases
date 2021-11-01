@@ -1,5 +1,3 @@
-# Enhancements aliases
-#
 # Colorize output of the "ls" command
 if [[ "$OSTYPE" = "linux-gnu" ]]; then
 	alias ls="ls --color=auto"

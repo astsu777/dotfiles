@@ -1,8 +1,4 @@
-# Common aliases for all shells
-#
-
 # Log symmetric session key during TLS traffic (useful to decrypt SSL traffic)
-# Uncomment to enable it
 #export SSLKEYLOGFILE=~/sslkeylog.log
 
 # Define custom PATH
