@@ -122,5 +122,8 @@ for_window [class="scratchpad"] move scratchpad
 exec --no-startup-id "$HOME/.config/i3/scratchpad.sh"
 bindsym F12 [class="scratchpad"] scratchpad show
 
+# Window rules
+for_window [class=".*" instance="mpv floating"] floating enable
+
 # Status bar
 exec --no-startup-id "$HOME/.config/i3/bar.sh"
