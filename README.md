@@ -373,7 +373,8 @@ The following table provides all the configured keybindings **except** for the *
 | `SUPER + SHIFT + Escape` | open a menu to logout/suspend/hibernate/shutdown the computer (script: dmenu-shutdown) |
 | `SUPER + SHIFT + Return` | open a run launcher (variable: $LMENU) |
 | `SUPER + ALT + 5` | take a screenshot of a region (variable: $SCROTBIN) |
-| `SUPER + ALT + b` | open bookmarks in the default Web browser (script: dmenu-bookmarks) |
+| `SUPER + ALT + b` | copy selected bookmark to the clipboard (script: dmenu-bookmarks) |
+| `SUPER + ALT + SHIFT + b` | open selected bookmark in the default Web browser (script: dmenu-bookmarks) |
 | `SUPER + ALT + c` | show the clipboard manager using *clipmenu* |
 | `SUPER + ALT + e` | open the default TUI text editor (variable: $EDITOR) |
 | `SUPER + ALT + f` | open the default TUI file manager (variable: $FILEMANAGER) |

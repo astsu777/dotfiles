@@ -78,7 +78,9 @@ The following keybindings are configured:
 .ITEM
 \f(CWSUPER + ALT + 5\fP \(en  take a screenshot of a region (variable: $SCROTBIN)
 .ITEM
-\f(CWSUPER + ALT + b\fP \(en  open bookmarks in the default Web browser (script: dmenu-bookmarks)
+\f(CWSUPER + ALT + b\fP \(en  copy selected bookmark to the clipboard (script: dmenu-bookmarks)
+.ITEM
+\f(CWSUPER + ALT + SHIFT + b\fP \(en  open bookmark in the default Web browser (script: dmenu-bookmarks)
 .ITEM
 \f(CWSUPER + ALT + c\fP \(en  show the clipboard manager using \fBclipmenu\fP
 .ITEM

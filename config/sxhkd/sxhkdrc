@@ -69,8 +69,8 @@ super + alt + 5
 	"$SHELL" -c "$SCROTBIN"
 
 # Bookmarks manager
-super + alt + b
-	"$SHELL" -c 'dmenu-bookmarks'
+super + alt + {b,B}
+	"$SHELL" -c {'dmenu-bookmarks copy','dmenu-bookmarks'}
 
 # Clipboard manager
 super + alt + c

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:09:15
-# Last modified: Sun 22 Aug 2021 12:09:21
+# Last modified: Sat 06 Nov 2021 10:43:55
 # Version: 1.0
 #
 # Description: show bookmarks in a DMenu menu
@@ -75,6 +75,13 @@ bmks_display() {
 	esac
 }
 
+bmks_copy(){
+	case "$PREFERED_LAUNCHER" in
+		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks:" | awk '{print $(NF)}' | xclip -selection clipboard && notify-send "Bookmark's URL copied to clipboard" ;;
+		fzf) sort "$URL_FILE_PATH/$URL_FILE_NAME" | fzf | awk '{print $(NF)}' | xclip -selection clipboard ;;
+	esac
+}
+
 bmks_check() {
 	[ ! -s "$URL_FILE_PATH/$URL_FILE_NAME" ] && printf "Error: No bookmarks found to display. Try adding some!\n\n" && show_usage && exit 0
 }
@@ -89,5 +96,6 @@ case "$1" in
 	"ls") bmks_ls ;;
 	"dmenu") PREFERED_LAUNCHER="$1"; bmks_display ;;
 	"fzf") PREFERED_LAUNCHER="$1"; bmks_display ;;
+	"copy") bmks_copy ;;
 	*) bmks_display ;;
 esac
