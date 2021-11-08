@@ -256,8 +256,8 @@ fi
 
 # Configure the default mail program
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	if type mailspring > /dev/null 2>&1; then
-		export MAILER="mailspring"
+	if type thunderbird > /dev/null 2>&1; then
+		export MAILER="thunderbird"
 	fi
 fi
 
