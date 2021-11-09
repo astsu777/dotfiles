@@ -798,7 +798,6 @@ This application is the lightest terminal emulator and is the daily driver of th
 .ITEM
 \f(CWALT + p\fP \(en  export the buffer to the default text editor ($EDITOR)
 .LIST OFF
-.LIST OFF
 
 .bp
 .HEADING 1 "Contact Information"
