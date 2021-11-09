@@ -796,7 +796,7 @@ This application is the lightest terminal emulator and is the daily driver of th
 .ITEM
 \f(CWALT + o\fP \(en  parse commands in the buffer, show them in a menu and copy its output to the clipboard
 .ITEM
-\f(CWALT + p\fP \(en  export the buffer to the default text editor ($EDITOR)
+\f(CWALT + e\fP \(en  export the buffer to the default text editor ($EDITOR)
 .LIST OFF
 
 .bp
