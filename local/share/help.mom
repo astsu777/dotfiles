@@ -154,8 +154,65 @@ The following keybindings are configured:
 .bp
 .HEADING 1 "Window Managers"
 This chapter will contain the general keybindings for the various window managers.
+
+.HEADING 2 "BSPWM"
+The following keyboard shortcuts are available in BSPWM:
+
+.LI
+.ITEM
+\f(CWSuper + RETURN\fP \(en  Open terminal (st is the hard-coded one but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + RETURN\fP \(en  Open run launcher (dmenu is the run launcher but it can be modified)
+.ITEM
+\f(CWSuper + SHIFT + c\fP \(en  Kill window with focus
+.ITEM
+\f(CWSuper + SHIFT + q\fP \(en  Quit BSPWM
+.ITEM
+\f(CWSuper + SHIFT + r\fP \(en  Reload BSPWM
+.ITEM
+\f(CWSuper + 1-9\fP \(en  Switch focus to workspace (1 to 9)
+.ITEM
+\f(CWSuper + SHIFT + 1-9\fP \(en  Move focused window to workspace (1 to 9)
+.ITEM
+\f(CWSuper + Space\fP \(en  Switch between monocle and tiled layout
+.ITEM
+\f(CWSuper + SHIFT + Space\fP \(en  Focused window becomes sticky
+.ITEM
+\f(CWSuper + t\fP \(en  Focused window set to tiled state
+.ITEM
+\f(CWSuper + SHIFT + t\fP \(en  Focused window set to pseudo tiled state
+.ITEM
+\f(CWSuper + f\fP \(en  Focused window set to floating state
+.ITEM
+\f(CWSuper + SHIFT + f\fP \(en  Focused window set to fullscreen state
+.ITEM
+\f(CWSuper + h-j-k-l\fP \(en  Give focus to window in either the west-south-north-east direction
+.ITEM
+\f(CWSuper + SHIFT + h-j-k-l\fP \(en  Move the focused window to the west-south-north-east
+.ITEM
+\f(CWSuper + [\fP \(en  Move to the previous workspace on the current monitor
+.ITEM
+\f(CWSuper + ]\fP \(en  Move to the next workspace on the current monitor
+.ITEM
+\f(CWSuper + Grave\fP \(en  Move to the last focused window
+.ITEM
+\f(CWSuper + Tab\fP \(en  Move to the last focused workspace
+.ITEM
+\f(CWSuper + o\fP \(en  Focus to the older opened window regardless of its workspace
+.ITEM
+\f(CWSuper + i\fP \(en  Focus to the newer opened window regardless of its workspace
+.ITEM
+\f(CWSuper + left-down-up-right arrow\fP \(en  Expand current window to the given direction
+.ITEM
+\f(CWSuper + Alt + left-down-up-right arrow\fP \(en  Reduce current window to the given direction
+.ITEM
+\f(CWSuper + SHIFT + left-down-up-right arrow\fP \(en  Move current floating window to the given direction
+.LIST OFF
+
+.bp
 .HEADING 2 "DWM"
 The following keyboard shortcuts are available in DWM:
+
 .LI
 .ITEM
 \f(CWSUPER + RETURN\fP \(en  opens terminal (st is the hard-coded one but it can be modified)
@@ -225,60 +282,6 @@ The following keyboard shortcuts are available in DWM:
 \f(CWSUPER + CTRL + SHIFT + t\fP \(en  closes the system tray
 .ITEM
 \f(CWF12\fP \(en  open a scratchpad
-.LIST OFF
-
-.HEADING 2 "BSPWM"
-The following keyboard shortcuts are available in BSPWM:
-
-.LI
-.ITEM
-\f(CWSuper + RETURN\fP \(en  Open terminal (st is the hard-coded one but it can be modified)
-.ITEM
-\f(CWSuper + SHIFT + RETURN\fP \(en  Open run launcher (dmenu is the run launcher but it can be modified)
-.ITEM
-\f(CWSuper + SHIFT + c\fP \(en  Kill window with focus
-.ITEM
-\f(CWSuper + SHIFT + q\fP \(en  Quit BSPWM
-.ITEM
-\f(CWSuper + SHIFT + r\fP \(en  Reload BSPWM
-.ITEM
-\f(CWSuper + 1-9\fP \(en  Switch focus to workspace (1 to 9)
-.ITEM
-\f(CWSuper + SHIFT + 1-9\fP \(en  Move focused window to workspace (1 to 9)
-.ITEM
-\f(CWSuper + Space\fP \(en  Switch between monocle and tiled layout
-.ITEM
-\f(CWSuper + SHIFT + Space\fP \(en  Focused window becomes sticky
-.ITEM
-\f(CWSuper + t\fP \(en  Focused window set to tiled state
-.ITEM
-\f(CWSuper + SHIFT + t\fP \(en  Focused window set to pseudo tiled state
-.ITEM
-\f(CWSuper + f\fP \(en  Focused window set to floating state
-.ITEM
-\f(CWSuper + SHIFT + f\fP \(en  Focused window set to fullscreen state
-.ITEM
-\f(CWSuper + h-j-k-l\fP \(en  Give focus to window in either the west-south-north-east direction
-.ITEM
-\f(CWSuper + SHIFT + h-j-k-l\fP \(en  Move the focused window to the west-south-north-east
-.ITEM
-\f(CWSuper + [\fP \(en  Move to the previous workspace on the current monitor
-.ITEM
-\f(CWSuper + ]\fP \(en  Move to the next workspace on the current monitor
-.ITEM
-\f(CWSuper + Grave\fP \(en  Move to the last focused window
-.ITEM
-\f(CWSuper + Tab\fP \(en  Move to the last focused workspace
-.ITEM
-\f(CWSuper + o\fP \(en  Focus to the older opened window regardless of its workspace
-.ITEM
-\f(CWSuper + i\fP \(en  Focus to the newer opened window regardless of its workspace
-.ITEM
-\f(CWSuper + left-down-up-right arrow\fP \(en  Expand current window to the given direction
-.ITEM
-\f(CWSuper + Alt + left-down-up-right arrow\fP \(en  Reduce current window to the given direction
-.ITEM
-\f(CWSuper + SHIFT + left-down-up-right arrow\fP \(en  Move current floating window to the given direction
 .LIST OFF
 
 .bp
@@ -364,7 +367,6 @@ The following keyboard shortcuts are available in Openbox:
 
 .HEADING 2 "SpectrWM"
 The following keyboard shortcuts are available in SpectrWM:
-
 .LI
 .ITEM
 \f(CWSUPER + RETURN \fP \(en  opens terminal (st is the hard-coded one but it can be modified)
@@ -564,31 +566,7 @@ The following keybindings are available in this application:
 
 \f(CWNewsboat\fP comes with another program called \f(CWPodboat\fP. This is a companion application to download and listen to podcasts. When some podcasts are enqueued for download, \f(CWPodboat\fP can be used to download and listen to the podcasts. The keybindings for \f(CWPodboat\fP are all described in the program's status bar.
 
-.HEADING 2 "SXIV"
-Simple X Image Viewer is a minimalist image viewer that can take a shell script for extensibility. The shell script is \f(CW.config/sxiv/exec/key-handler\fP. All keybindings must have the prefix \fBCTRL+x\fP.
-
-.LI
-\f(CWPREFIX & y\fP \(en  copy the current image to the clipboard
-.ITEM
-\f(CWPREFIX & d\fP \(en  delete the current image
-.ITEM
-\f(CWPREFIX & SHIFT + d\fP \(en  delete the current image without prompt
-.ITEM
-\f(CWPREFIX & i\fP \(en  display current image media information
-.ITEM
-\f(CWPREFIX & r\fP \(en  rotate the current image 90 degrees permanently
-.ITEM
-\f(CWPREFIX & SHIFT + r\fP \(en  rotate the current image -90 degrees permanently
-.ITEM
-\f(CWPREFIX & m\fP \(en  mirror the current image permanently
-.ITEM
-\f(CWPREFIX & e\fP \(en  open the current image in *GIMP*
-.ITEM
-\f(CWPREFIX & w\fP \(en  set the current image as the wallpaper
-.ITEM
-\f(CWPREFIX & SHIFT + w\fP \(en  copy the current image to the wallpapers collection
-.LIST OFF
-
+.bp
 .HEADING 2 "Qutebrowser"
 This Web browser has been made for VIM users: the entire Web browser can be driven by keyboard shortcuts and a lot of similarities with VIM are present.
 Once again, this Web browser's configuration is extensible as it allows defining custom keybindings to call external programs.
@@ -631,6 +609,33 @@ Once again, this Web browser's configuration is extensible as it allows defining
 .ITEM
 \f(CWx + y\fP \(en  hint links and copy it to clipboard
 .LIST OFF
+
+.bp
+.HEADING 2 "SXIV"
+Simple X Image Viewer is a minimalist image viewer that can take a shell script for extensibility. The shell script is \f(CW.config/sxiv/exec/key-handler\fP. All keybindings must have the prefix \fBCTRL+x\fP.
+
+.LI
+\f(CWPREFIX & y\fP \(en  copy the current image to the clipboard
+.ITEM
+\f(CWPREFIX & d\fP \(en  delete the current image
+.ITEM
+\f(CWPREFIX & SHIFT + d\fP \(en  delete the current image without prompt
+.ITEM
+\f(CWPREFIX & i\fP \(en  display current image media information
+.ITEM
+\f(CWPREFIX & r\fP \(en  rotate the current image 90 degrees permanently
+.ITEM
+\f(CWPREFIX & SHIFT + r\fP \(en  rotate the current image -90 degrees permanently
+.ITEM
+\f(CWPREFIX & m\fP \(en  mirror the current image permanently
+.ITEM
+\f(CWPREFIX & e\fP \(en  open the current image in *GIMP*
+.ITEM
+\f(CWPREFIX & w\fP \(en  set the current image as the wallpaper
+.ITEM
+\f(CWPREFIX & SHIFT + w\fP \(en  copy the current image to the wallpapers collection
+.LIST OFF
+
 .HEADING 2 "Zathura"
 This application can be used to read documents such as PDF, EPUB, etc... It is very minimalist but has very useful features that can be called with various keyboard shortcuts.
 
@@ -758,7 +763,45 @@ Here is a small description for every script:
 
 \fBNote\fP: a symlink called \f(CWurl_handler.sh\fP is referencing \f(CWhandler\fP because this name is hardcoded in the program \f(CWUrlview\fP.
 
-.HEADING 1 "Contact"
+.bp
+.HEADING 1 "Terminal Emulators"
+This chapter will contain the general keybindings for various terminal emulators. Programs using the default keyboard shortcuts are out of the scope of this document.
+
+.HEADING 2 "ST"
+This application is the lightest terminal emulator and is the daily driver of this document's author. The following keybindings are currently configured
+
+.LI
+.ITEM
+\f(CWMouse wheel UP/DOWN\fP \(en  scroll up and down the buffer
+.ITEM
+\f(CWMouse middle click\fP \(en  paste text selection
+.ITEM
+\f(CWSHIFT + PageUp/PageDown\fP \(en  scroll up and down the buffer
+.ITEM
+\f(CWCTRL + SHIFT + PageUp\fP \(en  zoom in
+.ITEM
+\f(CWCTRL + SHIFT + PageDown\fP \(en  zoom out
+.ITEM
+\f(CWCTRL + SHIFT + Home\fP \(en  reset zoom
+.ITEM
+\f(CWCTRL + SHIFT + c\fP \(en  copy selection to clipboard
+.ITEM
+\f(CWCTRL + SHIFT + y\fP \(en  copy and quickly paste selection (copied data not stored in clipboard)
+.ITEM
+\f(CWCTRL + SHIFT + v\fP \(en  paste clipboard content
+.ITEM
+\f(CWALT + l\fP \(en  parse URLs in the buffer, show them in a menu and open the chosen one
+.ITEM
+\f(CWALT + y\fP \(en  parse URLs in the buffer, show them in a menu and copy the chosen one to the clipboard
+.ITEM
+\f(CWALT + o\fP \(en  parse commands in the buffer, show them in a menu and copy its output to the clipboard
+.ITEM
+\f(CWALT + p\fP \(en  export the buffer to the default text editor ($EDITOR)
+.LIST OFF
+.LIST OFF
+
+.bp
+.HEADING 1 "Contact Information"
 You can always reach out to me:
 .LI
 .ITEM
