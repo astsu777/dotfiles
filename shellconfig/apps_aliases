@@ -159,6 +159,11 @@ if type Xephyr > /dev/null 2>&1; then
 	alias xnested="Xephyr -br -ac -noreset -screen 1280x1024 :1 ; echo -e 'Launch programs with DISPLAY=:1 <PROGRAM> (Ex.: startx -- /usr/bin/Xephyr :1) | Keystrokes can be ungrabbed with CTRL+Shift'"
 fi
 
+# KVM/QEMU
+if type virsh >/dev/null 2>&1; then
+	alias wget-virtio-win-drivers-iso="wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso"
+fi
+
 #=======================
 # Work
 #=======================
