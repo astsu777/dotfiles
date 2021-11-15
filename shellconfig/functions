@@ -20,6 +20,34 @@ colortest() {
 	echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
 }
 
+# Generate a strong random password
+pwdgen(){
+	if [ "$OSTYPE" = "linux-gnu" ]; then
+		if [ -z "$1" ]; then
+    		echo -e "Create a random strong password"
+			echo "Usage: pwdgen '<INTEGER>'"
+			echo "Ex.: pwdgen 10 --> will create a 10 characters password"
+			echo
+		else
+			tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c "$1" ; echo
+		fi
+	fi
+}
+
+# Generate a strong random password
+pwdgen-alpha(){
+	if [ "$OSTYPE" = "linux-gnu" ]; then
+		if [ -z "$1" ]; then
+    		echo -e "Create a random strong password with alphanumeric characters only"
+			echo "Usage: pwdgen-alpha '<INTEGER>'"
+			echo "Ex.: pwdgen-alpha 10 --> will create a 10 characters password"
+			echo
+		else
+			tr -dc 'A-Za-z0-9' </dev/urandom | head -c "$1" ; echo
+		fi
+	fi
+}
+
 # Function to perform basic maths
 if type bc > /dev/null 2>&1; then
 	calc() {
