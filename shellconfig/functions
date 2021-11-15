@@ -20,6 +20,18 @@ colortest() {
 	echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
 }
 
+# Create a temporary filesystem in RAM
+mkramfs(){
+	if [ $# -lt 2 ]; then
+    	echo -e "Mount a temporary partition in RAM"
+		echo "Usage: mkramfs '<MOUNT_POINT>' '<SIZE_IN_MB>'"
+		echo "Ex.: mkramfs /mnt 1024"
+		echo
+	else
+		sudo mount -t tmpfs tmpfs "$1" -o size="$2"m
+	fi
+}
+
 # Generate a strong random password
 pwdgen(){
 	if [ "$OSTYPE" = "linux-gnu" ]; then
@@ -47,6 +59,22 @@ pwdgen-alpha(){
 		fi
 	fi
 }
+
+# Save command's output to an image
+if type convert >/dev/null 2>&1; then
+	cmd2jpg(){
+		if [ $# -lt 2 ]; then
+    		echo -e "Save a command's output to an image"
+			echo "Usage: cmd2jpg '<COMMAND>' '<IMAGE_FILE>'"
+			echo "Ex.: cmd2jpg ifconfig ip.jpg"
+			echo
+			echo "The real command is '<COMMAND>' | convert label:@- '<IMAGE_FILE>'"
+			echo
+		else
+			"$1" | convert label:@- "$2"
+		fi
+	}
+fi
 
 # Function to perform basic maths
 if type bc > /dev/null 2>&1; then
