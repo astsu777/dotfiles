@@ -91,9 +91,9 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 
 	# Red Hat based systems using DNF package manager
 	elif type dnf snap > /dev/null 2>&1; then
-		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove --oldinstallonly --setopt installonly_limit=2 kernel && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; } ; sudo snap refresh'
 	elif type dnf > /dev/null 2>&1; then
-		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove $(dnf repoquery --installonly --latest-limit=2 -q) && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; }'
+		alias update-system='sudo dnf update && sudo dnf autoremove && sudo dnf clean all && sudo dnf remove --oldinstallonly --setopt installonly_limit=2 kernel && { needs-restarting -r; if [ $? -eq 1 ]; then echo -e "\033[31mA reboot is required to apply all updates"; fi; }'
 
 	# Red Hat based systems using YUM package manager
 	elif type yum snap > /dev/null 2>&1; then
