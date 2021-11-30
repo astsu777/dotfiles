@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Sun 17 Oct 2021 02:25:31
+# Last modified: Tue 30 Nov 2021 19:10:22
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -38,15 +38,15 @@ fi
 if [ "$TOPMENU" = 'Network Management' ]; then
 	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nNordVPN Connection\n(Un)mount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
-		"Block Ads") tui $SHELL -c "block-hosts ; $SHELL" ;;
-		"Clear DNS Cache") tui $SHELL -c "clear-dns-cache ; $SHELL" ;;
-		"Cloud Manager") tui $SHELL -c "upcloud-manager ; $SHELL" ;;
-		"DHCP Server") tui $SHELL -c "dhcp-server ; $SHELL" ;;
+		"Block Ads") tui "$SHELL" -c "block-hosts ; $SHELL" ;;
+		"Clear DNS Cache") tui "$SHELL" -c "clear-dns-cache ; $SHELL" ;;
+		"Cloud Manager") tui "$SHELL" -c "upcloud-manager ; $SHELL" ;;
+		"DHCP Server") tui "$SHELL" -c "dhcp-server ; $SHELL" ;;
 		"Manage Network") tui 'nmtui' ;;
 		"NordVPN Connection") dmenu-nordvpn ;;
 		"(Un)mount URI") tui 'dmenu-urimount' ;;
-		"TFTP Server") tui $SHELL -c "tftp-server ; $SHELL" ;;
-		"Websites Monitor") tui $SHELL -c "websites-monitor ; $SHELL" ;;
+		"TFTP Server") tui "$SHELL" -c "tftp-server ; $SHELL" ;;
+		"Websites Monitor") tui "$SHELL" -c "websites-monitor ; $SHELL" ;;
 		*) exec dmenu-system ;;
 	esac
 fi
@@ -55,12 +55,12 @@ fi
 # Miscellaneous
 #=======================
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
-	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nClear Clipboard Manager\nListen To Radio\nMount USB Drive\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
+	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nClear Clipboard Manager\nListen To Radio\nMount USB Drive\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nToggle Do Not Disturb\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
 		"Bookmarks List") dmenu-bookmarks ;;
 		"Change Theme") tui dmenu-theme ;;
 		"Check Online Streams") dmenu-stream ;;
-		"Check System Queue") tui $SHELL -c "tspool ; $SHELL" ;;
+		"Check System Queue") tui "$SHELL" -c "tspool ; $SHELL" ;;
 		"Clear Clipboard Manager") rm -rf "${XDG_CACHE_HOME:-$HOME/.cache}"/clipmenu*/* && notify-send "📋 Clipboard Manager Cleared" "The clipboard manager has been cleared" ;;
 		"Listen To Radio") dmenu-radio ;;
 		"Mount USB Drive") dmenu-mount ;;
@@ -71,6 +71,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Take Screenshot") "$SCROTBIN" || dmenu-screenshot ;;
 		"Toggle Compositor") if pgrep picom > /dev/null 2>&1; then pkill picom > /dev/null 2>&1; else nohup picom --experimental-backends > /dev/null 2>&1 ; fi ;;
 		"Toggle Cron Jobs") crontoggle ;;
+		"Toggle Do Not Disturb") notifytoggle ;;
 		"Unmount USB Drive") dmenu-umount ;;
 		"Web Search") dmenu-websearch ;;
 		"Windows Manager") dmenu-wm ;;

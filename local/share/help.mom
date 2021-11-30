@@ -740,6 +740,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWlsw\fP \(en  list opened windows
 .ITEM
+\f(CWnotifytoggle\fP \(en  enable/disable a do-not-disturb mode (notifications are hidden)
+.ITEM
 \f(CWopout\fP \(en  open a preview of certain file (most useful when called from Neovim/VIM)
 .ITEM
 \f(CWsxiview\fP \(en  when opening a single image with *SXIV*, automatically expand to all other images in the same folder

@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Sun 22 Aug 2021 12:08:24
+# Last modified: Tue 30 Nov 2021 19:21:27
+# Version: 1.0
+#
+# Description: toggle 'do not disturb' mode on and off
+#=========================================================================
+
+if type dunst >/dev/null 2>&1; then
+	status=$(dunstctl is-paused)
+	if [ "$status" = true ]; then
+		dunstctl set-paused toggle && notify-send "🗨️ Do Not Disturb OFF" "Notifications are now shown again"
+	else
+		notify-send "🗨️ Do Not Disturb ON" "Notifications will be hidden & queued" && sleep 5 && dunstctl set-paused toggle
+	fi
+fi
