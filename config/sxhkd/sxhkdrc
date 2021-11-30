@@ -5,6 +5,8 @@ XF86AudioRaiseVolume
 	amixer sset 'Master' 2%+
 XF86AudioMute
 	amixer sset 'Master' toggle
+XF86AudioMicMute
+	amixer sset 'Capture' toggle
 
 # Multimedia keys
 XF86AudioPlay
