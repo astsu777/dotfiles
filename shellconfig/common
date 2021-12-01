@@ -302,6 +302,8 @@ fi
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	if type qutebrowser > /dev/null 2>&1; then
 		export BROWSER="qutebrowser"
+	elif type brave > /dev/null 2>&1; then
+		export BROWSER="brave"
 	elif type firefox > /dev/null 2>&1; then
 		export BROWSER="firefox"
 	elif type vivaldi-stable > /dev/null 2>&1; then
