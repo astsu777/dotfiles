@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Thu 09 Dec 2021 22:14:33
+# Last modified: Thu 09 Dec 2021 22:33:17
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -24,7 +24,7 @@ fi
 if pgrep -f mpv >/dev/null 2>&1 && [ -z "$*" ]; then
 	choice="$(printf "%s\n" 'Grab Playing Videos' 'Play Video' | dmenu -i -p 'Choose Action:')"
 	case "$choice" in
-		"Grab Playing Videos") pgrep -f mpv && link="$(ps -x | grep '[0-9]\smpv' | awk '{print $NF}' | dmenu -i -p 'Videos Currently Playing:')" ;;
+		"Grab Playing Videos") pgrep -f mpv && link="$(ps -x | grep '[0-9]\smpv' | grep -oP 'www|http:|https:+[^\s]+[\w]' | dmenu -i -p 'Videos Currently Playing:')" ;;
 		"Play Video")
 			link="$(if [ -z "$*" ]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
 			if [ -z "$link" ]; then exit 2; fi
