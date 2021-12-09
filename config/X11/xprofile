@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Sun 29 Aug 2021 14:00:52
+# Last modified: Thu 09 Dec 2021 21:10:21
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -67,6 +67,12 @@ if type gnome-keyring >/dev/null 2>&1; then
 	eval $(gnome-keyring-daemon --start)
 	export SSH_AUTH_SOCK
   	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+
+# Automatic screen brightness
+if type clight >/dev/null 2>&1; then
+	[ -f ~/.config/clight/clight.conf ] && clight -c ~/.config/clight/clight.conf &
+	[ -f ~/.config/clight/clight.conf ] || clight --no-gamma --no-kbd &
 fi
 
 # MPD

@@ -218,6 +218,9 @@ Basically, it defines *Firefox* as the default Web browser, *feh* as the default
 
 The *Gemini* project is an alternative protocol to *HTTP* and can be used to serve text-only Websites over the Internet. It looks a lot like the *Gopher* protocol but is much newer and has some advantages. *Amfora* is a TUI client for *Gemini* capsules and its config file is located in the *config/amfora/config.toml* folder. The customization is mainly about the rendering, the keybindings and the colors used inside the application.
 
+## Clight
+*Clight* is an application used to interact with the automatic light sensor/webcam to automatically adjust screen backlight of any laptop. The configuration file is *config/clight/clight.conf*
+
 ## Dunst
 *Dunst* is a notification system for Linux. It can display desktop notifications and its entire configuration/customization is in the file *config/dunst/dunstrc*. The notification style differs depending on its urgency:
 

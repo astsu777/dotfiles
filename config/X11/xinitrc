@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Tue 19 Oct 2021 22:35:12
+# Last modified: Thu 09 Dec 2021 21:09:16
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -88,6 +88,12 @@ if type gnome-keyring >/dev/null 2>&1; then
 	eval $(gnome-keyring-daemon --start)
 	export SSH_AUTH_SOCK
   	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+
+# Automatic screen brightness
+if type clight >/dev/null 2>&1; then
+	[ -f ~/.config/clight/clight.conf ] && clight -c ~/.config/clight/clight.conf &
+	[ -f ~/.config/clight/clight.conf ] || clight --no-gamma --no-kbd &
 fi
 
 # MPD
