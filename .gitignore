@@ -21,3 +21,4 @@ vim/swap/**
 !vim/swap/.gitkeep
 vim/undo/**
 !vim/undo/.gitkeep
+local/share/applications/webapp**
