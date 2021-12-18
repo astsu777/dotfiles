@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:07:41
-# Last modified: Sun 29 Aug 2021 21:22:06
+# Last modified: Sat 18 Dec 2021 01:06:45
 # Version: 1.0
 #
 # Description: retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
@@ -26,7 +26,7 @@ https://blocklistproject.github.io/Lists/tracking.txt
 EOF
 leadmark="#### BLOCKLIST ####"
 tailmark="#### BLOCKLIST END ####"
-EUID=$(id -u)
+UserID=$(id -u)
 
 #=======================
 # Requirements
@@ -39,7 +39,7 @@ elif ! [ -f "$hostsfile" ] || ! type curl > /dev/null 2>&1; then
 	echo .
 	echo "No hosts file was found on your system! This script cannot be executed"
 	exit 2
-elif [ "$EUID" != 0 ] && ! type sudo > /dev/null 2>&1; then
+elif [ "$UserID" != 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
 	exit 3
@@ -50,7 +50,7 @@ fi
 #=======================
 installblocklist() {
 	cleanblocklist=$(<"$blocklists" xargs -n1 curl -s | grep '^0' | sort | uniq)
-	if [ "$EUID" = 0 ]; then
+	if [ "$UserID" = 0 ]; then
 		cp "$hostsfile" "$hostsfile"_.BACKUP
 		echo "$leadmark" | tee -a "$hostsfile" > /dev/null 2>&1
 		echo "$cleanblocklist" | tee -a "$hostsfile" > /dev/null 2>&1
@@ -82,7 +82,7 @@ case "$1" in
 		;;
 	"--uninstall")
 		if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
-			if [ "$EUID" = 0 ]; then
+			if [ "$UserID" = 0 ]; then
 				sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
 			elif type sudo > /dev/null 2>&1; then
 				sudo sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
@@ -96,7 +96,7 @@ case "$1" in
 		;;
 	"--update")
 		if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then
-			if [ "$EUID" = 0 ]; then
+			if [ "$UserID" = 0 ]; then
 				sed -i "/^$leadmark/,/^$tailmark/d" "$hostsfile"
 				installblocklist
 			elif type sudo > /dev/null 2>&1; then
