@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:09:15
-# Last modified: Sat 06 Nov 2021 10:52:21
+# Last modified: Sat 25 Dec 2021 12:13:47
 # Version: 1.0
 #
 # Description: show bookmarks in a DMenu menu
@@ -67,7 +67,7 @@ bmks_display() {
 	bmks_check
 	if [ "$(uname)" = "Darwin" ]; then
 		url="$(fzf <"$URL_FILE_PATH/$URL_FILE_NAME" | awk '{print $(NF)}')"
-		if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi
+		open "$url" && exit 0
 	fi
 	case "$PREFERED_LAUNCHER" in
 		dmenu) sort "$URL_FILE_PATH/$URL_FILE_NAME" | dmenu -i -l 30 -p "Bookmarks:" | awk '{print $(NF)}' | if pgrep surf > /dev/null 2>&1; then xargs -I '{}' surf {}; elif pgrep qutebrowser > /dev/null 2>&1; then xargs -I '{}' qutebrowser {}; elif [ -n "$BROWSER" ]; then xargs -I '{}' "$BROWSER" {}; else xargs -I '{}' xdg-open {}; fi ;;
