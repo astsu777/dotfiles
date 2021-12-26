@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Mon 01 Nov 2021 11:22:22
+# Last modified: Sun 26 Dec 2021 23:24:00
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -73,6 +73,67 @@ toggleCustom() {
 	I3Bar="#5e81ec"
 	I3ActiveBorder="#304569"
 	I3NormalBorder="#282c34"
+	I3Indicator="#96abcf"
+
+	# Rofi
+	rofiTheme="custom_theme"
+}
+
+#=======================
+# Custom 2
+#=======================
+toggleCustom2() {
+	# ST/Xresources
+	foreground="#c5c8c6"
+	background="#1c1c1c"
+	normalBlack="#333333"
+	normalRed="#cc6666"
+	normalGreen="#81bd68"
+	normalYellow="#f0c674"
+	normalBlue="#6699ff"
+	normalMagenta="#b294bb"
+	normalCyan="#789bba"
+	normalWhite="#c5c8c6"
+	brightBlack="#595959"
+	brightRed="#d98c8c"
+	brightGreen="#a7d095"
+	brightYellow="#f5daa3"
+	brightBlue="#9ab4cb"
+	brightMagenta="#c7b1cd"
+	brightCyan="#add2cd"
+	brightWhite="#e5e6e5"
+
+	# Alacritty
+	alacrittyTheme="custom_theme"
+
+	# Kitty
+	kittyTheme="custom_theme"
+
+	# VIM
+	vimColorscheme="kuroi"
+	vimLightline="jellybeans"
+
+	# BSPWM
+	BSPWMBackground="#373d48"
+	BSPWMForeground="#cccccc"
+	BSPWMBar="#1b4de4"
+	BSPWMActiveBorder="#48679d"
+	BSPWMNormalBorder="#373d48"
+
+	# DWM
+	DWMBackground="#373d48"
+	DWMForeground="#cccccc"
+	DWMBarFG="#cccccc"
+	DWMBarBG="#48679d"
+	DWMNormalBorder="#373d48"
+	DWMActiveBorder="#48679d"
+
+	# i3
+	I3Background="#373d48"
+	I3Foreground="#cccccc"
+	I3Bar="#1b4de4"
+	I3ActiveBorder="#48679d"
+	I3NormalBorder="#373d48"
 	I3Indicator="#96abcf"
 
 	# Rofi
@@ -509,8 +570,9 @@ toggleSpaceduck() {
 #=======================
 # Themes List
 #=======================
-case "$(printf "Custom\\nDoom-One\\nDracula\\nGruvbox\\nSolarized Light\\nNord\\nOnedark\\nSpaceduck" | sort | dmenu -l 8 -i -p "Choose a theme:")" in
+case "$(printf "Custom\\nCustom 2\\nDoom-One\\nDracula\\nGruvbox\\nSolarized Light\\nNord\\nOnedark\\nSpaceduck" | sort | dmenu -l 8 -i -p "Choose a theme:")" in
 	"Custom") toggleCustom ;;
+	"Custom 2") toggleCustom2 ;;
 	"Doom-One") toggleDoomone ;;
 	"Dracula") toggleDracula ;;
 	"Gruvbox") toggleGruvbox ;;
