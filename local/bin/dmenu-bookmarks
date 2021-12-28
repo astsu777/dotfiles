@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Tue 28 Dec 2021 21:53:52
+# Last modified: Tue 28 Dec 2021 22:05:04
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -58,7 +58,8 @@ addUrl(){
 }
 
 delUrl(){
-	getUrl && sed -i --follow-symlinks "\|$url|d" "$bookmarksPath/$bookmarksFile"
+	getUrl
+	sed -i --follow-symlinks "\|$url|d" "$bookmarksPath/$bookmarksFile"
 }
 
 getUrl(){
@@ -71,7 +72,8 @@ getUrl(){
 }
 
 copyUrl(){
-	getUrl && printf '%s' "$url" | tr -d '\n' | xclip -selection clipboard && notify-send "Bookmark's URL copied to clipboard"
+	getUrl
+	printf '%s' "$url" | xclip -selection clipboard && notify-send "Bookmark's URL copied to clipboard"
 }
 
 openUrl(){
