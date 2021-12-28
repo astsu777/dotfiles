@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Tue 28 Dec 2021 22:05:04
+# Last modified: Tue 28 Dec 2021 22:06:20
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -26,7 +26,7 @@ checkReq(){
 		if ! type dmenu >/dev/null 2>&1; then notify-send "Error" "The package 'dmenu' is not installed" && exit 1; fi
 	fi
 	[ -d "$bookmarksPath" ] || mkdir -p "$bookmarksPath"
-	[ -f "$bookmarksPath" ] || touch "$bookmarksFile"
+	[ -f "$bookmarksPath/$bookmarksFile" ] || touch "$bookmarksFile"
 }
 
 help() {
