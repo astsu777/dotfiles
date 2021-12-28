@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Tue 30 Nov 2021 19:10:22
+# Last modified: Tue 28 Dec 2021 22:45:22
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -11,7 +11,7 @@
 #=======================
 # Top menu
 #=======================
-TOPMENU=$(printf "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nCancel" | dmenu -i -p "Choose:")
+TOPMENU=$(printf "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nWeb Bookmarks Management\nCancel" | dmenu -i -p "Choose:")
 
 #=======================
 # Logout/shutdown
@@ -75,6 +75,20 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Unmount USB Drive") dmenu-umount ;;
 		"Web Search") dmenu-websearch ;;
 		"Windows Manager") dmenu-wm ;;
+		*) exec dmenu-system ;;
+	esac
+fi
+
+#=======================
+# Web bookmarks management
+#=======================
+if [ "$TOPMENU" = 'Web Bookmarks Management' ]; then
+	OPTS=$(printf '%s\n' "Add bookmark" "Delete bookmark" "Copy bookmark to clipboard" "Open bookmark" | sort | dmenu -i -p "Bookmarks Management:")
+	case "$OPTS" in
+		'Add bookmark') dmenu-bookmarks --add ;;
+		'Copy bookmark to clipboard') dmenu-bookmarks --copy ;;
+		'Delete bookmark') dmenu-bookmarks --delete ;;
+		'Open bookmark') dmenu-bookmarks ;;
 		*) exec dmenu-system ;;
 	esac
 fi
