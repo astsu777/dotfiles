@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Thu 09 Dec 2021 22:33:17
+# Last modified: Sun 09 Jan 2022 09:38:59
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -34,6 +34,12 @@ if pgrep -f mpv >/dev/null 2>&1 && [ -z "$*" ]; then
 else
 	link="$(if [ -z "$*" ]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
 	if [ -z "$link" ]; then exit 2; fi
+fi
+
+# Determine if link is a Magnet link
+if grep -Eq '^magnet' <<< "$link" ; then
+	if ! type webtorrent > /dev/null 2>&1; then notify-send "⚠️ Error" "webtorrent must be installed to stream Magnet links" & exit 1; fi
+	magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" <<< "$link")
 fi
 
 # Variables
@@ -104,10 +110,17 @@ yt-dlaudio(){
 	notify-send " Audio queued for download..."
 	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
+yt-magnet(){
+	if [ -z "$queue" ]; then webtorrent "$magnet" --mpv -q & disown; else "$queue" webtorrent "$magnet" --mpv -q & disown ; fi
+}
 
 # Choose preferred video format
 if [ -z "$queue" ]; then
-	format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	if [ -n "$magnet" ]; then
+		format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	else
+		format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	fi
 	case "$format" in
 		Listen) yt-listen ;;
 		"Watch SD") yt-wsd ;;
@@ -120,9 +133,14 @@ if [ -z "$queue" ]; then
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
 		"Stop Playing") pkill mpv ;;
+		"Watch Torrent") yt-magnet ;;
 	esac
 else
-	format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	if [ -n "$magnet" ]; then
+		format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	else
+		format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+	fi
 	case "$format" in
 		Listen) yt-listen ;;
 		"Watch SD") yt-wsd ;;
@@ -137,6 +155,7 @@ else
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
 		"Stop Playing") pkill mpv ;;
+		"Watch Torrent") yt-magnet ;;
 	esac
 fi
 exit 0
