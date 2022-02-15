@@ -212,7 +212,7 @@ fi
 
 # YTFZF
 if type ytfzf mpv > /dev/null 2>&1; then
-	export YTFZF_PLAYER="tspool mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title='mpvfloating'"
+	export YTFZF_PLAYER="dmenu-video"
 fi
 
 # If NVIM is installed, set it as default editor. Otherwise, fallback to vim or vi

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Sun 09 Jan 2022 09:38:59
+# Last modified: Tue 15 Feb 2022 21:26:04
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -66,9 +66,9 @@ yt-wsdnow(){
 }
 yt-whd(){
 	if [ -z "$queue" ]; then
-		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[<=1080]+ba/b' --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
+		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	else
-		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[<=1080]+ba/b' --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
+		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --title=mpvfloating "$link" 2>/dev/null & disown ; fi
 	fi
 }
 yt-whdnow(){
@@ -123,8 +123,8 @@ if [ -z "$queue" ]; then
 	fi
 	case "$format" in
 		Listen) yt-listen ;;
-		"Watch SD") yt-wsd ;;
-		"Watch HD") yt-whd ;;
+		"Watch SD") yt-wsdnow ;;
+		"Watch HD") yt-whdnow ;;
 		"Shuffle SD") yt-shufsd ;;
 		"Shuffle HD") yt-shufhd ;;
 		"Watch Reverse SD") yt-revsd ;;
