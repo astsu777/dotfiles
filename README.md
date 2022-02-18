@@ -382,7 +382,7 @@ The following table provides all the configured keybindings **except** for the *
 | `SUPER + ALT + c` | show the clipboard manager using *clipmenu* |
 | `SUPER + ALT + e` | open the default TUI text editor (variable: $EDITOR) |
 | `SUPER + ALT + f` | open the default TUI file manager (variable: $FILEMANAGER) |
-| `SUPER + ALT + SHIFT + f` | poor file manager using DMenu |
+| `SUPER + ALT + SHIFT + f` | open the default GUI file manager (variable: $GUIFILEMANAGER). If not set, then open poor file manager using DMenu |
 | `SUPER + ALT + h` | launch a TUI system monitor (variable: $SYSMONITOR) |
 | `SUPER + ALT + i` | launch an IRC client (variable: $IRCCLIENT) |
 | `SUPER + ALT + k` | launch and enable *screenkey* to display key strokes |

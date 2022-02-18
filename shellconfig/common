@@ -326,10 +326,12 @@ fi
 
 # Configure the default file manager
 if [ "$(uname)" = "Linux" ]; then
-	if type nnn > /dev/null 2>&1; then
+	if type nnn pcmanfm > /dev/null 2>&1; then
 		export FILEMANAGER="nnn"
+		export GUIFILEMANAGER="pcmanfm"
 	elif type pcmanfm > /dev/null 2>&1; then
 		export FILEMANAGER="pcmanfm"
+		export GUIFILEMANAGER="pcmanfm"
 	fi
 fi
 

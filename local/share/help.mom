@@ -88,7 +88,7 @@ The following keybindings are configured:
 .ITEM
 \f(CWSUPER + ALT + f\fP \(en  open the default TUI file manager (variable: $FILEMANAGER)
 .ITEM
-\f(CWSUPER + ALT + SHIFT + f\fP \(en  poor file manager using DMenu
+\f(CWSUPER + ALT + SHIFT + f\fP \(en  open the default GUI file manager (variable: $GUIFILEMANAGER). If not set, then open poor file manager using DMenu
 .ITEM
 \f(CWSUPER + ALT + h\fP \(en  launch a TUI system monitor (variable: $SYSMONITOR)
 .ITEM
