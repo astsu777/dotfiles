@@ -40,7 +40,7 @@ alt + Tab
 
 # Terminal emulator
 super + Return
-	"$SHELL" -c 'if [[ -z "$TERMINAL" ]]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
+	"$SHELL" -c 'if [ -z "$TERMINAL" ]; then st ; else "$SHELL" -c "$TERMINAL" ; fi'
 
 # Kill all media players
 super + XF86AudioMute
@@ -64,7 +64,7 @@ super + shift + Escape
 
 # Launcher menu
 super + shift + Return
-	"$SHELL" -c 'if [[ -z "$LMENU" ]]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
+	"$SHELL" -c 'if [ -z "$LMENU" ]; then dmenu_run ; else "$SHELL" -c "$LMENU" ; fi'
 
 # Screenshot
 super + alt + 5
@@ -84,7 +84,7 @@ super + alt + e
 
 # File manager
 super + alt + {f,F}
-	"$SHELL" -c {'if [[ "$FILEMANAGER" == "nnn"* ]]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi','if [[ -n "$GUIFILEMANAGER" ]]; then "$GUIFILEMANAGER" ; else xdg-open "$(locate home media | dmenu -i -p "File to open")" ; fi'}
+	"$SHELL" -c {'if [ "$FILEMANAGER" = "nnn" ]; then tui "$FILEMANAGER" ; else "$FILEMANAGER" ; fi','if [ -n "$GUIFILEMANAGER" ]; then "$GUIFILEMANAGER" ; else xdg-open "$(locate home media | dmenu -i -p "File to open")" ; fi'}
 
 # System monitor
 super + alt + h
@@ -92,7 +92,7 @@ super + alt + h
 
 # IRC client
 super + alt + i
-	"$SHELL" -c 'if [[ "$IRCCLIENT" == "weechat" ]]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
+	"$SHELL" -c 'if [ "$IRCCLIENT" = "weechat" ]; then tui "$IRCCLIENT" ; else "$IRCCLIENT" ; fi'
 
 # Toggle screenkey
 super + alt + {k,K}
@@ -104,7 +104,7 @@ super + alt + l
 
 # Email client | Music player
 super + alt + {m,M}
-	"$SHELL" -c {'"$MAILER"','if [[ "$MUSICPLAYER" == "ncmpcpp" ]]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'}
+	"$SHELL" -c {'"$MAILER"','if [ "$MUSICPLAYER" = "ncmpcpp" ]; then tui "$MUSICPLAYER" ; else "$MUSICPLAYER" ; fi'}
 
 # RSS reader
 super + alt + n
@@ -148,7 +148,7 @@ super + r ; {d,D}
 
 # Sound mixer
 super + r ; m
-	"$SHELL" -c 'if [[ "$AUDIOMIXER" == alsamixer ]]; then tui "$AUDIOMIXER" ; elif [[ "$AUDIOMIXER" == pulsemixer ]]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
+	"$SHELL" -c 'if [ "$AUDIOMIXER" = alsamixer ]; then tui "$AUDIOMIXER" ; elif [ "$AUDIOMIXER" = pulsemixer ]; then tui "$AUDIOMIXER" ; else "$AUDIOMIXER" ; fi'
 
 # Kill all multimedia players
 super + r ; s
