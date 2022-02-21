@@ -40,14 +40,14 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Auto-start SSH agent
 if [ "$(uname)" = "Linux" ] && { { [ ! -z "$SESSION" ] || [ ! -z "$GDMSESSION" ] ;} || { [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] ;} ;}; then
-	if find ~/.ssh/ -type f -regex ".*id_rsa.*" 2>/dev/null | grep 'id_rsa' >/dev/null 2>&1 && [ -z "$SSH_AUTH_SOCK" ]; then
+	if find ~/.ssh/ -type f -regex ".*id_rsa.*" 2>/dev/null | grep -q 'id_rsa' && [ -z "$SSH_AUTH_SOCK" ]; then
   		eval $(ssh-agent)
 		export SSH_AUTH_SOCK
 		ssh-add -l >/dev/null || ssh-add
 	fi
 elif [ "$(uname)" = "Darwin" ]; then
 	if [ -d "$HOME"/.ssh ]; then
-		if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep 'id_rsa' >/dev/null 2>&1; then
+		if find ~/.ssh/ -type f -regex ".*id_rsa.*" | grep -q 'id_rsa' ; then
   			find ~/.ssh/ -type f -regex ".*id_rsa.*" | xargs ssh-add -K >/dev/null 2>&1
   		fi
 	fi
@@ -396,7 +396,7 @@ if { [ -f /etc/arch-release ] || [ -d /usr/share/xbps.d ] ;} && [ -f "$HOME"/.xi
 fi
 
 # Auto-start Tmux session
-if ! printf '%s' "$SESSION" | grep -Eqi '^(dwm|bspwm|i3|spectrwm)$' && ! printf '%s' "$GDMSESSION" | grep -Eqi '^(dwm|bspwm|i3|spectrwm|)$' ; then
+if ! printf '%s' "$SESSION" | grep -Eqi '^(dwm|bspwm|i3|spectrwm)$' && ! printf '%s' "$GDMSESSION" | grep -Eqi '^(dwm|bspwm|i3|spectrwm)$' ; then
 	if type tmux > /dev/null 2>&1 && [ -z "$TMUX" ]; then
 		if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
     		if [ ! -d "$XDG_CONFIG_HOME"/tmux/plugins/tpm ]; then
