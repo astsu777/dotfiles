@@ -76,7 +76,7 @@ fi
 # Update systems globally and check if a reboot is necessary whenever possible
 	# macOS based systems using HOMEBREW package manager
 if [[ "$OSTYPE" == "darwin"* ]] && type brew > /dev/null 2>&1; then
-	alias update-system="softwareupdate --install -a --force --agree-to-license && brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup && brew doctor"
+	alias update-system="softwareupdate --install -a --force --agree-to-license && brew update && brew upgrade && brew upgrade --cask --greedy --force && brew cleanup && brew doctor"
 elif [[ $OSTYPE == "linux-gnu" ]]; then
 
 	# Debian based systems using APT or APT-GET package manager
