@@ -27,6 +27,9 @@ xset -b
 # Enable NumLock
 (sleep 1s && numlockx) &
 
+# Launch NetworkManager applet
+(sleep 1s && nm-applet) &
+
 # Screenshot
 (sleep 1s && flameshot) &
 

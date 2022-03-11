@@ -71,6 +71,11 @@ if type numlockx >/dev/null 2>&1; then
 	numlockx on &
 fi
 
+# Launch NetworkManager applet
+if type nm-applet > /dev/null 2>&1; then
+	nm-applet &
+fi
+
 # Launch a session manager
 if type lxpolkit >/dev/null 2>&1; then
 	lxpolkit &

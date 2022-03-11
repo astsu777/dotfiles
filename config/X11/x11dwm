@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:18:53
-# Last modified: Sun 19 Sep 2021 11:46:05
+# Last modified: Fri 11 Mar 2022 22:39:36
 # Version: 1.0
 #
 # Description: script executed by Xinit when the GUI is DWM
@@ -50,6 +50,11 @@ fi
 # Turn on Numlock
 if type numlockx > /dev/null 2>&1; then
 	numlockx on &
+fi
+
+# Launch NetworkManager applet
+if type nm-applet > /dev/null 2>&1; then
+	nm-applet &
 fi
 
 # Launch a session manager
