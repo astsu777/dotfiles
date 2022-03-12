@@ -1,6 +1,9 @@
 # Log symmetric session key during TLS traffic (useful to decrypt SSL traffic)
 #export SSLKEYLOGFILE=~/sslkeylog.log
 
+# Alacritty fixed font scaling
+# WINIT_X11_SCALE_FACTOR=1
+
 # Define custom PATH
 if [ -d "$SCRIPTS" ]; then
 	export PATH="$SCRIPTS":"$PATH"
