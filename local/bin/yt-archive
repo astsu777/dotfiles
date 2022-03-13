@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 17:03:50
-# Last modified: Tue 09 Nov 2021 09:49:43
+# Last modified: Sun 13 Mar 2022 12:27:36
 # Version: 1.0
 #
 # Description: easy script to archive YouTube channels/playlists/videos
@@ -20,7 +20,7 @@ fi
 # Functions
 #=======================
 archiveVideo() {
-	yt-dlp -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs -f 'bv+ba/b' "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
+	yt-dlp -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs --merge-output-format mp4 -f 'bv+ba/b' "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
 archiveAudio() {
 	yt-dlp -q -ci --download-archive "$3"/archive_audio.txt --extract-audio --audio-format mp3 --audio-quality 0 --add-metadata --embed-subs "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
@@ -33,7 +33,7 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 	echo "Some arguments are missing!
 Usage: yt-archive [--video|--audio] <URL> <DIRECTORY>
 
-Example: yt-archive https://www.youtube.com/user/GSquad934 ~/Videos
+Example: yt-archive --video https://www.youtube.com/user/GSquad934 ~/Videos
 Example2: yt-archive --audio https://www.youtube.com/user/GSquad934 ~/Videos
 
 Note: the '--audio' option will only archive audio in MP3 format
