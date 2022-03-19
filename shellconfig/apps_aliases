@@ -25,7 +25,7 @@ fi
 
 # Search in the shell history specified input
 if ! type fzf >/dev/null 2>&1; then
-	alias hs='history | grep $1'
+	alias his='history | grep $1'
 fi
 
 # Disable or enable Gatekeeper on macOS
