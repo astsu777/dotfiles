@@ -224,8 +224,8 @@
             <item label="compton"> <action name="Execute">
                 <execute>compton</execute>
             </action> </item>
-            <item label="Engrampa Archive Manager"> <action name="Execute">
-                <execute>engrampa</execute>
+            <item label="Archive Manager"> <action name="Execute">
+                <execute>file-roller</execute>
             </action> </item>
             <item label="Info"> <action name="Execute">
                 <execute>xterm -e info</execute>
