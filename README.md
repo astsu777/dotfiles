@@ -470,7 +470,7 @@ The configuration files stored in *config/X11* are meant to be used for graphica
 * *xinitrc*: this file is supposed to be located in *$HOME/.xinitrc* and is loaded by *xorg-xinit* when logging in without any display manager. The very first line defines which GUI needs to be loaded and the rest is executing commands automatically to setup the screen layout, keyboard, programs required to start automatically, etc...
 * *xprofile*: this file is the equivalent of *xinitrc* but is used by display managers at logon
 * *x11dwm*, *x11...*: these files are sourced in the *xinitrc* and *xprofile* files and there is one per supported GUI. The reason for this is to provide modularity and avoid repetitiveness in both *xinitrc* and *xprofile*
-* *lightdm*: these are configuration files for *LightDM* display manager when using the GTK greeter. The customization is very light as I do not use any display managers at all (but I offer the option)
+* *lightdm*: these are configuration files for *LightDM* display manager when using the Slick greeter
 * *Xresources*: this file is used to configure the theme of *Xterm* and of *SXIV*
 
 The deployment of the supported GUIs can be automated with my [bootstrap script](https://github.com/GSquad934/bootstrap.git) and the relevant x-file will also be automatically installed and configured.
