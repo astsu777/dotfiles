@@ -78,3 +78,5 @@
 [rebase]
 	# Automatically stash local modifications when rebase
 	autostash = true
+[init]
+	defaultBranch = master
