@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Thu 09 Dec 2021 21:09:16
+# Last modified: Sat 30 Apr 2022 16:08:30
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -47,6 +47,11 @@ fi
 # Set keyboard layout to US-Intl w/ dead keys
 if type setxkbmap >/dev/null 2>&1; then
 	setxkbmap -layout us -variant intl >/dev/null 2>&1
+fi
+
+# Launch audio post-effect
+if type easyeffects >/dev/null 2>&1; then
+	easyeffects -w -gapplication-service &
 fi
 
 # Configure keyboard repeat rate

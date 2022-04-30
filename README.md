@@ -226,6 +226,11 @@ The *Gemini* project is an alternative protocol to *HTTP* and can be used to ser
 
 ![](https://i.postimg.cc/bY1g2b4j/screenshot-20210718-032.png)
 
+## EasyEffects
+*EasyEffects* is an application used to add post-processing effect to audio when using *Pipewire* (input & output). The files in the *config/easyeffects* folders/sub-folders contain presets to adjust audio.
+
+If you use a hardware audio processing unit, it is not advised to also use software to do this.
+
 ## HTOP
 ![](https://i.postimg.cc/jdtxmyf9/screenshot-20210925-050.jpg)
 

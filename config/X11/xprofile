@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Thu 09 Dec 2021 21:10:21
+# Last modified: Sat 30 Apr 2022 16:07:50
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -31,6 +31,11 @@ fi
 # Manage light multimedia keys
 if type xfce4-power-manager >/dev/null 2>&1; then
 	xfce4-power-manager --daemon &
+fi
+
+# Launch audio post-effect
+if type easyeffects >/dev/null 2>&1; then
+	easyeffects -w -gapplication-service &
 fi
 
 # Configure keyboard repeat rate
