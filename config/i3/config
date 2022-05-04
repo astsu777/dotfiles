@@ -125,6 +125,12 @@ bindsym F12 [class="scratchpad"] scratchpad show
 # Window rules
 for_window [class=".*" instance="mpv floating"] floating enable
 for_window [class=".*" instance="mpvfloating"] floating enable
+for_window [class=".*" instance="Picture-in-Picture"] floating enable
+for_window [class=".*" instance="Picture in picture"] floating enable
+for_window [class=".*" instance="galculator"] floating enable
+for_window [class="Tor Browser" instance=".*"] floating enable
+for_window [class="Gimp" instance=".*"] floating enable
+for_window [class="fzfmenu" instance=".*"] floating enable
 
 # Status bar
 exec --no-startup-id "$HOME/.config/i3/bar.sh"
