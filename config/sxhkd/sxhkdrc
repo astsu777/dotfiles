@@ -1,8 +1,10 @@
 # Volume keys
 XF86AudioLowerVolume
-	amixer sset 'Master' 2%-
+	pactl set-sink-volume @DEFAULT_SINK@ -2%
+	# amixer sset 'Master' 2%-
 XF86AudioRaiseVolume
-	amixer sset 'Master' 2%+
+	pactl set-sink-volume @DEFAULT_SINK@ +2%
+	# amixer sset 'Master' 2%+
 XF86AudioMute
 	amixer sset 'Master' toggle
 XF86AudioMicMute
