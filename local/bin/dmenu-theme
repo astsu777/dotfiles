@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sun 26 Dec 2021 23:24:00
+# Last modified: Thu 05 May 2022 22:06:11
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -110,7 +110,7 @@ toggleCustom2() {
 	kittyTheme="custom_theme"
 
 	# VIM
-	vimColorscheme="kuroi"
+	vimColorscheme="aurora"
 	vimLightline="jellybeans"
 
 	# BSPWM
