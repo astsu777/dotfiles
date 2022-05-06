@@ -416,7 +416,7 @@ c.url.default_page = 'about:blank'
 # qutebrowser`.
 # Type: Dict
 c.url.searchengines = {
-    "DEFAULT": "https://www.startpage.com/sp/search?query={}&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "DEFAULT": "https://www.google.com/search?hl=en&q={}",
     "1337x_Torrents": "https://1337x.to/search/{}/1/",
     "2ememain": "https://www.2ememain.be/q/{}/",
     "9Gag": "https://9gag.com/v1/tag-suggest?query={}",
@@ -430,8 +430,8 @@ c.url.searchengines = {
     "AZLyrics": "https://search.azlyrics.com/search.php?q={}",
     "CTAN_-_Comprehensive_TeX_Archive_Network": "https://ctan.org/search?phrase={}",
     "Cheats.sh": "https://cheat.sh/{}",
-    "CheckPoint_KB": "https://www.startpage.com/sp/search?query={}+site%3Asupportcenter.checkpoint.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
-    "CheckPoint": "https://www.startpage.com/sp/search?query={}+site%3Asupportcenter.checkpoint.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "CheckPoint_KB": "https://www.google.com/search?hl=en&q={}+site%3Asupportcenter.checkpoint.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "CheckPoint": "https://www.google.com/search?hl=en&q={}+site%3Asupportcenter.checkpoint.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
     "Cisco": "https://search.cisco.com/search?query={}",
     "CommandLineFu": "https://www.commandlinefu.com/commands/matching/{}/bys=/sort-by-votes",
     "CVE_Details": "https://www.cvedetails.com/google-search-results.php?q={}",
@@ -461,7 +461,7 @@ c.url.searchengines = {
     "Instant_Gaming": "https://www.instant-gaming.com/en/search/?q={}",
     "LaTeX_WikiBooks": "https://en.wikibooks.org/w/index.php?search=latex%2F{}&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1&ns4=1&ns102=1&ns110=1&ns112=1",
     "Linux_Packages": "https://pkgs.org/search/?q={}",
-    "LinuxDocs": "https://www.startpage.com/sp/search?query={}+site%3Alinuxdocs.org&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "LinuxDocs": "https://www.google.com/search?hl=en&q={}+site%3Alinuxdocs.org&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
     "MDN_Web_Docs": "https://developer.mozilla.org/en-US/search?q={}",
     "Mac_Torrents": "https://mac-torrents.io/?s={}",
     "Marmiton_-_Recettes": "https://www.marmiton.org/recettes/recherche.aspx?aqt={}",
@@ -482,7 +482,7 @@ c.url.searchengines = {
     "Parfums_Moins_Cher": "https://www.parfumsmoinschers.com/search.php?search_query={}",
     "PGP_Keys_\(SKS\)": "http://pool.sks-keyservers.net:11371/pks/lookup?search={}&op=index",
     "PHP": "https://secure.php.net/manual-lookup.php?pattern={}",
-    "Pastebin": "https://www.startpage.com/sp/search?query={}+site%3Apastebin.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "Pastebin": "https://www.google.com/search?hl=en&q={}+site%3Apastebin.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
     "Perl_-_MetaCPAN": "https://metacpan.org/search?q={}",
     "PowerShell_Modules": "https://docs.microsoft.com/en-us/powershell/module/?term={}",
     "Python_2": "https://docs.python.org/2/search.html?q={}",
@@ -491,6 +491,7 @@ c.url.searchengines = {
     "RFC": "https://www.rfc-editor.org/search/rfc_search_detail.php?title={}",
     "Reddit": "https://www.reddit.com/search/?q={}",
     "SoundCloud": "https://soundcloud.com/search?q={}",
+    "Startpage": "https://www.startpage.com/sp/search?query={}&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
     "StackExchange": "https://stackexchange.com/search?q={}",
     "Stack_Overflow": "https://stackoverflow.com/search?q={}",
     "Test_King": "https://www.test-king.com/search?q={}",
@@ -506,7 +507,7 @@ c.url.searchengines = {
     "Vim_Tips_Wiki": "https://vim.fandom.com/wiki/Special:Search?query={}",
     "VMware_Docs": "https://docs.vmware.com/en/search/#/{}",
     "Void_Linux_Packages": "https://voidlinux.org/packages/?q={}",
-    "W3Schools": "https://www.startpage.com/sp/search?query={}+site%3Aw3schools.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
+    "W3Schools": "https://www.google.com/search?hl=en&q={}+site%3Aw3schools.com&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
     "Wallhaven": "https://wallhaven.cc/search?q={}",
     "Wallpaperflare": "https://www.wallpaperflare.com/search?wallpaper={}",
     "Wallpaper_Abyss": "https://wall.alphacoders.com/search.php?search={}",
@@ -660,6 +661,7 @@ c.content.blocking.adblock.lists = [
     'https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_8_Dutch/filter.txt',
     'https://secure.fanboy.co.nz/fanboy-annoyance.txt',
     'https://www.fanboy.co.nz/fanboy-antifacebook.txt',
+    'https://www.i-dont-care-about-cookies.eu/abp/',
     'https://secure.fanboy.co.nz/fanboy-cookiemonster.txt'
 ]
 
