@@ -15,6 +15,14 @@ if [ -d "$REPOS/bin" ]; then
 	export PATH="$REPOS/bin":"$PATH"
 fi
 
+# Google Workspace CLI
+if [ -d "$HOME/bin/gam" ]; then
+	export PATH="$HOME/bin/gam":"$PATH"
+fi
+if [ -d "$HOME/bin/gyb" ]; then
+	export PATH="$HOME/bin/gyb":"$PATH"
+fi
+
 # macOS specific PATH
 if [ "$(uname)" = "Darwin" ] && type brew > /dev/null 2>&1; then
 
