@@ -294,10 +294,14 @@ fi
 
 # Configure the default graphical Web browser
 if [ "$(uname)" = "Linux" ]; then
-	if type qutebrowser > /dev/null 2>&1; then
-		export BROWSER="qutebrowser"
-	elif type brave > /dev/null 2>&1; then
+	if type brave > /dev/null 2>&1; then
 		export BROWSER="brave"
+	elif type google-chrome-stable > /dev/null 2>&1; then
+		export BROWSER="google-chrome-stable"
+	elif type google-chrome-beta > /dev/null 2>&1; then
+		export BROWSER="google-chrome-beta"
+	elif type google-chrome-dev > /dev/null 2>&1; then
+		export BROWSER="google-chrome-dev"
 	elif type firefox > /dev/null 2>&1; then
 		export BROWSER="firefox"
 	elif type vivaldi-stable > /dev/null 2>&1; then
