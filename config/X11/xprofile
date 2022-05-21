@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Wed 04 May 2022 21:12:05
+# Last modified: Sat 21 May 2022 16:37:19
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -26,6 +26,11 @@ fi
 # Set keyboard layout to US-Intl w/ dead keys
 if type setxkbmap >/dev/null 2>&1; then
 	setxkbmap -layout us -variant intl >/dev/null 2>&1
+fi
+
+# Input devices manager
+if type solaar >/dev/null 2>&1; then
+	solaar -w hide &
 fi
 
 # Manage light multimedia keys

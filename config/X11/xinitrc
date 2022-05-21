@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Wed 04 May 2022 21:04:23
+# Last modified: Sat 21 May 2022 16:40:23
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -63,6 +63,11 @@ fi
 # Configure keyboard repeat rate
 if type xset >/dev/null 2>&1; then
 	xset r rate 200 70 >/dev/null 2>&1
+fi
+
+# Input devices manager
+if type solaar >/dev/null 2>&1; then
+	solaar -w hide &
 fi
 
 # Manage light multimedia keys
