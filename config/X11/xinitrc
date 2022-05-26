@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:20:13
-# Last modified: Sat 21 May 2022 16:40:23
+# Last modified: Thu 26 May 2022 09:02:52
 # Version: 1.0
 #
 # Description: script executed by Xinit when 'startx' is run
@@ -39,10 +39,11 @@ get_session(){
 	esac
 }
 
-# Common
 # Set screen layout if exist
-if [ -f "$HOME"/.config/screenlayout/layout.sh ]; then
-	. "$HOME"/.config/screenlayout/layout.sh &
+if [ -f "$HOME"/.config/screenlayout/layout-home.sh ] && lsusb | grep -Eq 'StarTech.*USB.*Hub'; then
+        . "$HOME"/.config/screenlayout/layout-home.sh &
+elif [ -f "$HOME"/.config/screenlayout/layout.sh ]; then
+        . "$HOME"/.config/screenlayout/layout.sh &
 fi
 
 # Enable tap-to-click if exist
@@ -107,7 +108,7 @@ if type gnome-keyring >/dev/null 2>&1; then
 fi
 
 # Automatic screen brightness
-if type clight >/dev/null 2>&1; then
+if type clight >/dev/null 2>&1 && ! lsusb | grep -Eq 'StarTech.*USB.*Hub'; then
 	[ -f ~/.config/clight/clight.conf ] && clight -c ~/.config/clight/clight.conf &
 	[ -f ~/.config/clight/clight.conf ] || clight --no-gamma --no-kbd &
 fi
