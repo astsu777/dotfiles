@@ -1,3 +1,11 @@
+# Emits a beep from PC speaker
+_alarm() {
+  ( \speaker-test --frequency 1000 --test sine )&
+  pid=$!
+  \sleep 0.2s
+  \kill -9 $pid
+}
+
 # Benchmark the SHELL (Bash & ZSH)
 _benchshell(){
 	if [[ "$SHELL" == "/bin/bash" ]]; then
