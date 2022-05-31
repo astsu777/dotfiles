@@ -1,5 +1,5 @@
 # Benchmark the SHELL (Bash & ZSH)
-benchshell(){
+_benchshell(){
 	if [[ "$SHELL" == "/bin/bash" ]]; then
 		time bash -i -c "echo -n"
 	elif [[ "$SHELL" == "/bin/zsh" ]]; then
@@ -8,7 +8,7 @@ benchshell(){
 }
 
 # Display true colors to test terminal colors
-colortest() {
+_colortest() {
 	echo -e "\033[0mNC (No color)"
 	echo -e "\033[1;37mWHITE\t\033[0;30mBLACK"
 	echo -e "\033[0;34mBLUE\t\033[1;34mLIGHT_BLUE"
@@ -21,7 +21,7 @@ colortest() {
 }
 
 # Create a temporary filesystem in RAM
-mkramfs(){
+_mkramfs(){
 	if [ $# -lt 2 ]; then
     	echo -e "Mount a temporary partition in RAM"
 		echo "Usage: mkramfs '<MOUNT_POINT>' '<SIZE_IN_MB>'"
@@ -33,7 +33,7 @@ mkramfs(){
 }
 
 # Generate a strong random password
-pwdgen(){
+_pwdgen(){
 	if [ "$OSTYPE" = "linux-gnu" ]; then
 		if [ -z "$1" ]; then
     		echo -e "Create a random strong password"
@@ -47,7 +47,7 @@ pwdgen(){
 }
 
 # Generate a strong random password
-pwdgen-alpha(){
+_pwdgen-alpha(){
 	if [ "$OSTYPE" = "linux-gnu" ]; then
 		if [ -z "$1" ]; then
     		echo -e "Create a random strong password with alphanumeric characters only"
@@ -62,7 +62,7 @@ pwdgen-alpha(){
 
 # Save command's output to an image
 if type convert >/dev/null 2>&1; then
-	cmd2jpg(){
+	_cmd2jpg(){
 		if [ $# -lt 2 ]; then
     		echo -e "Save a command's output to an image"
 			echo "Usage: cmd2jpg '<COMMAND>' '<IMAGE_FILE>'"
@@ -78,7 +78,7 @@ fi
 
 # Function to perform basic maths
 if type bc > /dev/null 2>&1; then
-	calc() {
+	_calc() {
 		if [ -z "$1" ]; then
     		echo -e "Perform calculation in the CLI"
 			echo "Usage: calc '<CALCULATION>'"
@@ -91,7 +91,7 @@ if type bc > /dev/null 2>&1; then
 fi
 
 # Create many files with random content
-ttouch() {
+_ttouch() {
 	if [ -z "$1" ]; then
     	echo -e "Create random binary files"
 		echo "Usage: ttouch '<INTEGER>'"
@@ -105,7 +105,7 @@ ttouch() {
 }
 
 # Write ISO image and make sure it is bootable (BIOS+EFI)
-ddiso() {
+_ddiso() {
 	if [ -z "$1" ] || [ -z "$2" ]; then
     	echo -e "Write a bootable ISO image to a drive"
     	echo -e "\nUsage: ddiso '<INPUT>' '<OUTPUT>'"
@@ -124,7 +124,7 @@ ddiso() {
 if type nnn > /dev/null 2>&1; then
 
 	# CD on exit when pressing ^G
-	n3()
+	_n3()
 	{
     	# Block nesting of nnn in subshells
     	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
@@ -160,17 +160,17 @@ fi
 if type curl > /dev/null 2>&1; then
 
 	# Get the current weather forecast
-	weather() {
+	_weather() {
 		\curl -s http://wttr.in/"$1"\?A\&F
 	}
 
 	# Bootstrap
-	bootstrap() {
+	_bootstrap() {
 		/bin/bash -c "$(\curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
 	}
 
 	# Get song lyrics
-	lyrics() {
+	_lyrics() {
 		if [ -z "$1" ] || [ -z "$2" ]; then
     		echo -e "Get lyrics for a song"
 			echo "Usage: lyrics '<ARTIST>' '<TITLE>'"
@@ -182,20 +182,20 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Get cheat sheets for specified commands
-	cheat() {
+	_cheat() {
     	\curl https://cheat.sh/"$1"
 	}
 
 	# Get cryptocurrency exchange rate
-	cryptorate() {
+	_cryptorate() {
 		\curl https://eur.rate.sx/"$1"
 	}
-	cryptorates() {
+	_cryptorates() {
 		\curl https://eur.rate.sx/?n=20
 	}
 
 	# Get a Website's speed statistics
-	speedsite() {
+	_speedsite() {
 		if [ -z "$1" ]; then
     		echo -e "Get statistics on a Website's performances"
 			echo "Usage: speedsite '<URL>'"
@@ -207,7 +207,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Check if a Website is UP
-	checkwebsite() {
+	_checkwebsite() {
 		if [ -z "$1" ]; then
     		echo -e "Print HTTP codes for a given Website"
 			echo "Usage: checkwebsite '<URL>'"
@@ -219,7 +219,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Generate QR code for a given input
-	qrcodegen() {
+	_qrcodegen() {
 		if [ -z "$1" ]; then
     		echo -e "Generate a QR code for a given input"
 			echo "Usage: qrcodegen '<INPUT>'"
@@ -232,7 +232,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Get the definition of a word
-	dico() {
+	_dico() {
 		if [ -z "$1" ]; then
     		echo -e "Get definitions for a word"
 			echo "Usage: dico '<INPUT>'"
@@ -244,7 +244,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Shorten a URL
-	urlshortener() {
+	_urlshortener() {
 		if [ -z "$1" ]; then
     		echo -e "Create short URL from the CLI"
 			echo "Usage: urlshortener '<LONG_URL>'"
@@ -256,7 +256,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Deshhorten a URL
-	urldeshortener() {
+	_urldeshortener() {
 		if [ -z "$1" ]; then
     		echo -e "Get the long URL from a short one"
 			echo "Usage: urldeshortener '<SHORT_URL>'"
@@ -268,12 +268,12 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Have a reverse traceroute
-	tracerouterev() {
+	_tracerouterev() {
     	\curl http://icanhaztraceroute.com/
 	}
 
 	# IP subnet calculator
-	ipcalc() {
+	_ipcalc() {
 		if [ -z "$1" ]; then
     		echo -e "Calculate details for an IP/IP Subnet (broadcast address, subnet mask, etc...)"
 			echo "Usage: ipcalc '<IP_ADDRESS_CIDR>'"
@@ -285,7 +285,7 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Use Google Translate
-	trag() {
+	_trag() {
 		local sl=$1
 		local tl=$2
 		if [[ ! "$1" =~ ^[a-z][a-z]$ ]] || [[ ! "$2" =~ ^[a-z][a-z]$ ]]; then
@@ -305,7 +305,7 @@ if type curl > /dev/null 2>&1; then
 
 	# DNS lookup over HTTPS
 	if type jq > /dev/null 2>&1; then
-		dnslookup() {
+		_dnslookup() {
 			if [ $# -lt 2 ]; then
 				echo -e "Perform DNS lookup over HTTPS"
 				echo -e "Usage: dnslookup <VALUE> <RECORD_TYPE>"
@@ -327,23 +327,23 @@ if type fzf > /dev/null 2>&1; then
 	if type fd > /dev/null 2>&1; then
 
 		# Find file in current folder and open it with default editor
- 		fcd() {
+ 		_fcd() {
 			fd -H . | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
 
 		# Find file in home folder and open it with default editor
- 		fch() {
+ 		_fch() {
 			fd -H . "$HOME" -E vim/backup | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
 	else
 
 		# Find file in current folder and open it with default editor
- 		fcc() {
+ 		_fcc() {
 			du -a . | awk '{print$2}'| fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
 
 		# Find file in home folder and open it with default editor
-		fch() {
+		_fch() {
 			du -a "$HOME" | awk '{print$2}' | fzf | xargs -I{} -o "$EDITOR" '{}'
 		}
 
@@ -353,25 +353,25 @@ if type fzf > /dev/null 2>&1; then
 	if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 		# Open and follow a log file
-		flogs() {
+		_flogs() {
 			sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs I{} -o sudo tail -f '{}'
 		}
 
 		# Search a file and open it with the default editor
-		fcf() {
+		_fcf() {
 			sudo echo > /dev/null && sudo du -a /opt /etc | awk '{print$2}' | fzf | xargs -I{} -o sudoedit '{}'
 		}
 
 		# If peco is installed, open a log file in it
 		if type peco > /dev/null 2>&1; then
-			plogs() {
+			_plogs() {
 				sudo echo > /dev/null && sudo du -a /var/log | awk '{print$2}' | fzf | xargs -I{} -o sudo peco '{}'
 			}
 		fi
 
 		# Search shell history
 		if type xdotool >/dev/null 2>&1; then
-			hs() {
+			_hs() {
 				cmd=$(history | fzf +s | awk '{print $1}')
 				xdotool type "!$cmd" && xdotool key KP_Enter
 			}
@@ -387,7 +387,7 @@ fi
 if type openssl > /dev/null 2>&1; then
 
 	# Check SSL certificate of a Website
-	checkssl() {
+	_checkssl() {
 		if [ -z "$1" ]; then
     		echo -e "Print details of a Website's SSL certificate"
 			echo "Usage: checkssl '<URL>'"
@@ -406,7 +406,7 @@ fi
 #=================
 if type mpv yt-dlp > /dev/null 2>&1; then
 
-	yt-listen(){
+	_yt-listen(){
 		if [ -z "$1" ]; then
     		echo -e "Listen to an online video"
 				echo "Usage: yt-listen '<URL>'"
@@ -417,7 +417,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-wsd() {
+	_yt-wsd() {
 		if [ -z "$1" ]; then
     		echo -e "Watch a video in low quality"
 				echo "Usage: yt-wsd '<URL>'"
@@ -428,7 +428,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-hd() {
+	_yt-hd() {
 		if [ -z "$1" ]; then
     		echo -e "Watch a video in HD quality"
 				echo "Usage: yt-hd '<URL>'"
@@ -439,7 +439,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-shufsd() {
+	_yt-shufsd() {
 		if [ -z "$1" ]; then
     		echo -e "Shuffle a playlist in low quality"
 				echo "Usage: yt-shufsd '<URL>'"
@@ -450,7 +450,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-shufhd() {
+	_yt-shufhd() {
 		if [ -z "$1" ]; then
     		echo -e "Shuffle a playlist in HD quality"
 				echo "Usage: yt-shufhd '<URL>'"
@@ -461,7 +461,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-revsd(){
+	_yt-revsd(){
 		if [ -z "$1" ]; then
     		echo -e "Reverse a playlist in low quality"
 				echo "Usage: yt-revsd '<URL>'"
@@ -472,7 +472,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-revhd(){
+	_yt-revhd(){
 		if [ -z "$1" ]; then
     		echo -e "Reverse a playlist in HD quality"
 				echo "Usage: yt-revhd '<URL>'"
@@ -483,7 +483,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-dlvideo(){
+	_yt-dlvideo(){
 		if [ -z "$1" ]; then
     		echo -e "Download an online video"
 				echo "Usage: yt-dlvideo '<URL>'"
@@ -495,7 +495,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				fi
 	}
 
-	yt-dlaudio(){
+	_yt-dlaudio(){
 		if [ -z "$1" ]; then
     		echo -e "Extract audio of an online video"
 				echo "Usage: yt-dlaudio '<URL>'"
@@ -514,7 +514,7 @@ fi
 #=======================
 if type wget >/dev/null 2>&1; then
 
-	wget-files() {
+	_wget-files() {
   	  if [ $# -lt 2 ]; then
     	echo -e "Download all files with specific extension on a webpage"
     	echo -e "\nUsage: wget-files <FILE_EXTENSION> <URL>"
@@ -527,7 +527,7 @@ if type wget >/dev/null 2>&1; then
   	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
 	}
 
-	wget-audio() {
+	_wget-audio() {
   	  if [ $# -lt 1 ]; then
     	echo -e "Download all audio files on a webpage"
     	echo -e "\nUsage: wget-audio <URL>"
@@ -540,7 +540,7 @@ if type wget >/dev/null 2>&1; then
   	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
 	}
 
-	wget-images() {
+	_wget-images() {
   	  if [ $# -lt 1 ]; then
     	echo -e "Download all images on a webpage"
     	echo -e "\nUsage: wget-images <URL>"
@@ -553,7 +553,7 @@ if type wget >/dev/null 2>&1; then
   	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
 	}
 
-	wget-save() {
+	_wget-save() {
   	  if [ $# -lt 1 ]; then
     	echo -e "Mirror a full Website recursively"
     	echo -e "\nUsage: wget-save <URL>"
@@ -566,7 +566,7 @@ if type wget >/dev/null 2>&1; then
   	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait "$1" >/dev/null 2>&1
 	}
 
-	wget-save-recursive() {
+	_wget-save-recursive() {
   	  if [ $# -lt 1 ]; then
     	echo -e "Mirror a full Website recursively"
     	echo -e "\nUsage: wget-save-recursive <EXCLUDE_DOMAINS> <URL>"
@@ -587,7 +587,7 @@ fi
 ## Parse RGB hex tuples.
 ## <Arg 1> - Hex: Input hex value [[:xdigit]]{6}
 ## <Arg 2> - String: Tuple [r|g|b]
-get_rgbtuple() {
+_get_rgbtuple() {
 	local hexrgb="${1}"
 	local tuple_flag="${2}"
 	local tuple_fmt="${3:-x}"
@@ -606,7 +606,7 @@ get_rgbtuple() {
 	echo $((0x${tuple}))
 }
 
-get_rgb() {
+_get_rgb() {
 	local -i ansi=${1:-1}
 	local -a rgb=("000000" "800000" "008000" "808000" "000080"     \
 	"800080" "008080" "c0c0c0" "808080" "ff0000" "00ff00" "ffff00" \
@@ -653,7 +653,7 @@ get_rgb() {
 	fi
 }
 
-colorpick() {
+_colorpick() {
 	local -i i=0
 	local rgb_R
 	local rgb_G
