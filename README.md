@@ -243,6 +243,8 @@ If you use a hardware audio processing unit, it is not advised to also use softw
 * The *basename* of a program is highlighted in bold in the process list
 * New and old processes are highlighted for 5 seconds
 
+Since macOS v12 released, *htop* columns slightly changed and customization now requires separare configuration files.
+
 ## Terminal Emulators
 Configuration files for three terminal emulators are available: *Alacritty*, *Kitty*, and *xTerm*. I don't use the three of them obviously, my daily driver being *Kitty* as it is fast, minimalist and is GPU-accelerated (like *Alacritty*). *ST* and *xTerm* are not GPU-accelerated unlike *Alacritty* and *Kitty*, so they can give less performance sometimes when rendering a lot of text/colors. GPU-accelerated terminal emulators are based on *OpenGL*: this means that they cannot be used when *OpenGL* libraries are updated and/or if they are missing/buggy. If the GPU is really poor, it can also be worst than anything else. In such a case, I usually use *ST* even though it has no config file in this repository. Finally, *xTerm* is the last resort terminal emulators if all else is not working. *xTerm* is also the default terminal emulator in the failsafe GUI environment (see chapter about *JWM*).
 
