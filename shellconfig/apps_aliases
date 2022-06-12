@@ -164,6 +164,21 @@ if type virsh >/dev/null 2>&1; then
 	alias wget-virtio-win-drivers-iso="wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso"
 fi
 
+# Refresh Touch Bar on MacBook Pro
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'
+fi
+
+# Display calendar
+if type cal > /dev/null 2>&1; then
+	alias cal="cal -m -w -3"
+fi
+
+# Run HTOP as super user for macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias htop='sudo htop'
+fi
+
 #=======================
 # Work
 #=======================

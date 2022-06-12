@@ -4,13 +4,3 @@ if type ccat > /dev/null 2>&1; then
 elif type highlight > /dev/null 2>&1; then
     alias cat="highlight -O ansi --force"
 fi
-
-# Refresh Touch Bar on MacBook Pro
-if [[ "$OSTYPE" == "darwin"* ]]; then
-	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'
-fi
-
-# Display calendar
-if type cal > /dev/null 2>&1; then
-	alias cal="cal -m -w -3"
-fi
