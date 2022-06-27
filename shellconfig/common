@@ -18,9 +18,11 @@ fi
 # Google Workspace CLI
 if [ -d "$HOME/bin/gam" ]; then
 	export PATH="$HOME/bin/gam":"$PATH"
+	alias _gam-upgrade="bash <(curl -s -S -L https://gam-shortn.appspot.com/gam-install) -l"
 fi
 if [ -d "$HOME/bin/gyb" ]; then
 	export PATH="$HOME/bin/gyb":"$PATH"
+	alias _gyb-upgrade="bash <(curl -s -S -L https://git.io/gyb-install) -l"
 fi
 
 # macOS specific PATH
