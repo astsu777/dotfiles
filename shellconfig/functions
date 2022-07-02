@@ -304,7 +304,7 @@ if type curl > /dev/null 2>&1; then
 		fi
 		shift 2
 		local base_url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q="
-		local ua='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+		local ua='Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0'
 		local qry=$( echo $@ | sed -e "s/\ /+/g" )
 		local full_url=${base_url}${qry}
 		local response=$(\curl -sA "${ua}" "${full_url}")
@@ -532,7 +532,7 @@ if type wget >/dev/null 2>&1; then
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading files from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
 	}
 
 	_wget-audio() {
@@ -545,7 +545,7 @@ if type wget >/dev/null 2>&1; then
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading audio files from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
 	}
 
 	_wget-images() {
@@ -558,7 +558,7 @@ if type wget >/dev/null 2>&1; then
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading pictures from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
 	}
 
 	_wget-save() {
@@ -571,7 +571,7 @@ if type wget >/dev/null 2>&1; then
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Mirrorring Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait "$1" >/dev/null 2>&1
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0" --random-wait "$1" >/dev/null 2>&1
 	}
 
 	_wget-save-recursive() {
@@ -584,7 +584,7 @@ if type wget >/dev/null 2>&1; then
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Mirrorring Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --random-wait -D "$1" "$2" >/dev/null 2>&1
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0" --random-wait -D "$1" "$2" >/dev/null 2>&1
 	}
 
 fi
