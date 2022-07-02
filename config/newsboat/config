@@ -1,6 +1,9 @@
 # Use W3M as HTML renderer if issues displaying HTML articles
 # html-renderer "w3m -dump -T text/html"
 
+# User-agent to work around Websites blocking Newsboat
+user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
+
 # Refresh all RSS feeds on startup
 auto-reload no
 
