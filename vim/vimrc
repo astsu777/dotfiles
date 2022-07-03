@@ -410,8 +410,8 @@ inoremap ;bl #=======================<CR>#<Space><CR>#=======================<CR
 function Header() abort
 	execute "normal! i#=========================================================================\<cr>"
 	execute "normal! i# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT\<cr>"
-	execute "normal! i# Creation: \<c-r>=strftime('%a %b %Y %H:%M:%S')\<cr>\<cr>"
-	execute "normal! i# Last modified: \<c-r>=strftime('%a %b %Y %H:%M:%S')\<cr>\<cr>"
+	execute "normal! i# Creation: \<c-r>=strftime('%a %d %b %Y %H:%M:%S')\<cr>\<cr>"
+	execute "normal! i# Last modified: \<c-r>=strftime('%a %d %b %Y %H:%M:%S')\<cr>\<cr>"
 	execute "normal! i# Version: 1.0\<cr>"
 	execute "normal! i#\<cr>"
 	execute "normal! i# Description: <++>\<cr>"
