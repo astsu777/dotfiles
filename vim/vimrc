@@ -139,7 +139,6 @@ autocmd FileType * setlocal textwidth=121 formatoptions=c
 
 " Do not insert EOL character
 set noeol
-set binary
 
 " Resize buffers when window changes sizes
 autocmd VimResized * execute "normal! \<c-w>="
