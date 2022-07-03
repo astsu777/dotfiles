@@ -1,4 +1,4 @@
-" Shell filetype
+" Powershell filetype
 augroup ps1_shell
 	autocmd!
 	" Insert function
@@ -12,6 +12,12 @@ augroup ps1_shell
 	if line('$') == 1 && getline(1) == ''
 		:call Header()
 	endif
+
+	" Set file format to DOS type
+	if &modifiable
+    	setlocal fileformat=dos
+	endif
+
 	" When writing the file, update the last modified timestamp
 	autocmd BufWritePre,FileWritePre * :silent! %s/# Last modified: \zs.*/\=strftime('%a %d %b %Y %H:%M:%S')
 	autocmd BufWritePre,FileWritePre * :silent! normal! g`'
