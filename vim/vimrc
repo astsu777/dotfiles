@@ -1,6 +1,7 @@
 "=============
 " Global Variables
 "=============
+
 " Detect OS type (useful to define OS specific options)
 " Linux will be referenced as 'Linux'. MacOS will be referenced as 'Darwin'
 if !exists('g:os')
@@ -14,6 +15,7 @@ endif
 "=============
 " Plugins Installation
 "=============
+
 " Vim-plug plugin manager auto-installation
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -67,6 +69,7 @@ filetype plugin indent on
 "=============
 " Key Bindings
 "=============
+
 " Change the leader key to comma
 let mapleader=","
 
@@ -102,6 +105,7 @@ map <leader>of :setlocal spell! spelllang=fr_fr<CR>
 "=============
 " Configuration
 "=============
+
 " Store .viminfo in different location
 set viminfo+=n$XDG_CACHE_HOME/.cache/viminfo
 
@@ -137,9 +141,6 @@ autocmd FileType text setlocal textwidth=121 formatoptions=t
 " For all other files, wrap comments but not the text
 autocmd FileType * setlocal textwidth=121 formatoptions=c
 
-" Do not insert EOL character
-set noeol
-
 " Resize buffers when window changes sizes
 autocmd VimResized * execute "normal! \<c-w>="
 
@@ -147,9 +148,13 @@ autocmd VimResized * execute "normal! \<c-w>="
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+" Hexdump current file and open its output (to use with binaries)
+nnoremap <leader>bb :%!xxd<Enter>
+
 "=============
 " Look & Feel
 "=============
+
 " Splits open at bottom and on the right (override defaults)
 " Shortcuts also to create normal and vertical splits
 set splitbelow splitright
@@ -366,6 +371,7 @@ nnoremap <leader>h :call ToggleStatusBar()<CR>
 "=============
 " Auto-Commands
 "=============
+
 " Properly set filetype
 autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
@@ -387,6 +393,7 @@ endif
 "=============
 " Code Snippets
 "=============
+
 " Guide Navigation
 map ;g <++>
 noremap <leader><Space> <Esc>/<++><Enter>"_c4l
@@ -418,6 +425,7 @@ inoremap ;hh <Esc>:call Header()<Enter>
 "=============
 " Scripts
 "=============
+
 " Compile document
 map <leader>c :w! \| !compiler "<c-r>%"<CR>
 
