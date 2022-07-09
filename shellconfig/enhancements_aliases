@@ -17,7 +17,7 @@ fi
 alias wget="wget -c --content-disposition"
 
 # Modify curl User-Agent to mimic Chrome
-alias curl='curl -H "Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0"'
+alias curl='curl -A "Mozilla/5.0 (X11; Linux i686; rv:102.0) Gecko/20100101 Firefox/102.0"'
 
 # Always read this specific config file
 if [[ -f "$HOME"/.ssh/config ]]; then
