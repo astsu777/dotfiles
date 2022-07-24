@@ -21,6 +21,8 @@ bspc rule -a galculator state=floating
 bspc rule -a 'mpv floating' state=floating sticky=on
 bspc rule -a 'mpvfloating' state=floating sticky=on
 bspc rule -a 'Tor Browser' state=floating
+bspc rule -a 'vmrc' state=floating
+bspc rule -a 'Vmrc' state=floating
 
 # Scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on

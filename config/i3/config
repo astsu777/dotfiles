@@ -129,6 +129,8 @@ for_window [class=".*" instance="Picture-in-Picture"] floating enable
 for_window [class=".*" instance="Picture in picture"] floating enable
 for_window [class=".*" instance="galculator"] floating enable
 for_window [class="Tor Browser" instance=".*"] floating enable
+for_window [class="vmrc" instance=".*"] floating enable
+for_window [class="Vmrc" instance=".*"] floating enable
 for_window [class="Gimp" instance=".*"] floating enable
 for_window [class="fzfmenu" instance=".*"] floating enable
 
