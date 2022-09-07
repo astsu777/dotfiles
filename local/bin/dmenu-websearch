@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Fri 22 Jul 2022 15:05:31
+# Last modified: Wed 07 Sep 2022 23:22:35
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -12,6 +12,7 @@
 # Search engines
 #=======================
 declare -A search_options
+
 search_options[1337x Torrents]="https://1337x.to/search/%s/1/"
 search_options[2ememain]="https://www.2ememain.be/q/%s/"
 search_options[9Gag]="https://9gag.com/v1/tag-suggest?query=%s"
@@ -33,6 +34,9 @@ search_options[Cisco]="https://search.cisco.com/search?query=%s"
 search_options[CommandLineFu]="https://www.commandlinefu.com/commands/matching/%s/bys=/sort-by-votes"
 search_options[DaFont]="https://www.dafont.com/search.php?q=%s"
 search_options[DuckDuckGo]="https://duckduckgo.com/?q=%s&key=156e688cb0dde7e4558a853154db4b02f5b831c07f124ef90c48c6c0e372e4f4e0299c4073d0de7199994a409a65c5d6ab999b4c7105085dd6a0e653f4430b95"
+search_options[EBay]="https://www.befr.ebay.be/sch/i.html?_nkw=%s"
+search_options[EBooks - PDF Drive]="https://www.pdfdrive.com/search?q=%s"
+search_options[EBooks - Zlibrary]="https://be1lib.org/s/%s"
 search_options[Explainshell]="https://explainshell.com/explain?cmd=%s"
 search_options[Exploit Database]="https://www.exploit-db.com/search?q=+%s"
 search_options[Facebook]="https://www.facebook.com/public/%s"
@@ -83,6 +87,7 @@ search_options[Python 3]="https://docs.python.org/3/search.html?q=%s"
 search_options[Qwant]="https://www.qwant.com/?q=%s"
 search_options[RFC]="https://www.rfc-editor.org/search/rfc_search_detail.php?title=%s"
 search_options[Reddit]="https://www.reddit.com/search/?q=%s"
+search_options[Scrap.io]="https://scrap.io/?type=%s"
 search_options[SoundCloud]="https://soundcloud.com/search?q=%s"
 search_options[Stack Overflow]="https://stackoverflow.com/search?q=%s"
 search_options[StackExchange]="https://stackexchange.com/search?q=%s"
@@ -97,6 +102,7 @@ search_options[Twitter]="https://twitter.com/search?q=%s&src=typed_query"
 search_options[Udemy]="https://www.udemy.com/courses/search/?q=%s"
 search_options[Urban Dictionary]="https://www.urbandictionary.com/define.php?term=%s"
 search_options[VMware Docs]="https://docs.vmware.com/en/search/#/%s"
+search_options[Versus]="https://versusutil.com/?seed=%s"
 search_options[Vim Tips Wiki]="https://vim.fandom.com/wiki/Special:Search?query=%s"
 search_options[Vimeo]="https://vimeo.com/search?q=%s"
 search_options[Void Linux Packages]="https://voidlinux.org/packages/?q=%s"
@@ -113,9 +119,6 @@ search_options[Wiktionary - FR]="https://fr.wiktionary.org/wiki/%s"
 search_options[WolframAlpha]="https://www.wolframalpha.com/input/?i=%s"
 search_options[Yelp - BE]="https://fr.yelp.be/search?find_desc=%s"
 search_options[YouTube]="https://www.youtube.com/results?search_query=%s"
-search_options[eBay]="https://www.befr.ebay.be/sch/i.html?_nkw=%s"
-search_options[eBooks - PDF Drive]="https://www.pdfdrive.com/search?q=%s"
-search_options[eBooks - Zlibrary]="https://be1lib.org/s/%s"
 
 # Choosing a search engine by name from array above.
 engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine:') "$@" || exit
