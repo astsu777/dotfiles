@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Wed 07 Sep 2022 23:22:35
+# Last modified: Sat 10 Sep 2022 21:33:20
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -88,6 +88,7 @@ search_options[Qwant]="https://www.qwant.com/?q=%s"
 search_options[RFC]="https://www.rfc-editor.org/search/rfc_search_detail.php?title=%s"
 search_options[Reddit]="https://www.reddit.com/search/?q=%s"
 search_options[Scrap.io]="https://scrap.io/?type=%s"
+search_options[Silent Install HQ]="https://silentinstallhq.com/?s=%s"
 search_options[SoundCloud]="https://soundcloud.com/search?q=%s"
 search_options[Stack Overflow]="https://stackoverflow.com/search?q=%s"
 search_options[StackExchange]="https://stackexchange.com/search?q=%s"

@@ -492,6 +492,7 @@ c.url.searchengines = {
     "RFC": "https://www.rfc-editor.org/search/rfc_search_detail.php?title={}",
     "Reddit": "https://www.reddit.com/search/?q={}",
     "Scrap.io": "https://scrap.io/?type={}",
+    "Silent_Install_HQ": "https://silentinstallhq.com/?s={}",
     "SoundCloud": "https://soundcloud.com/search?q={}",
     "Stack_Overflow": "https://stackoverflow.com/search?q={}",
     "StackExchange": "https://stackexchange.com/search?q={}",
