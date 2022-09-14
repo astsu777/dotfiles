@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Tue 28 Dec 2021 22:06:20
+# Last modified: Wed 14 Sep 2022 12:05:49
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -79,7 +79,7 @@ copyUrl(){
 openUrl(){
 	getUrl
 	if [ "$(uname)" = "Darwin" ]; then
-		open "$url"
+		open -u "$url"
 	else
 		if pgrep surf > /dev/null 2>&1; then setsid -f surf "$url"; elif pgrep qutebrowser > /dev/null 2>&1; then setsid -f qutebrowser "$url"; elif [ -n "$BROWSER" ]; then setsid -f "$BROWSER" "$url"; else setsid -f xdg-open "$url"; fi
 	fi

@@ -2,15 +2,46 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Sat 10 Sep 2022 21:33:20
+# Last modified: Wed 14 Sep 2022 12:07:20
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
 #=========================================================================
 
 #=======================
+# Functions
+#=======================
+
+checkReq(){
+	if [ "$(uname)" = "Darwin" ]; then
+		if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
+	else
+		if ! type dmenu >/dev/null 2>&1; then notify-send "Error" "The package 'dmenu' is not installed" && exit 1; fi
+	fi
+}
+
+getSE() {
+	if [ "$(uname)" = "Darwin" ]; then
+		engine=$(printf "%s\n" "${!search_options[@]}" | sort | fzf -i --prompt 'Search engine: ') "$@" || exit
+	else
+		engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine:') "$@" || exit
+	fi
+	search_engine="${search_options["${engine}"]}"
+}
+
+getQuery() {
+	if [ "$(uname)" = "Darwin" ]; then
+		read -p "Query: " -r query || exec dmenu-websearch
+	else
+		query=$(printf "%s\n" "$*" | dmenu -p 'Query:') || exec dmenu-websearch
+	fi
+	url=$(sed "s/\%s/$query/g" <<< "$search_engine")
+}
+
+#=======================
 # Search engines
 #=======================
+
 declare -A search_options
 
 search_options[1337x Torrents]="https://1337x.to/search/%s/1/"
@@ -121,16 +152,13 @@ search_options[WolframAlpha]="https://www.wolframalpha.com/input/?i=%s"
 search_options[Yelp - BE]="https://fr.yelp.be/search?find_desc=%s"
 search_options[YouTube]="https://www.youtube.com/results?search_query=%s"
 
-# Choosing a search engine by name from array above.
-engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine:') "$@" || exit
-search_engine="${search_options["${engine}"]}"
-
-# Searching the chosen engine.
-query=$(printf "%s\n" "$*" | dmenu -p 'Query:') || exec dmenu-websearch
-
-# Getting the url of the search engine we chose.
-url=$(sed "s/\%s/$query/g" <<< "$search_engine")
-
 # Display search results in web browser
-if pgrep surf > /dev/null 2>&1; then surf "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
+checkReq
+getSE
+getQuery
+if [ "$(uname)" = "Darwin" ]; then
+	open -u "${url}"
+else
+	if pgrep surf > /dev/null 2>&1; then surf "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
+fi
 exit 0
