@@ -169,7 +169,7 @@ The following table provides a description of all the scripts:
 | `devour` | launch a new program and hide the current window (useful to hide terminal emulator) |
 | `dhcp-server` | launch a local DHCP server |
 | `displayselect` | quickly configure screen layout, mirroring, etc... |
-| `dmenu-bookmarks` | display Web bookmarks in DMenu and open one in the default Web browser |
+| `dmenu-bookmarks` | display Web bookmarks in DMenu (or FZF in macOS terminal) and open one in the default Web browser |
 | `dmenu-mount` | mount connected USB devices using DMenu |
 | `dmenu-nordvpn` | manage NordVPN using DMenu |
 | `dmenu-pass` | use the *pass* password manager via DMenu |
@@ -185,7 +185,7 @@ The following table provides a description of all the scripts:
 | `dmenu-unicode` | display all unicode and free font-awesome characters via DMenu and insert ehem anywhere |
 | `dmenu-urimount` | mount a network share via DMenu |
 | `dmenu-video` | watch/listen/download a local/online video via DMenu |
-| `dmenu-websearch` | search online using various search engines via DMenu |
+| `dmenu-websearch` | search online using various search engines via DMenu (or FZF in macOS terminal) |
 | `dmenu-wm` | list all opened windows and focus on one (like ALT-Tab on Windows) via DMenu |
 | `docker-lab` | quickly spawn one or multiple CentOS/Debian containers for test purposes |
 | `fzfmenu` | TUI alternative to DMenu using *FZF* |
