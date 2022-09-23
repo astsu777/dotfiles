@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
 # Creation: Sun 22 Aug 2021 12:17:02
-# Last modified: Sun 22 Aug 2021 12:17:14
+# Last modified: Fri 23 Sep 2022 20:28:24
 # Version: 1.0
 #
 # Description: check if a list of URLs returns a HTTP/200 OK or not
@@ -25,6 +25,7 @@ Missing argument: url list!
 
 Usage: websites_monitor <OPTION> \"input_file\" (Example: websites_monitor --insecure urllist.txt)
 Options:
+	--secure: validate the SSL certificate of the remote server
 	--insecure: do not validate the SSL certificate of the remote server
 
 ------------
@@ -46,7 +47,7 @@ case "$1" in
 	"--insecure")
 		for i in $website
 		do
-			httpcode=$(curl -k -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+			httpcode=$(\curl -k -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
 			if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
 				urlnok=$((urlnok + 1))
 				echo "$i is DOWN (HTTP Code: $httpcode)"
@@ -54,10 +55,10 @@ case "$1" in
 			fi
 		done
 		;;
-	*)
+	"--secure")
 		for i in $website
 		do
-			httpcode=$(curl -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/74.0" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+			httpcode=$(\curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
 			if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
 				urlnok=$((urlnok + 1))
 				echo "$i is DOWN (HTTP Code: $httpcode)"

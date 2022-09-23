@@ -108,35 +108,12 @@ export XDG_CACHE_HOME="$HOME"/.cache
 # Set the location where user-specific data files should be written
 export XDG_DATA_HOME="$HOME"/.local/share
 
-# GTK
-export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export QT_STYLE_OVERRIDE="Adwaita-Dark"
+# Set the location where user-specific state files should be written
+export XDG_STATE_HOME="$HOME"/.local/state
 
-# Shell
-if [ "$SHELL" = "/bin/bash" ] || [ "$SHELL" = "/bin/zsh" ]; then
-	if [ ! -d "$XDG_DATA_HOME" ]; then mkdir -pv "$XDG_DATA_HOME" > /dev/null 2>&1; fi
-	HISTFILE="$XDG_DATA_HOME/shell_history"
-fi
-
-# NVIDIA Settings
-if type nvidia-settings > /dev/null 2>&1; then
-	alias nvidia-settings="nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings"
-fi
-
-# MPlayer
-if type mplayer > /dev/null 2>&1; then
-	export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
-fi
-
-# Pass
-if type pass > /dev/null 2>&1; then
-	export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/password-store
-fi
-
-# Weechat
-if type weechat > /dev/null 2>&1; then
-	export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
+# Ansible
+if type ansible > /dev/null 2>&1; then
+	export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 fi
 
 # Docker
@@ -144,9 +121,9 @@ if type docker > /dev/null 2>&1; then
 	export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 fi
 
-# 'wget'
-if type wget > /dev/null 2>&1; then
-	export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
+# FFmpeg
+if type ffmpeg > /dev/null 2>&1; then
+	export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
 fi
 
 # GNU screen
@@ -154,19 +131,59 @@ if type screen > /dev/null 2>&1; then
 	export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 fi
 
-# TMUX
-if type tmux > /dev/null 2>&1; then
-	export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+# GTK
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE="Adwaita-Dark"
+
+# MPlayer
+if type mplayer > /dev/null 2>&1; then
+	export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 fi
 
-# Ansible
-if type ansible > /dev/null 2>&1; then
-	export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
+# MySQL
+if type mysql > /dev/null 2>&1; then
+	export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 fi
 
-# NVIDIA
+# NVIDIA Settings
 if type nvidia-settings > /dev/null 2>&1; then
 	export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+fi
+
+# Pass
+if type pass > /dev/null 2>&1; then
+	export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/password-store
+fi
+
+# PostgreSQL
+if type psql > /dev/null 2>&1; then
+	export PSQLRC="$XDG_CONFIG_HOME"/pg/psqlrc
+	export PSQL_HISTORY="$XDG_STATE_HOME"/psql_history
+	export PGPASSFILE="$XDG_CONFIG_HOME"/pg/pgpass
+	export PGSERVICEFILE="$XDG_CONFIG_HOME"/pg/pg_service.conf
+fi
+
+# Python
+if type python > /dev/null 2>&1; then
+	export WORKON_HOME="$XDG_DATA_HOME"/virtualenvs
+fi
+
+# Redis
+if type redis > /dev/null 2>&1; then
+	export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
+	export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+fi
+
+# Ripgrep
+if type rg > /dev/null 2>&1; then
+	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/config
+fi
+
+# Shell
+if [ "$SHELL" = "/bin/bash" ] || [ "$SHELL" = "/bin/zsh" ]; then
+	if [ ! -d "$XDG_DATA_HOME" ]; then mkdir -pv "$XDG_DATA_HOME" > /dev/null 2>&1; fi
+	HISTFILE="$XDG_DATA_HOME/shell_history"
 fi
 
 # TeXLive
@@ -174,6 +191,21 @@ if type lualatex >/dev/null 2>&1; then
 	export TEXMFHOME="$XDG_DATA_HOME/texmf"
 	export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 	export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
+fi
+
+# TMUX
+if type tmux > /dev/null 2>&1; then
+	export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+fi
+
+# Weechat
+if type weechat > /dev/null 2>&1; then
+	export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
+fi
+
+# Wget
+if type wget > /dev/null 2>&1; then
+	export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 fi
 
 # Xorg

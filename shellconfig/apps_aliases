@@ -164,6 +164,11 @@ if type virsh >/dev/null 2>&1; then
 	alias wget-virtio-win-drivers-iso="wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso"
 fi
 
+# NVIDIA Settings
+if type nvidia-settings > /dev/null 2>&1; then
+	alias nvidia-settings="nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia-settings"
+fi
+
 # Refresh Touch Bar on MacBook Pro
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias tbreset='sudo kill $(pgrep -i [t]ouchbarserver [c]ontrolstrip)'
@@ -191,4 +196,12 @@ fi
 # Plow - HTTP benchmarking tool
 if type docker > /dev/null 2>&1; then
 	plow="docker run --rm --net=host ghcr.io/six-ddc/plow"
+fi
+
+# mitmproxy
+if type mitmproxy > /dev/null 2>&1; then
+	alias mitmproxy="mitmproxy --set confdir=$XDG_CONFIG_HOME/mitmproxy"
+fi
+if type mitmweb > /dev/null 2>&1; then
+	alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
 fi
