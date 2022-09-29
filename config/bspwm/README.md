@@ -24,7 +24,7 @@ The following software are not mandatory but recommended:
 
 *feh*, *st* and *dmenu* are very recommended because those programs are in my BSPWM configuration. This can be customized by modifying the *sxhkdrc* file.
 
-If you want a nice DMenu to be integrated, you can install [my custom build](https://github.com/GSquad934/dmenu). You can check out [my build of ST](https://github.com/GSquad934/st) for a nice terminal emulator.
+If you want a nice DMenu to be integrated, you can install [my custom build](https://github.com/astsu777/dmenu). You can check out [my build of ST](https://github.com/astsu777/st) for a nice terminal emulator.
 
 It is possible to use BSPWM without any status bar as it does not come with one. However, *Polybar* has been configured as illustrated by the above screenshot and can be installed to have a nice status bar.
 
@@ -46,10 +46,10 @@ dnf install bspwm
 
 Then, you also need the files in this repository to actually configure BSPWM and have the theme showcased in the above screenshot.
 
-<u>**Note**</u>: this BSPWM installation can be fully automated by using my [bootstrap script](https://github.com/GSquad934/bootstrap).
+<u>**Note**</u>: this BSPWM installation can be fully automated by using my [bootstrap script](https://github.com/astsu777/bootstrap).
 
 # Running BSPWM
-If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/GSquad934/dotfiles/blob/master/config/X11/xinitrc).
+If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/astsu777/dotfiles/blob/master/config/X11/xinitrc).
 
 If you use a login manager (such as *lightdm*), the BSPWM package installation should have already created a *.desktop* file necessary for the login manager. Otherwise, make sure to create a *bspwm.desktop* file in */usr/share/xsessions/*. The file should contain the following:
 
@@ -175,10 +175,10 @@ It has been configured to show the following:
 feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
 ```
 
-This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/GSquad934/wallpapers).
+This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/astsu777/wallpapers).
 
 # Contact
 You can always reach out to me:
 
-* [Twitter](https://twitter.com/gaetanict)
+* [Twitter](https://twitter.com/astsu777)
 * [Email](mailto:gaetan@ictpourtous.com)

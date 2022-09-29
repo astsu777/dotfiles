@@ -25,7 +25,7 @@ The following software are not mandatory but recommended:
 
 *feh*, *st* and *dmenu* are very recommended because those programs are in my Openbox configuration. This can be customized by modifying either the *autostart* file.
 
-If you want a nice DMenu to be integrated, you can install [my custom build](https://github.com/GSquad934/dmenu). You can check out [my build of ST](https://github.com/GSquad934/st) for a nice terminal emulator.
+If you want a nice DMenu to be integrated, you can install [my custom build](https://github.com/astsu777/dmenu). You can check out [my build of ST](https://github.com/astsu777/st) for a nice terminal emulator.
 
 # Installation
 Openbox is available in most Linux distribution repositories. It can be installed with the following command depending on your distro:
@@ -45,10 +45,10 @@ dnf install openbox
 
 Then, you also need the files in this repository to actually configure Openbox and have the theme showcased in the above screenshot. The *tint2rc* configuration file is available in this repository in the */config/tint2* folder and must be present in *$HOME/.config/tint2/tint2rc*.
 
-<u>**Note**</u>: this Openbox installation can be fully automated by using my [bootstrap script](https://github.com/GSquad934/bootstrap).
+<u>**Note**</u>: this Openbox installation can be fully automated by using my [bootstrap script](https://github.com/astsu777/bootstrap).
 
 # Running Openbox
-If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/GSquad934/dotfiles/blob/master/config/X11/xinitrc).
+If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/astsu777/dotfiles/blob/master/config/X11/xinitrc).
 
 If you use a login manager (such as *lightdm*), the Openbox package installation should have already created a *.desktop* file necessary for the login manager. Otherwise, make sure to create a *openbox.desktop* file in */usr/share/xsessions/*. The file should contain the following:
 
@@ -96,7 +96,7 @@ I configured the key bindings that I like. They are all configured in the *rc.xm
 | `ALT + Tab` | Cycle between opened windows |
 | `Super + Alt + l` | Lock screen |
 
-<u>**Note**</u>: the key bindings in this configuration are a bit limited because I actually use *SXHKD* to run all my applications. My configuration for *SXHKD* can be found in [my dotfiles](https://github.com/GSquad934/dotfiles/blob/master/config/sxhkd/sxhkdrc). My configuration file for *SXHKD* is totally based on my personal dotfiles, so you will need to modify either the key bindings of Openbox or have a custom *sxhkdrc* ready.
+<u>**Note**</u>: the key bindings in this configuration are a bit limited because I actually use *SXHKD* to run all my applications. My configuration for *SXHKD* can be found in [my dotfiles](https://github.com/astsu777/dotfiles/blob/master/config/sxhkd/sxhkdrc). My configuration file for *SXHKD* is totally based on my personal dotfiles, so you will need to modify either the key bindings of Openbox or have a custom *sxhkdrc* ready.
 
 # Status Bar
 In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been configured to act as the status bar. It is configured to display:
@@ -114,10 +114,10 @@ In this Openbox configuration, [Tint2](https://gitlab.com/o9000/tint2) has been 
 feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers*
 ```
 
-This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/GSquad934/wallpapers).
+This command would look for wallpapers in the defined folder and randomly assign one as the wallpaper. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/astsu777/wallpapers).
 
 # Contact
 You can always reach out to me:
 
-* [Twitter](https://twitter.com/gaetanict)
+* [Twitter](https://twitter.com/astsu777)
 * [Email](mailto:gaetan@ictpourtous.com)

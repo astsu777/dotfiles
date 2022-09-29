@@ -35,7 +35,7 @@ zsh -i -c "print -n"  0.15s user 0.07s system 106% cpu 0.207 total
 It is possible to simply clone this repository and use the dotfiles (symlinks or copy the files):
 
 ```
-git clone --depth 1 https://github.com/GSquad934/dotfiles.git "$HOME"/.dotfiles
+git clone --depth 1 https://github.com/astsu777/dotfiles.git "$HOME"/.dotfiles
 ```
 
 It is necessary to modify either the *.bashrc* or the *.zshrc* file and change the following variables according to your needs:
@@ -44,7 +44,7 @@ It is necessary to modify either the *.bashrc* or the *.zshrc* file and change t
 * **SOURCES**: defines the default location of source files ($HOME/.sources)
 * **REPOS**: defines the default location of git repositories ($HOME/.sources/repos)
 
-The installation can be automated when using my [bootstrap script](https://github.com/GSquad934/bootstrap.git). This script is modular so it is possible to only deploy the dotfiles and nothing else.
+The installation can be automated when using my [bootstrap script](https://github.com/astsu777/bootstrap.git). This script is modular so it is possible to only deploy the dotfiles and nothing else.
 The location of the dotfiles is as illustrated in this repository. The repository represents the root of the home folder. The folders *config*, *local*, *vim*, etc... are hidden folders in the root. The folder *shellconfig* is a bit different as only some files are meant to be installed as dotfiles.
 
 # Documentation - Root Folder
@@ -255,7 +255,7 @@ A few comments about each terminal emulators:
 * *Simple Terminal (ST)* works well enough and is my default if the GPU-accelerated terminal does not perform well enough
 * *xTerm* is never used, but I have it installed on all my workstations for a failsafe environment. If my WM/DE fails, I can work inside a failsafe GUI and *xTerm* is the default terminal emulator there
 
-I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for VMs mainly and machines where I don't deploy my applications and dotfiles. My built of *ST* can be found [here](https://github.com/GSquad934/st.git).
+I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for VMs mainly and machines where I don't deploy my applications and dotfiles. My built of *ST* can be found [here](https://github.com/astsu777/st.git).
 
 <u>**Note**</u>: every terminal emulator has its own set of keybindings. None of them are described here as I do not use them very often. Classic shortcuts such as CTRL+SHIFT+c (copy) and CTRL+SHIFT+v (paste) work as intended.
 
@@ -469,7 +469,7 @@ It is a very simple image viewer, and quite minimalist. However, a custom script
 /script upgrade
 ```
 
-The scripts download and deployment of the frameworks is never automated, not even by my [bootstrap script](https://github.com/GSquad934/bootstrap.git) The reason for this is simply security.
+The scripts download and deployment of the frameworks is never automated, not even by my [bootstrap script](https://github.com/astsu777/bootstrap.git) The reason for this is simply security.
 
 ## X11
 The configuration files stored in *config/X11* are meant to be used for graphical environments. Here is the purpose of each file in this folder:
@@ -480,22 +480,22 @@ The configuration files stored in *config/X11* are meant to be used for graphica
 * *lightdm*: these are configuration files for *LightDM* display manager when using the Slick greeter
 * *Xresources*: this file is used to configure the theme of *Xterm* and of *SXIV*
 
-The deployment of the supported GUIs can be automated with my [bootstrap script](https://github.com/GSquad934/bootstrap.git) and the relevant x-file will also be automatically installed and configured.
+The deployment of the supported GUIs can be automated with my [bootstrap script](https://github.com/astsu777/bootstrap.git) and the relevant x-file will also be automatically installed and configured.
 
 ### Theming
 In the *config* folder, there are configuration files for GTK v2/v3 to setup a dark theme. I use *Adwaita-dark* and the mouse cursor is using *Breeze light*. The mouse cursor is defined in the *icons* folder. QT applications can also be dark, but this is not defined in my dotfiles.
 
 #### BSPWM
-The folder *config/bspwm* contains the entire configuration for the *BSPWM* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/bspwm#readme).
+The folder *config/bspwm* contains the entire configuration for the *BSPWM* window manager. For more details, see the dedicated [README.md](https://github.com/astsu777/dotfiles/tree/master/config/bspwm#readme).
 
 #### i3
-The folder *config/i3* contains the entire configuration for the *i3-gaps* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/i3#readme).
+The folder *config/i3* contains the entire configuration for the *i3-gaps* window manager. For more details, see the dedicated [README.md](https://github.com/astsu777/dotfiles/tree/master/config/i3#readme).
 
 #### Openbox
-The folder *config/openbox* contains the entire configuration for the *Openbox* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/openbox#readme). In addition to this, there are folders for *Tint2* panel and *volumeicon* which themes the volume icon in the systray.
+The folder *config/openbox* contains the entire configuration for the *Openbox* window manager. For more details, see the dedicated [README.md](https://github.com/astsu777/dotfiles/tree/master/config/openbox#readme). In addition to this, there are folders for *Tint2* panel and *volumeicon* which themes the volume icon in the systray.
 
 #### SpectrWM
-The folder *config/spectrwm* contains the entire configuration for the *SpectrWM* window manager. For more details, see the dedicated [README.md](https://github.com/GSquad934/dotfiles/tree/master/config/spectrwm#readme).
+The folder *config/spectrwm* contains the entire configuration for the *SpectrWM* window manager. For more details, see the dedicated [README.md](https://github.com/astsu777/dotfiles/tree/master/config/spectrwm#readme).
 
 ## Zathura
 This program is used to display PDFs, eBooks, etc... It is very minimalist and can be customized via a configuration file (=*.config/zathura/zathurarc*). The configuration file sets the following:
@@ -528,5 +528,5 @@ Most VIM keybindings can be used within *Zathura* too: navigation with h/j/k/l, 
 # Contact
 You can always reach out to me:
 
-* [Twitter](https://twitter.com/gaetanict)
+* [Twitter](https://twitter.com/astsu777)
 * [Email](mailto:gaetan@ictpourtous.com)

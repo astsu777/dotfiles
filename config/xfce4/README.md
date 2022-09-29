@@ -35,7 +35,7 @@ dnf install xfce4 gvfs
 Then, you also need the files in this repository to actually configure XFCE4 and have the theme showcased in the above screenshot.
 
 # Running XFCE4
-If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/GSquad934/dotfiles/blob/master/config/X11/xinitrc).
+If you don't use a login manager, you can start the graphical environment with the *startx* command (package "*xorg-xinit*" required) and a properly configured *.xinitrc* file. If you want some inspiration for your *.xinitrc*, you can check out [mine](https://github.com/astsu777/dotfiles/blob/master/config/X11/xinitrc).
 
 If you use a login manager (such as *lightdm*), the XFCE4 package installation should have already created a *.desktop* file necessary for the login manager. Otherwise, make sure to create a *xfce.desktop* file in */usr/share/xsessions/*. The file should contain the following:
 
@@ -51,10 +51,10 @@ Type=Application
 ```
 
 # Wallpapers
-A default wallpaper (file: *background.png*) is supplied with this configuration of XFCE4 in addition to the default XFCE4 ones. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/GSquad934/wallpapers).
+A default wallpaper (file: *background.png*) is supplied with this configuration of XFCE4 in addition to the default XFCE4 ones. If you want a set of nice wallpapers, I have some stored in this [repository](https://github.com/astsu777/wallpapers).
 
 # Contact
 You can always reach out to me:
 
-* [Twitter](https://twitter.com/gaetanict)
+* [Twitter](https://twitter.com/astsu777)
 * [Email](mailto:gaetan@ictpourtous.com)
