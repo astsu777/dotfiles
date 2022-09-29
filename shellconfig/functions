@@ -174,7 +174,7 @@ if type curl > /dev/null 2>&1; then
 
 	# Bootstrap
 	_bootstrap() {
-		/bin/bash -c "$(\curl -fsSL https://raw.githubusercontent.com/GSquad934/bootstrap/master/bootstrap.sh)"
+		/bin/bash -c "$(\curl -fsSL https://raw.githubusercontent.com/astsu777/bootstrap/master/bootstrap.sh)"
 	}
 
 	# Get song lyrics
