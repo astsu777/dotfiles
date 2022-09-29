@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 #=========================================================================
-# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Thu 07 Oct 2021 11:29:52
-# Last modified: Thu 07 Oct 2021 11:35:00
+# Last modified: Thu 29 Sep 2022 22:31:39
 # Version: 1.0
 #
 # Description: Toggle the ability to switch to other VTs using CTRL-ALT-Fx

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #=========================================================================
-# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Tue 19 Oct 2021 17:42:04
-# Last modified: Tue 19 Oct 2021 19:02:26
+# Last modified: Thu 29 Sep 2022 22:28:02
 # Version: 1.0
 #
 # Description: outputs status bar information for SpectrWM

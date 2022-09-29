@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 #=========================================================================
-# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Mon 23 Aug 2021 15:06:02
-# Last modified: Mon 29 Nov 2021 22:39:37
+# Last modified: Thu 29 Sep 2022 22:28:17
 # Version: 1.0
 #
 # Description: configure the touchpad on laptops

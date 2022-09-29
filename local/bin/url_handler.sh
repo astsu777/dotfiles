@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 #=========================================================================
-# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 26 Sep 2021 10:13:54
-# Last modified: Sun 26 Sep 2021 14:45:50
+# Last modified: Thu 29 Sep 2022 22:31:10
 # Version: 1.0
 #
 # Description: file handler using file extensions, but can also use MIME types

@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 #=========================================================================
-# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:15:32
-# Last modified: Wed 25 Aug 2021 19:30:58
+# Last modified: Thu 29 Sep 2022 22:31:48
 # Version: 1.0
 #
 # Description: a general handler for opening a file's intended output,
