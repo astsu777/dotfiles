@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Wed 14 Sep 2022 12:07:20
+# Last modified: Fri 30 Sep 2022 13:56:22
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -86,6 +86,7 @@ search_options[Homebrew Casks]="https://formulae.brew.sh/cask/%s"
 search_options[Homebrew]="https://formulae.brew.sh/formula/%s"
 search_options[Instagram]="https://www.instagram.com/%s"
 search_options[Instant Gaming]="https://www.instant-gaming.com/en/search/?q=%s"
+search_options[ISBN Search]="https://isbnsearch.org/search?s=%s"
 search_options[LaTeX WikiBooks]="https://en.wikibooks.org/w/index.php?search=latex%2F%s&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1&ns4=1&ns102=1&ns110=1&ns112=1"
 search_options[Linux Packages]="https://pkgs.org/search/?q=%s"
 search_options[LinuxDocs]="https://www.startpage.com/sp/search?query=%s+site%3Alinuxdocs.org&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4"

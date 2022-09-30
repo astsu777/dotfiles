@@ -459,6 +459,7 @@ c.url.searchengines = {
     "Homebrew": "https://formulae.brew.sh/formula/{}",
     "Instagram": "https://www.instagram.com/{}",
     "Instant_Gaming": "https://www.instant-gaming.com/en/search/?q={}",
+    "ISBN_Search": "https://isbnsearch.org/search?s={}",
     "LaTeX_WikiBooks": "https://en.wikibooks.org/w/index.php?search=latex%2F{}&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1&ns4=1&ns102=1&ns110=1&ns112=1",
     "Linux_Packages": "https://pkgs.org/search/?q={}",
     "LinuxDocs": "https://www.startpage.com/sp/search?query={}+site%3Alinuxdocs.org&language=english&t=default&prfe=b7d215e64222ef5c8ec466e119ec2b72a6de56f1b8f04e85b7cd50b9a3cc517a2d1a3df7c8422680cfa92618d52ed539679f750c3e46b82c680f276819422830b53a38ef6c23ecf490cea64dd26bc15b6ad4",
