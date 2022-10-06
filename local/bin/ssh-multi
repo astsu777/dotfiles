@@ -1,0 +1,50 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Fri 07 Oct 2022 00:01:58
+# Last modified: Fri 07 Oct 2022 00:23:43
+# Version: 1.0
+#
+# Description: connect to one or multiple SSH servers in a TMUX window and sync input on all panes
+#=========================================================================
+
+#=======================
+# Prerequisites
+#=======================
+
+if ! type tmux >/dev/null 2>&1; then
+    echo "TMUX is not installed!"
+    exit 1
+elif [ -z "$1" ]; then
+    echo "Please supply at least one server to connect to"
+    exit 2
+fi
+
+#=======================
+# Variables
+#=======================
+
+target=multi-ssh-$$
+
+#=======================
+# Code
+#=======================
+
+if [ -z "$TMUX" ]; then
+    tmux new-session -d -s "$target"
+fi
+
+tmux new-window -n "$target" "ssh $1"
+shift
+
+for host in "$@"; do
+    tmux split-window -t ":$target" -h "ssh $host"
+    tmux select-layout -t ":$target" tiled
+done
+
+tmux select-pane -t ":$target"
+tmux set-window-option -t ":$target" synchronize-panes on
+
+if [ -z "$TMUX" ]; then
+    tmux attach-session -d -t ":$target"
+fi
