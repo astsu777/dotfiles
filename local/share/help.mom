@@ -678,6 +678,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWblock-hosts\fP \(en  implement various block-lists to the hosts file
 .ITEM
+\f(CWcheck-rep\fP \(en  check a FQDN/IP/CVE/Hash against several search engines
+.ITEM
 \f(CWclear-dns-cache\fP \(en  clear the local DNS cache if any is detected
 .ITEM
 \f(CWcompiler\fP \(en  compile a document to another format (mainly used for LaTeX)

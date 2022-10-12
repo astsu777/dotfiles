@@ -163,6 +163,7 @@ The following table provides a description of all the scripts:
 | Script | Description |
 | :--- | :--- |
 | `block-hosts` | implement various block-lists to the hosts file |
+| `check-rep` | check a FQDN/IP/CVE/Hash against several search engines |
 | `clear-dns-cache` | clear the local DNS cache if any is detected |
 | `compiler` | compile a document to another format (mainly used for LaTeX) |
 | `crontoggle` | enable/disable the cron jobs |
