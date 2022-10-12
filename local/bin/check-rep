@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Wed 12 Oct 2022 16:48:44
+# Last modified: Wed 12 Oct 2022 18:33:28
+# Version: 1.0
+#
+# Description: check an IP/domain/hash against several databases
+#=========================================================================
+
+#=======================
+# Functions
+#=======================
+
+checkIP() {
+	for i in "${checkip[@]}"; do
+		if [ "$(uname)" = "Darwin" ]; then
+			open -u "$i"
+		else
+			if pgrep surf > /dev/null 2>&1; then surf "$i"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "$i"; elif [ -n "$BROWSER" ]; then $BROWSER "$i"; else xdg-open "$i"; fi
+		fi
+	done
+}
+
+checkCVE() {
+	for i in "${checkcve[@]}"; do
+		if [ "$(uname)" = "Darwin" ]; then
+			open -u "$i"
+		else
+			if pgrep surf > /dev/null 2>&1; then surf "$i"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "$i"; elif [ -n "$BROWSER" ]; then $BROWSER "$i"; else xdg-open "$i"; fi
+		fi
+	done
+}
+
+checkDomain() {
+	for i in "${checkfqdn[@]}"; do
+		if [ "$(uname)" = "Darwin" ]; then
+			open -u "$i"
+		else
+			if pgrep surf > /dev/null 2>&1; then surf "$i"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "$i"; elif [ -n "$BROWSER" ]; then $BROWSER "$i"; else xdg-open "$i"; fi
+		fi
+	done
+}
+
+checkHash() {
+	for i in "${checkhash[@]}"; do
+		if [ "$(uname)" = "Darwin" ]; then
+			open -u "$i"
+		else
+			if pgrep surf > /dev/null 2>&1; then surf "$i"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "$i"; elif [ -n "$BROWSER" ]; then $BROWSER "$i"; else xdg-open "$i"; fi
+		fi
+	done
+}
+
+#=======================
+# Search engines
+#=======================
+
+declare -A checkcve
+declare -A checkip
+declare -A checkfqdn
+declare -A checkhash
+
+declare -A checkcve[greynoise]="https://viz.greynoise.io/query/?gnql=$1"
+declare -A checkcve[nvd]="https://nvd.nist.gov/vuln/search/results?query=$1"
+declare -A checkcve[sploitus]="https://sploitus.com/?query=$1"
+declare -A checkcve[vulmon]="https://vulmon.com/searchpage?q=$1"
+declare -A checkfqdn[archive]="https://archive.org/search.php?query=$1"
+declare -A checkfqdn[crtsh]="https://crt.sh/?q=$1"
+declare -A checkfqdn[dnslytics]="https://dnslytics.com/domain/$1"
+declare -A checkfqdn[domaintools]="https://whois.domaintools.com/$1"
+declare -A checkfqdn[intelx]="https://intelx.io/?s=$1"
+declare -A checkfqdn[maltiverse]="https://maltiverse.com/search;query=$1"
+declare -A checkfqdn[opentip]="https://opentip.kaspersky.com/$1/?tab=lookup"
+declare -A checkfqdn[otx]="https://otx.alienvault.com/indicator/domain/$1"
+declare -A checkfqdn[pulsedrive]="https://pulsedive.com/indicator/$1"
+declare -A checkfqdn[robtex]="https://www.robtex.com/dns-lookup/$1"
+declare -A checkfqdn[shodan]="https://www.shodan.io/search?query=$1"
+declare -A checkfqdn[threatminer]="https://www.threatminer.org/domain.php?q=$1"
+declare -A checkfqdn[tip]="https://threatintelligenceplatform.com/report/$1"
+declare -A checkfqdn[triage]="https://tria.ge/s?q=$1"
+declare -A checkfqdn[urlvoid]="https://www.urlvoid.com/scan/$1"
+declare -A checkfqdn[virustotal]="https://www.virustotal.com/gui/domain/$1"
+declare -A checkfqdn[x-force]="https://exchange.xforce.ibmcloud.com/url/$1"
+declare -A checkhash[greynoise]="https://viz.greynoise.io/query/?gnql=$1"
+declare -A checkhash[hashdd]="https://hashdd.com/search/$1"
+declare -A checkhash[intelx]="https://intelx.io/?s=$1"
+declare -A checkhash[malshare]="https://malshare.com/sample.php?action=detail&hash=$1"
+declare -A checkhash[maltiverse]="https://maltiverse.com/search;query=$1"
+declare -A checkhash[otx]="https://otx.alienvault.com/indicator/file/$1"
+declare -A checkhash[threatminer]="https://www.threatminer.org/sample.php?q=$1"
+declare -A checkhash[triage]="https://tria.ge/s?q=$1"
+declare -A checkhash[virustotal]="https://www.virustotal.com/gui/file/$1"
+declare -A checkhash[x-force]="https://exchange.xforce.ibmcloud.com/malware/$1"
+declare -A checkip[abuseipdb]="https://www.abuseipdb.com/check/$1"
+declare -A checkip[bgpview]="https://bgpview.io/ip/$1"
+declare -A checkip[dnslytics]="https://dnslytics.com/ip/$1"
+declare -A checkip[domaintools]="https://whois.domaintools.com/$1"
+declare -A checkip[greynoise]="https://viz.greynoise.io/ip/$1"
+declare -A checkip[intelx]="https://intelx.io/?s=$1"
+declare -A checkip[onyphe]="https://www.onyphe.io/search/?query=$1"
+declare -A checkip[opentip]="https://opentip.kaspersky.com/$1/?tab=lookup"
+declare -A checkip[otx]="https://otx.alienvault.com/indicator/ip/$1"
+declare -A checkip[pulsedrive]="https://pulsedive.com/indicator/$1"
+declare -A checkip[robtex]="https://www.robtex.com/ip-lookup/$1"
+declare -A checkip[shodan]="https://www.shodan.io/search?query=$1"
+declare -A checkip[threatminer]="https://www.threatminer.org/host.php?q=$1"
+declare -A checkip[tip]="https://threatintelligenceplatform.com/report/$1"
+declare -A checkip[virustotal]="https://www.virustotal.com/gui/ip-address/$1"
+declare -A checkip[x-force]="https://exchange.xforce.ibmcloud.com/ip/$1"
+
+# Display search results in web browser
+if [ -z "$1" ]; then
+    echo -e "Check an IP/Domain/Hash against several search engines"
+	echo "Usage: check-rep '<STRING>'"
+	echo "Ex.: check-rep domain.com"
+	echo
+else
+	if [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+		checkIP
+	elif [[ "$1" =~ CVE-\d{4}-\d{4,7} ]]; then
+		checkCVE
+	elif [[ "$1" =~ ^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.)+[a-zA-Z]{2,}$ ]]; then
+		checkDomain
+	else
+		checkHash
+	fi
+fi
