@@ -151,6 +151,9 @@ autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. B
 " Hexdump current file and open its output (to use with binaries)
 nnoremap <leader>bb :%!xxd<Enter>
 
+" Disable mouse support
+set mouse=
+
 "=============
 " Look & Feel
 "=============
