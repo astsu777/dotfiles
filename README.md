@@ -359,7 +359,7 @@ I almost never use this application as I have my own script to perform Web searc
 ## Simple X Hotkey Daemon (SXHKD)
 I use this application to globally define my keybindings to do... everything. A lot of environment variables are defined in this file as I don't like to hard-code applications, paths, etc... All of these environment variables are configured in the file *shellconfig/common*.
 
-Doing this allows modularity: for example, a shortcut opens the Web browser defined by the *$BROWSER* variable. This variable sets *Qutebrowser* as the primary browser, but then several fallbacks such as *Firefox*, *Brave*, etc... A default fallback option is also hard-coded in case the variable does not exit.
+Doing this allows modularity: for example, a shortcut opens the Web browser defined by the *$BROWSER* variable. This variable sets *Vivaldi* as the primary browser, but then several fallbacks such as *Firefox*, *Brave*, etc... A default fallback option is also hard-coded in case the variable does not exit.
 
 Two configuration files are present in this repository: one called *sxhkdrc* which contains all the keybindings. The second one is called *sxhkdrc_bspwm* and is solely called when running *BSPWM*.
 
