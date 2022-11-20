@@ -38,6 +38,7 @@ https://blog.talosintelligence.com/feeds/posts/default "~Cisco Talos Intelligenc
 http://packetstormsecurity.org/exploits.xml "~Exploit Files Packet Storm - Exploits"
 https://seclists.org/rss/fulldisclosure.rss "~Full Disclosure"
 https://blog.mozilla.org/security/feed/ "~Mozilla Security Blog"
+https://api.msrc.microsoft.com/update-guide/rss "~MSRC Security Update Guide"
 https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss.xml "~National Vulnerability Database"
 https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss-analyzed.xml "~National Vulnerability Database (Analyzed)"
 https://delta.navisec.io/rss/ "~NaviSec Delta"
@@ -51,6 +52,7 @@ http://fetchrss.com/rss/6270f4d03b3b1f7101473f776270f3550f0422780e14b6e2.xml "~x
 https://zsecurity.org/feed/ "~zSecurity"
 ---SOFTWARE---
 https://patchmypc.com/category/catalog-updates/feed "~Catalog Updates Archives - Patch My PC"
+https://www.ivanti.com/blog/topics/patch-tuesday/rss "~Ivanti Blog: Patch Tuesday"
 http://suckless.org/atom.xml "~Suckless.org - Software that sucks less"
 ---WAREZ---
 https://www.freetutorialsus.com/feed/ "~Download Udemy Courses For Free  freetutorials.us"
