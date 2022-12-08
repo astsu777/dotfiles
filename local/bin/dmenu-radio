@@ -2,16 +2,55 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:10:21
-# Last modified: Sun 22 Aug 2021 12:10:57
+# Last modified: Thu 08 Dec 2022 21:55:50
 # Version: 1.0
 #
 # Description: listen to online radio
 #=========================================================================
 
 #=======================
-# Search engine config
+# Functions
 #=======================
+
+checkReq(){
+	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
+	if type mpv >/dev/null 2>&1; then mpv=1; fi
+}
+
+getRadio(){
+	if ! type dmenu >/dev/null 2>&1; then
+		radio=$(printf "%s\n" "${!radios[@]}" | sort | fzf -i --prompt 'Choose a station:') "$@" || exit
+	else
+		radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station:') "$@" || exit
+	fi
+	station="${radios["${radio}"]}"
+}
+
+listenRadio(){
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ -n "$mpv" ]; then
+			if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
+			mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
+		else
+			open "$station"
+		fi
+	else
+		if [ -n "$mpv" ]; then
+			if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
+			mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
+		else
+			setsid -f xdg-open "$station"
+		fi
+	fi
+}
+
+#=======================
+# Radios
+#=======================
+
 declare -A radios
+
 radios[Blues Music Fan Radio]="http://ais-sa2.cdnstream1.com/1992_128.mp3"
 radios[Chillhop Radio]="http://hyades.shoutca.st:8043/stream"
 radios[Driveradio]="http://listen.radionomy.com/driveradio.m3u"
@@ -30,14 +69,8 @@ radios[Synthwave]="https://ecast.myautodj.com/public1channel"
 radios[Stop Playing]=""
 
 #=======================
-# Choose a radio
+# Choose and listen to radio
 #=======================
-radio=$(printf "%s\n" "${!radios[@]}" | sort | dmenu -i -l 30 -p 'Choose a station:') "$@" || exit
-station="${radios["${radio}"]}"
-
-#=======================
-# Listen to the stream
-#=======================
-if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
-mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
+getRadio
+listenRadio
 exit 0

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Fri 30 Sep 2022 13:56:22
+# Last modified: Thu 08 Dec 2022 20:56:53
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -13,15 +13,12 @@
 #=======================
 
 checkReq(){
-	if [ "$(uname)" = "Darwin" ]; then
-		if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
-	else
-		if ! type dmenu >/dev/null 2>&1; then notify-send "Error" "The package 'dmenu' is not installed" && exit 1; fi
-	fi
+	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
 }
 
 getSE() {
-	if [ "$(uname)" = "Darwin" ]; then
+	if ! type dmenu >/dev/null 2>&1; then
 		engine=$(printf "%s\n" "${!search_options[@]}" | sort | fzf -i --prompt 'Search engine: ') "$@" || exit
 	else
 		engine=$(printf "%s\n" "${!search_options[@]}" | sort | dmenu -i -l 30 -p 'Search engine:') "$@" || exit
@@ -30,12 +27,20 @@ getSE() {
 }
 
 getQuery() {
-	if [ "$(uname)" = "Darwin" ]; then
+	if ! type dmenu >/dev/null 2>&1; then
 		read -p "Query: " -r query || exec dmenu-websearch
 	else
 		query=$(printf "%s\n" "$*" | dmenu -p 'Query:') || exec dmenu-websearch
 	fi
 	url=$(sed "s/\%s/$query/g" <<< "$search_engine")
+}
+
+search() {
+	if [ "$(uname)" = "Darwin" ]; then
+		open -u "${url}"
+	else
+		if pgrep surf > /dev/null 2>&1; then surf "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
+	fi
 }
 
 #=======================
@@ -153,13 +158,12 @@ search_options[WolframAlpha]="https://www.wolframalpha.com/input/?i=%s"
 search_options[Yelp - BE]="https://fr.yelp.be/search?find_desc=%s"
 search_options[YouTube]="https://www.youtube.com/results?search_query=%s"
 
+#=======================
 # Display search results in web browser
+#=======================
+
 checkReq
 getSE
 getQuery
-if [ "$(uname)" = "Darwin" ]; then
-	open -u "${url}"
-else
-	if pgrep surf > /dev/null 2>&1; then surf "${url}"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "${url}"; elif [ -n "$BROWSER" ]; then $BROWSER "${url}"; else xdg-open "${url}"; fi
-fi
+search
 exit 0

@@ -2,14 +2,28 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Tue 15 Feb 2022 21:26:04
+# Last modified: Thu 08 Dec 2022 21:48:03
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
 #=========================================================================
 
-# Prerequisites
-if ! type streamlink mpv yt-dlp ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "yt-dlp, streamlink & ffmpeg must be installed" & exit 1; fi
+#=======================
+# Variables
+#=======================
+
+# Add multiple websites separated by a pipe (Ex.: "twitch|youtube|vimeo")
+StreamlinkSupported="twitch"
+
+#=======================
+# Functions
+#=======================
+
+checkReq(){
+	if ! type streamlink mpv yt-dlp ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "yt-dlp, streamlink & ffmpeg must be installed" & exit 1; fi
+	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
+}
 
 # Determine queue software (optional)
 if type ts > /dev/null 2>&1; then
@@ -20,33 +34,40 @@ else
 	queue=''
 fi
 
-# Grab the video/playlist link
-if pgrep -f mpv >/dev/null 2>&1 && [ -z "$*" ]; then
-	choice="$(printf "%s\n" 'Grab Playing Videos' 'Play Video' | dmenu -i -p 'Choose Action:')"
-	case "$choice" in
-		"Grab Playing Videos") pgrep -f mpv && link="$(ps -x | grep '[0-9]\smpv' | grep -oP 'www|http:|https:+[^\s]+[\w]' | dmenu -i -p 'Videos Currently Playing:')" ;;
-		"Play Video")
+getLink(){
+	if pgrep -f mpv >/dev/null 2>&1 && [ -z "$*" ]; then
+		if ! type dmenu >/dev/null 2>&1; then
+			choice="$(printf "%s\n" 'Grab Playing Videos' 'Play Video' | fzf -i --prompt 'Choose Action:')"
+		else
+			choice="$(printf "%s\n" 'Grab Playing Videos' 'Play Video' | dmenu -i -p 'Choose Action:')"
+		fi
+		case "$choice" in
+			"Grab Playing Videos") pgrep -f mpv && link="$(ps -x | grep '[0-9]\smpv' | grep -oP 'www|http:|https:+[^\s]+[\w]' | dmenu -i -p 'Videos Currently Playing:')" ;;
+			"Play Video")
+				if ! type dmenu >/dev/null 2>&1; then
+					link="$(if [ -z "$*" ]; then printf "%s" "$*" | fzf --prompt 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
+				else
+					link="$(if [ -z "$*" ]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
+				fi
+				if [ -z "$link" ]; then exit 2; fi
+				;;
+			*) exit 2 ;;
+		esac
+	else
+		if ! type dmenu >/dev/null 2>&1; then
+			link="$(if [ -z "$*" ]; then printf "%s" "$*" | fzf --prompt 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
+		else
 			link="$(if [ -z "$*" ]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
-			if [ -z "$link" ]; then exit 2; fi
-			;;
-		*) exit 2 ;;
-	esac
-else
-	link="$(if [ -z "$*" ]; then printf "%s" "$*" | dmenu -p 'Video/Playlist/Channel Link:'; else printf "%s" "$*" ;fi)"
-	if [ -z "$link" ]; then exit 2; fi
-fi
+		fi
+		if [ -z "$link" ]; then exit 2; fi
+	fi
+	# Determine if link is a Magnet link
+	if grep -Eq '^magnet' <<< "$link" ; then
+		if ! type webtorrent > /dev/null 2>&1; then notify-send "⚠️ Error" "webtorrent must be installed to stream Magnet links" & exit 1; fi
+		magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" <<< "$link")
+	fi
+}
 
-# Determine if link is a Magnet link
-if grep -Eq '^magnet' <<< "$link" ; then
-	if ! type webtorrent > /dev/null 2>&1; then notify-send "⚠️ Error" "webtorrent must be installed to stream Magnet links" & exit 1; fi
-	magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" <<< "$link")
-fi
-
-# Variables
-# Add multiple websites separated by a pipe (Ex.: "twitch|youtube|vimeo"
-StreamlinkSupported="twitch"
-
-# Actions
 yt-listen(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--really-quiet' "$link" audio_only 2> /dev/null & disown ; else mpv --ytdl-format='ba/best' --really-quiet "$link" 2> /dev/null & disown ; fi
@@ -54,6 +75,7 @@ yt-listen(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--really-quiet' "$link" audio_only 2> /dev/null & disown ; else "$queue" mpv --ytdl-format='ba/best' --really-quiet "$link" 2> /dev/null & disown ; fi
 	fi
 }
+
 yt-wsd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -61,9 +83,11 @@ yt-wsd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-wsdnow(){
 	if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 }
+
 yt-whd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -71,9 +95,11 @@ yt-whd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --title=mpvfloating "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-whdnow(){
 	if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 }
+
 yt-shufsd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -81,6 +107,7 @@ yt-shufsd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-shufhd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -88,6 +115,7 @@ yt-shufhd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl --shuffle --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-revsd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -95,6 +123,7 @@ yt-revsd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating"' "$link" 480p 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-revhd(){
 	if [ -z "$queue" ]; then
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
@@ -102,14 +131,17 @@ yt-revhd(){
 		if grep -Eqw "$StreamlinkSupported" <<< "$link"; then "$queue" streamlink --player mpv --player-args '--ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating"' "$link" best 2>/dev/null & disown ; else "$queue" mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown ; fi
 	fi
 }
+
 yt-dlvideo(){
 	notify-send " Video queued for download..."
 	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --embed-thumbnail --embed-subs -f 'bv+ba/b' "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci -f 'bv+ba/b' --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
+
 yt-dlaudio(){
 	notify-send " Audio queued for download..."
 	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
+
 yt-magnet(){
 	if [ -z "$queue" ]; then webtorrent "$magnet" --mpv -q & disown; else "$queue" webtorrent "$magnet" --mpv -q & disown ; fi
 }
@@ -117,9 +149,17 @@ yt-magnet(){
 # Choose preferred video format
 if [ -z "$queue" ]; then
 	if [ -n "$magnet" ]; then
-		format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		if ! type dmenu >/dev/null 2>&1; then
+			format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
+		else
+			format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		fi
 	else
-		format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		if ! type dmenu >/dev/null 2>&1; then
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
+		else
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch HD' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		fi
 	fi
 	case "$format" in
 		Listen) yt-listen ;;
@@ -137,9 +177,17 @@ if [ -z "$queue" ]; then
 	esac
 else
 	if [ -n "$magnet" ]; then
-		format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		if ! type dmenu >/dev/null 2>&1; then
+			format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
+		else
+			format="$(printf "%s\n" 'Watch Torrent' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		fi
 	else
-		format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		if ! type dmenu >/dev/null 2>&1; then
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
+		else
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+		fi
 	fi
 	case "$format" in
 		Listen) yt-listen ;;

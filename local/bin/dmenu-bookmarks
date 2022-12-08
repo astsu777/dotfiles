@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Sat 15 Oct 2022 22:21:31
+# Last modified: Thu 08 Dec 2022 20:47:23
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -20,11 +20,8 @@ bookmarksFile="bookmarks"
 #=======================
 
 checkReq(){
-	if [ "$(uname)" = "Darwin" ]; then
-		if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
-	else
-		if ! type dmenu >/dev/null 2>&1; then notify-send "Error" "The package 'dmenu' is not installed" && exit 1; fi
-	fi
+	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed, switching to FZF in CLI"; fi
+	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
 	[ -d "$bookmarksPath" ] || mkdir -p "$bookmarksPath"
 	[ -f "$bookmarksPath/$bookmarksFile" ] || touch "$bookmarksFile"
 }
@@ -44,7 +41,7 @@ options:
 }
 
 addUrl(){
-	if [ "$(uname)" = "Darwin" ]; then
+	if ! type dmenu >/dev/null 2>&1; then
 		printf "The description format should be: [CATEGORY] <DESCRIPTION>"
 		printf "Description: " && read -r description
 		printf "URL: " && read -r url
@@ -63,7 +60,7 @@ delUrl(){
 }
 
 getUrl(){
-	if [ "$(uname)" = "Darwin" ]; then
+	if ! type dmenu >/dev/null 2>&1; then
 		url="$(fzf <"$bookmarksPath/$bookmarksFile" | awk '{print $(NF)}')"
 	else
 		url="$(sort "$bookmarksPath/$bookmarksFile" | dmenu -i -l 30 -p "Bookmarks:" | awk '{print $(NF)}')"

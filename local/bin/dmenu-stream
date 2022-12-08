@@ -2,58 +2,107 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Sat 11 Dec 2021 22:16:19
+# Last modified: Thu 08 Dec 2022 21:58:43
 # Version: 1.0
 #
 # Description: check online streams and watch them
 #=========================================================================
 
-# Requirements check
-if ! type yt-dlp mpv > /dev/null 2>&1; then
-	notify-send "⚠️ Error" "Please install 'mpv' and 'yt-dlp' to use this script"
-	exit 1
-fi
+#=======================
+# Functions
+#=======================
 
-# Define streams list
-Streams="$HOME/.local/share/streams"
-if [ ! -f "$Streams" ]; then
-	notify-send "⚠️ Error" "Stream list does not exist!"
-	exit 2
-fi
+checkReq(){
+	if ! type yt-dlp mpv > /dev/null 2>&1; then notify-send "⚠️ Error" "Please install 'mpv' and 'yt-dlp' to use this script" && exit 1; fi
+	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
+	if type mpv >/dev/null 2>&1; then mpv=1; fi
+}
 
-# Check for on-going instance
-if lsof "$Streams" > /dev/null 2>&1; then
-	notify-send "Script already running" "Checking for online streams. Please wait..."
-	exit 4
-fi
+setStreamList(){
+	Streams="$HOME/.local/share/streams"
+	if [ ! -f "$Streams" ]; then notify-send "⚠️ Error" "Stream list does not exist!" && exit 2; fi
+}
 
+checkInstance(){
+	if lsof "$Streams" > /dev/null 2>&1; then notify-send "Script already running" "Checking for online streams. Please wait..." && exit 4; fi
+}
+
+checkOnlineStreams() {
+	Cache="$XDG_CACHE_HOME/onlinestreams"
+	if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; then
+		if ! type dmenu >/dev/null 2>&1; then
+			OPTS=$(printf "Refresh Online Streams\nUse Cache" | sort | fzf -i --prompt "Cache is older than 10 minutes. Choose:")
+		else
+			OPTS=$(printf "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose:")
+		fi
+		case "$OPTS" in
+			'Refresh Online Streams')
+				rm "$Cache"
+				OnlineStreams=$(mktemp)
+				notify-send "🎬 Checking online streams" "Please wait, it may take a while..."
+				while IFS="" read -r i; do
+					yt-dlp -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
+					sleep 5
+				done < "$Streams"
+				mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
+				notify-send "🎬 Refreshed online streams" "The online streams cache has been generated" && setsid -f paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
+				;;
+			'Use Cache')
+				;;
+			*)
+				exit 0 ;;
+		esac
+	fi
+}
+
+getStream(){
+	if ! type dmenu >/dev/null 2>&1; then
+		Stream=$(sort "$Cache" | fzf -i --prompt "Online streams:")
+	else
+		Stream=$(sort "$Cache" | dmenu -i -l 30 -p "Online streams:")
+	fi
+}
+
+watchStream() {
+	if [ -z "$Stream" ]; then exit 3; fi
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ -n "$mpv" ]; then
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+		else
+			open "$Stream"
+		fi
+	else
+		if type dmenu-video > /dev/null 2>&1; then
+			dmenu-video "$Stream"
+		else
+			if [ -n "$mpv" ]; then
+				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+			else
+				setsid -f xdg-open "$Stream"
+			fi
+		fi
+	fi
+}
+
+#=======================
+# Prerequisites
+#=======================
+
+checkReq
+setStreamList
+
+#=======================
 # Check online streams
-Cache="$XDG_CACHE_HOME/onlinestreams"
-if [ -f "$Cache" ] && test "$(find "$Cache" -mmin +10)" || [ ! -f "$Cache" ]; then
-	OPTS=$(printf "Refresh Online Streams\nUse Cache" | sort | dmenu -i -p "Cache is older than 10 minutes. Choose:")
-	case "$OPTS" in
-		'Refresh Online Streams')
-			rm "$Cache"
-			OnlineStreams=$(mktemp)
-			notify-send "🎬 Checking online streams" "Please wait, it may take a while..."
-			while IFS="" read -r i; do
-				yt-dlp -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
-				sleep 5
-			done < "$Streams"
-			mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
-			notify-send "🎬 Refreshed online streams" "The online streams cache has been generated" && setsid -f paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
-			;;
-		'Use Cache')
-			;;
-		*)
-			exit 0 ;;
-	esac
-fi
+#=======================
 
-# Choose a stream to watch
-Stream=$(sort "$Cache" | dmenu -i -l 30 -p "Online streams:")
+checkInstance
+checkOnlineStreams
 
-# Watch the stream
-if [ -z "$Stream" ]; then exit 3; fi
-if type dmenu-video > /dev/null 2>&1; then dmenu-video "$Stream"; else nohup mpv --cache=yes --really-quiet "$Stream" > /dev/null 2>&1 ; fi
+#=======================
+# Watch stream
+#=======================
+
+getStream
+watchStream
 exit 0
