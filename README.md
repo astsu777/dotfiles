@@ -170,26 +170,25 @@ The following table provides a description of all the scripts:
 | `devour` | launch a new program and hide the current window (useful to hide terminal emulator) |
 | `dhcp-server` | launch a local DHCP server |
 | `displayselect` | quickly configure screen layout, mirroring, etc... |
-| `dmenu-bookmarks` | display Web bookmarks in DMenu (or FZF in macOS terminal) and open one in the default Web browser |
+| `dmenu-bookmarks` | display Web bookmarks in DMenu/FZF and open one in the default Web browser |
 | `dmenu-mount` | mount connected USB devices using DMenu |
 | `dmenu-nordvpn` | manage NordVPN using DMenu |
 | `dmenu-pass` | use the *pass* password manager via DMenu |
-| `dmenu-radio` | listen to Web radios via DMenu |
+| `dmenu-radio` | listen to Web radios via DMenu/FZF |
 | `dmenu-record` | record the current screen, audio and/or the webcam via DMenu |
 | `dmenu-run` | run prompt using DMenu with caching (remembers if TUI/GUI programs) |
 | `dmenu-screenshot` | take a screenshot via DMenu |
 | `dmenu-shutdown` | logout/suspend/hibernate/shutdown the computer via DMenu |
-| `dmenu-stream` | check online streams and watch one via DMenu |
+| `dmenu-stream` | check online streams and watch one via DMenu/FZF |
 | `dmenu-system` | general menu with various options to manage the system via DMenu |
 | `dmenu-theme` | change the overall WM/terminal emulator/VIM theme via DMenu |
 | `dmenu-umount` | unmount connected USB devices using DMenu |
 | `dmenu-unicode` | display all unicode and free font-awesome characters via DMenu and insert ehem anywhere |
 | `dmenu-urimount` | mount a network share via DMenu |
-| `dmenu-video` | watch/listen/download a local/online video via DMenu |
-| `dmenu-websearch` | search online using various search engines via DMenu (or FZF in macOS terminal) |
+| `dmenu-video` | watch/listen/download a local/online video via DMenu/FZF |
+| `dmenu-websearch` | search online using various search engines via DMenu/FZF |
 | `dmenu-wm` | list all opened windows and focus on one (like ALT-Tab on Windows) via DMenu |
 | `docker-lab` | quickly spawn one or multiple CentOS/Debian containers for test purposes |
-| `fzfmenu` | TUI alternative to DMenu using *FZF* |
 | `git_all_pull` | find all GIT repositories recursively and pull from them |
 | `handler` | general file/URL mapper |
 | `kbdbacklight` | adjust the keyboard backlight easily |
