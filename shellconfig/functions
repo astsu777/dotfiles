@@ -421,7 +421,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-listen https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ytdl-format=bestaudio/best --really-quiet "$link" 2> /dev/null & disown
+			mpv --ytdl-format='ba/best' --really-quiet "$link" 2> /dev/null & disown
 				fi
 	}
 
@@ -432,7 +432,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-wsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --title="mpv floating" "$1" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --title="mpvfloating" "$1" 2>/dev/null & disown
 				fi
 	}
 
@@ -443,7 +443,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-hd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format=299+bestaudio/137+bestaudio/best --title="mpv floating" "$1" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$1" 2>/dev/null & disown
 				fi
 	}
 
@@ -454,7 +454,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-shufsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$1" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$1" 2>/dev/null & disown
 				fi
 	}
 
@@ -465,7 +465,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-shufhd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --really-quiet --ytdl --shuffle --title="mpv floating" "$1" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height=1080]+ba/b' --really-quiet --ytdl --shuffle --title="mpvfloating" "$1" 2>/dev/null & disown
 				fi
 	}
 
@@ -476,7 +476,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-revsd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=135+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=480]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown
 				fi
 	}
 
@@ -487,7 +487,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo "Ex.: yt-revhd https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 				echo
 		else
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format=299+bestaudio/137+bestaudio/best --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpv floating" "$link" 2>/dev/null & disown
+			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --ytdl-format='bv*[height<=1080]+ba/b' --ytdl-raw-options-append="playlist-reverse=" --really-quiet --title="mpvfloating" "$link" 2>/dev/null & disown
 				fi
 	}
 
@@ -499,7 +499,7 @@ if type mpv yt-dlp > /dev/null 2>&1; then
 				echo
 		else
 			echo -e "Video queued for download..."
-				yt-dlp -ci -f 299+bestaudio/137+bestaudio/best --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown
+				yt-dlp -ci -f 'bv+ba/b' --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown
 				fi
 	}
 
