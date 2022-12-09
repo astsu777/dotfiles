@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:10:21
-# Last modified: Thu 08 Dec 2022 21:55:50
+# Last modified: Fri 09 Dec 2022 12:36:23
 # Version: 1.0
 #
 # Description: listen to online radio
@@ -71,6 +71,8 @@ radios[Stop Playing]=""
 #=======================
 # Choose and listen to radio
 #=======================
-getRadio
+
+checkReq
+getRadio "$@"
 listenRadio
 exit 0

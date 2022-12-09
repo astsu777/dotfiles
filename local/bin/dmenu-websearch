@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:39
-# Last modified: Thu 08 Dec 2022 20:56:53
+# Last modified: Fri 09 Dec 2022 12:33:55
 # Version: 1.0
 #
 # Description: search various search engines (inspired by surfraw).
@@ -163,7 +163,7 @@ search_options[YouTube]="https://www.youtube.com/results?search_query=%s"
 #=======================
 
 checkReq
-getSE
-getQuery
+getSE "$@"
+getQuery "$@"
 search
 exit 0

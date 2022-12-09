@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Thu 08 Dec 2022 21:48:03
+# Last modified: Fri 09 Dec 2022 12:33:01
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -146,7 +146,12 @@ yt-magnet(){
 	if [ -z "$queue" ]; then webtorrent "$magnet" --mpv -q & disown; else "$queue" webtorrent "$magnet" --mpv -q & disown ; fi
 }
 
-# Choose preferred video format
+#=======================
+# Choose action
+#=======================
+
+checkReq
+getLink "$*"
 if [ -z "$queue" ]; then
 	if [ -n "$magnet" ]; then
 		if ! type dmenu >/dev/null 2>&1; then
