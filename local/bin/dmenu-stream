@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Thu 08 Dec 2022 21:58:43
+# Last modified: Fri 09 Dec 2022 19:16:09
 # Version: 1.0
 #
 # Description: check online streams and watch them
@@ -67,10 +67,14 @@ getStream(){
 watchStream() {
 	if [ -z "$Stream" ]; then exit 3; fi
 	if [ "$(uname)" = "Darwin" ]; then
-		if [ -n "$mpv" ]; then
-			mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+		if type dmenu-video > /dev/null 2>&1; then
+			dmenu-video "$Stream"
 		else
-			open "$Stream"
+			if [ -n "$mpv" ]; then
+				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+			else
+				open "$Stream"
+			fi
 		fi
 	else
 		if type dmenu-video > /dev/null 2>&1; then
