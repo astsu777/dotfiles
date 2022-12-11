@@ -1,5 +1,8 @@
+---FUN---
+https://wtffunfact.com/feed/ "~WTF Fun Facts"
 ---HOSTER---
 https://status.upcloud.com/history.rss "~UpCloud Status - Incident History"
+---HUMOR---
 ---HUMOR---
 https://danstonchat.com/rss.xml "~DansTonChat.com"
 https://www.viedemerde.fr/rss "~Vie de merde"
@@ -19,6 +22,7 @@ https://weberblog.net/feed/ "~Weberblog.net  IT-Security, Networks, IPv6, DNSSEC
 https://www.cyberciti.biz/atom/atom.xml "~nixCraft: Linux Tips"
 http://www.taltan.fr/feed/atom "~Taltan.blog.bkp"
 ---NEWS---
+https://news.ycombinator.com/rss "~Hacker News"
 http://www.informaticien.be/index.ks?page=rss_news "~Informaticien.be"
 ---PODCASTS---
 https://feeds.buzzsprout.com/1142720.rss "~Blueprint, by SANS"
