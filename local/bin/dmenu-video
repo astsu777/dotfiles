@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Fri 09 Dec 2022 12:33:01
+# Last modified: Tue 27 Dec 2022 22:16:44
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -177,6 +177,7 @@ if [ -z "$queue" ]; then
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
+		"Open Link") xdg-open "$link" ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;
 	esac
@@ -189,9 +190,9 @@ else
 		fi
 	else
 		if ! type dmenu >/dev/null 2>&1; then
-			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Open Link' 'Stop Playing' | sort | fzf -i --prompt 'Choose Action:')"
 		else
-			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
+			format="$(printf "%s\n" Listen 'Watch SD' 'Watch SD (no queue)' 'Watch HD' 'Watch HD (no queue)' 'Shuffle SD' 'Shuffle HD' 'Watch Reverse SD' 'Watch Reverse HD' Download 'Download Audio' 'Copy Link' 'Open Link' 'Stop Playing' | sort | dmenu -i -p 'Choose Action:')"
 		fi
 	fi
 	case "$format" in
@@ -207,6 +208,7 @@ else
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
+		"Open Link") xdg-open "$link" ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;
 	esac
