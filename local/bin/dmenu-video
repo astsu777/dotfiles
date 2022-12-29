@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Tue 27 Dec 2022 22:16:44
+# Last modified: Thu 29 Dec 2022 18:34:20
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -177,7 +177,7 @@ if [ -z "$queue" ]; then
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
-		"Open Link") xdg-open "$link" ;;
+		"Open Link") if type xdg-open >/dev/null 2>&1; then xdg-open "$link"; else open "$link"; fi ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;
 	esac
@@ -208,7 +208,7 @@ else
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
 		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
-		"Open Link") xdg-open "$link" ;;
+		"Open Link") if type xdg-open >/dev/null 2>&1; then xdg-open "$link"; else open "$link"; fi ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;
 	esac
