@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Fri 30 Dec 2022 20:22:01
+# Last modified: Sat 31 Dec 2022 09:31:03
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -77,7 +77,7 @@ openUrl(){
 	getUrl
 	if (printf '%s' "$url" | grep -Eq '(\.onion[\/].*)|(\.onion$)' ;) ; then tor=1; fi
 	if [ "$(uname)" = "Darwin" ]; then
-		if [ -n "$tor" ]; then open -u "$url"; else open -a "/Applications/Tor Browser.app/Contents/MacOS/firefox" -u "$url"; fi
+		if [ -n "$tor" ]; then open -a "/Applications/Tor Browser.app/Contents/MacOS/firefox" -u "$url"; else open -u "$url"; fi
 	else
 		if [ -n "$tor" ]; then setsid -f tor-browser "$url"; elif pgrep surf > /dev/null 2>&1; then setsid -f surf "$url"; elif pgrep qutebrowser > /dev/null 2>&1; then setsid -f qutebrowser "$url"; elif [ -n "$BROWSER" ]; then setsid -f "$BROWSER" "$url"; else setsid -f xdg-open "$url"; fi
 	fi
