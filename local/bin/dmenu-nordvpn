@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Thu 30 Sep 2021 18:58:02
+# Last modified: Tue 03 Jan 2023 16:54:16
 # Version: 1.0
 #
 # Description: manage NordVPN connectivity
@@ -11,13 +11,14 @@
 #=======================
 # Prerequisites
 #=======================
+
 if ! type nordvpn >/dev/null 2>&1; then
-	notify-send "⚠️ Error" "Please install 'nordvpn'"
+	notify "⚠️ Error" "Please install 'nordvpn'"
 	exit 1
 fi
 
 if ! groups | grep nordvpn >/dev/null 2>&1; then
-	notify-send "⚠️ Error" "You're not a member of the 'nordvpn' group"
+	notify "⚠️ Error" "You're not a member of the 'nordvpn' group"
 	exit 1
 fi
 
@@ -25,10 +26,15 @@ fi
 # Functions
 #=======================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 checkStatus() {
 	account=$(nordvpn account)
-	printf %s "$account" | grep 'You are not logged in.' && tui nordvpn login && notify-send "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
-	printf %s "$account" | grep 'username and password not provided' && nordvpn logout && tui nordvpn login && notify-send "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
+	printf %s "$account" | grep 'You are not logged in.' && tui nordvpn login && notify "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
+	printf %s "$account" | grep 'username and password not provided' && nordvpn logout && tui nordvpn login && notify "Login Successful" "You're successfully logged in to your NordVPN account" && exit 2
 
 	status=$(nordvpn status)
 	printf %s "$status" | grep 'Disconnected' && status=0
@@ -49,9 +55,9 @@ ctrlTech() {
 	choice=$(printf "%s\n" 'NordLynx (Wireguard)' 'OpenVPN' | dmenu -i -p "Current tech is $currentTech. Please choose:")
 	case "$choice" in
 		"NordLynx (Wireguard)")
-			nordvpn set technology NordLynx && notify-send "Protocol Modified" "NordLynx has been set as the used protocol" ;;
+			nordvpn set technology NordLynx && notify "Protocol Modified" "NordLynx has been set as the used protocol" ;;
 		"OpenVPN")
-			nordvpn set technology OpenVPN && notify-send "Protocol Modified" "OpenVPN has been set as the used protocol" ;;
+			nordvpn set technology OpenVPN && notify "Protocol Modified" "OpenVPN has been set as the used protocol" ;;
 	esac
 }
 
@@ -59,8 +65,8 @@ ctrlFW() {
 	currentFW=$(nordvpn settings | awk '/Firewall/ {print $2}')
 	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "Firewall is $currentFW. Please choose:")
 	case "$choice" in
-		"Enable") nordvpn set firewall on && notify-send "Firewall Enabled" "The firewall is now enabled" ;;
-		"Disable") nordvpn set firewall off && notify-send "Firewall Disabled" "The firewall is now disabled" ;;
+		"Enable") nordvpn set firewall on && notify "Firewall Enabled" "The firewall is now enabled" ;;
+		"Disable") nordvpn set firewall off && notify "Firewall Disabled" "The firewall is now disabled" ;;
 	esac
 }
 
@@ -68,8 +74,8 @@ ctrlKS() {
 	currentKS=$(nordvpn settings | awk '/Kill/ {print $3}')
 	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "Kill Switch is $currentKS. Please choose:")
 	case "$choice" in
-		"Enable") nordvpn set killswitch on && notify-send "Kill Switch Enabled" "The kill switch is now enabled" ;;
-		"Disable") nordvpn set killswitch off && notify-send "Kill Switch Disabled" "The kill switch is now disabled" ;;
+		"Enable") nordvpn set killswitch on && notify "Kill Switch Enabled" "The kill switch is now enabled" ;;
+		"Disable") nordvpn set killswitch off && notify "Kill Switch Disabled" "The kill switch is now disabled" ;;
 	esac
 }
 
@@ -77,8 +83,8 @@ ctrlCS() {
 	currentCS=$(nordvpn settings | awk '/CyberSec/ {print $2}')
 	choice=$(printf "%s\n" 'Enable' 'Disable' | dmenu -i -p "CyberSec is $currentCS. Please choose:")
 	case "$choice" in
-		"Enable") nordvpn set cybersec on && notify-send "CyberSec Enabled" "CyberSec is now enabled" ;;
-		"Disable") nordvpn set cybersec off && notify-send "CyberSec Disabled" "CyberSec is now disabled" ;;
+		"Enable") nordvpn set cybersec on && notify "CyberSec Enabled" "CyberSec is now enabled" ;;
+		"Disable") nordvpn set cybersec off && notify "CyberSec Disabled" "CyberSec is now disabled" ;;
 	esac
 }
 
@@ -88,9 +94,9 @@ ctrlDNS() {
 	case "$choice" in
 		"Enable")
 			servers=$(printf "%s" "$@" | dmenu -p 'DNS Servers (space separated):')
-			nordvpn set dns $servers && notify-send "DNS Configured" "DNS servers $servers are set"
+			nordvpn set dns $servers && notify "DNS Configured" "DNS servers $servers are set"
 			;;
-		"Disable") nordvpn set dns off && notify-send "DNS Disabled" "Custom DNS servers are disabled" ;;
+		"Disable") nordvpn set dns off && notify "DNS Disabled" "Custom DNS servers are disabled" ;;
 	esac
 }
 

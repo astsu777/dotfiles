@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Tue 28 Dec 2021 18:39:09
-# Last modified: Sat 31 Dec 2022 09:31:03
+# Last modified: Tue 03 Jan 2023 16:53:56
 # Version: 1.0
 #
 # Description: Web bookmarks handler
@@ -19,8 +19,13 @@ bookmarksFile="bookmarks"
 # Functions
 #=======================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 checkReq(){
-	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed, switching to FZF in CLI"; fi
+	if ! type dmenu >/dev/null 2>&1; then notify "Warning" "The package 'dmenu' is not installed, switching to FZF in CLI"; fi
 	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
 	[ -d "$bookmarksPath" ] || mkdir -p "$bookmarksPath"
 	[ -f "$bookmarksPath/$bookmarksFile" ] || touch "$bookmarksFile"
@@ -70,7 +75,7 @@ getUrl(){
 
 copyUrl(){
 	getUrl
-	printf '%s' "$url" | xclip -selection clipboard && notify-send "Bookmark's URL copied to clipboard"
+	printf '%s' "$url" | xclip -selection clipboard && notify "Bookmark's URL copied to clipboard"
 }
 
 openUrl(){
@@ -79,7 +84,7 @@ openUrl(){
 	if [ "$(uname)" = "Darwin" ]; then
 		if [ -n "$tor" ]; then open -a "/Applications/Tor Browser.app/Contents/MacOS/firefox" -u "$url"; else open -u "$url"; fi
 	else
-		if [ -n "$tor" ]; then setsid -f tor-browser "$url"; elif pgrep surf > /dev/null 2>&1; then setsid -f surf "$url"; elif pgrep qutebrowser > /dev/null 2>&1; then setsid -f qutebrowser "$url"; elif [ -n "$BROWSER" ]; then setsid -f "$BROWSER" "$url"; else setsid -f xdg-open "$url"; fi
+		if [ -n "$tor" ]; then tor-browser "$url"; elif pgrep surf > /dev/null 2>&1; then surf "$url"; elif pgrep qutebrowser > /dev/null 2>&1; then qutebrowser "$url"; elif [ -n "$BROWSER" ]; then "$BROWSER" "$url"; else xdg-open "$url"; fi
 	fi
 }
 

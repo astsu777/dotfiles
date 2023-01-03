@@ -2,17 +2,27 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:15:03
-# Last modified: Sun 22 Aug 2021 12:15:07
+# Last modified: Tue 03 Jan 2023 16:59:46
 # Version: 1.0
 #
 # Description: list opened windows using EWMH properties
 #=========================================================================
 
 #=======================
+# Functions
+#=======================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
+#=======================
 # Dependencies
 #=======================
+
 if ! type wmctrl > /dev/null 2>&1; then
-	notify-send "Error" "The package 'wmctrl' is not installed"
+	notify "Error" "The package 'wmctrl' is not installed"
 	echo "Error: the package 'wmctrl' is not installed"
 	exit 1
 fi
@@ -22,7 +32,7 @@ fi
 #=======================
 windows=$(wmctrl -xl | tr -s '[:blank:]' | cut -d ' ' -f 3-3,5- | sed 's/^[a-zA-Z0-9-]*\.//' | sort)
 if [ -z "$windows" ]; then
-	notify-send "No opened windows"
+	notify "No opened windows"
 	echo "No opened windows"
 	exit 0
 fi
@@ -30,6 +40,7 @@ fi
 #=======================
 # Add spaces to align the WM_NAMEs of the windows
 #=======================
+
 max=$(echo "$windows" | awk '{cur=length($1); max=(cur>max?cur:max)} END{print max}')
 windows=$(echo "$windows" | \
     awk -v max="$max" \

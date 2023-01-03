@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:10:21
-# Last modified: Fri 09 Dec 2022 12:36:23
+# Last modified: Tue 03 Jan 2023 16:54:42
 # Version: 1.0
 #
 # Description: listen to online radio
@@ -12,8 +12,13 @@
 # Functions
 #=======================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 checkReq(){
-	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type dmenu >/dev/null 2>&1; then notify "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
 	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
 	if type mpv >/dev/null 2>&1; then mpv=1; fi
 }
@@ -40,7 +45,7 @@ listenRadio(){
 			if pgrep -f mpvradio > /dev/null 2>&1; then pkill -f mpvradio; elif [ "$station" == "Stop Playing" ]; then pkill -f mpvradio; fi
 			mpv --cache=yes --really-quiet --title=mpvradio "$station" 2> /dev/null & disown
 		else
-			setsid -f xdg-open "$station"
+			xdg-open "$station"
 		fi
 	fi
 }

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Thu 05 May 2022 22:06:11
+# Last modified: Tue 03 Jan 2023 16:57:02
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -14,8 +14,8 @@
 notify() {
 	notifySound="$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1 )"
 	notify-send "🖌️ Theme Installed" "Please reload your WM to apply new theme (or reboot)"
-	setsid -f paplay "$notifySound"
-	echo "Theme Installed. Please reload your WM to apply new theme (or reboot)"
+	paplay "$notifySound"
+	printf '%s\n' "Theme Installed. Please reload your WM to apply new theme (or reboot)"
 }
 
 #=======================

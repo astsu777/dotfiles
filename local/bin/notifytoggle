@@ -2,17 +2,22 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:08:24
-# Last modified: Thu 29 Sep 2022 22:31:14
+# Last modified: Tue 03 Jan 2023 17:00:55
 # Version: 1.0
 #
 # Description: toggle 'do not disturb' mode on and off
 #=========================================================================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 if type dunst >/dev/null 2>&1; then
 	status=$(dunstctl is-paused)
 	if [ "$status" = true ]; then
-		dunstctl set-paused toggle && notify-send "🗨️ Do Not Disturb OFF" "Notifications are now shown again"
+		dunstctl set-paused toggle && notify "🗨️ Do Not Disturb OFF" "Notifications are now shown again"
 	else
-		notify-send "🗨️ Do Not Disturb ON" "Notifications will be hidden & queued" && sleep 5 && dunstctl set-paused toggle
+		notify "🗨️ Do Not Disturb ON" "Notifications will be hidden & queued" && sleep 5 && dunstctl set-paused toggle
 	fi
 fi

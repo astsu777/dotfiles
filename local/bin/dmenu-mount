@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:09:56
-# Last modified: Sun 22 Aug 2021 12:11:18
+# Last modified: Tue 03 Jan 2023 16:54:06
 # Version: 1.0
 #
 # Description:
@@ -11,6 +11,11 @@
 # be prompted to give a mountpoint from already existsing directories. If you
 # input a novel directory, it will prompt you to create that directory.
 #=========================================================================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
 
 getmount() { \
 	[ -z "$chosen" ] && exit 1
@@ -25,7 +30,7 @@ getmount() { \
 mountusb() { \
 	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?")" || exit 1
 	chosen="$(echo "$chosen" | awk '{print $1}')"
-	sudo -A mount "$chosen" 2>/dev/null && notify-send "💻 USB mounting" "$chosen mounted" && exit 0
+	sudo -A mount "$chosen" 2>/dev/null && notify "💻 USB mounting" "$chosen mounted" && exit 0
 	alreadymounted=$(lsblk -nrpo "name,type,mountpoint" | awk '$3!~/\/boot|\/home$|SWAP/&&length($3)>1{printf "-not ( -path *%s -prune ) ",$3}')
 	getmount "/mnt /media /mount /home -maxdepth 5 -type d $alreadymounted"
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
@@ -34,7 +39,7 @@ mountusb() { \
 		"exfat") sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)";;
 		*) sudo -A mount "$chosen" "$mp"; user="$(whoami)"; ug="$(groups | awk '{print $1}')"; sudo -A chown "$user":"$ug" "$mp";;
 	esac
-	notify-send "💻 USB mounting" "$chosen mounted to $mp"
+	notify "💻 USB mounting" "$chosen mounted to $mp"
 	}
 
 mountandroid() { \
@@ -44,7 +49,7 @@ mountandroid() { \
         simple-mtpfs --device "$chosen" "$mp"
 	echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter" || exit 1
 	simple-mtpfs --device "$chosen" "$mp"
-	notify-send "🤖 Android Mounting" "Android device mounted to $mp"
+	notify "🤖 Android Mounting" "Android device mounted to $mp"
 	}
 
 asktype() { \
@@ -59,15 +64,15 @@ anddrives=$(simple-mtpfs -l 2>/dev/null)
 usbdrives="$(lsblk -rpo "name,type,size,mountpoint" | grep 'part\|rom' | awk '$4==""{printf "%s (%s)\n",$1,$3}')"
 
 if [ -z "$usbdrives" ]; then
-	[ -z "$anddrives" ] && notify-send "No USB drive or Android device detected" && exit
-	notify-send "Android device(s) detected"
+	[ -z "$anddrives" ] && notify "No USB drive or Android device detected" && exit
+	notify "Android device(s) detected"
 	mountandroid
 else
 	if [ -z "$anddrives" ]; then
-		notify-send "USB drive(s) detected"
+		notify "USB drive(s) detected"
 		mountusb
 	else
-		notify-send "Mountable USB drive(s) and Android device(s) detected"
+		notify "Mountable USB drive(s) and Android device(s) detected"
 		asktype
 	fi
 fi

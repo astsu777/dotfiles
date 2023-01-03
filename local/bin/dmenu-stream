@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Fri 09 Dec 2022 19:16:09
+# Last modified: Tue 03 Jan 2023 16:52:16
 # Version: 1.0
 #
 # Description: check online streams and watch them
@@ -12,20 +12,25 @@
 # Functions
 #=======================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 checkReq(){
-	if ! type yt-dlp mpv > /dev/null 2>&1; then notify-send "⚠️ Error" "Please install 'mpv' and 'yt-dlp' to use this script" && exit 1; fi
-	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
-	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
+	if ! type yt-dlp mpv > /dev/null 2>&1; then notify "⚠️ Error" "Please install 'mpv' and 'yt-dlp' to use this script" && exit 1; fi
+	if ! type dmenu >/dev/null 2>&1; then notify "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type fzf >/dev/null 2>&1; then notify "The package 'fzf' is currently not installed!" && exit 1; fi
 	if type mpv >/dev/null 2>&1; then mpv=1; fi
 }
 
 setStreamList(){
 	Streams="$HOME/.local/share/streams"
-	if [ ! -f "$Streams" ]; then notify-send "⚠️ Error" "Stream list does not exist!" && exit 2; fi
+	if [ ! -f "$Streams" ]; then notify "⚠️ Error" "Stream list does not exist!" && exit 2; fi
 }
 
 checkInstance(){
-	if lsof "$Streams" > /dev/null 2>&1; then notify-send "Script already running" "Checking for online streams. Please wait..." && exit 4; fi
+	if lsof "$Streams" > /dev/null 2>&1; then notify "Script already running" "Checking for online streams. Please wait..." && exit 4; fi
 }
 
 checkOnlineStreams() {
@@ -40,13 +45,13 @@ checkOnlineStreams() {
 			'Refresh Online Streams')
 				rm "$Cache"
 				OnlineStreams=$(mktemp)
-				notify-send "🎬 Checking online streams" "Please wait, it may take a while..."
+				notify "🎬 Checking online streams" "Please wait, it may take a while..."
 				while IFS="" read -r i; do
 					yt-dlp -F "$i" > /dev/null 2>&1 && echo "$i" >> "$OnlineStreams"
 					sleep 5
 				done < "$Streams"
 				mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
-				notify-send "🎬 Refreshed online streams" "The online streams cache has been generated" && setsid -f paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
+				notify "🎬 Refreshed online streams" "The online streams cache has been generated" && paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
 				;;
 			'Use Cache')
 				;;
@@ -71,7 +76,7 @@ watchStream() {
 			dmenu-video "$Stream"
 		else
 			if [ -n "$mpv" ]; then
-				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null &
 			else
 				open "$Stream"
 			fi
@@ -81,9 +86,9 @@ watchStream() {
 			dmenu-video "$Stream"
 		else
 			if [ -n "$mpv" ]; then
-				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null & disown
+				mpv --ontop --no-border --force-window --autofit=352x240 --geometry=-15-15 --really-quiet --ytdl-format='bv*[height=1080]+ba/b' --title="mpvfloating" "$Stream" 2>/dev/null &
 			else
-				setsid -f xdg-open "$Stream"
+				xdg-open "$Stream"
 			fi
 		fi
 	fi

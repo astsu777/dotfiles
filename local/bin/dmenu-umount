@@ -2,24 +2,29 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:10
-# Last modified: Sun 22 Aug 2021 12:14:15
+# Last modified: Tue 03 Jan 2023 16:57:59
 # Version: 1.0
 #
 # Description: DMenu prompt to unmount drives.
 #=========================================================================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
 
 unmountusb() {
 	[ -z "$drives" ] && exit
 	chosen="$(echo "$drives" | dmenu -i -p "Unmount which drive?")" || exit 1
 	chosen="$(echo "$chosen" | awk '{print $1}')"
 	[ -z "$chosen" ] && exit
-	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted"
+	sudo -A umount "$chosen" && notify "💻 USB unmounting" "$chosen unmounted"
 	}
 
 unmountandroid() { \
 	chosen="$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | dmenu -i -p "Unmount which device?")" || exit 1
 	[ -z "$chosen" ] && exit
-	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted"
+	sudo -A umount -l "$chosen" && notify "🤖 Android unmounting" "$chosen unmounted"
 	}
 
 asktype() { \
@@ -33,16 +38,16 @@ asktype() { \
 drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '!/\/efi/' | awk '$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
 
 if ! grep simple-mtpfs /etc/mtab; then
-	[ -z "$drives" ] && notify-send "No drives to unmount" &&  exit
-	notify-send "Unmountable USB drive detected"
+	[ -z "$drives" ] && notify "No drives to unmount" &&  exit
+	notify "Unmountable USB drive detected"
 	unmountusb
 else
 	if [ -z "$drives" ]
 	then
-		notify-send "Unmountable Android device detected"
+		notify "Unmountable Android device detected"
 	       	unmountandroid
 	else
-		notify-send "Unmountable USB drive(s) and Android device(s) detected"
+		notify "Unmountable USB drive(s) and Android device(s) detected"
 		asktype
 	fi
 fi

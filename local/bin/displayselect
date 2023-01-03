@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:09:07
-# Last modified: Sun 22 Aug 2021 12:09:12
+# Last modified: Tue 03 Jan 2023 16:53:28
 # Version: 1.0
 #
 # Description:
@@ -10,6 +10,11 @@
 # displays and lets user select one to use. User may also select "manual
 # selection" which opens arandr.
 #=========================================================================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
 
 twoscreen() { # If multi-monitor is selected and there are two screens.
 
@@ -63,7 +68,7 @@ onescreen() { # If only one output available or chosen.
 	}
 
 postrun() { # Stuff to run to clean up.
-	{ killall dunst ; setsid -f dunst ;} >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
+	{ killall dunst ; dunst ;} >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
 	}
 
 # Get all possible displays
@@ -74,7 +79,7 @@ screens=$(echo "$allposs" | awk '/ connected/ {print $1}')
 
 # If there's only one screen
 [ "$(echo "$screens" | wc -l)" -lt 2 ] &&
-	{ onescreen "$screens"; postrun; notify-send "📺 Only one screen detected";  exit ;}
+	{ onescreen "$screens"; postrun; notify "📺 Only one screen detected";  exit ;}
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | sort | dmenu -i -p "Select display arangement") &&

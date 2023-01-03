@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:08:11
-# Last modified: Sun 22 Aug 2021 12:08:20
+# Last modified: Tue 03 Jan 2023 16:52:48
 # Version: 1.0
 #
 # Description:
@@ -59,7 +59,7 @@ case "$ext" in
 	rs) cargo build ;;
 	sass) sassc -a "$file" "$base.css" ;;
 	scad) openscad -o "$base".stl "$file" ;;
-	sent) setsid -f sent "$file" 2>/dev/null ;;
+	sent) sent "$file" 2>/dev/null ;;
 	tex) textype "$file" ;;
 	*) head -n1 "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac

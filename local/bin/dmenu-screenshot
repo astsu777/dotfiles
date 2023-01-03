@@ -2,11 +2,16 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:21
-# Last modified: Sun 22 Aug 2021 12:12:29
+# Last modified: Tue 03 Jan 2023 16:55:26
 # Version: 1.0
 #
 # Description: take screenshot and shows a menu with different methods
 #=========================================================================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
 
 screenshot="$(mktemp --suffix ".jpg")"
 case "$(printf "Selected Area\\nCurrent Window\\nFull Screen" | sort | dmenu -l 3 -i -p "Take a screenshot of:")" in
@@ -16,7 +21,7 @@ case "$(printf "Selected Area\\nCurrent Window\\nFull Screen" | sort | dmenu -l 
 	*) exit 0 ;;
 esac
 case "$(printf "Copy To Clipboard\\nSave To File" | sort | dmenu -l 2 -i -p "Screenshot taken. Choose to:")" in
-	"Copy To Clipboard") xclip -selection clipboard -t image/jpg "$screenshot" && rm -f "$screenshot" && notify-send "📷 Screenshot Copied" "Screenshot copied to clipboard" ;;
-	"Save To File") mv "$screenshot" "$HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" && notify-send "📷 Screenshot Saved" "Screenshot saved to $HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" ;;
+	"Copy To Clipboard") xclip -selection clipboard -t image/jpg "$screenshot" && rm -f "$screenshot" && notify "📷 Screenshot Copied" "Screenshot copied to clipboard" ;;
+	"Save To File") mv "$screenshot" "$HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" && notify "📷 Screenshot Saved" "Screenshot saved to $HOME/Downloads/screenshot_$(date '+%Y%m%d-%H%M%S').jpg" ;;
 	*) exit 0 ;;
 esac

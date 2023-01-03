@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:14:28
-# Last modified: Thu 29 Dec 2022 18:34:20
+# Last modified: Tue 03 Jan 2023 16:58:46
 # Version: 1.0
 #
 # Description: manage Internet videos. If taskspooler is installed, queue the links
@@ -19,9 +19,14 @@ StreamlinkSupported="twitch"
 # Functions
 #=======================
 
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 checkReq(){
-	if ! type streamlink mpv yt-dlp ffmpeg > /dev/null 2>&1; then notify-send "⚠️ Error" "yt-dlp, streamlink & ffmpeg must be installed" & exit 1; fi
-	if ! type dmenu >/dev/null 2>&1; then notify-send "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
+	if ! type streamlink mpv yt-dlp ffmpeg > /dev/null 2>&1; then notify "⚠️ Error" "yt-dlp, streamlink & ffmpeg must be installed" & exit 1; fi
+	if ! type dmenu >/dev/null 2>&1; then notify "Warning" "The package 'dmenu' is not installed. Switching to FZF in CLI."; fi
 	if ! type fzf >/dev/null 2>&1; then printf "The package 'fzf' is currently not installed!" && exit 1; fi
 }
 
@@ -63,7 +68,7 @@ getLink(){
 	fi
 	# Determine if link is a Magnet link
 	if grep -Eq '^magnet' <<< "$link" ; then
-		if ! type webtorrent > /dev/null 2>&1; then notify-send "⚠️ Error" "webtorrent must be installed to stream Magnet links" & exit 1; fi
+		if ! type webtorrent > /dev/null 2>&1; then notify "⚠️ Error" "webtorrent must be installed to stream Magnet links" & exit 1; fi
 		magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" <<< "$link")
 	fi
 }
@@ -133,12 +138,12 @@ yt-revhd(){
 }
 
 yt-dlvideo(){
-	notify-send " Video queued for download..."
+	notify " Video queued for download..."
 	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --embed-thumbnail --embed-subs -f 'bv+ba/b' "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci -f 'bv+ba/b' --add-metadata --embed-thumbnail --embed-subs "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
 
 yt-dlaudio(){
-	notify-send " Audio queued for download..."
+	notify " Audio queued for download..."
 	if [ -z "$queue" ]; then yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; else "$queue" yt-dlp -ci --add-metadata --extract-audio --audio-format mp3 --audio-quality 0 "$link" -o "$HOME"/Downloads/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s' 2> /dev/null & disown ; fi
 }
 
@@ -176,7 +181,7 @@ if [ -z "$queue" ]; then
 		"Watch Reverse HD") yt-revhd ;;
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
-		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
+		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify "📋 Link copied to clipboard" ;;
 		"Open Link") if type xdg-open >/dev/null 2>&1; then xdg-open "$link"; else open "$link"; fi ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;
@@ -207,7 +212,7 @@ else
 		"Watch Reverse HD") yt-revhd ;;
 		Download) yt-dlvideo ;;
 		"Download Audio") yt-dlaudio ;;
-		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify-send "📋 Link copied to clipboard" ;;
+		"Copy Link") printf "%s" "$link" | tr -d '\n' | xclip -selection clipboard ; notify "📋 Link copied to clipboard" ;;
 		"Open Link") if type xdg-open >/dev/null 2>&1; then xdg-open "$link"; else open "$link"; fi ;;
 		"Stop Playing") pkill mpv ;;
 		"Watch Torrent") yt-magnet ;;

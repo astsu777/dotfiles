@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Tue 28 Dec 2021 22:45:22
+# Last modified: Tue 03 Jan 2023 16:56:23
 # Version: 1.0
 #
 # Description: perform various system operations
@@ -54,6 +54,12 @@ fi
 #=======================
 # Miscellaneous
 #=======================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
 	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nClear Clipboard Manager\nListen To Radio\nMount USB Drive\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nToggle Do Not Disturb\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
 	case $OPTS in
@@ -61,7 +67,7 @@ if [ "$TOPMENU" = 'Miscellaneous' ]; then
 		"Change Theme") tui dmenu-theme ;;
 		"Check Online Streams") dmenu-stream ;;
 		"Check System Queue") tui "$SHELL" -c "tspool ; $SHELL" ;;
-		"Clear Clipboard Manager") rm -rf "${XDG_CACHE_HOME:-$HOME/.cache}"/clipmenu*/* && notify-send "📋 Clipboard Manager Cleared" "The clipboard manager has been cleared" ;;
+		"Clear Clipboard Manager") rm -rf "${XDG_CACHE_HOME:-$HOME/.cache}"/clipmenu*/* && notify "📋 Clipboard Manager Cleared" "The clipboard manager has been cleared" ;;
 		"Listen To Radio") dmenu-radio ;;
 		"Mount USB Drive") dmenu-mount ;;
 		"Password List") dmenu-pass ;;

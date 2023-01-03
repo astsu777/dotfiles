@@ -2,10 +2,15 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Thu 07 Oct 2021 11:29:52
-# Last modified: Thu 29 Sep 2022 22:31:39
+# Last modified: Tue 03 Jan 2023 17:02:44
 # Version: 1.0
 #
 # Description: Toggle the ability to switch to other VTs using CTRL-ALT-Fx
 #=========================================================================
 
-setxkbmap -print | grep -q 'no_srvr_keys' && { setxkbmap -option '' && notify-send "VTs Switching Enabled" "Switching to VTs using CTRL-ALT-Fx is now enabled" ;} || { setxkbmap -option srvrkeys:none && notify-send "VTs Switching Disabled" "Switching to VTs using CTRL-ALT-Fx is now disabled" ;}
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
+setxkbmap -print | grep -q 'no_srvr_keys' && { setxkbmap -option '' && notify "VTs Switching Enabled" "Switching to VTs using CTRL-ALT-Fx is now enabled" ;} || { setxkbmap -option srvrkeys:none && notify "VTs Switching Disabled" "Switching to VTs using CTRL-ALT-Fx is now disabled" ;}

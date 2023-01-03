@@ -2,11 +2,16 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 29 Aug 2021 23:17:25
-# Last modified: Sun 29 Aug 2021 23:17:46
+# Last modified: Tue 03 Jan 2023 17:00:40
 # Version: 1.0
 #
 # Description: control the keyboard's backlight
 #=========================================================================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
 
 # backlight_get
 #       Print current keyboard brightness from UPower to stdout.
@@ -69,7 +74,7 @@ backlight_change()
             return 1
         else
             backlight_set "${value}"
-            notify-send -t 800 "Keyboard brightness set to ${value}"
+            notify -t 800 "Keyboard brightness set to ${value}"
         fi
         ;;
 
@@ -79,7 +84,7 @@ backlight_change()
         if test "${current}" -lt "${max}" ; then
             value=$(( ${current} + 1 ))
             backlight_set "${value}"
-            notify-send -t 800 "Keyboard brightness set to ${value}"
+            notify -t 800 "Keyboard brightness set to ${value}"
         fi
         ;;
 
@@ -88,7 +93,7 @@ backlight_change()
         if test "${current}" -gt 0 ; then
             value=$(( ${current}  - 1 ))
             backlight_set "${value}"
-            notify-send -t 800 "Keyboard brightness set to ${value}"
+            notify -t 800 "Keyboard brightness set to ${value}"
         fi
         ;;
 
@@ -103,7 +108,7 @@ backlight_change()
 
 if test $# -eq 0 ; then
     current_brightness=$( backlight_get )
-    notify-send -t 800 "Keyboard brightness is ${current_brightness}"
+    notify -t 800 "Keyboard brightness is ${current_brightness}"
 else
     # Handle multiple backlight changes, e.g.:
     #   backlight.sh up up down down up
