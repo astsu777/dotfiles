@@ -136,6 +136,11 @@ export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
+# MOC
+if type mocp > /dev/null 2>&1; then
+	export MOCDir="$XDG_CONFIG_HOME"/moc
+fi
+
 # MPlayer
 if type mplayer > /dev/null 2>&1; then
 	export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
@@ -364,8 +369,8 @@ fi
 
 # Configure the default music player
 if [ "$(uname)" = "Linux" ]; then
-	if type ncmpcpp > /dev/null 2>&1; then
-		export MUSICPLAYER="ncmpcpp"
+	if type mocp > /dev/null 2>&1; then
+		export MUSICPLAYER="mocp"
 	elif type mpv > /dev/null 2>&1; then
 		export MUSICPLAYER="mpv"
 	elif type vlc > /dev/null 2>&1; then
