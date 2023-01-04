@@ -152,6 +152,9 @@ Additional keybindings are configured per filetype. All of them are described in
 Finally, some keybindings are also provided by the installed plugins. All the useful ones are described in the above table.
 
 # Documentation - Local Folder
+## Music On Console (MOC)
+*Music On Console* is a lightweight music player running in the terminal. This repository hosts its configuration file and a theme file for the the colorscheme.
+
 ## Resources
 The folder *local/share* contains resources that can be useful for either other programs or for the user.
 
@@ -259,9 +262,6 @@ A few comments about each terminal emulators:
 I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for VMs mainly and machines where I don't deploy my applications and dotfiles. My built of *ST* can be found [here](https://github.com/astsu777/st.git).
 
 <u>**Note**</u>: every terminal emulator has its own set of keybindings. None of them are described here as I do not use them very often. Classic shortcuts such as CTRL+SHIFT+c (copy) and CTRL+SHIFT+v (paste) work as intended.
-
-## Music On Console (MOC)
-*Music On Console* is a lightweight music player running in the terminal. This repository hosts its configuration file and a theme file for the the colorscheme.
 
 ## MSMTP
 I use this application to send emails from my workstations if necessary. This can be useful for certain cron jobs and/or certain scripts. The config file *config/msmtp/config* defines the mail relay to be used and the credentials for the default account to use as sender. The configuration file is written so the credentials are meant to be decrypted using GPG.
