@@ -260,11 +260,6 @@ I have *ST* installed automatically when deploying my GUI (WM or DE). Useful for
 
 <u>**Note**</u>: every terminal emulator has its own set of keybindings. None of them are described here as I do not use them very often. Classic shortcuts such as CTRL+SHIFT+c (copy) and CTRL+SHIFT+v (paste) work as intended.
 
-## Music Player Daemon (MPD) & NCMPCPP
-![](https://i.postimg.cc/KzzJXhdF/screenshot-20210914-045.jpg)
-
-*Music Player Daemon* is a daemon running in the background used to play music. In order to interact with it, a client is necessary. This repository hosts configuration files for *ncmpcpp*, but others can be used to play music. I used to use *MOC* in the past, but *MPD* allows for more flexbility and also for a centralized architecture and multiple clients.
-
 ## MSMTP
 I use this application to send emails from my workstations if necessary. This can be useful for certain cron jobs and/or certain scripts. The config file *config/msmtp/config* defines the mail relay to be used and the credentials for the default account to use as sender. The configuration file is written so the credentials are meant to be decrypted using GPG.
 
