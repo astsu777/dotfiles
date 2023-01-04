@@ -126,6 +126,11 @@ _ddiso() {
 	fi
 }
 
+# Print timestamp for a given command (to be piped)
+_timestamp() {
+	while read x; do echo "$(date +%Y-%m-%d\ %H\:%M\:%S): $x"; done
+}
+
 #=================
 # NNN
 #=================
