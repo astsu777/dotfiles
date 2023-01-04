@@ -101,7 +101,7 @@ fi
 
 # Launch compositer for fancy graphical effects
 if type picom >/dev/null 2>&1; then
-	picom --experimental-backends &
+	picom &
 fi
 
 # Status bar

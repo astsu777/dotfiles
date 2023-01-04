@@ -7,7 +7,7 @@ xset -b
 (sleep 1s && feh --bg-scale --no-fehbg --randomize "$HOME"/.local/share/wallpapers/* || feh --bg-scale --no-fehbg "$HOME"/.config/openbox/background.jpg) &
 
 # Compositer
-(sleep 1s && picom --experimental-backends) &
+(sleep 1s && picom) &
 
 # Notification Daemon
 (sleep 1s && dunst) &

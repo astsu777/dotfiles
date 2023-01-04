@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Tue 19 Oct 2021 18:42:01
-# Last modified: Thu 29 Sep 2022 22:29:57
+# Last modified: Wed 04 Jan 2023 12:48:32
 # Version: 1.0
 #
 # Description: SpectrWM autostart script
@@ -69,5 +69,5 @@ fi
 
 # Launch compositer for fancy graphical effects
 if type picom >/dev/null 2>&1; then
-	picom --experimental-backends &
+	picom &
 fi
