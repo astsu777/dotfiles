@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Thu 26 May 2022 09:03:15
+# Last modified: Wed 04 Jan 2023 21:03:31
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -42,7 +42,7 @@ fi
 
 # Launch audio post-effect
 if type easyeffects >/dev/null 2>&1; then
-	easyeffects -w -gapplication-service &
+	easyeffects -w &
 fi
 
 # Configure keyboard repeat rate
@@ -85,14 +85,6 @@ fi
 if type clight >/dev/null 2>&1 && ! lsusb | grep -Eq 'StarTech.*USB.*Hub'; then
 	[ -f ~/.config/clight/clight.conf ] && clight -c ~/.config/clight/clight.conf &
 	[ -f ~/.config/clight/clight.conf ] || clight --no-gamma --no-kbd &
-fi
-
-# MPD
-if type mpd >/dev/null 2>&1; then
-	mpd &
-fi
-if type mpDris2 >/dev/null 2>&1; then
-	mpDris2 &
 fi
 
 # DWM
