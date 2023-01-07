@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:17:02
-# Last modified: Thu 29 Sep 2022 22:31:27
+# Last modified: Sat 07 Jan 2023 08:50:59
 # Version: 1.0
 #
 # Description: check if a list of URLs returns a HTTP/200 OK or not
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if ! type curl > /dev/null 2>&1; then
 	echo "Curl is not installed! Please install the 'curl' package"
 	exit 2
@@ -19,6 +20,7 @@ fi
 #====================
 # Print help if no input
 #====================
+
 if [[ -z "$2" ]]; then
 	echo "
 Missing argument: url list!
@@ -37,12 +39,14 @@ fi
 #====================
 # Variables
 #====================
+
 urlsum=$(awk 'END{print NR}' "$2")
 website=$(<"$2" xargs -n1 echo)
 
 #=======================
 # Check Websites
 #=======================
+
 case "$1" in
 	"--insecure")
 		for i in $website
@@ -71,6 +75,7 @@ esac
 #====================
 # Show results
 #====================
+
 if [ -z "$urlnok" ]; then
 	echo
 	echo "Result: all sites are UP ($urlsum checked)"

@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Tue 03 Jan 2023 16:52:16
+# Last modified: Sat 07 Jan 2023 08:52:06
 # Version: 1.0
 #
 # Description: check online streams and watch them
@@ -13,6 +13,10 @@
 #=======================
 
 notify() {
+    if type paplay >/dev/null 2>&1; then
+            notifySound="$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav 2>/dev/null | shuf -n 1 )"
+            [ -n "$notifySound" ] && paplay "$notifySound"
+    fi
 	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
 	printf '%s\n' "$*"
 }
@@ -51,7 +55,7 @@ checkOnlineStreams() {
 					sleep 5
 				done < "$Streams"
 				mv "$OnlineStreams" "$Cache" > /dev/null 2>&1
-				notify "🎬 Refreshed online streams" "The online streams cache has been generated" && paplay "$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav | shuf -n 1)"
+				notify "🎬 Refreshed online streams" "The online streams cache has been generated"
 				;;
 			'Use Cache')
 				;;

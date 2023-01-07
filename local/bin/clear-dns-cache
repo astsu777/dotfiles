@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:07:59
-# Last modified: Sun 22 Aug 2021 12:08:07
+# Last modified: Sat 07 Jan 2023 08:36:41
 # Version: 1.0
 #
 # Description: flush local DNS cache
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if [ "$(id -u)" = 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
@@ -27,6 +28,7 @@ fi
 #=======================
 # Clear DNS Cache
 #=======================
+
 if [ "$(uname)" = "Darwin" ]; then
 	sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache
 	echo "DNS cache has been flushed"

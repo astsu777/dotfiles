@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Thu 26 Aug 2021 10:51:38
-# Last modified: Tue 03 Jan 2023 16:58:33
+# Last modified: Sat 07 Jan 2023 08:48:18
 # Version: 1.0
 #
 # Description: mount network shares
@@ -11,6 +11,7 @@
 #=======================
 # Variables
 #=======================
+
 uriTypes='smb|ftp|nfs|cifs'
 
 #=======================
@@ -70,6 +71,7 @@ umountNet() {
 #=======================
 # Options
 #=======================
+
 options=$(printf "Scan network for shares\nMount network share\nUnmount network share" | sort | dmenu -i -p "Choose:")
 case "$options" in
 	"Scan network for shares") scanNetworks ;;

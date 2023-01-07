@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:07:41
-# Last modified: Sat 18 Dec 2021 01:06:45
+# Last modified: Sat 07 Jan 2023 08:36:17
 # Version: 1.0
 #
 # Description: retrieve lists of domains and insert then in the /etc/hosts file for blocking purposes
@@ -11,6 +11,7 @@
 #=======================
 # Variables
 #=======================
+
 hostsfile="/etc/hosts"
 blocklists=$(mktemp) && cat <<-'EOF' >"$blocklists"
 https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -31,6 +32,7 @@ UserID=$(id -u)
 #=======================
 # Requirements
 #=======================
+
 if ! type sed grep sort uniq curl > /dev/null 2>&1; then
 	echo .
 	echo "Please make sure the packages 'curl sed grep sort uniq' are installed on your system!"
@@ -48,6 +50,7 @@ fi
 #=======================
 # Functions
 #=======================
+
 installblocklist() {
 	cleanblocklist=$(<"$blocklists" xargs -n1 curl -s | grep '^0' | sort | uniq)
 	if [ "$UserID" = 0 ]; then
@@ -71,6 +74,7 @@ installblocklist() {
 #=======================
 # Blocklists
 #=======================
+
 case "$1" in
 	"--install")
 		if grep "^$leadmark" "$hostsfile" > /dev/null 2>&1; then

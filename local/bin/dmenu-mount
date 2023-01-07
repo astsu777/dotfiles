@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:09:56
-# Last modified: Tue 03 Jan 2023 16:54:06
+# Last modified: Sat 07 Jan 2023 08:45:13
 # Version: 1.0
 #
 # Description:
@@ -11,6 +11,10 @@
 # be prompted to give a mountpoint from already existsing directories. If you
 # input a novel directory, it will prompt you to create that directory.
 #=========================================================================
+
+#=======================
+# FUNCTIONS
+#=======================
 
 notify() {
 	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
@@ -60,8 +64,16 @@ asktype() { \
 	esac
 	}
 
+#=======================
+# VARIABLES
+#=======================
+
 anddrives=$(simple-mtpfs -l 2>/dev/null)
 usbdrives="$(lsblk -rpo "name,type,size,mountpoint" | grep 'part\|rom' | awk '$4==""{printf "%s (%s)\n",$1,$3}')"
+
+#=======================
+# MOUNT
+#=======================
 
 if [ -z "$usbdrives" ]; then
 	[ -z "$anddrives" ] && notify "No USB drive or Android device detected" && exit

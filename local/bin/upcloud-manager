@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:16:41
-# Last modified: Thu 29 Sep 2022 22:31:31
+# Last modified: Sat 07 Jan 2023 08:50:29
 # Version: 1.0
 #
 # Description: manage servers hosted at UpCloud
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if ! type curl > /dev/null 2>&1; then
 	echo .
 	echo "Curl is not installed. Please install 'curl'!"
@@ -20,6 +21,7 @@ fi
 #=======================
 # Functions
 #=======================
+
 startServer() {
 	echo
 	read -sp "Enter your Base64 encoded API key: " APIKEY
@@ -63,6 +65,7 @@ checkServerStatus(){
 #=======================
 # API Calls
 #=======================
+
 case "$1" in
 	"--start") startServer ;;
 	"--stop") stopServer ;;

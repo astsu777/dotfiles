@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:11:23
-# Last modified: Sun 22 Aug 2021 12:12:04
+# Last modified: Sat 07 Jan 2023 08:45:56
 # Version: 1.0
 #
 # Description: record the screen
@@ -14,6 +14,10 @@
 # `$0 kill`: Kill existing recording
 # If there is already a running instance, user will be prompted to end it.
 #=========================================================================
+
+#=======================
+# FUNCTIONS
+#=======================
 
 updateicon() { \
 	echo "$1" > /tmp/recordingicon
@@ -118,6 +122,10 @@ videoselected()
 	echo $! > /tmp/recordingpid
 	updateicon "⏺️"
 }
+
+#=======================
+# START
+#=======================
 
 case "$1" in
 	screencast) screencast;;

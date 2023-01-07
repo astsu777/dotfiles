@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:16:10
-# Last modified: Thu 29 Sep 2022 22:31:52
+# Last modified: Sat 07 Jan 2023 08:50:10
 # Version: 1.0
 #
 # Description: start/stop local TFTP server
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if [ "$(id -u)" != 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
@@ -20,6 +21,7 @@ fi
 #=======================
 # Functions
 #=======================
+
 startTFTP() {
 	if [ "$(uname)" = "Darwin" ]; then
 		sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
@@ -37,6 +39,7 @@ stopTFTP() {
 #=======================
 # TFTP
 #=======================
+
 case "$1" in
 	"--start") startTFTP ;;
 	"--stop") stopTFTP ;;

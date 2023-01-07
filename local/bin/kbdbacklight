@@ -2,11 +2,15 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 29 Aug 2021 23:17:25
-# Last modified: Tue 03 Jan 2023 17:00:40
+# Last modified: Sat 07 Jan 2023 08:49:28
 # Version: 1.0
 #
 # Description: control the keyboard's backlight
 #=========================================================================
+
+#=======================
+# FUNCTIONS
+#=======================
 
 notify() {
 	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
@@ -105,6 +109,10 @@ backlight_change()
         ;;
     esac
 }
+
+#=======================
+# BACKLIGHT
+#=======================
 
 if test $# -eq 0 ; then
     current_brightness=$( backlight_get )

@@ -2,20 +2,31 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:55
-# Last modified: Wed 04 Jan 2023 12:47:35
+# Last modified: Sat 07 Jan 2023 08:47:24
 # Version: 1.0
 #
 # Description: perform various system operations
 #=========================================================================
 
 #=======================
+# FUNCTIONS
+#=======================
+
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
+#=======================
 # Top menu
 #=======================
+
 TOPMENU=$(printf "Display Management\nLogout/Shutdown\nNetwork Management\nMiscellaneous\nWeb Bookmarks Management\nCancel" | dmenu -i -p "Choose:")
 
 #=======================
 # Logout/shutdown
 #=======================
+
 if [ "$TOPMENU" = 'Logout/Shutdown' ]; then
 	dmenu-shutdown
 fi
@@ -23,6 +34,7 @@ fi
 #=======================
 # Display management
 #=======================
+
 if [ "$TOPMENU" = 'Display Management' ]; then
 	OPTS=$(printf "Manage Screens\nToggle Virtual Terminals" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
@@ -35,6 +47,7 @@ fi
 #=======================
 # Network management
 #=======================
+
 if [ "$TOPMENU" = 'Network Management' ]; then
 	OPTS=$(printf "Block Ads\nClear DNS Cache\nCloud Manager\nDHCP Server\nManage Network\nNordVPN Connection\n(Un)mount URI\nTFTP Server\nWebsites Monitor" | sort | dmenu -i -p "Network Management:")
 	case $OPTS in
@@ -54,11 +67,6 @@ fi
 #=======================
 # Miscellaneous
 #=======================
-
-notify() {
-	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
-	printf '%s\n' "$*"
-}
 
 if [ "$TOPMENU" = 'Miscellaneous' ]; then
 	OPTS=$(printf "Bookmarks List\nChange Theme\nCheck Online Streams\nCheck System Queue\nClear Clipboard Manager\nListen To Radio\nMount USB Drive\nPassword List\nPlay Audio/Video\nRecord Screen/Webcam\nRun\nTake Screenshot\nToggle Compositor\nToggle Cron Jobs\nToggle Do Not Disturb\nUnmount USB Drive\nWeb Search\nWindows Manager" | sort | dmenu -i -p "Miscellaneous:")
@@ -88,6 +96,7 @@ fi
 #=======================
 # Web bookmarks management
 #=======================
+
 if [ "$TOPMENU" = 'Web Bookmarks Management' ]; then
 	OPTS=$(printf '%s\n' "Add bookmark" "Delete bookmark" "Copy bookmark to clipboard" "Open bookmark" | sort | dmenu -i -p "Bookmarks Management:")
 	case "$OPTS" in

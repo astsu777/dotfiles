@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 17:03:50
-# Last modified: Thu 29 Sep 2022 22:21:37
+# Last modified: Sat 07 Jan 2023 08:51:08
 # Version: 1.0
 #
 # Description: easy script to archive YouTube channels/playlists/videos
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if ! type yt-dlp ffmpeg >/dev/null 2>&1; then
 	printf "The packages 'yt-dlp', 'ffmpeg' are not installed!"
 	exit 1
@@ -19,6 +20,7 @@ fi
 #=======================
 # Functions
 #=======================
+
 archiveVideo() {
 	yt-dlp -q -ci --download-archive "$3"/archive_video.txt --add-metadata --embed-thumbnail --embed-subs --merge-output-format mp4 -f 'bv+ba/b' "$2" -o "$3"/'%(uploader)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s'
 }
@@ -29,6 +31,7 @@ archiveAudio() {
 #=======================
 # Archive
 #=======================
+
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 	echo "Some arguments are missing!
 Usage: yt-archive [--video|--audio] <URL> <DIRECTORY>

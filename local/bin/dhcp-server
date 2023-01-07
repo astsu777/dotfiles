@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:08:54
-# Last modified: Sun 22 Aug 2021 12:09:03
+# Last modified: Sat 07 Jan 2023 08:43:42
 # Version: 1.0
 #
 # Description: start/stop local DHCP server
@@ -11,6 +11,7 @@
 #=======================
 # Requirements
 #=======================
+
 if [ "$(id -u)" != 0 ] && ! type sudo > /dev/null 2>&1; then
 	echo .
 	echo "Root privileges are required to run this script. Make sure to execute the script as root or have sudo installed!"
@@ -20,6 +21,7 @@ fi
 #=======================
 # Functions
 #=======================
+
 startDHCP() {
 	if [ "$(uname)" = "Darwin" ]; then
 		sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist
@@ -37,6 +39,7 @@ stopDHCP() {
 #=======================
 # DHCP
 #=======================
+
 case "$1" in
 	"--start") startDHCP ;;
 	"--stop") stopDHCP ;;
