@@ -235,6 +235,8 @@ The *Gemini* project is an alternative protocol to *HTTP* and can be used to ser
 
 If you use a hardware audio processing unit, it is not advised to also use software to do this.
 
+**Note**: the settings are not automatically loaded. This needs to be configured in the application itself.
+
 ## HTOP
 ![](https://i.postimg.cc/jdtxmyf9/screenshot-20210925-050.jpg)
 
