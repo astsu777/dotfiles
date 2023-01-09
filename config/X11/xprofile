@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Wed 04 Jan 2023 21:03:31
+# Last modified: Mon 09 Jan 2023 22:59:21
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -42,7 +42,7 @@ fi
 
 # Launch audio post-effect
 if type easyeffects >/dev/null 2>&1; then
-	easyeffects -w &
+	easyeffects --gapplication-service &
 fi
 
 # Configure keyboard repeat rate
