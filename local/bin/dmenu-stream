@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:12:43
-# Last modified: Sat 07 Jan 2023 08:52:06
+# Last modified: Mon 09 Jan 2023 22:21:55
 # Version: 1.0
 #
 # Description: check online streams and watch them
@@ -13,11 +13,11 @@
 #=======================
 
 notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
     if type paplay >/dev/null 2>&1; then
             notifySound="$(find "${XDG_CONFIG_HOME:-~/.config}"/dunst/*.wav 2>/dev/null | shuf -n 1 )"
             [ -n "$notifySound" ] && paplay "$notifySound"
     fi
-	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
 	printf '%s\n' "$*"
 }
 
