@@ -1,62 +1,16 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # Do not create an empty line at start
 add_newline = false
 
-# Prompt's format
-format = """
-$username\
-$hostname\
-$shlvl\
-$kubernetes\
-$directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-$hg_branch\
-$docker_context\
-$package\
-$cmake\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$golang\
-$helm\
-$java\
-$julia\
-$kotlin\
-$nim\
-$nodejs\
-$ocaml\
-$perl\
-$php\
-$purescript\
-$python\
-$ruby\
-$rust\
-$swift\
-$terraform\
-$zig\
-$nix_shell\
-$conda\
-$aws\
-$gcloud\
-$openstack\
-$env_var\
-$crystal\
-$custom\
-$cmd_duration\
-$line_break\
-$lua\
-$jobs\
-$time\
-$status\
-$character"""
+# AWS region and profile
+[aws]
+format = '[$symbol$profile(\($region\))(\[$duration\])]($style) '
 
-# Prompt on two lines
-[line_break]
-disabled = false
+# Battery
+[battery]
+disabled = true
 
 # Prompt's beginning character customization
 [character]
@@ -78,11 +32,6 @@ read_only = " "
 read_only_style = "blue"
 style = "bold 172"
 
-# AWS region and profile
-[aws]
-format = '[$symbol$profile(\($region\))]($style) '
-symbol = " "
-
 # Current Git branch
 [git_branch]
 symbol = " "
@@ -97,14 +46,20 @@ style = "purple"
 
 # Git repo status (ahead, etc...)
 [git_status]
-disabled=false
+disabled = false
 style = "bold purple"
 
 # Background jobs customization
 [jobs]
 threshold = 1
 
+# Prompt on two lines
+[line_break]
+disabled = false
+
 # Show error code of previous command if failed
 [status]
 disabled = false
-format = "[\\($status\\)]($style) "
+
+# Prompt's format
+format = "$all[\\($status\\)]($style) "
