@@ -34,7 +34,7 @@ style = "bold 172"
 
 # Current Git branch
 [git_branch]
-symbol = " "
+# symbol = " "
 format = "[$symbol$branch]($style) "
 style = "bold purple"
 
