@@ -68,6 +68,17 @@ _pwdgen-alpha(){
 	fi
 }
 
+# Clean Debian based systems
+if type apt >/dev/null 2>&1; then
+	_clean-system(){
+		sudo apt purge $(dpkg -l | awk '/^rc/{print $2}')
+	}
+elif type apt-get >/dev/null 2>&1; then
+	_clean-system(){
+		sudo apt-get remove --purge $(dpkg -l | awk '/^rc/{print $2}')
+	}
+fi
+
 # Save command's output to an image
 if type convert >/dev/null 2>&1; then
 	_cmd2jpg(){
