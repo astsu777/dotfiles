@@ -82,12 +82,16 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	# Debian based systems using APT or APT-GET package manager
 	if type apt snap > /dev/null 2>&1; then
 		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+		alias clean-system="sudo apt purge $(dpkg -l | awk '/^rc/{print $2}')"
 	elif type apt > /dev/null 2>&1; then
 		alias update-system='sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean && sudo apt clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; }'
+		alias clean-system="sudo apt purge $(dpkg -l | awk '/^rc/{print $2}')"
 	elif type apt-get snap > /dev/null 2>&1; then
 		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; } ; sudo snap refresh'
+		alias clean-system="sudo apt-get remove --purge $(dpkg -l | awk '/^rc/{print $2}')"
 	elif type apt-get > /dev/null 2>&1; then
 		alias update-system='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove --purge && sudo apt-get autoclean && sudo apt-get clean && { test -f /var/run/reboot-required && echo -e "$FILE \033[31mA reboot is required to apply all updates"; }'
+		alias clean-system="sudo apt-get remove --purge $(dpkg -l | awk '/^rc/{print $2}')"
 
 	# Red Hat based systems using DNF package manager
 	elif type dnf snap > /dev/null 2>&1; then
