@@ -307,7 +307,7 @@ A compositor is not a necessary program, but recommended to help with tearing on
 
 In this repository, the configuration file disables shadows, fading animations and blur. It also disables all sorts of transparency for all window types. I only like my terminal emulators to be somewhat transparent, but I am managing this via the terminal emulator's settings.
 
-However, the configuration file contains all the necessary settings to easily enable any kind of graphic effects. For example, an opacity rule exists for *XTerm* so this particular program is somewhat transparent, although *XTerm* does not support transparency by itself.
+However, the configuration file contains all the necessary settings to easily enable any kind of graphic effects. For example, an opacity rule exists for *XTerm* so this particular program is somewhat transparent (disabled by default), although *XTerm* does not support transparency by itself.
 
 ## Qutebrowser
 ![](https://i.postimg.cc/DwpPKc41/screenshot-20210718-034.png)
