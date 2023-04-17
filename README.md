@@ -146,6 +146,7 @@ The following keybindings are configured:
 | `y + s + <MOTION> + <NEW_SURROUND>` | NORMAL | surround text with quotes/parenthesies/etc... Use *yss* for the whole line, *ysiw* for a word, etc... (plugin: vim-surround) |
 | `S + <NEW_SURROUNDINGS>` | VISUAL | surround paragraph with specified surroundings above and below the selected text (plugin: vim-surround) |
 | `LEADER + r + r` | NORMAL | bulk rename files in the current directory (plugin: vim-renamer) |
+| `LEADER + q` | NORMAL | toggle the quickfix window |
 
 Additional keybindings are configured per filetype. All of them are described in the *ftplugin* folder. Most keybindings are for code snippets though and/or shortcuts while writing certain file types.
 

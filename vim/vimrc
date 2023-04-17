@@ -63,6 +63,8 @@ call plug#begin('~/.vim/bundle')
 	Plug 'junegunn/fzf.vim'
 	"" Bulk rename files
 	Plug 'qpkorr/vim-renamer'
+	"" Run commands in the background
+	Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 filetype plugin indent on
 
@@ -101,6 +103,16 @@ noremap <silent> L 10k
 " an additional letter to the shortcut can simply be added for other languages
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <leader>of :setlocal spell! spelllang=fr_fr<CR>
+
+" Toggle the quickfix window
+function! ToggleQuickFix()
+	if empty(filter(getwininfo(), 'v:val.quickfix'))
+		copen
+	else
+		cclose
+	endif
+endfunction
+noremap <leader>q :call ToggleQuickFix()<CR>
 
 "=============
 " Configuration
@@ -371,6 +383,12 @@ function ToggleStatusBar()
 endfunction
 nnoremap <leader>h :call ToggleStatusBar()<CR>
 
+"" AsyncRun
+" Open the quickfix window when running command
+let g:asyncrun_open = 8
+" Close the quickfix window if no errors after some time
+let g:asyncrun_exit = 'call timer_start(2000, {-> execute("cclose")})'
+
 "=============
 " Auto-Commands
 "=============
@@ -430,7 +448,7 @@ inoremap ;hh <Esc>:call Header()<Enter>
 "=============
 
 " Compile document
-map <leader>c :w! \| !compiler "<c-r>%"<CR>
+map <leader>c :w! \| AsyncRun compiler "<c-r>%"<CR>
 
 " Open corresponding .pdf/.html or preview
 map <leader>P :!opout <c-r>%<CR><CR>

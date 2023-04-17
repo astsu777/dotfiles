@@ -525,6 +525,8 @@ The \f(CW.vimrc\fP file is compatible with both \fBNeovim\fP and \fBVIM\fP. All 
 \f(CWS + <NEW_SURROUNDINGS>\fP \(en  (VISUAL)  surround paragraph with specified surroundings above and below the selected text (plugin: vim-surround)
 .ITEM
 \f(CWLEADER + r + r\fP \(en  (NORMAL)  bulk rename files in the current directory (plugin: vim-renamer)
+.ITEM
+\f(CWLEADER + q\fP \(en  (NORMAL)  toggle the quickfix window
 .LIST OFF
 
 .bp
