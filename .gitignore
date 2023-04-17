@@ -15,6 +15,7 @@ Thumbs.db
 vim/bundle/**
 vim/autoload/**
 vim/init.vim
+vim/viminfo
 vim/backup/**
 !vim/backup/.gitkeep
 vim/swap/**
