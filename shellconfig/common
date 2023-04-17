@@ -244,10 +244,10 @@ if type ytfzf mpv > /dev/null 2>&1; then
 fi
 
 # If NVIM is installed, set it as default editor. Otherwise, fallback to vim or vi
-if type nvim > /dev/null 2>&1; then
-	export EDITOR="nvim"
-	export VISUAL="nvim"
-elif type vim > /dev/null 2>&1; then
+# if type nvim > /dev/null 2>&1; then
+	# export EDITOR="nvim"
+	# export VISUAL="nvim"
+if type vim > /dev/null 2>&1; then
 	export EDITOR="vim"
 	export VISUAL="vim"
 elif type vi > /dev/null 2>&1; then
