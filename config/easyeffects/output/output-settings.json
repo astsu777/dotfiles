@@ -33,11 +33,11 @@
         "equalizer#0": {
             "balance": 0.0,
             "bypass": false,
-            "input-gain": 3.6,
+            "input-gain": 0.0,
             "left": {
                 "band0": {
                     "frequency": 22.4,
-                    "gain": 14.49,
+                    "gain": 13.07,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 4.36,
@@ -47,7 +47,7 @@
                 },
                 "band1": {
                     "frequency": 27.8,
-                    "gain": 8.97,
+                    "gain": 7.29,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 4.36,
@@ -364,7 +364,7 @@
             "right": {
                 "band0": {
                     "frequency": 22.4,
-                    "gain": 14.49,
+                    "gain": 13.07,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 4.36,
@@ -374,7 +374,7 @@
                 },
                 "band1": {
                     "frequency": 27.8,
-                    "gain": 8.97,
+                    "gain": 7.29,
                     "mode": "RLC (BT)",
                     "mute": false,
                     "q": 4.36,
