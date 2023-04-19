@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:15:32
-# Last modified: Tue 03 Jan 2023 17:01:20
+# Last modified: Wed 19 Apr 2023 18:52:43
 # Version: 1.0
 #
 # Description: a general handler for opening a file's intended output,
@@ -11,7 +11,7 @@
 basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
 
 case "${*}" in
-	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) if [ "$(uname)" = "Darwin" ]; then open "$basename".pdf >/dev/null 2>&1; else xdg-open "$basename".pdf >/dev/null 2>&1; fi ;;
-	*.html) if [ "$(uname)" = "Darwin" ]; then "$BROWSER" "$basename".html >/dev/null 2>&1; else "$BROWSER" "$basename".html >/dev/null 2>&1; fi ;;
-	*.sent) if [ "$(uname)" = "Darwin" ]; then sent "$1" >/dev/null 2>&1; else sent "$1" >/dev/null 2>&1; fi ;;
+	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) if [ "$(uname)" = "Darwin" ]; then open "$basename".pdf >/dev/null 2>&1; else setsid -f xdg-open "$basename".pdf >/dev/null 2>&1; fi ;;
+	*.html) if [ "$(uname)" = "Darwin" ]; then "$BROWSER" "$basename".html >/dev/null 2>&1; else setsid -f "$BROWSER" "$basename".html >/dev/null 2>&1; fi ;;
+	*.sent) if [ "$(uname)" = "Darwin" ]; then sent "$1" >/dev/null 2>&1; else setsid -f sent "$1" >/dev/null 2>&1; fi ;;
 esac
