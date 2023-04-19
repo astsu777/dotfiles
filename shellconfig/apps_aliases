@@ -131,10 +131,10 @@ fi
 
 # If the program "neovim" is installed, replace "vim" with it
 # Also, adds an alias to launch it without any configuration
-# if type nvim > /dev/null 2>&1; then
-	# alias vim="nvim"
-	# alias vvim="nvim -u NONE"
-if type vim > /dev/null 2>&1; then
+if type nvim > /dev/null 2>&1; then
+	alias vim="nvim"
+	alias vvim="nvim -u NONE"
+elif type vim > /dev/null 2>&1; then
 	alias vvim="vim -u NONE"
 fi
 
