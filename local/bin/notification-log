@@ -1,0 +1,60 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Mon 24 Apr 2023 16:41:25
+# Last modified: Mon 24 Apr 2023 21:48:24
+# Version: 1.0
+#
+# Description: monitors desktop notifications and log them to a file
+#=========================================================================
+
+#=======================
+# VARIABLES
+#=======================
+
+# Log file location as an argument
+logfile=$1
+
+# Application title
+
+#=======================
+# FUNCTIONS
+#=======================
+
+notifyLog(){
+	dbus-monitor "interface='org.freedesktop.Notifications'" | awk '
+    	$1 == "signal" {
+    	if (state) emit()
+        	state = 0
+        	_title = ""
+        	_messages = ""
+        	split($2,arr,"=")
+        	_date = strftime("%Y-%m-%dT%H:%M:%S%z",arr[2])
+
+        	next
+    	}
+    	$1 == "method" { state = 1; next; }
+    	$1 == "string" && (state == 1 || state == 2) && match($0,/".+"/) {
+    		s = substr($0,RSTART,RLENGTH)
+    		if (state == 1) {
+        		_title = s
+        		state = 2
+        		next
+    		} else
+    		_messages = (_messages == "" ? "" : _messages ", ") s
+		}
+		$1 == "array" { state = 3 }
+		END { if (state) emit() }
+		function emit() {
+    		print "Message:", _messages
+    		print "Date: " _date
+    		fflush()
+		}
+	'
+}
+
+#=======================
+# MONITOR NOTIFICATIONS
+#=======================
+
+if [ -z "$1" ]; then notifyLog; else notifyLog >> "$logfile"; fi
