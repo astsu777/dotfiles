@@ -197,6 +197,7 @@ The following table provides a description of all the scripts:
 | `handler` | general file/URL mapper |
 | `kbdbacklight` | adjust the keyboard backlight easily |
 | `lsw` | list opened windows |
+| `notification-log` | log all desktop notifications to console or to a file |
 | `notifytoggle` | enable/disable a do-not-disturb mode (notifications are hidden) |
 | `opout` | open a preview of certain file (most useful when called from Neovim/VIM) |
 | `ssh-multi` | connect to one or multiple SSH servers in a *TMUX* window and sync input on all panes |
@@ -206,6 +207,7 @@ The following table provides a description of all the scripts:
 | `tspool` | interact with task-spooler using either the *ts* or *tsp* command (or none if *task-spooler* is not installed) |
 | `tui` | open a terminal emulator and execute a specific command (Ex.: 'tui htop' from DMenu) |
 | `upcloud-manager` | easily interact with *Upcloud* API |
+| `url_handler.sh` | file handler by file extensions of MIME types |
 | `vttoggle` | toggle the ability to switch to other Virtual Terminals using CTRL-ALT-Fx |
 | `websites-monitor` | quickly test many websites and test for error codes |
 | `yt-archive` | easily download YouTube channels/playlists/videos with caching (backend: yt-dlp) |
