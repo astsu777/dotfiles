@@ -1,8 +1,18 @@
 #! /bin/sh
 # BSPWM configuration
+
+# Multi-monitor configuration (automatic by default)
 # Workspaces can be customized for multi-monitor. They are independant per monitor
 # Use command 'xrandr -q | grep '\sconnected' | awk '{print $1}'' to display connected monitors
-bspc monitor -d 1 2 3 4 5 6 7 8 9
+for monitor in $(bspc query -M)
+do
+    # set the workspaces on each monitor to 1-9
+    bspc monitor $monitor -d 1 2 3 4 5 6 7 8 9
+    #polybar hidden when fullscreen for vlc, youtube, mpv ...
+    xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_$monitor)
+done
+
+# Windows customization
 bspc config border_width        2
 bspc config window_gap          10
 bspc config split_ratio         0.50

@@ -62,6 +62,8 @@ Type=Application
 ```
 
 ## Multi-monitor Setup
+**By default**, the configuration in *bspwmrc* will create 9 workspaces per connected monitors.
+
 BSPWM treats workspaces on a per-monitor basis. This means that a workspace can only exist on a single monitor. By default, the *bspwmrc* is configured to setup 9 workspaces on a single monitor with the following line:
 
 ```
