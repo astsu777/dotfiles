@@ -6,10 +6,7 @@
 # Use command 'xrandr -q | grep '\sconnected' | awk '{print $1}'' to display connected monitors
 for monitor in $(bspc query -M)
 do
-    # set the workspaces on each monitor to 1-9
-    bspc monitor $monitor -d 1 2 3 4 5 6 7 8 9
-    #polybar hidden when fullscreen for vlc, youtube, mpv ...
-    xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_$monitor)
+    bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9
 done
 
 # Windows customization
@@ -75,7 +72,7 @@ if type flameshot >/dev/null 2>&1; then
 fi
 
 # Display volume icon in systray
-if type volumeicon >/dev/null 2>&1 && [ ! -n "$(pgrep volumeicon)" ]; then
+if type volumeicon >/dev/null 2>&1 && [ -z "$(pgrep volumeicon)" ]; then
 	volumeicon &
 fi
 
@@ -100,7 +97,7 @@ if type lxsession >/dev/null 2>&1 && [ ! -d /usr/share/xbps.d ]; then
 fi
 
 # Launch Redshift (night light)
-if type redshift >/dev/null 2>&1 && [ ! -n "$(pgrep redshift-gtk)" ]; then
+if type redshift >/dev/null 2>&1 && [ -z "$(pgrep redshift-gtk)" ]; then
 	redshift-gtk &
 fi
 
