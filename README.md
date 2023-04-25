@@ -166,6 +166,7 @@ The following table provides a description of all the scripts:
 
 | Script | Description |
 | :--- | :--- |
+| `android-webcam` | use an Android smartphone connected via USB as a webcam |
 | `block-hosts` | implement various block-lists to the hosts file |
 | `check-rep` | check a FQDN/IP/CVE/Hash against several search engines |
 | `clear-dns-cache` | clear the local DNS cache if any is detected |

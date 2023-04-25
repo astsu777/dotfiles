@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT
+# Creation: Tue 25 Apr 2023 20:15:15
+# Last modified: Tue 25 Apr 2023 21:17:08
+# Version: 1.0
+#
+# Description: setup a dummy video device with a connected Android smartphone
+#=========================================================================
+
+#=======================
+# Variables
+#=======================
+
+# Ports to listen to on host and smartphone
+HOSTPORT=8080
+PHONEPORT=8080
+
+# Dummy video device to use
+CAMERA='/dev/video4'
+
+# URL of the video on smartphone
+VIDEOURL="http://localhost:$HOSTPORT/video"
+
+#=======================
+# Functions
+#=======================
+
+# Display desktop notifications
+notify() {
+	if type notify-send >/dev/null 2>&1; then notify-send "$*"; fi
+	printf '%s\n' "$*"
+}
+
+# Check the prerequisites
+checkReq(){
+	if ! type adb ffmpeg > /dev/null 2>&1; then notify "⚠️ Error" "Please install 'scrcpy' and 'ffmpeg' to use this script" && exit 1; fi
+}
+
+# Start the IPWebcam server
+startCam(){
+	# Forward a port on the computer to the smartphone
+	adb forward "tcp:$HOSTPORT" "tcp:$PHONEPORT"
+    # Check if IPWebcam is running
+    local IPWEBCAMON
+    IPWEBCAMON=$(adb shell "dumpsys activity activities" | grep com.pas.webcam.pro | grep ActivityRecord | grep mLastOrientationSource | grep Rolling)
+    if [ -z "$IPWEBCAMON" ]; then
+    	notify "Warning" "Starting the IPWebcam server on Android smartphone..."
+        # Open the IPWebcam application
+        adb shell monkey -p com.pas.webcam 1 > /dev/null
+        # Start the IPWebcam server
+        adb shell input roll 10 100
+        adb shell input keyevent 66
+    fi
+}
+
+# Stop the IPWebcam server
+stopCam(){
+    # stop ipwebcam application
+    local IPWEBCAMON
+    IPWEBCAMON=$(adb shell ps | grep com.pas.webcam)
+    if [ -n "$IS_IW_RUNNING" ]; then
+        notify "Info" "Stopping the IPWebcam server on Android smartphone..."
+        adb shell am force-stop com.pas.webcam
+    fi
+}
+
+# Create the V4L2loopback device
+v4l2UP(){
+    if ! pgrep -f 'ffmpeg.*v4l2' > /dev/null 2>&1; then
+    	notify 'Info' 'Creating a dummy video device...'
+    	ffmpeg -i "$VIDEOURL" -vf format=yuv420p -f v4l2 "$CAMERA"
+    fi
+}
+
+
+# Delete the V4L2loopback device
+v4l2DOWN(){
+    if pgrep -f 'ffmpeg.*v4l2' > /dev/null 2>&1; then
+    	pkill -f 'ffmpeg.*v4l2'
+    fi
+}
+
+#=======================
+# Code
+#=======================
+
+checkReq && case "$(printf "Start IPWebcam on phone\\nStop IPWebcam on phone\\nStart Android webcam\\nStop Android webcam" | sort | dmenu -l 8 -i -p "Choose an action:")" in
+	"Start IPWebcam on phone") startCam ;;
+	"Stop IPWebcam on phone") stopCam ;;
+	"Start Android webcam") v4l2UP ;;
+	"Stop Android webcam") v4l2DOWN ;;
+	*) exit 0 ;;
+esac
