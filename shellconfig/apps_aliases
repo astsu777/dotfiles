@@ -120,7 +120,9 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 fi
 
 # Use the common alias 'll' to display files with exa
-if type exa > /dev/null 2>&1; then
+if type lsd > /dev/null 2>&1; then
+	alias ll="lsd -lah --icon always --color always --group-directories-first"
+elif type exa > /dev/null 2>&1; then
 	alias ll="exa -lSag --git --icons"
 fi
 
