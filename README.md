@@ -430,7 +430,7 @@ The following table provides all the configured keybindings **except** for the *
 *TMUX* configuration has changed over the years and multiple config files are available. A single one is present for my workstations and two are aimed for remote SSH connections. The file called *tmux24-server.conf* is meant to be used on servers with *TMUX* v2.9 or higher (earlier versions should use the file called *tmuxpre29-server.conf* for compatibility purposes).
 
 My dotfiles will open *TMUX* automatically unless the window manager is *DWM*, *BSPWM* or *i3*: I tend to open multiple terminal emulators when using a tiling window manager. This is configured in the file called *shellconfig/common*. On a remote server, *TMUX* is also automatically loaded upon login.
-The look & feel differs between the workstation and the server configuration. The prefix keybinding too differs: CTRL+A for the workstation, CTRL+B for the server.
+The look & feel differs between the workstation and the server configuration. The prefix keybinding too differs: CTRL+A for the workstation, CTRL+B for the server. Several themes are available as well.
 
 <u>**Note**</u>: even though I also use a tiling window manager in macOS (called *Amethyst*), I still use *TMUX* automatically on my Mac as it is more convenient.
 
