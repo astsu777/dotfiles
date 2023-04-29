@@ -25,6 +25,11 @@ if [ -d "$HOME/bin/gyb" ]; then
 	alias _gyb-upgrade="bash <(curl -s -S -L https://git.io/gyb-install) -l"
 fi
 
+# Emacs
+if [ -d "$HOME/emacs/bin" ]; then
+	export PATH="$HOME/emacs/bin":"$PATH"
+fi
+
 # macOS specific PATH
 if [ "$(uname)" = "Darwin" ] && type brew > /dev/null 2>&1; then
 
@@ -49,7 +54,6 @@ fi
 
 # Remove any duplicates from PATH environment variable
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
-
 
 # Auto-start SSH agent
 if [ "$(uname)" = "Linux" ] && { { [ ! -z "$SESSION" ] || [ ! -z "$GDMSESSION" ] ;} || { [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] ;} ;}; then
