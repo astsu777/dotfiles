@@ -26,8 +26,8 @@ if [ -d "$HOME/bin/gyb" ]; then
 fi
 
 # Emacs
-if [ -d "$HOME/emacs/bin" ]; then
-	export PATH="$HOME/emacs/bin":"$PATH"
+if [ -d "$HOME/.config/emacs/bin" ]; then
+	export PATH="$HOME/.config/emacs/bin":"$PATH"
 fi
 
 # macOS specific PATH
