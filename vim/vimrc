@@ -319,7 +319,7 @@ set smartcase
 set number relativenumber
 
 " Highlight the line where the cursor is (disable it if scrolling feels slow)
-set nocursorline
+set cursorline
 
 " Do not show mode at the bottom
 set noshowmode
