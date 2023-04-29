@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Mon 09 Jan 2023 22:22:44
+# Last modified: Sat 29 Apr 2023 18:36:06
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -81,6 +81,9 @@ toggleCustom() {
 
 	# Rofi
 	rofiTheme="custom_theme"
+
+	# TMUX
+	tmuxTheme="custom_theme"
 }
 
 #=======================
@@ -607,12 +610,12 @@ if type vim > /dev/null 2>&1 && [ -f "$HOME"/.vimrc ]; then
 fi
 
 # Alacritty
-if type alacritty > /dev/null 2>&1 && [ -f "$HOME"/.config/alacritty/alacritty.yml ]; then
-	sed -i --follow-symlinks "/^\ \ -\ ~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/$alacrittyTheme\.yml" "$HOME"/.config/alacritty/alacritty.yml 2>&1
+if type alacritty > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/alacritty/alacritty.yml ]; then
+	sed -i --follow-symlinks "/^\ \ -\ .*_theme\.yml/c \ \ -\ $alacrittyTheme\.yml" "$HOME"/.config/alacritty/alacritty.yml 2>&1
 fi
 
 # Kitty
-if type kitty > /dev/null 2>&1 && [ -f "$HOME"/.config/kitty/kitty.conf ]; then
+if type kitty > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/kitty/kitty.conf ]; then
 	sed -i --follow-symlinks "/^include\s.*_theme\.conf/c include $kittyTheme\.conf" "$HOME"/.config/kitty/kitty.conf 2>&1
 fi
 
@@ -641,7 +644,7 @@ fi
 
 # XTerm
 if type xterm > /dev/null 2>&1; then
-	if [ -f "$HOME"/.config/X11/Xresources ]; then
+	if [ -f "$XDG_CONFIG_HOME"/X11/Xresources ]; then
 		XRESOURCES="$HOME/.config/X11/Xresources"
 	elif [ -f "$HOME"/.Xresources ]; then
 		XRESOURCES="$HOME/.Xresources"
@@ -669,16 +672,16 @@ if type xterm > /dev/null 2>&1; then
 fi
 
 # BSPWM
-if type bspwm > /dev/null 2>&1 && [ -f "$HOME"/.config/bspwm/bspwmrc ]; then
+if type bspwm > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/bspwm/bspwmrc ]; then
     sed -i --follow-symlinks "/^bspc config active_border_color/c bspc config active_border_color \\$BSPWMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
     sed -i --follow-symlinks "/^bspc config normal_border_color/c bspc config normal_border_color \\$BSPWMNormalBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
     sed -i --follow-symlinks "/^bspc config focused_border_color/c bspc config focused_border_color \\$BSPWMActiveBorder" "$HOME"/.config/bspwm/bspwmrc 2>&1
-	if [ -f "$HOME"/.config/bspwm/polybar.config ]; then
+	if [ -f "$XDG_CONFIG_HOME"/bspwm/polybar.config ]; then
     	sed -i --follow-symlinks "/^background = #/c background = $BSPWMBackground" "$HOME"/.config/bspwm/polybar.config 2>&1
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $BSPWMForeground" "$HOME"/.config/bspwm/polybar.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $BSPWMBar" "$HOME"/.config/bspwm/polybar.config 2>&1
 	fi
-	if [ -f "$HOME"/.config/bspwm/polybar-txt.config ]; then
+	if [ -f "$XDG_CONFIG_HOME"/bspwm/polybar-txt.config ]; then
     	sed -i --follow-symlinks "/^background = #/c background = $BSPWMBackground" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $BSPWMForeground" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $BSPWMBar" "$HOME"/.config/bspwm/polybar-txt.config 2>&1
@@ -697,16 +700,16 @@ if type dwm > /dev/null 2>&1 && [ -f /opt/dwm/config.h ]; then
 fi
 
 # i3
-if type i3 > /dev/null 2>&1 && [ -f "$HOME"/.config/i3/config ]; then
+if type i3 > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/i3/config ]; then
     sed -i --follow-symlinks "/^client\.focused\s.*/c client\.focused \ \ \ \ \ \ \ \ \ $I3ActiveBorder $I3ActiveBorder $I3ActiveBorder $I3Indicator \ \ $I3ActiveBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
     sed -i --follow-symlinks "/^client\.focused_inactive\s.*/c client\.focused_inactive $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
     sed -i --follow-symlinks "/^client\.unfocused\s.*/c client\.unfocused \ \ \ \ \ \ \ $I3NormalBorder $I3NormalBorder $I3NormalBorder $I3NormalBorder \ \ $I3NormalBorder" "$HOME"/.dotfiles/config/i3/config 2>&1
-	if [ -f "$HOME"/.config/i3/polybar.config ]; then
+	if [ -f "$XDG_CONFIG_HOME"/i3/polybar.config ]; then
     	sed -i --follow-symlinks "/^background = #/c background = $I3Background" "$HOME"/.config/i3/polybar.config 2>&1
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $I3Foreground" "$HOME"/.config/i3/polybar.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $I3Bar" "$HOME"/.config/i3/polybar.config 2>&1
 	fi
-	if [ -f "$HOME"/.config/i3/polybar-txt.config ]; then
+	if [ -f "$XDG_CONFIG_HOME"/i3/polybar-txt.config ]; then
     	sed -i --follow-symlinks "/^background = #/c background = $I3Background" "$HOME"/.config/i3/polybar-txt.config 2>&1
     	sed -i --follow-symlinks "/^foreground = #/c foreground = $I3Foreground" "$HOME"/.config/i3/polybar-txt.config 2>&1
     	sed -i --follow-symlinks "/^primary = #/c primary = $I3Bar" "$HOME"/.config/i3/polybar-txt.config 2>&1
@@ -714,8 +717,13 @@ if type i3 > /dev/null 2>&1 && [ -f "$HOME"/.config/i3/config ]; then
 fi
 
 # Rofi
-if type rofi > /dev/null 2>&1 && [ -f "$HOME"/.config/rofi/config.rasi ]; then
+if type rofi > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/rofi/config.rasi ]; then
 	sed -i --follow-symlinks "/^@import\s.*\.rasi/c @import \"$rofiTheme\.rasi\"" "$HOME"/.config/rofi/config.rasi 2>&1
+fi
+
+# TMUX
+if type tmux > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/tmux/tmux.conf ]; then
+	sed -i --follow-symlinks "/^source-file\ .*_theme\.conf/c source-file\ \$XDG_CONFIG_HOME\/tmux\/$tmuxTheme.conf" "$XDG_CONFIG_HOME"/tmux/tmux.conf 2>&1
 fi
 
 notify "🖌️ Theme Installed" "Please reload your WM to apply new theme (or reboot)"
