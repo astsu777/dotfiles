@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sat 29 Apr 2023 18:36:06
+# Last modified: Sat 29 Apr 2023 18:39:56
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -208,6 +208,9 @@ toggleGruvbox() {
 
 	# Rofi
 	rofiTheme="gruvbox_theme"
+
+	# TMUX
+	tmuxTheme="gruvbox_theme"
 }
 
 #=======================
