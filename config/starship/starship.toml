@@ -14,9 +14,9 @@ disabled = true
 
 # Prompt's beginning character customization
 [character]
-success_symbol = "[❯](bold 33)"
-error_symbol = "[❯](bold 196)"
-vicmd_symbol = "[❮](bold 39)"
+success_symbol = "[❯](bold #6699ff)"
+error_symbol = "[❯](bold #cc6666)"
+vicmd_symbol = "[❮](bold #789bba)"
 
 # Command duration customization
 [cmd_duration]
