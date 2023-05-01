@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Sat 29 Apr 2023 18:39:56
+# Last modified: Mon 01 May 2023 14:44:33
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -273,6 +273,9 @@ toggleDracula() {
 
 	# Rofi
 	rofiTheme="dracula_theme"
+
+	# TMUX
+	tmuxTheme="dracula_theme"
 }
 
 #=======================
@@ -335,6 +338,9 @@ toggleOnedark() {
 
 	# Rofi
 	rofiTheme="onedark_theme"
+
+	# TMUX
+	tmuxTheme="onedark_theme"
 }
 
 #=======================
@@ -397,6 +403,9 @@ toggleNord() {
 
 	# Rofi
 	rofiTheme="nord_theme"
+
+	# TMUX
+	tmuxTheme="nord_theme"
 }
 
 #=======================
@@ -459,68 +468,9 @@ toggleDoomone() {
 
 	# Rofi
 	rofiTheme="doomone_theme"
-}
 
-#=======================
-# Solarized Light Theme
-#=======================
-
-toggleSolarizedLight() {
-	# ST/Xresources
-	foreground="#586e75"
-	background="#fdf6e3"
-    normalBlack="#073642"
-    normalRed="#dc322f"
-    normalGreen="#859900"
-    normalYellow="#b58900"
-    normalBlue="#268bd2"
-    normalMagenta="#d33682"
-    normalCyan="#2aa198"
-    normalWhite="#eee8d5"
-    brightBlack="#002b36"
-    brightRed="#cb4b16"
-    brightGreen="#586e75"
-    brightYellow="#657b83"
-    brightBlue="#839496"
-    brightMagenta="#6c71c4"
-    brightCyan="#93a1a1"
-    brightWhite="#fdf6e3"
-
-	# Alacritty
-	alacrittyTheme="solarizedlight_theme"
-
-	# Kitty
-	kittyTheme="solarizedlight_theme"
-
-	# VIM
-	vimColorscheme="solarized8"
-	vimLightline="selenized_light"
-
-	# BSPWM
-	BSPWMBackground="#fdf6e3"
-	BSPWMForeground="#586e75"
-	BSPWMBar="#fdf6e3"
-	BSPWMActiveBorder="#586e75"
-	BSPWMNormalBorder="#fdf6e3"
-
-	# DWM
-	DWMBackground="#fdf6e3"
-	DWMForeground="#586e75"
-	DWMBarFG="#fdf6e3"
-	DWMBarBG="#586e75"
-	DWMNormalBorder="#586e75"
-	DWMActiveBorder="#fdf6e3"
-
-	# i3
-	I3Background="#fdf6e3"
-	I3Foreground="#586e75"
-	I3Bar="#fdf6e3"
-	I3ActiveBorder="#586e75"
-	I3NormalBorder="#fdf6e3"
-	I3Indicator="#dc322f"
-
-	# Rofi
-	rofiTheme="solarizedlight_theme"
+	# TMUX
+	tmuxTheme="doomone_theme"
 }
 
 #=======================
@@ -583,6 +533,9 @@ toggleSpaceduck() {
 
 	# Rofi
 	rofiTheme="spaceduck_theme"
+
+	# TMUX
+	tmuxTheme="spaceduck_theme"
 }
 
 #=======================

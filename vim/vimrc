@@ -36,7 +36,6 @@ call plug#begin('~/.vim/bundle')
     Plug 'arcticicestudio/nord-vim'
     Plug 'romgrk/doom-one.vim'
     Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-    Plug 'lifepillar/vim-solarized8'
     Plug 'rafalbromirski/vim-aurora'
 	"" Linters
 	Plug 'chr4/nginx.vim'
@@ -225,20 +224,12 @@ function ToggleColors()
 		let g:lightline = {'colorscheme': 'jellybeans'}
 		call lightline#init()
 		call lightline#colorscheme()
-    elseif (g:colors_name == "solarized8")
+    elseif (g:colors_name == "doom-one")
         colorscheme spaceduck
 		" highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'spaceduck'}
-		call lightline#init()
-		call lightline#colorscheme()
-    elseif (g:colors_name == "doom-one")
-        colorscheme solarized8
-		" highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
-		let g:lightline = {'colorscheme': 'selenized_light'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "nord")
