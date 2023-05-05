@@ -50,6 +50,11 @@ if [ "$(uname)" = "Darwin" ] && type brew > /dev/null 2>&1; then
     if [ -d "$HOME"/Library/Python/3.7/bin ]; then
     	export PATH=$HOME/Library/Python/3.7/bin:$PATH
     fi
+
+    # GNU sed
+    if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
+    	export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+    fi
 fi
 
 # Remove any duplicates from PATH environment variable
