@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Mon 01 May 2023 14:44:33
+# Last modified: Fri 05 May 2023 17:24:27
 # Version: 1.0
 #
 # Description: toggle graphical themes
@@ -567,7 +567,7 @@ fi
 
 # Alacritty
 if type alacritty > /dev/null 2>&1 && [ -f "$XDG_CONFIG_HOME"/alacritty/alacritty.yml ]; then
-	sed -i --follow-symlinks "/^\ \ -\ .*_theme\.yml/c \ \ -\ $alacrittyTheme\.yml" "$HOME"/.config/alacritty/alacritty.yml 2>&1
+	sed -i --follow-symlinks "/^\ \ -\ \~\/\.config\/alacritty\/.*_theme\.yml/c \ \ -\ \~\/\.config\/alacritty\/$alacrittyTheme\.yml" "$HOME"/.config/alacritty/alacritty.yml 2>&1
 fi
 
 # Kitty
