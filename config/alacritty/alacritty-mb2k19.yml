@@ -457,4 +457,4 @@ key_bindings:
 
 # Theme
 import:
-  - custom_theme.yml
+  - ~/.config/alacritty/custom_theme.yml
