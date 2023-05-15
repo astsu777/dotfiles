@@ -260,7 +260,7 @@ Configuration files for three terminal emulators are available: *Alacritty*, *Ki
 
 A few comments about each terminal emulators:
 
-* *Alacritty* is rendering fonts differently depending on the screen resolution and the configuration files differ slightly between macOS/Linux. Therefore, multiple *Alacritty* config files are available for my different computers
+* *Alacritty* is rendering fonts differently depending on the screen resolution and the configuration files differ slightly between macOS/Linux and also depending on the monitor. Therefore, one config file per machine may be created
 * *Kitty* works like *Alacritty* but does a much better job at rendering unicode characters: this is the main reason I keep it around. It has much more features that I don't use. It has almost the same configuration as *Alacritty*, no extra plugins/*kittens*. Depending on the machine, it can also give more performance than *Alacritty* and renders ligatures and unicode characters better. Also, I prefer the way fonts are rendered in *Kitty*
 * *Simple Terminal (ST)* works well enough and is my default if the GPU-accelerated terminal does not perform well enough
 * *xTerm* is never used, but I have it installed on all my workstations for a failsafe environment. If my WM/DE fails, I can work inside a failsafe GUI and *xTerm* is the default terminal emulator there
