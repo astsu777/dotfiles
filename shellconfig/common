@@ -271,10 +271,10 @@ fi
 
 # Configure the default terminal emulator
 if [ "$(uname)" = "Linux" ]; then
-	if type alacritty > /dev/null 2>&1; then
-		export TERMINAL="WINIT_X11_SCALE_FACTOR=1 alacritty"
-	elif type kitty > /dev/null 2>&1; then
+	if type kitty > /dev/null 2>&1; then
 		export TERMINAL="kitty"
+	elif type alacritty > /dev/null 2>&1; then
+		export TERMINAL="WINIT_X11_SCALE_FACTOR=1 alacritty"
 	elif type st > /dev/null 2>&1; then
 		export TERMINAL="st"
 	elif type xterm > /dev/null 2>&1; then
