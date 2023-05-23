@@ -2,7 +2,7 @@
 #export SSLKEYLOGFILE=~/sslkeylog.log
 
 # Alacritty fixed font scaling
-# WINIT_X11_SCALE_FACTOR=1
+WINIT_X11_SCALE_FACTOR=1
 
 # Define custom PATH
 if [ -d "$SCRIPTS" ]; then
@@ -274,7 +274,7 @@ if [ "$(uname)" = "Linux" ]; then
 	if type kitty > /dev/null 2>&1; then
 		export TERMINAL="kitty"
 	elif type alacritty > /dev/null 2>&1; then
-		export TERMINAL="WINIT_X11_SCALE_FACTOR=1 alacritty"
+		export TERMINAL="alacritty"
 	elif type st > /dev/null 2>&1; then
 		export TERMINAL="st"
 	elif type xterm > /dev/null 2>&1; then
