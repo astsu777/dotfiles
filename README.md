@@ -51,6 +51,9 @@ The location of the dotfiles is as illustrated in this repository. The repositor
 ## DOSBox
 There is a sample *DOSBox* configuration (*dosbox* folder) that I keep around and modify if needed. This template works well for me and I usually only modify the [*autoexec*] commands at the end of the file. I use this program for playing old games only and this configuration gives me good performances/stability.
 
+## Etc
+This directory contains several configuration file for various software such as *dhcpd* (DHCP server). Those are not installed automatically but can be used as templates.
+
 ## Git
 The file *gitconfig* contains the global *Git* configuration and several aliases to make life easier when using *Git* client.
 
