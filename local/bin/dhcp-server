@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:08:54
-# Last modified: Sat 07 Jan 2023 08:43:42
+# Last modified: Wed 26 Jul 2023 14:56:55
 # Version: 1.0
 #
 # Description: start/stop local DHCP server
@@ -26,14 +26,19 @@ startDHCP() {
 	if [ "$(uname)" = "Darwin" ]; then
 		sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist
 		echo "DHCP server started. Modify its options in /etc/bootpd.list"
+	elif [ "$(uname)" = "Linux" ]; then
+		sudo systemctl start dhcpd4.service
+		echo "DHCP server started. Modify its options in /etc/dhcpd.conf"
 	fi
 }
 
 stopDHCP() {
 	if [ "$(uname)" = "Darwin" ]; then
 		sudo /bin/launchctl unload -w /System/Library/LaunchDaemons/bootps.plist
-		echo "DHCP server stopped"
+	elif [ "$(uname)" = "Linux" ]; then
+		sudo systemctl stop dhcpd4.service
 	fi
+	echo "DHCP server stopped"
 }
 
 #=======================
