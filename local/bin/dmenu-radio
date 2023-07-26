@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:10:21
-# Last modified: Tue 03 Jan 2023 16:54:42
+# Last modified: Fri 26 May 2023 13:06:26
 # Version: 1.0
 #
 # Description: listen to online radio
@@ -65,13 +65,15 @@ radios[Hotmix Radio - Lounge]="http://streaming.hotmixradio.fr/hotmixradio-loung
 radios[Hotmix Radio - Platinum]="http://streaming.hotmixradio.fr/hotmixradio-platinum-128.mp3"
 radios[I Love Chillhop]="https://streams.ilovemusic.de/iloveradio17.mp3"
 radios[Lofi 24/7]="http://usa9.fastcast4u.com/proxy/jamz?mp=/1"
+radios[Lofi Girl - Chillhop Radio]="https://www.youtube.com/watch?v=jfKfPfyJRdk"
+radios[Lofi Girl - Synthwave Radio]="https://www.youtube.com/watch?v=MVPTGNGiI-4"
 radios[Musopen - Classical]="https://live.musopen.org:8085/streamvbr0"
 radios[Nightride]="https://stream.nightride.fm/nightride.m4a"
 radios[Radiomeuh]="http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3"
 radios[Radiorecord - Synthwave]="http://air.radiorecord.ru:805/synth_320"
+radios[Stop Playing]=""
 radios[Studio Brussels]="http://icecast.vrtcdn.be/stubru-high.mp3"
 radios[Synthwave]="https://ecast.myautodj.com/public1channel"
-radios[Stop Playing]=""
 
 #=======================
 # Choose and listen to radio
