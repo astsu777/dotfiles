@@ -339,12 +339,12 @@ fi
 
 # Configure the default graphical Web browser
 if [ "$(uname)" = "Linux" ]; then
-	if type brave > /dev/null 2>&1; then
-		export BROWSER="brave"
-	elif type vivaldi-stable > /dev/null 2>&1; then
+	if type vivaldi-stable > /dev/null 2>&1; then
 		export BROWSER="vivaldi-stable"
 	elif type vivaldi > /dev/null 2>&1; then
 		export BROWSER="vivaldi"
+	elif type brave > /dev/null 2>&1; then
+		export BROWSER="brave"
 	elif type google-chrome-stable > /dev/null 2>&1; then
 		export BROWSER="google-chrome-stable"
 	elif type google-chrome-beta > /dev/null 2>&1; then
@@ -359,10 +359,10 @@ if [ "$(uname)" = "Linux" ]; then
 		export BROWSER="qutebrowser"
 	fi
 elif [ "$(uname)" = "Darwin" ]; then
-	if [ -d /Applications/Brave\ Browser.app ]; then
-		export BROWSER="/Applications/Brave Browser.app/Contents/MacOS/BraveBrowser"
-	elif [ -d /Applications/Vivaldi.app ]; then
+	if [ -d /Applications/Vivaldi.app ]; then
 		export BROWSER="/Applications/Vivaldi.app/Contents/MacOS/Vivaldi"
+	elif [ -d /Applications/Brave\ Browser.app ]; then
+		export BROWSER="/Applications/Brave Browser.app/Contents/MacOS/BraveBrowser"
 	elif [ -d /Applications/Firefox.app ]; then
 		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
 	elif [ -d /Applications/qutebrowser.app ]; then
