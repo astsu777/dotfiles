@@ -29,40 +29,40 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 call plug#begin('~/.vim/bundle')
-    "" Colorscheme
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'joshdick/onedark.vim', { 'as': 'onedark' }
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'romgrk/doom-one.vim'
-    Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-    Plug 'rafalbromirski/vim-aurora'
-	"" Linters
+  " Colorscheme
+  Plug 'sainnhe/gruvbox-material'
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'joshdick/onedark.vim', { 'as': 'onedark' }
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'romgrk/doom-one.vim'
+  Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+  Plug 'rafalbromirski/vim-aurora'
+	" Linters
 	Plug 'chr4/nginx.vim'
-	"" Status bar
+	" Status bar
 	Plug 'itchyny/lightline.vim'
-	"" File browser
+	" File browser
 	Plug 'scrooloose/nerdtree'
-	"" Easily comment lines with 'gcc' for a line, 'gcap' for a paragraph, etc...
-		"" Custom comment string can be implemented with the following:
-		"" autocmd FileType apache setlocal commentstring=#\ %s
+	" Easily comment lines with 'gcc' for a line, 'gcap' for a paragraph, etc...
+	" Custom comment string can be implemented with the following:
+	" autocmd FileType apache setlocal commentstring=#\ %s
 	Plug 'tpope/vim-commentary'
-	"" Easily modify surrounding of a text with 'cs' followed by surrounds. 'ds' deletes surroundings
+	" Easily modify surrounding of a text with 'cs' followed by surrounds. 'ds' deletes surroundings
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
-	"" Center the text for distraction free typing
+	" Center the text for distraction free typing
 	Plug 'junegunn/goyo.vim'
-	"" Colorize color codes
+	" Colorize color codes
 	Plug 'lilydjwg/colorizer'
-	"" Match sections begin/end (like if/fi) using '%' and 'g%'
+	" Match sections begin/end (like if/fi) using '%' and 'g%'
 	Plug 'https://github.com/adelarsq/vim-matchit'
-	"" Fuzzy Finder
+	" Fuzzy Finder
 	set rtp+=~/.vim/bundle/fzf
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
-	"" Bulk rename files
+	" Bulk rename files
 	Plug 'qpkorr/vim-renamer'
-	"" Run commands in the background
+	" Run commands in the background
 	Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 filetype plugin indent on
@@ -146,7 +146,7 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-"" Text wrapping
+" Text wrapping
 " For text file, wrap all the text
 autocmd FileType text setlocal textwidth=121 formatoptions=t
 " For all other files, wrap comments but not the text
@@ -281,12 +281,12 @@ set laststatus=2
 
 " Auto-indent the text (tabs only used for indentation)
 filetype indent on
-set noexpandtab
+set expandtab
 set copyindent
 set preserveindent
 set softtabstop=0
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Enable a visual menu when using TAB autocomplete in command mode
 set wildmenu
@@ -359,7 +359,7 @@ let g:lightline = {'colorscheme': 'jellybeans'}
 let s:status_bar = 1
 function ToggleStatusBar()
 	if (s:status_bar == 0)
-    	let s:status_bar = 1
+			let s:status_bar = 1
         set noshowmode
         set noruler
         set laststatus=0
@@ -374,7 +374,7 @@ function ToggleStatusBar()
 endfunction
 nnoremap <leader>h :call ToggleStatusBar()<CR>
 
-"" AsyncRun
+" AsyncRun
 " Open the quickfix window when running command
 let g:asyncrun_open = 8
 " Close the quickfix window if no errors after some time
