@@ -37,6 +37,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'romgrk/doom-one.vim'
   Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
   Plug 'rafalbromirski/vim-aurora'
+  Plug 'google/vim-colorscheme-primary'
 	" Linters
 	Plug 'chr4/nginx.vim'
 	" Status bar
@@ -182,13 +183,13 @@ function ToggleSyntax()
     if s:syntax == 1
         syntax off
 		let s:syntax = 0
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
     else
         syntax on
 		let s:syntax = 1
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
     endif
@@ -204,13 +205,23 @@ if empty($SSH_CLIENT)
 	set termguicolors
 endif
 colorscheme kuroi
-" highlight Comment cterm=italic gui=italic
+highlight Comment cterm=italic gui=italic
 highlight Normal guibg=NONE ctermbg=NONE
 highlight EndOfBuffer guibg=NONE ctermbg=NONE
 function ToggleColors()
-    if (g:colors_name == "aurora")
+    if (g:colors_name == "kuroi")
+        colorscheme primary
+		highlight Comment cterm=italic gui=italic
+		highlight Normal guibg=NONE ctermbg=NONE
+		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+		let g:lightline = {'colorscheme': 'jellybeans'}
+		call lightline#init()
+		call lightline#colorscheme()
+		set t_Co=256
+    set background=light
+    elseif (g:colors_name == "aurora")
         colorscheme kuroi
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
@@ -218,7 +229,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "spaceduck")
         colorscheme aurora
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
@@ -226,7 +237,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "doom-one")
         colorscheme spaceduck
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'spaceduck'}
@@ -234,7 +245,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "nord")
         colorscheme doom-one
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'jellybeans'}
@@ -242,7 +253,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "onedark")
         colorscheme nord
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'nord'}
@@ -250,7 +261,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "dracula")
         colorscheme onedark
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'onedark'}
@@ -258,7 +269,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     elseif (g:colors_name == "gruvbox-material")
         colorscheme dracula
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline = {'colorscheme': 'dracula'}
@@ -266,7 +277,7 @@ function ToggleColors()
 		call lightline#colorscheme()
     else
         colorscheme gruvbox-material
-		" highlight Comment cterm=italic gui=italic
+		highlight Comment cterm=italic gui=italic
 		highlight Normal guibg=NONE ctermbg=NONE
 		highlight EndOfBuffer guibg=NONE ctermbg=NONE
 		let g:lightline.colorscheme = 'gruvbox_material'
