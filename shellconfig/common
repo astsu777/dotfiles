@@ -339,7 +339,9 @@ fi
 
 # Configure the default graphical Web browser
 if [ "$(uname)" = "Linux" ]; then
-	if type vivaldi-stable > /dev/null 2>&1; then
+	if type firefox > /dev/null 2>&1; then
+		export BROWSER="firefox"
+	elif type vivaldi-stable > /dev/null 2>&1; then
 		export BROWSER="vivaldi-stable"
 	elif type vivaldi > /dev/null 2>&1; then
 		export BROWSER="vivaldi"
@@ -353,18 +355,16 @@ if [ "$(uname)" = "Linux" ]; then
 		export BROWSER="google-chrome-dev"
 	elif type microsoft-edge-stable > /dev/null 2>&1; then
 		export BROWSER="microsoft-edge-stable"
-	elif type firefox > /dev/null 2>&1; then
-		export BROWSER="firefox"
 	elif type qutebrowser > /dev/null 2>&1; then
 		export BROWSER="qutebrowser"
 	fi
 elif [ "$(uname)" = "Darwin" ]; then
-	if [ -d /Applications/Vivaldi.app ]; then
+	if [ -d /Applications/Firefox.app ]; then
+		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
+	elif [ -d /Applications/Vivaldi.app ]; then
 		export BROWSER="/Applications/Vivaldi.app/Contents/MacOS/Vivaldi"
 	elif [ -d /Applications/Brave\ Browser.app ]; then
 		export BROWSER="/Applications/Brave Browser.app/Contents/MacOS/BraveBrowser"
-	elif [ -d /Applications/Firefox.app ]; then
-		export BROWSER="/Applications/Firefox.app/Contents/MacOS/firefox"
 	elif [ -d /Applications/qutebrowser.app ]; then
 		export BROWSER="/Applications/qutebrowser.app/Contents/MacOS/qutebrowser"
 	fi
