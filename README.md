@@ -424,6 +424,7 @@ The following table provides all the configured keybindings **except** for the *
 | `SUPER + r & d` | open a menu to mount USB devices (script: dmenu-mount) |
 | `SUPER + r & SHIFT + d` | open a menu to unmount USB devices (script: dmenu-umount) |
 | `SUPER + r & m` | launch the audio mixer (variable: $AUDIOMIXER) |
+| `SUPER + r & n` | manage network connections |
 | `SUPER + r & s` | kill all multimedia player (useful if no media keys) |
 | `SUPER + r & w` | set a random wallpaper from *"$HOME"/.local/share/wallpapers* using *feh* |
 | `SUPER + r & SHIFT + w` | open a grid view of all the wallpapers stored in *"$HOME"/.local/share/wallpapers* using *sxiv* |

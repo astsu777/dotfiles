@@ -142,6 +142,8 @@ The following keybindings are configured:
 .ITEM
 \f(CWSUPER + r & m\fP \(en  launch the audio mixer (variable: $AUDIOMIXER)
 .ITEM
+\f(CWSUPER + r & n\fP \(en  manage network connections
+.ITEM
 \f(CWSUPER + r & s\fP \(en  kill all multimedia player (useful if no media keys)
 .ITEM
 \f(CWSUPER + r & w\fP \(en  set a random wallpaper from \fB"$HOME"/.local/share/wallpapers\fP using \fBfeh\fP
