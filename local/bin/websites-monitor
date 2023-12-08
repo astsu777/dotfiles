@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:17:02
-# Last modified: Fri 08 Dec 2023 16:33:37
+# Last modified: Fri 08 Dec 2023 16:37:17
 # Version: 1.0
 #
 # Description: check if a list of URLs returns a HTTP/200 OK or not
@@ -51,7 +51,7 @@ case "$1" in
 	"--insecure")
 		for i in $website
 		do
-			httpcode=$(\curl -k -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+			httpcode=$(\curl -k -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
 			if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
 				urlnok=$((urlnok + 1))
 				echo "$i is DOWN (HTTP Code: $httpcode)"
@@ -62,7 +62,7 @@ case "$1" in
 	"--secure")
 		for i in $website
 		do
-			httpcode=$(\curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
+			httpcode=$(\curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --max-time 20 --connect-timeout 10 -o /dev/null -s -w "%{http_code}"\\n "$i")
 			if [[ "$httpcode" != "20"* ]] && [[ "$httpcode" != "30"* ]] && [[ "$httpcode" != "401" ]]; then
 				urlnok=$((urlnok + 1))
 				echo "$i is DOWN (HTTP Code: $httpcode)"
