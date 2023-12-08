@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:17:02
-# Last modified: Sat 07 Jan 2023 08:50:59
+# Last modified: Fri 08 Dec 2023 16:33:37
 # Version: 1.0
 #
 # Description: check if a list of URLs returns a HTTP/200 OK or not
@@ -41,7 +41,7 @@ fi
 #====================
 
 urlsum=$(awk 'END{print NR}' "$2")
-website=$(<"$2" xargs -n1 echo)
+website=$(grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*' "$2" | xargs -n1 echo)
 
 #=======================
 # Check Websites
