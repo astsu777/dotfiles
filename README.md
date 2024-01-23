@@ -222,7 +222,7 @@ The following table provides a description of all the scripts:
 ## Default Applications (xdg-open)
 All default applications for the main things I use have been defined in the file *config/mimeapps.list*. To be properly installed, this file should be present in both *$XDG_CONFIG_HOME* and *$HOME/.local/share/applications*. This file is used when a file is trying to be opened with *xdg-open*. Although it is present in this repository, it can easily be overwritten by any default application manager.
 
-Basically, it defines *Firefox* as the default Web browser, *feh* as the default image viewer, *vim* as the default text editor, *zathura* as the default PDF/Dejavu/eBook reader, *mpv* as the default video/audio player, *pcmanfm* as the default file explorer. There is also a few file associations for some other applications.
+Basically, it defines *Vivaldi* as the default Web browser, *feh* as the default image viewer, *vim* as the default text editor, *zathura* as the default PDF/Dejavu/eBook reader, *mpv* as the default video/audio player, *pcmanfm* as the default file explorer. There is also a few file associations for some other applications.
 
 ## Amfora - Gemini Client
 ![](https://i.postimg.cc/fTZK7yhS/screenshot-20210718-031.png)
