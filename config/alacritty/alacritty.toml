@@ -1,0 +1,55 @@
+import = ["/Users/gaetan/.config/alacritty/custom_theme.toml"]
+live_config_reload = true
+
+[bell]
+command = "None"
+duration = 0
+
+[cursor.style]
+blinking = "Never"
+shape = "Beam"
+
+[font]
+size = 9.0
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = -1
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[scrolling]
+history = 20000
+
+[window]
+decorations = "none"
+opacity = 1.0
+
+[window.dimensions]
+columns = 140
+lines = 40
