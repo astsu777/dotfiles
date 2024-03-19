@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:20:45
-# Last modified: Mon 15 May 2023 12:39:09
+# Last modified: Tue 19 Mar 2024 08:41:47
 # Version: 1.0
 #
 # Description: script executed by a display manager
@@ -75,8 +75,8 @@ fi
 # GNOME-Keyring for password/SSH keys caching
 if type gnome-keyring >/dev/null 2>&1; then
 	eval $(gnome-keyring-daemon --start)
-	export SSH_AUTH_SOCK
-  	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+	systemctl enable gcr-ssh-agent.socket --user
+	export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 fi
 
 # Automatic screen brightness
