@@ -339,14 +339,14 @@ fi
 
 # Configure the default graphical Web browser
 if [ "$(uname)" = "Linux" ]; then
-	if type vivaldi-stable > /dev/null 2>&1; then
+	if type brave > /dev/null 2>&1; then
+		export BROWSER="brave"
+	elif type vivaldi-stable > /dev/null 2>&1; then
 		export BROWSER="vivaldi-stable"
 	elif type vivaldi > /dev/null 2>&1; then
 		export BROWSER="vivaldi"
 	elif type firefox > /dev/null 2>&1; then
 		export BROWSER="firefox"
-	elif type brave > /dev/null 2>&1; then
-		export BROWSER="brave"
 	elif type google-chrome-stable > /dev/null 2>&1; then
 		export BROWSER="google-chrome-stable"
 	elif type google-chrome-beta > /dev/null 2>&1; then
