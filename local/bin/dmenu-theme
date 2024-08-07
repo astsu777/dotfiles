@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:13:51
-# Last modified: Mon 08 May 2023 17:35:30
+# Last modified: Wed 07 Aug 2024 07:24:48
 # Version: 1.0
 #
 # Description: toggle graphical themes and colorschemes
@@ -702,7 +702,7 @@ checkReq
 #=======================
 
 if ! type dmenu > /dev/null 2>&1; then
-	case "$(printf "Custom\\nCustom 2\\nDoom-One\\nDracula\\nGruvbox\\nSolarized Light\\nNord\\nOnedark\\nSpaceduck" | sort | fzf -i --prompt "Choose a theme:")" in
+	case "$(printf "Custom\\nCustom 2\\nDoom-One\\nDracula\\nGruvbox\\nNord\\nOnedark\\nSpaceduck" | sort | fzf -i --prompt "Choose a theme:")" in
 		"Custom") toggleCustom ;;
 		"Custom 2") toggleCustom2 ;;
 		"Doom-One") toggleDoomone ;;
@@ -710,12 +710,11 @@ if ! type dmenu > /dev/null 2>&1; then
 		"Gruvbox") toggleGruvbox ;;
 		"Nord") toggleNord ;;
 		"Onedark") toggleOnedark ;;
-		"Solarized Light") toggleSolarizedLight ;;
 		"Spaceduck") toggleSpaceduck ;;
 		*) exit 0 ;;
 	esac
 else
-	case "$(printf "Custom\\nCustom 2\\nDoom-One\\nDracula\\nGruvbox\\nSolarized Light\\nNord\\nOnedark\\nSpaceduck" | sort | dmenu -l 30 -i -p "Choose a theme:")" in
+	case "$(printf "Custom\\nCustom 2\\nDoom-One\\nDracula\\nGruvbox\\nNord\\nOnedark\\nSpaceduck" | sort | dmenu -l 30 -i -p "Choose a theme:")" in
 		"Custom") toggleCustom ;;
 		"Custom 2") toggleCustom2 ;;
 		"Doom-One") toggleDoomone ;;
@@ -723,7 +722,6 @@ else
 		"Gruvbox") toggleGruvbox ;;
 		"Nord") toggleNord ;;
 		"Onedark") toggleOnedark ;;
-		"Solarized Light") toggleSolarizedLight ;;
 		"Spaceduck") toggleSpaceduck ;;
 		*) exit 0 ;;
 	esac
