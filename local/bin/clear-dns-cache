@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:07:59
-# Last modified: Sat 07 Jan 2023 08:36:41
+# Last modified: Wed 14 Aug 2024 09:00:26
 # Version: 1.0
 #
 # Description: flush local DNS cache
@@ -37,6 +37,7 @@ elif [ "$(uname)" = "Linux" ]; then
 	dnsResolver=$(sudo lsof -i :53 -S | awk 'FNR==2 {print $1}')
 	if [ -z "$dnsResolver" ]; then echo "No DNS cache found" && exit 0; fi
 	case "$dnsResolver" in
+		AdGuardHo) sudo /opt/AdGuardHome/AdGuardHome -s restart ;;
 		systemd-resolve) sudo killall -USR2 systemd-resolved ;;
 		dnsmasq) sudo killall -USR1 dnsmasq ;;
 		nscd) sudo systemctl restart nscd.service ;;
