@@ -1,3 +1,4 @@
+[general]
 import = ["/Users/gaetan/.config/alacritty/custom_theme.toml"]
 live_config_reload = true
 
