@@ -48,6 +48,9 @@ The installation can be automated when using my [bootstrap script](https://githu
 The location of the dotfiles is as illustrated in this repository. The repository represents the root of the home folder. The folders *config*, *local*, *vim*, etc... are hidden folders in the root. The folder *shellconfig* is a bit different as only some files are meant to be installed as dotfiles.
 
 # Documentation - Root Folder
+## AeroSpace
+The file *aerospace.toml* represents the configuration file for the *macOS* tiling window manager called *AeroSpace*.
+
 ## DOSBox
 There is a sample *DOSBox* configuration (*dosbox* folder) that I keep around and modify if needed. This template works well for me and I usually only modify the [*autoexec*] commands at the end of the file. I use this program for playing old games only and this configuration gives me good performances/stability.
 
