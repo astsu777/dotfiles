@@ -197,7 +197,8 @@ fi
 
 # Plow - HTTP benchmarking tool
 if type docker > /dev/null 2>&1; then
-	plow="docker run --rm --net=host ghcr.io/six-ddc/plow"
+	alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"
+	alias docker-clean='docker container prune -f && docker images prune -af && docker volume prune -f && docker network prune -f'
 fi
 
 # mitmproxy
