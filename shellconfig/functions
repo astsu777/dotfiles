@@ -71,13 +71,11 @@ _pwdgen-alpha(){
 # Clean Debian residual packages
 if type apt >/dev/null 2>&1; then
 	_clean-system(){
-		local pkgs=$(dpkg -l | awk '/^rc/{print $2}')
-		sudo apt purge "$pkgs"
+		sudo apt purge $(dpkg -l | awk '/^rc/{print $2}')
 	}
 elif type apt-get >/dev/null 2>&1; then
 	_clean-system(){
-		local pkgs=$(dpkg -l | awk '/^rc/{print $2}')
-		sudo apt-get remove --purge "$pkgs"
+		sudo apt-get remove --purge $(dpkg -l | awk '/^rc/{print $2}')
 	}
 fi
 
