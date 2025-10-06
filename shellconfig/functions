@@ -579,7 +579,7 @@ if type wget >/dev/null 2>&1; then
 
 	_wget-save() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Mirror a full Website recursively"
+    	echo -e "Mirror a full Website"
     	echo -e "\nUsage: wget-save <URL>"
     	echo -e "\nExample:\nwget-save http://example.com/"
     	return 1
@@ -590,16 +590,16 @@ if type wget >/dev/null 2>&1; then
   	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait "$1" >/dev/null 2>&1
 	}
 
-	_wget-save-recursive() {
+	_wget-save-multiple() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Mirror a full Website recursively"
-    	echo -e "\nUsage: wget-save-recursive <EXCLUDE_DOMAINS> <URL>"
+    	echo -e "Mirror multiple Websites"
+    	echo -e "\nUsage: wget-save-multiple <EXCLUDE_DOMAINS> <URL>"
     	echo -e "\nExample:\nwget-save-recursive www.instagram.com,twitter.com http://example.com/"
     	return 1
   	  fi
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
-  	  echo -e "Mirrorring Website..."
+  	  echo -e "Mirrorring Websites..."
   	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait -D "$1" "$2" >/dev/null 2>&1
 	}
 
