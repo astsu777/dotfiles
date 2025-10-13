@@ -190,7 +190,7 @@ if type rg > /dev/null 2>&1; then
 fi
 
 # Shell
-if [ "$SHELL" = "/bin/bash" ] || [ "$SHELL" = "/bin/zsh" ]; then
+if [ "$SHELL" = "/bin/bash" ] || [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "/usr/bin/bash" ] || [ "$SHELL" = "/usr/bin/zsh" ]; then
 	if [ ! -d "$XDG_DATA_HOME" ]; then mkdir -pv "$XDG_DATA_HOME" > /dev/null 2>&1; fi
 	HISTFILE="$XDG_DATA_HOME/shell_history"
 fi

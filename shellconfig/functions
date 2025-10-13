@@ -8,9 +8,9 @@ _alarm() {
 
 # Benchmark the SHELL (Bash & ZSH)
 _benchshell(){
-	if [[ "$SHELL" == "/bin/bash" ]]; then
+	if [[ "$SHELL" == "/bin/bash" ]] || [[ "$SHELL" == "/usr/bin/bash" ]]; then
 		time bash -i -c "echo -n"
-	elif [[ "$SHELL" == "/bin/zsh" ]]; then
+	elif [[ "$SHELL" == "/bin/zsh" ]] || [[ "$SHELL" == "/usr/bin/zsh" ]]; then
 		time zsh -i -c "print -n"
 	fi
 }
