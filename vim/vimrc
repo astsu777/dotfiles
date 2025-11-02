@@ -219,14 +219,18 @@ if empty($SSH_CLIENT)
 endif
 colorscheme kuroi
 highlight Comment cterm=italic gui=italic
-highlight Normal guibg=NONE ctermbg=NONE
-highlight EndOfBuffer guibg=NONE ctermbg=NONE
+if !has("gui_running")
+  highlight Normal guibg=NONE ctermbg=NONE
+  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+endif
 function ToggleColors()
     if (g:colors_name == "kuroi")
         colorscheme primary
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'jellybeans'}
 		call lightline#init()
 		call lightline#colorscheme()
@@ -235,64 +239,80 @@ function ToggleColors()
     elseif (g:colors_name == "aurora")
         colorscheme kuroi
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'jellybeans'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "spaceduck")
         colorscheme aurora
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'jellybeans'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "doom-one")
         colorscheme spaceduck
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'spaceduck'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "nord")
         colorscheme doom-one
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'jellybeans'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "onedark")
         colorscheme nord
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'nord'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "dracula")
         colorscheme onedark
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'onedark'}
 		call lightline#init()
 		call lightline#colorscheme()
     elseif (g:colors_name == "gruvbox-material")
         colorscheme dracula
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline = {'colorscheme': 'dracula'}
 		call lightline#init()
 		call lightline#colorscheme()
     else
         colorscheme gruvbox-material
 		highlight Comment cterm=italic gui=italic
-		highlight Normal guibg=NONE ctermbg=NONE
-		highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    if !has("gui_running")
+		  highlight Normal guibg=NONE ctermbg=NONE
+		  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+	  endif
 		let g:lightline.colorscheme = 'gruvbox_material'
 		call lightline#init()
 		call lightline#colorscheme()
