@@ -5,11 +5,24 @@
 " Detect OS type (useful to define OS specific options)
 " Linux will be referenced as 'Linux'. MacOS will be referenced as 'Darwin'
 if !exists('g:os')
-    if has('win32') || has('win16')
-        let g:os = 'Windows'
-    else
-        let g:os = substitute(system('uname'), '\n', '', '')
-    endif
+  if has('win32') || has('win16')
+    let g:os = 'Windows'
+    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization easier
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+  else
+    let g:os = substitute(system('uname'), '\n', '', '')
+  endif
+endif
+
+" Font customization for GVim
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=JetBrains\ Mono:h9
+  elseif has("gui_macvim")
+    set guifont=JetBrains\ Mono:h9
+  elseif has("gui_win32")
+    set guifont=JetBrains\ Mono:h9
+  endif
 endif
 
 "=============
