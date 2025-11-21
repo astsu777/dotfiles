@@ -16,6 +16,8 @@ endif
 
 " Font customization for GVim
 if has("gui_running")
+  set lines=30
+  set columns=140
   if has("gui_gtk2")
     set guifont=JetBrains\ Mono:h9
   elseif has("gui_macvim")
