@@ -124,6 +124,8 @@ if type lsd > /dev/null 2>&1; then
 	alias ll="lsd -lah --icon always --color always --group-directories-first"
 elif type exa > /dev/null 2>&1; then
 	alias ll="exa -lSag --git --icons"
+else
+  alias ll="ls -lah"
 fi
 
 # Make 'yt-dlp' easier to use
