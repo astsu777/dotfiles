@@ -348,9 +348,23 @@ if type curl > /dev/null 2>&1; then
 			echo -e "Usage: grab-links <URL>"
 			echo -e "\nExample:\ngrab-links example.com"
 			return 1
+		else
+		  local ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+		  \curl -s -A "${ua}" -f -L "$1" -H "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8" -H "upgrade-insecure-requests: 1" -H "Accept-Language: en-US,en;q=0.9" -L --insecure | grep -Eo "https?://\S+?\"" | sed 's/&.*//' | cut -d \" -f1
 		fi
-		local ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-		\curl -s -A "${ua}" -f -L "$1" -H "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8" -H "upgrade-insecure-requests: 1" -H "Accept-Language: en-US,en;q=0.9" -L --insecure | grep -Eo "https?://\S+?\"" | sed 's/&.*//' | cut -d \" -f1
+	}
+
+	# Shorten a URL
+	_check-website-change() {
+		if [ -z "$1" ]; then
+    	echo -e "Check the last time a Web page was modified"
+    	echo -e "WARNING: may not work on all Websites"
+			echo -e "\nUsage: check-website-change '<URL>'"
+			echo "Ex.: check-website-change https://www.example.com/path/to/page"
+			return 1
+		else
+		  curl -s -L --insecure -I "$1" | grep -i '^last-modified:'
+    fi
 	}
 
 fi
