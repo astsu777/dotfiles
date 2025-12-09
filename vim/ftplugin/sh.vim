@@ -16,7 +16,7 @@ augroup ft_shell
 	function SHHeader() abort
 		execute "normal! i#!/usr/bin/env sh\<cr>"
 		execute "normal! i#=========================================================================\<cr>"
-		execute "normal! i# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @GaetanICT\<cr>"
+		execute "normal! i# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777\<cr>"
 		execute "normal! i# Creation: \<c-r>=strftime('%a %d %b %Y %H:%M:%S')\<cr>\<cr>"
 		execute "normal! i# Last modified: \<c-r>=strftime('%a %d %b %Y %H:%M:%S')\<cr>\<cr>"
 		execute "normal! i# Version: 1.0\<cr>"
