@@ -42,7 +42,7 @@ bind-key d pb-download
 bind-key c pb-cancel
 
 # Configure browsers for various type of URLs
-browser $BROWSER
+browser "$BROWSER %u &"
 macro , open-in-browser
 macro t set browser "$BROWSERCLI %u"; open-in-browser ; set browser $BROWSER
 macro m set browser "tspool yt-dlp --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser $BROWSER
