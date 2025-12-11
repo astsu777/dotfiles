@@ -55,6 +55,7 @@ color listnormal_unread blue default
 color listfocus_unread yellow default bold
 color info red black bold
 color article white default bold
+datetime-format "%F"
 highlight all "---.*---" yellow
 highlight feedlist ".*(0/0))" black
 highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
