@@ -764,6 +764,8 @@ Here is a small description for every script:
 .ITEM
 \f(CWupcloud-manager\fP \(en  easily interact with *Upcloud* API
 .ITEM
+\f(CWupdate-ua\fP \(en  retrieve the latest *User-Agent* for select browser and update the adjacent dotfile
+.ITEM
 \f(CWvttoggle\fP \(en  toggle the ability to switch to other Virtual Terminals using CTRL-ALT-Fx
 .ITEM
 \f(CWwebsites-monitor\fP \(en  quickly test many websites and test for error codes

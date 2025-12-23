@@ -214,6 +214,7 @@ The following table provides a description of all the scripts:
 | `tspool` | interact with task-spooler using either the *ts* or *tsp* command (or none if *task-spooler* is not installed) |
 | `tui` | open a terminal emulator and execute a specific command (Ex.: 'tui htop' from DMenu) |
 | `upcloud-manager` | easily interact with *Upcloud* API |
+| `update-ua` | retrieve the latest *User-Agent* for select browser and update the adjacent dotfile  |
 | `url_handler.sh` | file handler by file extensions of MIME types |
 | `vttoggle` | toggle the ability to switch to other Virtual Terminals using CTRL-ALT-Fx |
 | `websites-monitor` | quickly test many websites and test for error codes |
