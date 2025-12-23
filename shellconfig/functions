@@ -309,23 +309,25 @@ if type curl > /dev/null 2>&1; then
 	}
 
 	# Use Google Translate
-	_trag() {
-		local sl=$1
-		local tl=$2
-		if [[ ! "$1" =~ ^[a-z][a-z]$ ]] || [[ ! "$2" =~ ^[a-z][a-z]$ ]]; then
-    		echo -e "Use Google Translate from the CLI"
-			echo "Please input a valid source and destination language (Ex.: \"en\" for English)"
-			echo "Usage: trag <SRC_LANG> <DEST_LANG> <TEXT_TO_TRANSLATE>"
-			return 1
-		fi
-		shift 2
-		local base_url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q="
-		local ua="$UA"
-		local qry=$( echo $@ | sed -e "s/\ /+/g" )
-		local full_url=${base_url}${qry}
-		local response=$(\curl -sA "${ua}" "${full_url}")
-		echo ${response} | jq -r '.[0][0][0]'
-	}
+	if type jq > /dev/null 2>&1; then
+	  _trag() {
+		  local sl=$1
+		  local tl=$2
+		  if [[ ! "$1" =~ ^[a-z][a-z]$ ]] || [[ ! "$2" =~ ^[a-z][a-z]$ ]]; then
+    		  echo -e "Use Google Translate from the CLI"
+			  echo "Please input a valid source and destination language (Ex.: \"en\" for English)"
+			  echo "Usage: trag <SRC_LANG> <DEST_LANG> <TEXT_TO_TRANSLATE>"
+			  return 1
+		  fi
+		  shift 2
+		  local base_url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q="
+		  local ua="$UA"
+		  local qry=$( echo $@ | sed -e "s/\ /+/g" )
+		  local full_url=${base_url}${qry}
+		  local response=$(\curl -sA "${ua}" "${full_url}")
+		  echo ${response} | jq -r '.[0][0][0]'
+	  }
+	fi
 
 	# DNS lookup over HTTPS
 	if type jq > /dev/null 2>&1; then

@@ -18,6 +18,9 @@ fi
 alias getpublicip="\curl -s https://ipinfo.io/ip"
 alias getpublicipinfo="\curl -s https://ipinfo.io"
 
+# Get the latest user-agents
+alias getlatestua="\curl -s https://techfanetechnologies.github.io/latest-user-agent/user_agents.json"
+
 # Generate random secure passwords of 64 characters
 if type pwgen > /dev/null 2>&1; then
 	alias pwgen-secure="pwgen -syBcn 64"
