@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
+# Creation: Tue 23 Dec 2025 01:08:46
+# Last modified: Tue 23 Dec 2025 01:16:03
+# Version: 1.0
+#
+# Description: update the dotfiles with the latest user agent
+#=========================================================================
+
+#=======================
+# VARIABLES
+#=======================
+
+DOTFILE="$DOTFILES/shellconfig/common"
+UAS="https://techfanetechnologies.github.io/latest-user-agent/user_agents.json"
+CHOSENUAID="0"
+
+#=======================
+# CODE
+#=======================
+
+REQUEST="$(curl -s $UAS | jq -r ".[$CHOSENUAID]")"
+sed -i "/export UA=/c\export UA=\"$REQUEST\"" "$DOTFILE"
+printf "%s" "$UA"
