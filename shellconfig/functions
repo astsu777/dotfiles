@@ -568,68 +568,110 @@ if type wget >/dev/null 2>&1; then
 
 	_wget-files() {
   	  if [ $# -lt 2 ]; then
-    	echo -e "Download all files with specific extension on a webpage"
-    	echo -e "\nUsage: wget-files <FILE_EXTENSION> <URL>"
-    	echo -e "\nExample:\nwget-files mp4,ogg,wma http://example.com/files/"
-    	return 1
+    	  echo -e "Download all files with specific extension on a webpage"
+    	  echo -e "\nUsage: wget-files <FILE_EXTENSION> <URL>"
+    	  echo -e "\nExample:\nwget-files mp4,ogg,wma http://example.com/files/"
+    	  return 1
   	  fi
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading files from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
+  	  local ua="$UA"
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="${ua}" --random-wait -nd -r -l1 -H -t1 -N -np -A "$1" -e robots=off "$2" >/dev/null 2>&1
 	}
 
 	_wget-audio() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Download all audio files on a webpage"
-    	echo -e "\nUsage: wget-audio <URL>"
-    	echo -e "\nExample:\nwget-audio http://example.com/music/"
-    	return 1
+    	  echo -e "Download all audio files on a webpage"
+    	  echo -e "\nUsage: wget-audio <URL>"
+    	  echo -e "\nExample:\nwget-audio http://example.com/music/"
+    	  return 1
   	  fi
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading audio files from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
+  	  local ua="$UA"
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="${ua}" --random-wait -nd -r -l1 -H -t1 -N -np -A "mp3,ogg,wma,flac,aac" -e robots=off "$1" >/dev/null 2>&1
 	}
 
 	_wget-images() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Download all images on a webpage"
-    	echo -e "\nUsage: wget-images <URL>"
-    	echo -e "\nExample:\nwget-images http://example.com/pictures/"
-    	return 1
+    	  echo -e "Download all images on a webpage"
+    	  echo -e "\nUsage: wget-images <URL>"
+    	  echo -e "\nExample:\nwget-images http://example.com/pictures/"
+    	  return 1
   	  fi
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Downloading pictures from Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
+  	  local ua="$UA"
+  	  cd "$outputdir_name" && wget --no-check-certificate --user-agent="${ua}" --random-wait -nd -r -l1 -H -t1 -N -np -A "jpg,jpeg,png,bmp,gif,webp,tiff,svg,avif,apng" -e robots=off "$1" >/dev/null 2>&1
 	}
 
 	_wget-save() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Mirror a full Website"
-    	echo -e "\nUsage: wget-save <URL>"
-    	echo -e "\nExample:\nwget-save http://example.com/"
-    	return 1
+    	  echo -e "Mirror a full Website"
+    	  echo -e "\nUsage: wget-save <URL>"
+    	  echo -e "\nExample:\nwget-save http://example.com/"
+    	  return 1
   	  fi
   	  outputdir_name=$(echo "$1" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Mirrorring Website..."
-  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait "$1" >/dev/null 2>&1
+  	  local ua="$UA"
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -k -p -e robots=off -np --user-agent="${ua}" --random-wait "$1" >/dev/null 2>&1
 	}
 
 	_wget-save-multiple() {
   	  if [ $# -lt 1 ]; then
-    	echo -e "Mirror multiple Websites"
-    	echo -e "\nUsage: wget-save-multiple <EXCLUDE_DOMAINS> <URL>"
-    	echo -e "\nExample:\nwget-save-recursive www.instagram.com,twitter.com http://example.com/"
-    	return 1
+    	  echo -e "Mirror multiple Websites"
+    	  echo -e "\nUsage: wget-save-multiple <EXCLUDE_DOMAINS> <URL>"
+    	  echo -e "\nExample:\nwget-save-recursive www.instagram.com,twitter.com http://example.com/"
+    	  return 1
   	  fi
   	  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
   	  mkdir -pv "$outputdir_name" >/dev/null 2>&1
   	  echo -e "Mirrorring Websites..."
-  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --random-wait -D "$1" "$2" >/dev/null 2>&1
+  	  local ua="$UA"
+  	  cd "$outputdir_name" && wget --no-check-certificate -m -E -H -k -p -e robots=off -np --user-agent="${ua}" --random-wait -D "$1" "$2" >/dev/null 2>&1
 	}
+
+fi
+
+#=================
+# YT-DLP
+#=================
+if type yt-dlp > /dev/null 2>&1; then
+
+  _yt-getchannelid(){
+	  if [ -z "$1" ]; then
+      echo -e "Retrieve ID of a YouTube channel"
+			echo -e "Usage: yt-getchannelid '<URL>'"
+			echo -e "Ex.: yt-getchannelid https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+			return 1
+	  fi
+		yt-dlp --print "%(channel_id)s" --playlist-end 1 "$1" 2>/dev/null
+  }
+
+  _yt-getvideoid(){
+	  if [ -z "$1" ]; then
+      echo -e "Retrieve ID of a YouTube video"
+			echo -e "Usage: yt-getvideoid '<URL>'"
+			echo -e "Ex.: yt-getvideoid https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+			return 1
+	  fi
+		yt-dlp --print "%(id)s" "$1" 2>/dev/null
+  }
+
+  _yt-getplaylistid(){
+	  if [ -z "$1" ]; then
+      echo -e "Retrieve ID of a YouTube playlist"
+			echo -e "Usage: yt-getplaylistid '<URL>'"
+			echo -e "Ex.: yt-getplaylistid ttps://www.youtube.com/playlist?list=PL1234567890abcdef"
+			return 1
+	  fi
+		yt-dlp --print "%(playlist_id)s" --playlist-end 1 "$1" 2>/dev/null
+  }
 
 fi
 
