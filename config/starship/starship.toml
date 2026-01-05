@@ -4,8 +4,8 @@
 # Do not create an empty line at start
 add_newline = false
 
-# Increase timeout for directory scan
-scan_timeout = 1000
+# Do not follow symbolic links for scanning
+follow_symlinks = false
 
 # AWS region and profile
 [aws]
