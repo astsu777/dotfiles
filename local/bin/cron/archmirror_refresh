@@ -1,6 +1,6 @@
 #!/bin/sh
 # Set as a root cron job to refresh Arch Linux mirrors
-/usr/bin/su gaetan -c '/usr/bin/notify-send "🔒 Refreshing Arch Linux mirrors..."'
+/usr/bin/su "$USER" -c '/usr/bin/notify-send "🔒 Refreshing Arch Linux mirrors..."'
 [ -x /bin/eos-rankmirrors ] && /bin/eos-rankmirrors
 /usr/bin/reflector --latest 10 --country Belgium,France,Luxembourg,Germany,Netherlands --protocol https --sort rate --verbose --save /etc/pacman.d/mirrorlist
-/usr/bin/su gaetan -c '/usr/bin/notify-send "🔓 Arch Linux mirrors refreshed"'
+/usr/bin/su "$USER" -c '/usr/bin/notify-send "🔓 Arch Linux mirrors refreshed"'
