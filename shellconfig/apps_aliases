@@ -207,6 +207,7 @@ if type docker > /dev/null 2>&1; then
 	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it unfrl/dug"; fi
 	if ! type ssh-audit > /dev/null 2>&1; then alias ssh-audit="docker run --rm -it positronsecurity/ssh-audit"; fi
 	if ! type testssl > /dev/null 2>&1; then alias testssl="docker run --rm -it ghcr.io/testssl/testssl.sh"; fi
+	alias docker-all-compose='ls -R -d */*.yml | xargs -I{} docker compose -f {}'
 fi
 
 # mitmproxy
