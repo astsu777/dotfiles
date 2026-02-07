@@ -220,8 +220,8 @@ fi
 
 # SSH towards many hosts at a time
 if type ssh-multi > /dev/null 2>&1 && [ -f "$HOME/.ssh/config" ]; then
-  alias ssh-hypervisors="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(PRX.*[0-9])$/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
-  alias ssh-lb="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(LB.*[0-9])$/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
-  alias ssh-servers="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(PBS.*[0-9]|PDM.*[0-9]|SRV.*[0-9])$/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
-  alias ssh-switches="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(SW.*[0-9]|FW.*[0-9]|GW)$/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
+  alias ssh-hypervisors="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(PRX.*[0-9])$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
+  alias ssh-lb="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(LB.*[0-9])$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
+  alias ssh-servers="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(PBS.*[0-9]|PDM.*[0-9]|SRV.*[0-9])$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
+  alias ssh-switches="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(SW.*[0-9]|FW.*[0-9]|GW)$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
 fi
