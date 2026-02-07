@@ -225,3 +225,8 @@ if type ssh-multi > /dev/null 2>&1 && [ -f "$HOME/.ssh/config" ]; then
   alias ssh-servers="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(PBS.*[0-9]|PDM.*[0-9]|SRV.*[0-9])$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
   alias ssh-switches="ssh-multi $(awk '/^Host / {for(i=2; i<=NF; i++) if ($i ~ /(SW.*[0-9]|FW.*[0-9]|GW)$/ && $i !~ /(^LAB.*|TEST.*)/) print $i}' ~/.ssh/config | sed ':a N; s/\n/ /; ta')"
 fi
+
+# SSH aliases for different environments
+if [ -f "$HOME"/.ssh/config-lab ]; then
+  alias ssh-lab="ssh -F ~/.ssh/config-lab"
+fi
