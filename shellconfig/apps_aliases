@@ -230,3 +230,9 @@ fi
 if [ -f "$HOME"/.ssh/config-lab ]; then
   alias ssh-lab="ssh -F ~/.ssh/config-lab"
 fi
+
+# OpenSSL
+if type openssl > /dev/null 2>&1; then
+  # Generate a random long secret
+  alias openssl-random="for i in {1..10}; do openssl rand -base64 32; done"
+fi
