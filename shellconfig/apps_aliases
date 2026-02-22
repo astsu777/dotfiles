@@ -203,8 +203,9 @@ fi
 # Interactive containers
 if type docker > /dev/null 2>&1; then
 	alias docker-clean='docker container prune -f && docker image prune -af && docker volume prune -f && docker network prune -f'
-	if ! type plow > /dev/null 2>&1; then alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"; fi
 	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it unfrl/dug"; fi
+	if ! type plow > /dev/null 2>&1; then alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"; fi
+	if ! type siege > /dev/null 2>&1; then alias siege="docker run --rm -it openeuler/siege"; fi
 	if ! type ssh-audit > /dev/null 2>&1; then alias ssh-audit="docker run --rm -it positronsecurity/ssh-audit"; fi
 	if ! type testssl > /dev/null 2>&1; then alias testssl="docker run --rm -it ghcr.io/testssl/testssl.sh"; fi
 	alias docker-all-compose='ls -R -d */*.yml | xargs -I{} docker compose -f {}'
