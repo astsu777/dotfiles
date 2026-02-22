@@ -204,6 +204,7 @@ fi
 if type docker > /dev/null 2>&1; then
 	alias docker-clean='docker container prune -f && docker image prune -af && docker volume prune -f && docker network prune -f'
 	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it unfrl/dug"; fi
+	if ! type hping3 > /dev/null 2>&1; then alias hping3="docker run --rm -it sflow/hping3"; fi
 	if ! type plow > /dev/null 2>&1; then alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"; fi
 	if ! type siege > /dev/null 2>&1; then alias siege="docker run --rm -it openeuler/siege"; fi
 	if ! type ssh-audit > /dev/null 2>&1; then alias ssh-audit="docker run --rm -it positronsecurity/ssh-audit"; fi
