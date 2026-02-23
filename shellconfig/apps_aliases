@@ -202,14 +202,38 @@ fi
 
 # Interactive containers
 if type docker > /dev/null 2>&1; then
-	alias docker-clean='docker container prune -f && docker image prune -af && docker volume prune -f && docker network prune -f'
-	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it unfrl/dug"; fi
-	if ! type hping3 > /dev/null 2>&1; then alias hping3="docker run --rm -it sflow/hping3"; fi
-	if ! type plow > /dev/null 2>&1; then alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"; fi
-	if ! type siege > /dev/null 2>&1; then alias siege="docker run --rm -it openeuler/siege"; fi
-	if ! type ssh-audit > /dev/null 2>&1; then alias ssh-audit="docker run --rm -it positronsecurity/ssh-audit"; fi
-	if ! type testssl > /dev/null 2>&1; then alias testssl="docker run --rm -it ghcr.io/testssl/testssl.sh"; fi
 	alias docker-all-compose='ls -R -d */*.yml | xargs -I{} docker compose -f {}'
+	alias docker-clean='docker container prune -f && docker image prune -af && docker volume prune -f && docker network prune -f'
+	# DNS propagation checker
+	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it --net=host unfrl/dug"; fi
+	# Packet generator
+	if ! type hping3 > /dev/null 2>&1; then alias hping3="docker run --rm -it --net=host sflow/hping3"; fi
+	# Network bandwidth tester
+	if ! type iperf3 > /dev/null 2>&1; then alias iperf3="docker run --rm -it --net=host networkstatic/iperf3"; fi
+	# JSON parser
+	if ! type jq > /dev/null 2>&1; then alias jq="docker run --rm -i quay.io/docwhat/jq"; fi
+	# PING and Traceroute AIO
+	if ! type mtr > /dev/null 2>&1; then alias mtr="docker run --rm -it --net=host str0ke/mtr"; fi
+	# Disk space usage analyzer
+	if ! type ncdu > /dev/null 2>&1; then alias ncdu="docker run --rm -it -v $(pwd):/mount bernadinm/ncdu /mount"; fi
+	# SSL library
+	if ! type openssl > /dev/null 2>&1; then alias openssl="docker run --rm -it --net=host alpine/openssl"; fi
+	# HTTP benchmarking tool
+	if ! type plow > /dev/null 2>&1; then alias plow="docker run --rm --net=host ghcr.io/six-ddc/plow"; fi
+	# Shell script auditing tool
+	if ! type shellcheck > /dev/null 2>&1; then alias shellcheck="docker run --rm -it -v $(pwd):/mnt:ro koalaman/shellcheck"; fi
+	# DoS attack simulator against Web servers
+	if ! type slowhttptest > /dev/null 2>&1; then alias slowhttptest="docker run --rm -it --net=host shekyan/slowhttptest"; fi
+	# SSH security auditing tool
+	if ! type ssh-audit > /dev/null 2>&1; then alias ssh-audit="docker run --rm -it --net=host positronsecurity/ssh-audit"; fi
+	# Traceroute via TCP
+	if ! type tcptraceroute > /dev/null 2>&1; then alias tcptraceroute="docker run --rm --net=host niden/tcptraceroute"; fi
+	# Telnet client
+	if ! type telnet > /dev/null 2>&1; then alias telnet="docker run --rm --net=host str0ke/telnet"; fi
+	# Packet capture tool
+	if ! type tcpdump > /dev/null 2>&1; then alias tcpdump="docker run --rm -it --net=host corfr/tcpdump"; fi
+	# SSL/TLS security auditing tool
+	if ! type testssl > /dev/null 2>&1; then alias testssl="docker run --rm -it --net=host ghcr.io/testssl/testssl.sh"; fi
 fi
 
 # mitmproxy
