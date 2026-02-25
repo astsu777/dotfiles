@@ -2,7 +2,7 @@
 #=========================================================================
 # Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
 # Creation: Sun 22 Aug 2021 12:15:19
-# Last modified: Sat 07 Jan 2023 08:48:52
+# Last modified: Wed 25 Feb 2026 17:52:44
 # Version: 1.0
 #
 # Description: this script finds all Git repositories and pull the changes
@@ -25,7 +25,7 @@ fi
 # Variables
 #====================
 
-if [ "$(uname)" = "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ] || type busybox > /dev/null 2>&1; then
 	repositories="$(find $1 -type d -not \( -path */data -prune \) -not \( -path */.password-store -prune \) -not \( -path */Cloud -prune \) -not \( -path */.cache -prune \) -not \( -path */.emacs.d -prune \) -not \( -path */.config -prune \) -not \( -path */Downloads -prune \) -not \( -path */.vim -prune \) -name '.git' | sed 's/\/\.git//g')"
 else
 	repositories="$(find $1 -type d -not \( -path */data -prune \) -not \( -path */.password-store -prune \) -not \( -path */Cloud -prune \) -not \( -path */.cache -prune \) -not \( -path */.emacs.d -prune \) -not \( -path */.config -prune \) -not \( -path */Downloads -prune \) -not \( -path */.vim -prune \) -name '.git' -printf '%h\n')"
