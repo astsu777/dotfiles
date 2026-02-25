@@ -122,7 +122,7 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	fi
 elif [[ $OSTYPE == "linux-musl" ]]; then
 	if type apk > /dev/null 2>&1; then
-		alias update-system='sudo apk update && sudo apk upgrade -a'
+		alias update-system='sudo apk update && sudo apk upgrade -a && sudo apk cache clean'
 	fi
 fi
 
