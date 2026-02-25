@@ -120,6 +120,10 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	elif type xbps-install > /dev/null 2>&1; then
 		alias update-system='sudo xbps-install -Su && sudo xbps-remove -Oo'
 	fi
+elif [[ $OSTYPE == "linux-musl" ]]; then
+	if type apk > /dev/null 2>&1; then
+		alias update-system='sudo apk update && sudo apk upgrade -a'
+	fi
 fi
 
 # Use the common alias 'll' to display files with exa
