@@ -210,11 +210,19 @@ if type docker > /dev/null 2>&1; then
 	alias docker-clean='docker container prune -f && docker image prune -af && docker volume prune -f && docker network prune -f'
 	# Duplicates finder
 	if ! type czkawka_cli > /dev/null 2>&1; then alias czkawka_cli-dupimg="docker run --rm -v $(pwd):/data jlesage/czkawka czkawka_cli image -d /data -s 0"; fi
-	if ! type czkawka_cli > /dev/null 2>&1; then alias czkawka_cli="printf \"%s\n\" \"Use '-d /data' in the command for current directory\" && docker run --rm -v $(pwd):/data jlesage/czkawka czkawka_cli"; fi
+	if ! type czkawka_cli > /dev/null 2>&1; then alias czkawka_cli="printf \"%s\n\" \"Use '-d /data' in the command for current directory\" && docker run --rm -v $(pwd):/data jlesage/czkawka czkawka_cli --help"; fi
 	# DNS propagation checker
 	if ! type dug > /dev/null 2>&1; then alias dug="docker run --rm -it --net=host unfrl/dug"; fi
 	# Packet generator
 	if ! type hping3 > /dev/null 2>&1; then alias hping3="docker run --rm -it --net=host sflow/hping3"; fi
+	# Image manipulation tool
+  if ! type compare > /dev/null 2>&1; then alias compare="docker run --rm --entrypoint=compare -v $(pwd):/imgs dpokidov/imagemagick"; fi
+	if ! type convert > /dev/null 2>&1; then alias convert="docker run --rm --entrypoint=convert -v $(pwd):/imgs dpokidov/imagemagick"; fi
+	if ! type identify > /dev/null 2>&1; then alias identify="docker run --rm --entrypoint=identify -v $(pwd):/imgs dpokidov/imagemagick"; fi
+  if ! type magick > /dev/null 2>&1; then alias magick="docker run --rm --entrypoint=magick -v $(pwd):/imgs dpokidov/imagemagick"; fi
+  if ! type mogrify > /dev/null 2>&1; then alias mogrify="docker run --rm --entrypoint=mogrify -v $(pwd):/imgs dpokidov/imagemagick"; fi
+  if ! type montage > /dev/null 2>&1; then alias montage="docker run --rm --entrypoint=montage -v $(pwd):/imgs dpokidov/imagemagick"; fi
+  if ! type stream > /dev/null 2>&1; then alias stream="docker run --rm --entrypoint=stream -v $(pwd):/imgs dpokidov/imagemagick"; fi
 	# Network bandwidth tester
 	if ! type iperf3 > /dev/null 2>&1; then alias iperf3="docker run --rm -it --net=host networkstatic/iperf3"; fi
 	# JSON parser
