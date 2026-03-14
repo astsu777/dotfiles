@@ -675,6 +675,35 @@ if type yt-dlp > /dev/null 2>&1; then
 
 fi
 
+#=======================
+# FFMPEG
+#=======================
+
+if type ffmpeg >/dev/null 2>&1; then
+  _ffmpeg_merge_audiotracks() {
+		  if [ $# -lt 3 ]; then
+        echo -e "Merge multiple movies with same video but different audio tracks"
+        echo -e "Usage: ffmpeg_merge_movies 'Movie 1 FR.mkv' 'Movie 2 EN.mkv' 'Output.mkv'"
+        echo -e "IMPORTANT: the video quality of the first file will be kept!"
+        return 1
+      fi
+      local movie_fr="$1"
+      local movie_en="$2"
+      local output="$3"
+      ffmpeg -i "$movie_fr" -i "$movie_en" \
+      -map 0:v \
+      -map 0:a:m:language:fra? -map 0:s:m:language:fra? \
+      -map 1:a:m:language:eng? -map 1:s:m:language:eng? \
+      -c:v copy \
+      -c:a copy \
+      -c:s copy \
+      -metadata:s:a:0 language=fr -metadata:s:a:0 title="Francais" \
+      -metadata:s:a:1 language=en -metadata:s:a:1 title="English" \
+      "$output"
+      echo "Merged movie saved to '$output'"
+  }
+fi
+
 #=================
 # Colors
 #=================
