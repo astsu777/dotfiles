@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
+# Creation: Sat 14 Mar 2026 23:28:44
+# Last modified: Sun 15 Mar 2026 00:09:38
+# Version: 1.0
+#
+# Description: Convert a list of movies to x265 to save disk space
+#=========================================================================
+
+#!/usr/bin/env bash
+
+INPUT="conversion_queue.csv"
+DRY_RUN=false
+MAX_JOBS=4
+MIN_SIZE_MB=700  # skip files smaller than this
+LOG_FILE="conversion_log.txt"
+
+if [[ "$1" == "--dry-run" ]]; then
+  DRY_RUN=true
+fi
+
+echo "Starting bulletproof conversion. Dry run: $DRY_RUN"
+echo "Using up to $MAX_JOBS parallel jobs. Minimum size: $MIN_SIZE_MB MB"
+echo "Log file: $LOG_FILE"
+
+# Ensure log file exists
+touch "$LOG_FILE"
+
+convert_file() {
+  local input="$1"
+  local output="${input%.*}_HEVC.mkv"
+
+  # Skip tiny files
+  local size_bytes=$(stat -c%s "$input")
+  local size_mb=$((size_bytes / 1024 / 1024))
+  if (( size_mb < MIN_SIZE_MB )); then
+    echo "[SKIP] Too small: $input ($size_mb MB)" >> "$LOG_FILE"
+    return
+  fi
+
+  # Skip if output already exists
+  if [[ -f "$output" ]]; then
+    echo "[SKIP] Already converted: $input" >> "$LOG_FILE"
+    return
+  fi
+
+  # Skip if file already converted (resume support)
+  if grep -Fxq "$input" "$LOG_FILE"; then
+    echo "[RESUME] Already done: $input"
+    return
+  fi
+
+  # Build ffmpeg command
+  cmd=(ffmpeg -i "$input" \
+      -map 0 \
+      -c:v libx265 \
+      -preset slow \
+      -crf 20 \
+      -c:a copy \
+      -c:s copy \
+      "$output")
+
+  if $DRY_RUN; then
+    echo "[DRY RUN] ${cmd[*]}"
+  else
+    echo "Converting: $input"
+    "${cmd[@]}"
+
+    # Verify output
+    if [[ -f "$output" ]]; then
+      echo "SUCCESS: $input → $output"
+      echo "$input" >> "$LOG_FILE"
+    else
+      echo "FAIL: $input" >> "$LOG_FILE"
+    fi
+  fi
+}
+
+# Export for GNU parallel
+export -f convert_file
+export DRY_RUN
+export LOG_FILE
+export MIN_SIZE_MB
+
+# Run conversions in parallel
+if type parallel >/dev/null 2>&1; then
+  tail -n +2 "$INPUT" | awk -F, '{gsub(/"/,"",$1); print $1}' | \
+    parallel -j "$MAX_JOBS" convert_file {}
+else
+  tail -n +2 "$INPUT" | awk -F, '{gsub(/"/,"",$1); print $1}' | \
+  while read -r file; do
+      convert_file "$file"
+  done
+fi

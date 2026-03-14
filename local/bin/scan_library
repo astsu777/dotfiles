@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#=========================================================================
+# Author: Gaetan (gaetan@ictpourtous.com) - Twitter: @astsu777
+# Creation: Sat 14 Mar 2026 23:24:59
+# Last modified: Sat 14 Mar 2026 23:29:42
+# Version: 1.0
+#
+# Description: scan library of films and create a list for potential convertion to x265
+#=========================================================================
+
+OUTPUT="conversion_queue.csv"
+MIN_SIZE_MB=700
+
+echo "File,Codec,Resolution,Bitrate,SizeMB" > "$OUTPUT"
+
+find . -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 |
+while IFS= read -r -d '' f; do
+
+  size_bytes=$(stat -c%s "$f")
+  size_mb=$((size_bytes / 1024 / 1024))
+
+  if (( size_mb < MIN_SIZE_MB )); then
+    continue
+  fi
+
+  codec=$(mediainfo --Inform="Video;%Format%" "$f")
+
+  if [[ "$codec" == "HEVC" ]]; then
+    continue
+  fi
+
+  resolution=$(mediainfo --Inform="Video;%Width%x%Height%" "$f")
+  bitrate=$(mediainfo --Inform="Video;%BitRate%" "$f")
+
+  echo "\"$f\",$codec,$resolution,$bitrate,$size_mb" >> "$OUTPUT"
+
+done
+
+echo "Scan finished. Queue saved to $OUTPUT"
+
+awk -F, '
+NR>1 {
+  size_mb=$5
+  codec=$2
+  if (codec=="AVC") saved=size_mb*0.5
+  else saved=size_mb*0.7
+  total+=$5
+  total_saved+=saved
+}
+END {
+  print "Total size (MB): " total
+  print "Estimated savings (MB): " total_saved
+  print "Estimated savings (%): " total_saved/total*100
+}
+' conversion_queue.csv
