@@ -686,7 +686,11 @@ Here is a small description for every script:
 .ITEM
 \f(CWclear-dns-cache\fP \(en  clear the local DNS cache if any is detected
 .ITEM
+\f(CWcolortest.py\fP \(en  displays 256 colors with their codes in the terminal
+.ITEM
 \f(CWcompiler\fP \(en  compile a document to another format (mainly used for LaTeX)
+.ITEM
+\f(CWconvert_library\fP \(en  convert a list of movie files to modern HEVC x265
 .ITEM
 \f(CWcrontoggle\fP \(en  enable/disable the cron jobs
 .ITEM
@@ -749,6 +753,8 @@ Here is a small description for every script:
 \f(CWnotifytoggle\fP \(en  enable/disable a do-not-disturb mode (notifications are hidden)
 .ITEM
 \f(CWopout\fP \(en  open a preview of certain file (most useful when called from Neovim/VIM)
+.ITEM
+\f(CWscan_library\fP \(en  scan a whole library of video files and prepare a list to be converted to modern HEVC x265
 .ITEM
 \f(CWssh-multi\fP \(en  connect to one or multiple SSH servers in a *TMUX* window and sync input on all panes
 .ITEM
