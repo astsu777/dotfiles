@@ -108,11 +108,11 @@ elif [[ $OSTYPE == "linux-gnu" ]]; then
 	# It also integrates the AUR helper 'yay' if it is installed
 	# The last command will return an error if no orphan packages found
 	elif type pacman yay snap > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && sudo pacman -Rns $(sudo pacman -Qdtq 2>/dev/null) || true ; yay -Syu && yes | yay -Scc && yay -Rns $(yay -Qdtq 2>/dev/null) || true ; sudo snap refresh'
+		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && orphans=$(sudo pacman -Qdtq) && [ -n "$orphans" ] && sudo pacman -Rns $orphans && yay -Syu && yes | yay -Scc && aur_orphans=$(yay -Qdtq) && [ -n "$aur_orphans" ] && yay -Rns $aur_orphans && sudo snap refresh'
 	elif type pacman yay > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && sudo pacman -Rns $(sudo pacman -Qdtq 2>/dev/null) || true ; yay -Syu && yes | yay -Scc && yay -Rns $(yay -Qdtq 2>/dev/null) || true'
+		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && orphans=$(sudo pacman -Qdtq) && [ -n "$orphans" ] && sudo pacman -Rns $orphans && yay -Syu && yes | yay -Scc && aur_orphans=$(yay -Qdtq) && [ -n "$aur_orphans" ] && yay -Rns $aur_orphans'
 	elif type pacman > /dev/null 2>&1; then
-		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && sudo pacman -Rns $(sudo pacman -Qdtq 2>/dev/null) || true'
+		alias update-system='sudo pacman -Syu && yes | sudo pacman -Scc && orphans=$(sudo pacman -Qdtq) && [ -n "$orphans" ] && sudo pacman -Rns $orphans'
 
 	# Void based systems using XBPS package manager
 	elif type xbps-install snap > /dev/null 2>&1; then
